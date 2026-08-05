@@ -1,0 +1,28 @@
+# AILORA — Changelog
+
+All significant changes to this project are recorded here.
+This file is append-only in meaning; earlier entries must not be silently rewritten.
+
+Format: ISO 8601 dates (YYYY-MM-DD), atomic entries aligned with Git commits.
+
+---
+
+## [Unreleased]
+
+---
+
+## 2026-08-05 — Official Project Start
+
+**OFFICIAL_PROJECT_START_DATE = 2026-08-05**
+**OFFICIAL_PROJECT_END_DATE = NOT_YET_COMPLETED**
+**TIMEZONE_CONTEXT = Europe/Berlin**
+
+- Official start of controlled AILORA development authorized by Amin Azimi (AI Architect).
+- Authoritative source: Prompt files 01–15 (CSIP-EO-FMSP) + Gate 7 Start Command.
+- Repository baseline established; identity and documentation baseline confirmed.
+- All prior gate records (Validation #1, #2, #2A, #3, Identity Gate, Pre-start Clearance #6) preserved in docs/.
+- Implementation phase begins with PHASE_0 (repository and engineering baseline).
+
+**Status: IMPLEMENTATION_IN_PROGRESS**
+**Prompt 06 domain review: PARTIAL / STILL OPEN**
+**Oya: PLANNED / NOT CURRENTLY IMPLEMENTED**
