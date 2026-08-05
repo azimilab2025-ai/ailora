@@ -1,0 +1,106 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# AILORA — Project Identity Manifest
+# ─────────────────────────────────────────────────────────────────────────────
+# Purpose : Records the approved project identity baseline.
+#           This manifest does NOT authorize implementation, deployment,
+#           repository creation, package installation, or any other
+#           development action.
+# Status  : IDENTITY_BASELINE — IMPLEMENTATION_NOT_STARTED
+# Source  : User-approved decision (AILORA Identity Gate) +
+#           Authoritative Prompts 01–15 (CSIP-EO-FMSP)
+# ─────────────────────────────────────────────────────────────────────────────
+
+identity:
+  canonical_name:             "AILORA"
+  canonical_slug:             "ailora"
+  official_descriptive_line:  "An Azimi Innovation Lab Orbital Intelligence System"
+  tagline:                    "Intelligence Beyond the Horizon"
+  persian_rendering:          "ایلورا؛ یک سامانهٔ هوشمندی مداری از آزمایشگاه نوآوری عظیمی"
+
+brand:
+  parent_brand:               "Azimi Innovation Lab"
+  brand_abbreviation:         "AIL"
+  name_meaning:
+    AIL:  "Azimi Innovation Lab"
+    ORA:  "Inspired by Orbit / Orbital; evokes orbit, observation, horizon, and future-oriented intelligence"
+    note: "AILORA is a coined brand name designed to support a future product ecosystem; it does not require a literal dictionary translation."
+
+authorship:
+  author:                     "Amin Azimi"
+  professional_title:         "AI Architect"
+  responsibility:             "End-to-End System Architecture and Project Development"
+  organization:               "Azimi Innovation Lab"
+
+repository:
+  proposed_form:              "azimi-innovation-lab/ailora"
+  canonical_slug:             "ailora"
+  git_remote_name:            "origin"
+  status:                     "NOT_CREATED — requires separate explicit authorization"
+  collision_scan_required:    true
+  collision_result:           "NOT_VERIFIED"
+  user_approval:              "PENDING_REPOSITORY_CREATION_GATE"
+
+scope:
+  system_type:                "Space decision-support, analysis and simulation platform"
+  active_domain:              "EARTH_ORBIT_ONLY"
+  orbit_regimes:              ["LEO", "MEO", "GEO", "HEO"]
+  deployment_baseline:        "TERRESTRIAL_BASELINE"
+  on_orbit_runtime:           "DEFERRED"
+  challenge_target:           "Challenge-ready Enterprise SaaS Foundation + Verified Space Vertical Slice"
+  real_world_command:         false
+  autonomous_maneuver:        false
+  spacecraft_command_path:    "PERMANENTLY_DENIED — E9/APR-X/INC-0/HARD_DENY"
+
+technical_identifiers:
+  # All fields below remain TBD until explicitly approved
+  runtime_package:            "TBD / NOT YET APPROVED"
+  docker_compose_project:     "TBD / NOT YET APPROVED"
+  primary_database_name:      "TBD / NOT YET APPROVED"
+  render_service_name:        "TBD / NOT YET APPROVED"
+  public_api_slug:            "TBD / NOT YET APPROVED"
+  environment_prefix:         "TBD / NOT YET APPROVED"
+  primary_language:           "TBD / NOT YET APPROVED"
+  ibm_in_public_name:         "NOT_AUTHORIZED — requires explicit Challenge authorization"
+
+governance:
+  authoritative_source_set:   "CSIP-EO-FMSP Prompts 01–15"
+  lifecycle_state:            "RECONSTITUTED_DRAFT — NOT_APPROVED — NOT_FROZEN"
+  prompt_06_domain_review:    "OPEN — REQUIRED — NOT_NORMATIVELY_ACTIVATED"
+  prompt_06_effect:           "Astrodynamics and scientific-algorithm contracts require independent qualified review before any Normative or Operational claim can be made. Demo algorithms must be presented as Advisory, Bounded, and non-Normative."
+
+future_direction:
+  oya:
+    status:                   "PLANNED / NOT CURRENTLY IMPLEMENTED"
+    description:              "Oya is planned for a future stage of AILORA's evolution."
+    implementation:           "NOT_STARTED"
+    note:                     "Oya's eventual role, architecture, interfaces, dependencies, configuration, and deployment model remain subject to later design and explicit authorization."
+
+language_policy:
+  user_facing_explanations:   "Persian"
+  technical_identifiers:      "English"
+  source_code_identifiers:    "English"
+  filenames_and_paths:        "English"
+  project_and_module_names:   "English"
+  invented_persian_transliterations: false
+
+implementation_gate:
+  implementation_authorized:  false
+  repository_created:         false
+  git_initialized:            false
+  any_code_written:           false
+  explicit_statement:         "This manifest records identity only. It does not authorize implementation, repository creation, scaffold generation, package installation, deployment, or any other development action."
+
+protected_identifiers_must_not_reuse:
+  - "IBM-Bob-Challenge-2026"
+  - "end-to-end-ai-engineering"
+  - "ibm-supply-chain-api"
+  - "supply-chain-data"
+
+timeline:
+  official_project_start: "2026-08-05"
+  official_project_end: "NOT_YET_COMPLETED"
+  timezone_context: "Europe/Berlin"
+  note: "Start date set by Amin Azimi on 2026-08-05. End date must not be pre-filled; it will be recorded only when Amin Azimi explicitly approves project completion."
+
+change_control:
+  rule: "Any field change after the first Git Remote or Deploy action constitutes a material identity change and requires independent explicit user Approval before taking effect."
