@@ -54,6 +54,54 @@ Git history, tooling baseline, and first validated scaffold.
 
 ---
 
+#### 2026-08-05 — PHASE_0 Gate 8
+
+**Gate objective:** Premium README + Docker scaffold + documentation contract tests
+
+| Commit | Hash | Description |
+|---|---|---|
+| 8 | a4f570f | test(readme): define flagship documentation contract |
+| 9 | 6f30906 | docs(readme): establish AILORA visual foundation and hero |
+| 10 | ad032da | docs(readme): add architecture capabilities and stack |
+| 11 | ce94a96 | docs(readme): add setup quality safety and roadmap sections |
+| 12 | 8944a74 | docs(readme): add project links hub and author profile |
+| 13 | a293228 | test(docker): define Dockerfile and docker-compose contract tests |
+| 14 | 96e54cc | build(docker): add Dockerfile docker-compose and .dockerignore |
+
+**Test results:**
+```
+INITIAL (pre-gate):  2 collected, 2 passed (test_health.py)
+FINAL (post-gate):  51 collected, 51 passed (test_health, test_readme, test_docker_contracts)
+
+Tests added this gate:
+  test_readme.py        35 tests — README documentation contract
+  test_docker_contracts.py  14 tests — Dockerfile/docker-compose structural contracts
+  Total new:           49 tests
+```
+
+**Quality gates:**
+```
+ruff format --check   ✅  11 files, all formatted
+ruff check            ✅  0 issues
+mypy (strict)         ✅  0 issues in 7 source files
+pytest                ✅  51/51 passed
+docker build          ✅  ailora:dev built successfully (multi-stage, non-root, healthcheck)
+docker compose config ✅  validates without error
+```
+
+**Decisions recorded:**
+- README redesigned to flagship-level technical landing page with 16 required sections
+- Docker stack: multi-stage build (builder → runtime), non-root user (UID 1001), HEALTHCHECK, postgres:16-alpine
+- docker-compose uses `AILORA_DB_PASSWORD` env var substitution — no hardcoded secrets
+- `.dockerignore` excludes `.venv`, `.env`, `__pycache__`, `.git`, test artefacts
+- `env_file.required: false` pattern enables `docker compose config` without `.env` present
+
+**Deferred (unchanged):**
+- Prompt 06 `DOMAIN_REVIEW_REQUIRED` — blocks normative scientific claims
+- P0-08: `docs/verification.md` skeleton
+
+---
+
 ## Open Work Items (ordered, smallest-first)
 
 ### PHASE_0 — Engineering Baseline
@@ -64,9 +112,9 @@ Git history, tooling baseline, and first validated scaffold.
 | P0-02 | Identity docs | ✅ DONE | — |
 | P0-03 | Prompt sequence docs | ✅ DONE | — |
 | P0-04 | Timeline + CHANGELOG | ✅ DONE | — |
-| P0-05 | DEVLOG | 🔄 IN PROGRESS | — |
-| P0-06 | Python scaffold (`pyproject.toml`, `src/ailora/`, tooling) | ⬜ TODO | — |
-| P0-07 | Dockerfile + docker-compose skeleton | ⬜ TODO | — |
+| P0-05 | DEVLOG | ✅ DONE | — |
+| P0-06 | Python scaffold (`pyproject.toml`, `src/ailora/`, tooling) | ✅ DONE | — |
+| P0-07 | Dockerfile + docker-compose skeleton | ✅ DONE | — |
 | P0-08 | `docs/verification.md` skeleton | ⬜ TODO | — |
 
 ### PHASE_1 — Foundation
