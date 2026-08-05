@@ -1,0 +1,55 @@
+# ─── AILORA .dockerignore ─────────────────────────────────────────────────────
+# Excludes files and directories that must not be included in the Docker build
+# context. This reduces build context size and prevents secrets from leaking
+# into the image.
+
+# Version control
+.git
+.gitignore
+
+# Python virtual environment — dependencies are resolved inside the build stage
+.venv
+venv
+env
+
+# Environment files — NEVER bake secrets into the image
+.env
+.env.*
+!.env.example
+
+# Python byte-compiled files and caches
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Test artefacts
+.pytest_cache
+.coverage
+coverage.xml
+htmlcov/
+*.log
+
+# Type-checking and linting caches
+.mypy_cache
+.ruff_cache
+
+# Documentation build outputs
+docs/_build/
+site/
+
+# OS metadata
+.DS_Store
+Thumbs.db
+
+# IDE / editor directories
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Distribution / packaging artefacts
+dist/
+build/
+*.egg-info/
