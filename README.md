@@ -431,6 +431,7 @@ authorization before any implementation begins.
 | Deployed API | Not yet deployed — no production environment exists | **[placeholder]** |
 | API Documentation (`/docs`) | `http://localhost:8000/docs` (local dev only) | Local only |
 | API Documentation (`/redoc`) | `http://localhost:8000/redoc` (local dev only) | Local only |
+| Container Image (local) | `ailora:dev` (built via `docker build . -t ailora:dev`) | Local only |
 | Container Registry | To be provided by Amin Azimi | **[placeholder]** |
 | Project Website | To be provided by Amin Azimi | **[placeholder]** |
 | Demo Environment | To be added after official approval by Amin Azimi | **[placeholder]** |
