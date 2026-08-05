@@ -22,6 +22,9 @@ class Settings(BaseSettings):
     debug: bool = False
     environment: str = "local"
 
+    # ── Observability ─────────────────────────────────────────────────────────
+    enable_tracing: bool = False  # Set true in dev/staging to emit spans to console
+
     # ── Database (TBD — resolved during PHASE_1) ─────────────────────────────
     database_url: str = "postgresql+psycopg://ailora:ailora@localhost:5432/ailora_db"
 

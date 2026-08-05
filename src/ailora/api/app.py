@@ -7,6 +7,11 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from ailora.api.routers import health
 from ailora.config import settings
+from ailora.observability.logging import configure_logging
+
+# Configure structured logging at import time so all modules that call
+# get_logger() receive a configured logger even before the ASGI server starts.
+configure_logging()
 
 app = FastAPI(
     title=settings.app_name,
