@@ -310,9 +310,11 @@ make lint && make test
 
 ```
 ruff format --check   ✅  9 files, all formatted
-ruff check            ✅  0 issues
-mypy (strict)         ✅  0 issues in 7 source files
-pytest                ✅  tests collected / passed (see DEVLOG for exact count)
+ruff check            ✅  0 issues (7 source files)
+mypy (strict)         ✅  0 issues (7 source files, strict mode)
+pytest                ✅  37 tests collected, 37 passed
+  tests/test_health.py  — 2 tests (liveness, readiness)
+  tests/test_readme.py  — 35 tests (documentation contract)
 ```
 
 ---
