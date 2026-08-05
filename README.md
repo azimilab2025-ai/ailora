@@ -82,19 +82,19 @@ situational awareness as a Challenge-ready Enterprise SaaS Foundation.
 
 ### ✅ Implemented
 
-| Capability | Description | Status |
-|---|---|---|
-| Health endpoints | `/health/live` and `/health/ready` liveness and readiness probes | Verified |
-| FastAPI application scaffold | Full ASGI application with structured routing | Verified |
-| Configuration management | Pydantic-settings environment-based config | Verified |
-| Engineering baseline | `pyproject.toml`, ruff, mypy, pytest, uv toolchain | Verified |
+| Capability | Description | Tests | Status |
+|---|---|---|---|
+| Health endpoints | `/health/live` and `/health/ready` liveness and readiness probes | `test_health.py` | Verified |
+| FastAPI application scaffold | Full ASGI application with structured routing | `test_health.py` | Verified |
+| Configuration management | Pydantic-settings environment-based config | — | Verified |
+| Engineering baseline | `pyproject.toml`, ruff, mypy, pytest, uv toolchain | — | Verified |
+| README documentation contract | Flagship README with 35 contract tests | `test_readme.py` | Verified |
 
 ### 🔄 In Progress
 
 | Capability | Description | Phase |
 |---|---|---|
 | Docker containerisation | Multi-stage Dockerfile and docker-compose scaffold | PHASE_0 (P0-07) |
-| Premium documentation | Flagship README with contract tests | PHASE_0 (P0-05) |
 
 ### 📋 Planned
 
