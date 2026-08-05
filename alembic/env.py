@@ -19,8 +19,7 @@ from ailora.config import settings  # noqa: E402
 from ailora.db.base import Base  # noqa: E402
 
 # Models must be imported here so their mappers are registered on Base.metadata.
-# Add each new model module below as it is created.
-# from ailora.domain.identity.models import *  # noqa: F401, F403
+from ailora.domain.identity import models as _identity_models  # noqa: F401
 
 # --- Alembic config ----------------------------------------------------------
 config = context.config
