@@ -46,6 +46,7 @@ dev = [
     "mypy>=1.13",
     "types-passlib",
     "hatchling",
+    "aiosqlite>=0.19",
 ]
 
 [project.scripts]
@@ -84,3 +85,9 @@ addopts = "--cov=src/ailora --cov-report=term-missing --cov-fail-under=0"
 [tool.coverage.run]
 source = ["src/ailora"]
 omit = ["*/tests/*"]
+
+[dependency-groups]
+dev = [
+    "aiosqlite>=0.22.1",
+    "greenlet>=3.5.4",
+]
