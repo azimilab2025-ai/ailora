@@ -98,7 +98,8 @@ docker compose config ✅  validates without error
 
 **Deferred (unchanged):**
 - Prompt 06 `DOMAIN_REVIEW_REQUIRED` — blocks normative scientific claims
-- P0-08: `docs/verification.md` skeleton
+
+**PHASE_0 status: ✅ COMPLETE — all P0-01 through P0-08 items done.**
 
 ---
 
@@ -115,7 +116,7 @@ docker compose config ✅  validates without error
 | P0-05 | DEVLOG | ✅ DONE | — |
 | P0-06 | Python scaffold (`pyproject.toml`, `src/ailora/`, tooling) | ✅ DONE | — |
 | P0-07 | Dockerfile + docker-compose skeleton | ✅ DONE | — |
-| P0-08 | `docs/verification.md` skeleton | ⬜ TODO | — |
+| P0-08 | `docs/verification.md` skeleton | ✅ DONE | — |
 
 ### PHASE_1 — Foundation
 

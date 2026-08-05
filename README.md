@@ -89,12 +89,12 @@ situational awareness as a Challenge-ready Enterprise SaaS Foundation.
 | Configuration management | Pydantic-settings environment-based config | — | Verified |
 | Engineering baseline | `pyproject.toml`, ruff, mypy, pytest, uv toolchain | — | Verified |
 | README documentation contract | Flagship README with 35 contract tests | `test_readme.py` | Verified |
+| Docker containerisation | Multi-stage Dockerfile and docker-compose scaffold | `test_docker_contracts.py` | Verified |
+| Verification baseline | `docs/verification.md` quality-gate evidence skeleton | — | Verified |
 
 ### 🔄 In Progress
 
-| Capability | Description | Phase |
-|---|---|---|
-| Docker containerisation | Multi-stage Dockerfile and docker-compose scaffold | PHASE_0 (P0-07) |
+*No capabilities currently in progress — PHASE_0 complete.*
 
 ### 📋 Planned
 
@@ -309,12 +309,13 @@ make lint && make test
 ### Current Results (Gate 8 baseline)
 
 ```
-ruff format --check   ✅  9 files, all formatted
+ruff format --check   ✅  11 files, all formatted
 ruff check            ✅  0 issues (7 source files)
 mypy (strict)         ✅  0 issues (7 source files, strict mode)
-pytest                ✅  37 tests collected, 37 passed
-  tests/test_health.py  — 2 tests (liveness, readiness)
-  tests/test_readme.py  — 35 tests (documentation contract)
+pytest                ✅  51 tests collected, 51 passed
+  tests/test_health.py          —  2 tests (liveness, readiness)
+  tests/test_readme.py          — 35 tests (documentation contract)
+  tests/test_docker_contracts.py — 14 tests (Dockerfile/docker-compose contracts)
 ```
 
 ---
@@ -377,7 +378,7 @@ authorization before any implementation begins.
 
 | Phase | Objective | Exit Condition | Status |
 |---|---|---|---|
-| **PHASE_0** — Discovery & Baseline | Establish evidence-based baseline: repo, scope, constraints, risks | Repository, tooling, identity docs, scaffold operational | 🔄 In Progress |
+| **PHASE_0** — Discovery & Baseline | Establish evidence-based baseline: repo, scope, constraints, risks | Repository, tooling, identity docs, scaffold operational | ✅ Complete |
 | **PHASE_1** — Foundation | Minimal healthy architecture and engineering baseline | Build, test, and core boundaries operational | 📋 Planned |
 | **PHASE_2** — Identity & Tenancy | Identity, membership, policy, and tenant isolation | Authorized tenant-scoped access verified | 📋 Planned |
 | **PHASE_3** — Vertical Slice | One real end-to-end use case (conjunction risk advisory) | Slice implemented, tested, and evidenced | 📋 Planned |
@@ -414,6 +415,7 @@ authorization before any implementation begins.
 | Health Router | [`src/ailora/api/routers/health.py`](src/ailora/api/routers/health.py) | Liveness and readiness probe endpoints |
 | Health Tests | [`tests/test_health.py`](tests/test_health.py) | Health endpoint contract tests |
 | README Contract Tests | [`tests/test_readme.py`](tests/test_readme.py) | Documentation truthfulness contract tests |
+| Verification Baseline | [`docs/verification.md`](docs/verification.md) | Quality-gate evidence records by phase |
 
 ---
 
