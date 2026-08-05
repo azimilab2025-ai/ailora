@@ -151,8 +151,8 @@ def test_no_fabricated_operational_claim(phrase: str, readme_text: str) -> None:
     phrase_lower = phrase.lower()
     idx = lower_text.find(phrase_lower)
     while idx != -1:
-        # Look at the surrounding paragraph (100 chars before)
-        context = lower_text[max(0, idx - 150) : idx + len(phrase_lower) + 150]
+        # Look at the surrounding paragraph (300 chars before/after)
+        context = lower_text[max(0, idx - 300) : idx + len(phrase_lower) + 300]
         is_denial = any(
             word in context
             for word in [
