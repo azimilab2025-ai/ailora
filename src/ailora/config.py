@@ -36,5 +36,11 @@ class Settings(BaseSettings):
     # ── CORS ─────────────────────────────────────────────────────────────────
     allowed_origins: list[str] = ["http://localhost:3000", "http://localhost:8000"]
 
+    # ── Server ────────────────────────────────────────────────────────────────
+    port: int = 8000  # Overridden by $PORT on Render
+
+    # ── Oya Voice AI (master flag — disabled prototype default) ───────────────
+    enable_oya_voice_service: bool = False  # noqa: S105
+
 
 settings = Settings()

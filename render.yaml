@@ -1,0 +1,35 @@
+##############################################################################
+# AILORA — Render deployment configuration
+# Authoritative source: Prompts 01–15 (CSIP-EO-FMSP)
+# Advisory-only prototype: no spacecraft command/telecommand/maneuver path.
+##############################################################################
+
+services:
+  - type: web
+    name: ailora
+    runtime: python
+    region: oregon
+    plan: free
+    buildCommand: pip install uv && uv sync --no-dev --frozen
+    startCommand: uvicorn ailora.api.app:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health/live
+    envVars:
+      - key: PYTHONPATH
+        value: src
+      - key: AILORA_ENVIRONMENT
+        value: production
+      - key: AILORA_DEBUG
+        value: "false"
+      - key: AILORA_ENABLE_TRACING
+        value: "false"
+      - key: AILORA_ENABLE_OYA_VOICE_SERVICE
+        value: "false"
+      - key: AILORA_APP_NAME
+        value: AILORA
+      - key: AILORA_APP_VERSION
+        value: "0.1.0"
+      # Secrets — set via Render dashboard; never committed to source control.
+      - key: AILORA_SECRET_KEY
+        sync: false
+      - key: AILORA_DATABASE_URL
+        sync: false
