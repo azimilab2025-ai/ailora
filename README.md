@@ -364,10 +364,16 @@ Operational status.
 
 > **Status: PLANNED / NOT CURRENTLY IMPLEMENTED**
 
-Oya is planned for a future stage of AILORA's evolution. It is not currently implemented
-or integrated into any part of this project. No Oya API, SDK, integration contract, or
-placeholder code exists in this repository. All aspects of Oya require explicit
-authorization before any implementation begins.
+Oya is planned for a future stage of AILORA's evolution.  The service is
+intentionally kept disabled during the prototype phase.  A safe placeholder
+module exists in `src/ailora/services/oya/` with a no-op adapter and
+fail-closed configuration.  No real Oya API call, vendor charge, or paid
+service activation occurs in prototype, development, test, or challenge phases.
+All production activation requires explicit authorization from Amin Azimi and
+the production revenue gate being met.
+
+See [Future Integration Roadmap: Oya Voice AI](#future-integration-roadmap-oya-voice-ai)
+for the full architecture and activation requirements.
 
 ---
 
@@ -379,9 +385,9 @@ authorization before any implementation begins.
 | Phase | Objective | Exit Condition | Status |
 |---|---|---|---|
 | **PHASE_0** — Discovery & Baseline | Establish evidence-based baseline: repo, scope, constraints, risks | Repository, tooling, identity docs, scaffold operational | ✅ Complete |
-| **PHASE_1** — Foundation | Minimal healthy architecture and engineering baseline | Build, test, and core boundaries operational | 📋 Planned |
-| **PHASE_2** — Identity & Tenancy | Identity, membership, policy, and tenant isolation | Authorized tenant-scoped access verified | 📋 Planned |
-| **PHASE_3** — Vertical Slice | One real end-to-end use case (conjunction risk advisory) | Slice implemented, tested, and evidenced | 📋 Planned |
+| **PHASE_1** — Foundation | Minimal healthy architecture and engineering baseline | Build, test, and core boundaries operational | ✅ Complete |
+| **PHASE_2** — Identity & Tenancy | Identity, membership, policy, and tenant isolation | Authorized tenant-scoped access verified | ✅ Complete |
+| **PHASE_3** — Vertical Slice | One real end-to-end use case (conjunction risk advisory) | Slice implemented, tested, and evidenced | ✅ Complete |
 | **PHASE_4** — Workflow & Events | Durable jobs, state transitions, event handling | Idempotency, retry, and failure behavior verified | 📋 Planned |
 | **PHASE_5** — AI Advisory | Bounded advisory AI capability | Safety, provenance, validation, and cost controls verified | 📋 Planned |
 | **PHASE_6** — Hardening | Security, reliability, performance, observability | Defined readiness criteria have evidence | 📋 Planned |
@@ -439,6 +445,141 @@ authorization before any implementation begins.
 | Demo Environment | To be added after official approval by Amin Azimi | **[placeholder]** |
 
 ---
+
+
+## Future Integration Roadmap: Oya Voice AI
+
+> **Status: PLANNED / NOT CURRENTLY IMPLEMENTED as a production service — PROTOTYPE PHASE — DISABLED / MOCKED / NON-BILLABLE**
+
+Oya is integrated into the core architecture as a future enhancement and is intentionally kept disabled during the prototype phase to optimize initial operational overhead.
+
+No Oya API call, vendor charge, or paid service activation occurs in prototype, development, test, or challenge environments.
+
+### Prototype vs Production Phases
+
+| Dimension | Prototype Phase (current) | Production Phase (future) |
+|---|---|---|
+| **Service state** | Disabled / no-op adapter | Active after revenue gate |
+| **Network calls** | None — fail-closed | Real vendor API calls |
+| **Cost** | Zero — non-billable | Pay-per-use (vendor TBD) |
+| **API key** | Empty placeholder | Production credential required |
+| **Activation** | Not authorized | Requires explicit authorization |
+| **Fallback** | Always TEXT_CHAT | TEXT_CHAT on failure |
+| **Code module** | `src/ailora/services/oya/` | Same module, production adapter |
+
+### Feature / Use-Case Matrix
+
+| Capability | Prototype | Production | Notes |
+|---|---|---|---|
+| Low-latency real-time voice conversation | ✗ Disabled | ✓ Planned | Vendor TBD |
+| Multilingual conversations + language switching | ✗ Disabled | ✓ Planned | BCP-47 language tags |
+| Dynamic accent and emotion adaptation | ✗ Disabled | ✓ Planned | Provider-neutral interface |
+| Voice-driven workflow and tool execution | ✗ Disabled | ✓ Planned | Requires authorization boundary |
+| Sentiment and user-context adaptation | ✗ Disabled | ✓ Planned | Advisory-only output |
+| Voice onboarding flows | ✗ Disabled | ✓ Planned | Tenant-scoped |
+| Real-time customer assistance | ✗ Disabled | ✓ Planned | Human-in-the-loop |
+| Hands-free orbital advisory commands | ✗ Disabled | ✓ Planned | Advisory-only; no spacecraft commands |
+| Interactive audio-guided analysis | ✗ Disabled | ✓ Planned | Space advisory context |
+| Web / Mobile / Embedded integration | ✗ Disabled | ✓ Planned | Modular adapter pattern |
+
+### Activation Criteria (Production Gate)
+
+All of the following must be true simultaneously:
+
+1. `AILORA_ENABLE_OYA_VOICE_SERVICE=true` — explicit feature flag
+2. `AILORA_OYA_API_KEY` — non-empty production credential (server-side only)
+3. `AILORA_OYA_ENVIRONMENT=production` — environment gate
+4. Explicit authorization from Amin Azimi
+5. Active revenue generation (production commercial operation)
+
+**Fail-closed**: If any condition is missing or invalid, the service remains disabled and falls back to TEXT_CHAT.
+
+### Architecture Boundaries
+
+```
+[User / Operator]
+       │
+       ▼
+[AILORA API Gateway] ──── Authorization ──── [JWT + Membership check]
+       │
+       ▼
+[OyaVoiceAdapter interface]   ← Provider-neutral contract
+       │
+       ├── [NoOpOyaAdapter]        ← PROTOTYPE PHASE (current) — no network calls
+       │
+       └── [ProductionOyaAdapter]  ← PRODUCTION PHASE (future) — vendor SDK (TBD)
+                                       Never activated in prototype
+```
+
+- Secrets remain server-side; never exposed to clients, logs, or source control.
+- Tenant context is required for all voice sessions.
+- Session quota, timeout, and circuit-breaker limits are defined in `OyaSettings`.
+- All voice advisory outputs remain advisory-only; no spacecraft command path exists.
+
+### Security and Privacy Considerations
+
+| Concern | Mitigation |
+|---|---|
+| **Secret exposure** | API key and webhook secret in environment only; never in code/logs |
+| **Prompt injection** | Voice inputs must be validated before tool execution |
+| **Sensitive audio** | Raw audio and transcripts are not retained beyond session scope |
+| **Tenant isolation** | Each session scoped to a verified tenant membership |
+| **Unauthorized tool execution** | Explicit user confirmation required for sensitive actions |
+| **Replay attacks** | Webhook signature verification (TBD — vendor-specific) |
+| **Quota abuse** | Per-tenant rate limits and session budgets enforced in config |
+| **Fallback security** | TEXT_CHAT fallback preserves all authorization controls |
+
+### Operational Risks
+
+| Risk | Status | Mitigation |
+|---|---|---|
+| Accidental paid activation | Mitigated by fail-closed config | Three-gate activation requirement |
+| Voice latency degradation | Not yet measured | Circuit-breaker and timeout controls planned |
+| Provider unavailability | Handled by no-op fallback | TEXT_CHAT fallback always available |
+| Audio data residency | TBD — vendor-specific | Data residency requirements to be assessed |
+| Cost overrun | Bounded by session limits | Per-tenant quotas in `OyaSettings` |
+
+### Rollout Stages (Future)
+
+1. **Alpha** — Internal synthetic testing with no real users
+2. **Beta** — Selected tenants with explicit consent and monitored cost
+3. **GA** — Full production rollout after Beta validation
+
+### Observability
+
+Telemetry records for each Oya session must include:
+
+- Session health and state transitions
+- Latency and timeout events
+- Quota and cost signals (no raw audio or transcript)
+- Fallback events and reason codes
+- Error categories (no sensitive stack traces to clients)
+
+**Never recorded**: raw audio, transcripts, API keys, or user PII beyond session ID.
+
+### Fallback Behavior
+
+When voice quota, provider availability, or latency limits fail:
+- Fall back to standard text chat immediately.
+- Preserve tenant context and user session.
+- Log a telemetry fallback event (no sensitive data).
+- Return `OyaSessionState.DEGRADED` with `fallback_applied=True`.
+
+### Cost Controls
+
+- `AILORA_OYA_MAX_SESSIONS_PER_TENANT` — hard session concurrency limit
+- `AILORA_OYA_MAX_AUDIO_DURATION_SECONDS` — maximum audio per session
+- `AILORA_OYA_SESSION_TIMEOUT_SECONDS` — session idle timeout
+- No unbounded retry loops
+- Budget alerts and hard limits required before production activation
+
+> ⚠️ **Vendor-specific details** (SDK methods, pricing, compliance certifications,
+> performance figures, and authentication URLs) are marked **TBD** until vendor
+> documentation and data-access agreements are confirmed.  This blueprint is
+> intentionally provider-adaptable.
+
+---
+
 
 ## Author
 
