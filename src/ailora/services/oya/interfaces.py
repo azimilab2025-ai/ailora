@@ -39,8 +39,8 @@ class OyaSessionState(StrEnum):
 class OyaFallbackMode(StrEnum):
     """Fallback behavior when voice is unavailable."""
 
-    TEXT_CHAT = "TEXT_CHAT"        # Graceful degradation to standard text interface
-    DISABLED = "DISABLED"          # Feature unavailable; user notified
+    TEXT_CHAT = "TEXT_CHAT"  # Graceful degradation to standard text interface
+    DISABLED = "DISABLED"  # Feature unavailable; user notified
 
 
 @dataclass(frozen=True)
@@ -54,7 +54,7 @@ class OyaSessionConfig:
 
     tenant_id: str
     user_id: str
-    language: str = "en"           # BCP-47 language tag
+    language: str = "en"  # BCP-47 language tag
     fallback_mode: OyaFallbackMode = OyaFallbackMode.TEXT_CHAT
     max_duration_seconds: int = 300
 
@@ -65,7 +65,7 @@ class OyaSessionResult:
 
     session_id: str
     state: OyaSessionState
-    is_advisory: bool = True       # Voice outputs remain advisory-only
+    is_advisory: bool = True  # Voice outputs remain advisory-only
     fallback_applied: bool = False
     error_message: str = ""
 

@@ -60,8 +60,8 @@ DEMO_TLE_LINE2_B = "2 99002  51.6000   0.0000 0001000   0.0000   0.5000 15.49000
 DEMO_EPOCH_ISO = "2026-08-05T12:00:00Z"
 
 # Demo separation distances (metres)
-DEMO_SEPARATION_CLOSE_M = 3_000.0     # 3 km — within default CDT
-DEMO_SEPARATION_FAR_M = 500_000.0    # 500 km — well outside CDT
+DEMO_SEPARATION_CLOSE_M = 3_000.0  # 3 km — within default CDT
+DEMO_SEPARATION_FAR_M = 500_000.0  # 500 km — well outside CDT
 
 
 # ---------------------------------------------------------------------------
@@ -92,8 +92,7 @@ class DemoScenarioResult:
     # Advisory sentinel
     is_advisory: bool = True
     advisory_label: str = (
-        "AILORA DEMO — Advisory Only | PHY-C1/T0 | Non-normative | "
-        "Prompt 06 DOMAIN_REVIEW_REQUIRED"
+        "AILORA DEMO — Advisory Only | PHY-C1/T0 | Non-normative | Prompt 06 DOMAIN_REVIEW_REQUIRED"
     )
 
 
@@ -172,19 +171,28 @@ def run_demo_scenario(
     # Primary object at some representative LEO position
     primary_state = CartesianState(
         stamp=stamp,
-        x_m=7_000_000.0, y_m=0.0, z_m=0.0,
-        vx_ms=0.0, vy_ms=7_500.0, vz_ms=0.0,
+        x_m=7_000_000.0,
+        y_m=0.0,
+        z_m=0.0,
+        vx_ms=0.0,
+        vy_ms=7_500.0,
+        vz_ms=0.0,
     )
     # Secondary object offset by the demo separation
     secondary_state = CartesianState(
         stamp=stamp,
-        x_m=7_000_000.0 + separation_m, y_m=0.0, z_m=0.0,
-        vx_ms=0.0, vy_ms=7_500.0, vz_ms=0.0,
+        x_m=7_000_000.0 + separation_m,
+        y_m=0.0,
+        z_m=0.0,
+        vx_ms=0.0,
+        vy_ms=7_500.0,
+        vz_ms=0.0,
     )
 
     # --- Step 4: T0/PHY-C1 screening ---
     screening_result = screen_t0_phy_c1(
-        primary_state, secondary_state,
+        primary_state,
+        secondary_state,
         conjunction_distance_threshold_km=conjunction_distance_threshold_km,
     )
 

@@ -44,9 +44,9 @@ class OyaSettings(BaseSettings):
     enable_oya_voice_service: bool = False  # MUST remain False unless production gate met
 
     # ── Provider configuration (TBD — provider-neutral placeholders) ─────────
-    oya_api_key: str = ""            # Must be set in production only
-    oya_base_url: str = ""           # TBD — vendor-specific URL
-    oya_webhook_secret: str = ""     # TBD — vendor-specific webhook verification
+    oya_api_key: str = ""  # Must be set in production only
+    oya_base_url: str = ""  # TBD — vendor-specific URL
+    oya_webhook_secret: str = ""  # TBD — vendor-specific webhook verification
     oya_environment: str = "prototype"  # Set to "production" only with revenue gate
 
     # ── Safety limits ─────────────────────────────────────────────────────────
@@ -64,10 +64,7 @@ class OyaSettings(BaseSettings):
         """
         if self.enable_oya_voice_service:
             # All three gate conditions must be satisfied for activation
-            gate_ok = (
-                bool(self.oya_api_key.strip())
-                and self.oya_environment == "production"
-            )
+            gate_ok = bool(self.oya_api_key.strip()) and self.oya_environment == "production"
             if not gate_ok:
                 # Fail-closed: disable rather than raise
                 object.__setattr__(self, "enable_oya_voice_service", False)

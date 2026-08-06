@@ -138,32 +138,48 @@ class TestCartesianState:
     def test_basic_creation(self) -> None:
         cs = CartesianState(
             stamp=self._stamp,
-            x_m=7_000_000.0, y_m=0.0, z_m=0.0,
-            vx_ms=0.0, vy_ms=7_500.0, vz_ms=0.0,
+            x_m=7_000_000.0,
+            y_m=0.0,
+            z_m=0.0,
+            vx_ms=0.0,
+            vy_ms=7_500.0,
+            vz_ms=0.0,
         )
         assert cs.x_m == 7_000_000.0
 
     def test_position_magnitude(self) -> None:
         cs = CartesianState(
             stamp=self._stamp,
-            x_m=3.0, y_m=4.0, z_m=0.0,
-            vx_ms=0.0, vy_ms=0.0, vz_ms=0.0,
+            x_m=3.0,
+            y_m=4.0,
+            z_m=0.0,
+            vx_ms=0.0,
+            vy_ms=0.0,
+            vz_ms=0.0,
         )
         assert abs(cs.position_magnitude_m - 5.0) < 1e-9
 
     def test_velocity_magnitude(self) -> None:
         cs = CartesianState(
             stamp=self._stamp,
-            x_m=0.0, y_m=0.0, z_m=0.0,
-            vx_ms=3.0, vy_ms=4.0, vz_ms=0.0,
+            x_m=0.0,
+            y_m=0.0,
+            z_m=0.0,
+            vx_ms=3.0,
+            vy_ms=4.0,
+            vz_ms=0.0,
         )
         assert abs(cs.velocity_magnitude_ms - 5.0) < 1e-9
 
     def test_immutable(self) -> None:
         cs = CartesianState(
             stamp=self._stamp,
-            x_m=1.0, y_m=2.0, z_m=3.0,
-            vx_ms=0.0, vy_ms=0.0, vz_ms=0.0,
+            x_m=1.0,
+            y_m=2.0,
+            z_m=3.0,
+            vx_ms=0.0,
+            vy_ms=0.0,
+            vz_ms=0.0,
         )
         with pytest.raises((ValidationError, TypeError)):
             cs.x_m = 999.0  # type: ignore[misc]
@@ -171,8 +187,12 @@ class TestCartesianState:
     def test_zero_vector(self) -> None:
         cs = CartesianState(
             stamp=self._stamp,
-            x_m=0.0, y_m=0.0, z_m=0.0,
-            vx_ms=0.0, vy_ms=0.0, vz_ms=0.0,
+            x_m=0.0,
+            y_m=0.0,
+            z_m=0.0,
+            vx_ms=0.0,
+            vy_ms=0.0,
+            vz_ms=0.0,
         )
         assert cs.position_magnitude_m == 0.0
         assert cs.velocity_magnitude_ms == 0.0

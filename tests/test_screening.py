@@ -31,7 +31,9 @@ def _state(x_km: float, y_km: float, z_km: float) -> CartesianState:
         x_m=x_km * 1_000.0,
         y_m=y_km * 1_000.0,
         z_m=z_km * 1_000.0,
-        vx_ms=0.0, vy_ms=0.0, vz_ms=0.0,
+        vx_ms=0.0,
+        vy_ms=0.0,
+        vz_ms=0.0,
     )
 
 
@@ -139,9 +141,9 @@ def test_result_repr_contains_outcome() -> None:
 
 def test_screening_module_advisory_boundary() -> None:
     from pathlib import Path
+
     text = (
-        Path(__file__).parent.parent
-        / "src" / "ailora" / "domain" / "ssa" / "screening.py"
+        Path(__file__).parent.parent / "src" / "ailora" / "domain" / "ssa" / "screening.py"
     ).read_text()
     assert "advisory" in text.lower()
     assert "prompt 06" in text.lower()
@@ -151,10 +153,12 @@ def test_screening_module_advisory_boundary() -> None:
 def test_no_pc_calculation_in_t0_module() -> None:
     """T0/PHY-C1 screening must not claim to compute Probability of Collision."""
     from pathlib import Path
+
     text = (
-        Path(__file__).parent.parent
-        / "src" / "ailora" / "domain" / "ssa" / "screening.py"
-    ).read_text().lower()
+        (Path(__file__).parent.parent / "src" / "ailora" / "domain" / "ssa" / "screening.py")
+        .read_text()
+        .lower()
+    )
     # These would indicate a T3/T4 normative claim
     forbidden = ["probability_of_collision", "p_c =", "pc =", "foster_1992"]
     for f in forbidden:
@@ -162,6 +166,7 @@ def test_no_pc_calculation_in_t0_module() -> None:
 
 
 # ─── Distance edge cases ─────────────────────────────────────────────────────
+
 
 def test_zero_distance_is_conjunction_possible() -> None:
     s = _state(7000.0, 0.0, 0.0)

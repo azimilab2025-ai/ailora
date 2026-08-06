@@ -147,13 +147,11 @@ def test_empty_name_accepted() -> None:
 
 def test_tle_parser_module_is_advisory_only() -> None:
     from pathlib import Path
+
     text = (
-        Path(__file__).parent.parent
-        / "src" / "ailora" / "domain" / "ssa" / "tle_parser.py"
+        Path(__file__).parent.parent / "src" / "ailora" / "domain" / "ssa" / "tle_parser.py"
     ).read_text()
-    assert "advisory" in text.lower(), (
-        "tle_parser.py must contain advisory-only boundary statement"
-    )
+    assert "advisory" in text.lower(), "tle_parser.py must contain advisory-only boundary statement"
     assert "prompt 06" in text.lower(), (
         "tle_parser.py must reference Prompt 06 domain review boundary"
     )
@@ -162,10 +160,12 @@ def test_tle_parser_module_is_advisory_only() -> None:
 def test_no_real_tle_integration() -> None:
     """Parser must not import or call live TLE data APIs."""
     from pathlib import Path
+
     text = (
-        Path(__file__).parent.parent
-        / "src" / "ailora" / "domain" / "ssa" / "tle_parser.py"
-    ).read_text().lower()
+        (Path(__file__).parent.parent / "src" / "ailora" / "domain" / "ssa" / "tle_parser.py")
+        .read_text()
+        .lower()
+    )
     # Check for actual import/call patterns, not docstring mentions
     forbidden = ["import requests", "import httpx", "requests.get(", "httpx.get("]
     for f in forbidden:

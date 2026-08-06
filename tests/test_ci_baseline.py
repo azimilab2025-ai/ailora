@@ -23,6 +23,7 @@ def test_ci_workflow_exists() -> None:
 def test_ci_workflow_parseable_yaml() -> None:
     """CI workflow must be valid YAML."""
     import yaml  # type: ignore[import-untyped]
+
     content = CI_WORKFLOW.read_text(encoding="utf-8")
     doc = yaml.safe_load(content)
     assert doc is not None, "ci.yml must not be empty"
@@ -91,6 +92,7 @@ def test_ci_workflow_no_hardcoded_secrets() -> None:
 def test_ci_workflow_no_deploy_steps() -> None:
     """CI workflow must not contain deployment step commands."""
     import yaml  # type: ignore[import-untyped]
+
     doc = yaml.safe_load(CI_WORKFLOW.read_text(encoding="utf-8"))
     # Collect all 'run' step commands from all jobs
     run_commands: list[str] = []
@@ -103,6 +105,4 @@ def test_ci_workflow_no_deploy_steps() -> None:
     prohibited_in_run = ["heroku", "fly.io", "render deploy", "kubectl apply", "docker push"]
     for cmd in run_commands:
         for forbidden in prohibited_in_run:
-            assert forbidden not in cmd, (
-                f"CI workflow run step must not perform: '{forbidden}'"
-            )
+            assert forbidden not in cmd, f"CI workflow run step must not perform: '{forbidden}'"

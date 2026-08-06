@@ -45,7 +45,7 @@ def test_oya_fail_closed_flag_true_no_credentials() -> None:
     """Enabling the flag without credentials must be reset to False (fail-closed)."""
     s = OyaSettings(
         enable_oya_voice_service=True,
-        oya_api_key="",           # no key
+        oya_api_key="",  # no key
         oya_environment="prototype",
     )
     assert s.enable_oya_voice_service is False
@@ -57,7 +57,7 @@ def test_oya_fail_closed_flag_true_wrong_environment() -> None:
     s = OyaSettings(
         enable_oya_voice_service=True,
         oya_api_key="some-real-key",
-        oya_environment="staging",   # not "production"
+        oya_environment="staging",  # not "production"
     )
     assert s.enable_oya_voice_service is False
     assert s.is_active is False
@@ -113,6 +113,7 @@ async def test_noop_adapter_start_session_is_advisory() -> None:
 async def test_noop_adapter_start_session_no_network_call() -> None:
     """start_session must complete without any network call."""
     import asyncio
+
     adapter = NoOpOyaAdapter()
     config = OyaSessionConfig(tenant_id="t1", user_id="u1")
     # Must complete almost instantly — no real network IO
@@ -177,10 +178,12 @@ async def test_noop_adapter_fallback_mode_is_text_chat() -> None:
 def test_adapter_module_no_network_imports() -> None:
     """Adapter module must not import requests, httpx, or similar in prototype."""
     from pathlib import Path
+
     text = (
-        Path(__file__).parent.parent
-        / "src" / "ailora" / "services" / "oya" / "adapter.py"
-    ).read_text().lower()
+        (Path(__file__).parent.parent / "src" / "ailora" / "services" / "oya" / "adapter.py")
+        .read_text()
+        .lower()
+    )
     forbidden = ["import requests", "import httpx", "import aiohttp"]
     for f in forbidden:
         assert f not in text, f"adapter.py must not import network library: '{f}'"
@@ -189,9 +192,8 @@ def test_adapter_module_no_network_imports() -> None:
 def test_env_example_has_oya_placeholders() -> None:
     """`.env.example` must document Oya configuration placeholders."""
     from pathlib import Path
-    text = (
-        Path(__file__).parent.parent / ".env.example"
-    ).read_text(encoding="utf-8")
+
+    text = (Path(__file__).parent.parent / ".env.example").read_text(encoding="utf-8")
     assert "OYA_VOICE_SERVICE" in text
     assert "OYA_API_KEY" in text
     assert "OYA_BASE_URL" in text
@@ -201,7 +203,6 @@ def test_env_example_has_oya_placeholders() -> None:
 def test_env_example_oya_disabled_by_default() -> None:
     """`.env.example` must set ENABLE_OYA_VOICE_SERVICE=false."""
     from pathlib import Path
-    text = (
-        Path(__file__).parent.parent / ".env.example"
-    ).read_text(encoding="utf-8")
+
+    text = (Path(__file__).parent.parent / ".env.example").read_text(encoding="utf-8")
     assert "ENABLE_OYA_VOICE_SERVICE=false" in text

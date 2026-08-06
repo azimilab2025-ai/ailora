@@ -16,7 +16,7 @@ Algorithm: T0 / PHY-C1 — Geometric sphere intersection screening.
   Given two orbital objects with position vectors at a common epoch,
   compute the Euclidean distance between their positions and compare it
   to a configurable conjunction distance threshold (CDT).
-  
+
   This is the coarsest possible screen:
     IF distance ≤ CDT  →  CONJUNCTION_POSSIBLE (requires further analysis)
     IF distance > CDT  →  NO_CONJUNCTION (objects are far apart at this epoch)
@@ -45,7 +45,7 @@ from ailora.domain.shared.value_objects import CartesianState
 class ConjunctionTier(StrEnum):
     """Advisory classification tier for conjunction screening output."""
 
-    T0_PHY_C1 = "T0_PHY_C1"   # Coarse geometric screening (this module)
+    T0_PHY_C1 = "T0_PHY_C1"  # Coarse geometric screening (this module)
 
 
 class ScreeningOutcome(StrEnum):

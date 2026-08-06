@@ -73,8 +73,7 @@ class ConjunctionRiskAssessment:
         self.threshold_km = screening_result.threshold_km
         self.is_advisory: bool = True
         self.provenance_label = (
-            "AILORA Advisory Output | T0/PHY-C1 | Non-normative | "
-            "Prompt 06 DOMAIN_REVIEW_REQUIRED"
+            "AILORA Advisory Output | T0/PHY-C1 | Non-normative | Prompt 06 DOMAIN_REVIEW_REQUIRED"
         )
 
         self.risk_level = self._classify_risk()
@@ -103,10 +102,7 @@ class ConjunctionRiskAssessment:
         cdt = self.threshold_km
         level = self.risk_level
 
-        header = (
-            f"[ADVISORY — PHY-C1 / T0 — Non-normative] "
-            f"Risk level: {level.value}"
-        )
+        header = f"[ADVISORY — PHY-C1 / T0 — Non-normative] Risk level: {level.value}"
 
         if level == RiskLevel.CRITICAL:
             body = (

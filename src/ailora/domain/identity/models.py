@@ -35,10 +35,10 @@ from ailora.db.base import Base
 class RoleEnum(StrEnum):
     """Built-in roles for tenant membership."""
 
-    OWNER = "owner"       # Full access within the tenant
-    ADMIN = "admin"       # Administrative access, cannot delete tenant
-    MEMBER = "member"     # Standard access
-    VIEWER = "viewer"     # Read-only access
+    OWNER = "owner"  # Full access within the tenant
+    ADMIN = "admin"  # Administrative access, cannot delete tenant
+    MEMBER = "member"  # Standard access
+    VIEWER = "viewer"  # Read-only access
 
 
 # ---------------------------------------------------------------------------
@@ -169,9 +169,7 @@ class Membership(Base):
     """
 
     __tablename__ = "memberships"
-    __table_args__ = (
-        UniqueConstraint("user_id", "tenant_id", name="uq_membership_user_tenant"),
-    )
+    __table_args__ = (UniqueConstraint("user_id", "tenant_id", name="uq_membership_user_tenant"),)
 
     id: Mapped[uuid.UUID] = mapped_column(
         UUID(as_uuid=True),

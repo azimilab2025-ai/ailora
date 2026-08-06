@@ -150,18 +150,14 @@ def test_membership_tenant_id_has_foreign_key() -> None:
     """tenant_id must have a foreign key to tenants.id."""
     col = Membership.__table__.columns["tenant_id"]
     fk_targets = {fk.target_fullname for fk in col.foreign_keys}
-    assert "tenants.id" in fk_targets, (
-        "membership.tenant_id must reference tenants.id"
-    )
+    assert "tenants.id" in fk_targets, "membership.tenant_id must reference tenants.id"
 
 
 def test_membership_user_id_has_foreign_key() -> None:
     """user_id must have a foreign key to users.id."""
     col = Membership.__table__.columns["user_id"]
     fk_targets = {fk.target_fullname for fk in col.foreign_keys}
-    assert "users.id" in fk_targets, (
-        "membership.user_id must reference users.id"
-    )
+    assert "users.id" in fk_targets, "membership.user_id must reference users.id"
 
 
 # ─── UUID primary keys ───────────────────────────────────────────────────────
@@ -212,9 +208,7 @@ def test_identity_migration_exists() -> None:
 def test_identity_migration_has_correct_down_revision() -> None:
     """Identity migration must chain from 0001_baseline."""
     text = IDENTITY_MIGRATION.read_text(encoding="utf-8")
-    assert "0001_baseline" in text, (
-        "0002_identity.py must set down_revision = '0001_baseline'"
-    )
+    assert "0001_baseline" in text, "0002_identity.py must set down_revision = '0001_baseline'"
 
 
 def test_identity_migration_creates_all_three_tables() -> None:

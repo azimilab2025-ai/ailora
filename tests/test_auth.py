@@ -112,6 +112,7 @@ def test_decode_expired_token_raises_token_error() -> None:
     from jose import jwt as jose_jwt
 
     from ailora.config import settings
+
     payload = {
         "sub": "user-id-exp",
         "exp": datetime.now(tz=UTC) - timedelta(seconds=1),
@@ -124,6 +125,7 @@ def test_decode_expired_token_raises_token_error() -> None:
 def test_token_error_message_does_not_expose_secret() -> None:
     """TokenError messages must not contain the secret key."""
     from ailora.config import settings
+
     try:
         decode_access_token("invalid.token")
     except TokenError as e:
@@ -138,6 +140,7 @@ def _make_protected_app() -> FastAPI:
     from typing import Any
 
     from fastapi import Depends
+
     app = FastAPI()
 
     @app.get("/protected")
@@ -179,6 +182,7 @@ async def test_protected_route_invalid_token_returns_401() -> None:
 async def test_protected_route_error_body_no_secret() -> None:
     """401 response body must not contain the secret key."""
     from ailora.config import settings
+
     app = _make_protected_app()
     async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as client:
         resp = await client.get("/protected", headers={"Authorization": "Bearer bad.token.here"})
@@ -195,6 +199,7 @@ async def test_protected_route_wrong_scheme_returns_401() -> None:
 
 
 # ─── Sync client test for simple cases ───────────────────────────────────────
+
 
 def test_protected_route_sync_no_token() -> None:
     app = _make_protected_app()

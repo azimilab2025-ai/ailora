@@ -39,15 +39,11 @@ class TenantRepository:
         self._session = session
 
     async def get_by_id(self, tenant_id: uuid.UUID) -> Tenant | None:
-        result = await self._session.execute(
-            select(Tenant).where(Tenant.id == tenant_id)
-        )
+        result = await self._session.execute(select(Tenant).where(Tenant.id == tenant_id))
         return result.scalar_one_or_none()
 
     async def get_by_slug(self, slug: str) -> Tenant | None:
-        result = await self._session.execute(
-            select(Tenant).where(Tenant.slug == slug)
-        )
+        result = await self._session.execute(select(Tenant).where(Tenant.slug == slug))
         return result.scalar_one_or_none()
 
     async def create(self, slug: str, display_name: str) -> Tenant:
@@ -69,15 +65,11 @@ class UserRepository:
         self._session = session
 
     async def get_by_id(self, user_id: uuid.UUID) -> User | None:
-        result = await self._session.execute(
-            select(User).where(User.id == user_id)
-        )
+        result = await self._session.execute(select(User).where(User.id == user_id))
         return result.scalar_one_or_none()
 
     async def get_by_email(self, email: str) -> User | None:
-        result = await self._session.execute(
-            select(User).where(User.email == email)
-        )
+        result = await self._session.execute(select(User).where(User.email == email))
         return result.scalar_one_or_none()
 
     async def create(self, email: str, hashed_password: str) -> User:
@@ -124,9 +116,7 @@ class MembershipRepository:
         )
         membership = result.scalar_one_or_none()
         if membership is None:
-            raise TenantAccessError(
-                "No active membership for this user in the requested tenant"
-            )
+            raise TenantAccessError("No active membership for this user in the requested tenant")
         return membership
 
     async def create(

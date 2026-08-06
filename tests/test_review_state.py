@@ -155,9 +155,9 @@ def test_transition_count_increments(pending_record: ReviewRecord) -> None:
 
 def test_review_module_no_command_path() -> None:
     from pathlib import Path
+
     text = (
-        Path(__file__).parent.parent
-        / "src" / "ailora" / "domain" / "ssa" / "review.py"
+        Path(__file__).parent.parent / "src" / "ailora" / "domain" / "ssa" / "review.py"
     ).read_text()
     # No actual command execution functions
     forbidden = ["execute_command(", "send_uplink(", "maneuver_execute("]

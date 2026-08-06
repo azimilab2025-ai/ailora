@@ -44,25 +44,19 @@ def test_alembic_versions_dir_exists() -> None:
 def test_alembic_env_uses_ailora_settings() -> None:
     """alembic/env.py must import from ailora.config to resolve database URL."""
     text = ALEMBIC_ENV.read_text(encoding="utf-8")
-    assert "ailora.config" in text, (
-        "alembic/env.py must import settings from ailora.config"
-    )
+    assert "ailora.config" in text, "alembic/env.py must import settings from ailora.config"
 
 
 def test_alembic_env_targets_base_metadata() -> None:
     """alembic/env.py must reference Base.metadata for autogenerate support."""
     text = ALEMBIC_ENV.read_text(encoding="utf-8")
-    assert "Base.metadata" in text, (
-        "alembic/env.py must set target_metadata = Base.metadata"
-    )
+    assert "Base.metadata" in text, "alembic/env.py must set target_metadata = Base.metadata"
 
 
 def test_alembic_env_is_async() -> None:
     """alembic/env.py must use async engine (async_engine_from_config or equivalent)."""
     text = ALEMBIC_ENV.read_text(encoding="utf-8")
-    assert "async" in text.lower(), (
-        "alembic/env.py must use async migration runner"
-    )
+    assert "async" in text.lower(), "alembic/env.py must use async migration runner"
 
 
 def test_alembic_ini_no_hardcoded_credentials() -> None:
@@ -87,9 +81,7 @@ def test_baseline_migration_exists() -> None:
 
 def test_baseline_migration_has_upgrade_and_downgrade() -> None:
     """Baseline migration must define upgrade() and downgrade() functions."""
-    migration_files = [
-        f for f in ALEMBIC_VERSIONS.glob("*.py") if f.name != "__init__.py"
-    ]
+    migration_files = [f for f in ALEMBIC_VERSIONS.glob("*.py") if f.name != "__init__.py"]
     assert migration_files, "No migration files found"
     # Check the earliest migration (sorted by name)
     first_migration = sorted(migration_files)[0]
@@ -100,9 +92,7 @@ def test_baseline_migration_has_upgrade_and_downgrade() -> None:
 
 def test_baseline_migration_has_revision_id() -> None:
     """Baseline migration must define a revision identifier."""
-    migration_files = [
-        f for f in ALEMBIC_VERSIONS.glob("*.py") if f.name != "__init__.py"
-    ]
+    migration_files = [f for f in ALEMBIC_VERSIONS.glob("*.py") if f.name != "__init__.py"]
     first_migration = sorted(migration_files)[0]
     text = first_migration.read_text(encoding="utf-8")
     assert "revision" in text, f"{first_migration.name} must define a revision ID"
@@ -143,17 +133,13 @@ def test_db_session_no_hardcoded_credentials() -> None:
     text = SESSION_MODULE.read_text(encoding="utf-8")
     forbidden = ["password=", "PASSWORD=", "postgres://ailora:ailora"]
     for pattern in forbidden:
-        assert pattern not in text, (
-            f"session.py must not contain hardcoded credential: '{pattern}'"
-        )
+        assert pattern not in text, f"session.py must not contain hardcoded credential: '{pattern}'"
 
 
 def test_db_base_has_declarative_base() -> None:
     """base.py must define a SQLAlchemy DeclarativeBase subclass."""
     text = BASE_MODULE.read_text(encoding="utf-8")
-    assert "DeclarativeBase" in text, (
-        "base.py must define a class inheriting from DeclarativeBase"
-    )
+    assert "DeclarativeBase" in text, "base.py must define a class inheriting from DeclarativeBase"
 
 
 # ─── Import sanity (no live connection required) ──────────────────────────────
@@ -167,9 +153,7 @@ async def test_db_session_module_importable() -> None:
 
     module = importlib.import_module("ailora.db.session")
     assert hasattr(module, "get_db"), "session module must export get_db"
-    assert hasattr(module, "AsyncSessionLocal"), (
-        "session module must export AsyncSessionLocal"
-    )
+    assert hasattr(module, "AsyncSessionLocal"), "session module must export AsyncSessionLocal"
 
 
 @pytest.mark.asyncio

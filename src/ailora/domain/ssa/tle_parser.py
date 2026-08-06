@@ -27,8 +27,8 @@ from dataclasses import dataclass
 # TLE parsing constants
 # ---------------------------------------------------------------------------
 
-_EARTH_MU_KM3_S2 = 398_600.4418   # Earth gravitational parameter (km³/s²)
-_EARTH_RADIUS_KM = 6_378.137       # Earth equatorial radius (km)
+_EARTH_MU_KM3_S2 = 398_600.4418  # Earth gravitational parameter (km³/s²)
+_EARTH_RADIUS_KM = 6_378.137  # Earth equatorial radius (km)
 _TWOPI = 2.0 * math.pi
 
 
@@ -50,23 +50,23 @@ class TLERecord:
     """
 
     # Metadata
-    name: str                      # Satellite name (from TLE line 0)
-    catalog_number: str            # NORAD catalog number (field 2, line 1)
-    epoch_year: int                # Two-digit epoch year
-    epoch_day: float               # Day of epoch year (fractional)
-    classification: str            # U = Unclassified
+    name: str  # Satellite name (from TLE line 0)
+    catalog_number: str  # NORAD catalog number (field 2, line 1)
+    epoch_year: int  # Two-digit epoch year
+    epoch_day: float  # Day of epoch year (fractional)
+    classification: str  # U = Unclassified
 
     # Keplerian elements (mean elements — SGP4 mean motion model)
-    inclination_deg: float         # Inclination (degrees)
-    raan_deg: float                # Right ascension of ascending node (degrees)
-    eccentricity: float            # Eccentricity (dimensionless, 0–1)
-    arg_perigee_deg: float         # Argument of perigee (degrees)
-    mean_anomaly_deg: float        # Mean anomaly at epoch (degrees)
-    mean_motion_rev_day: float     # Mean motion (revolutions/day)
-    revolution_number: int         # Revolution number at epoch
+    inclination_deg: float  # Inclination (degrees)
+    raan_deg: float  # Right ascension of ascending node (degrees)
+    eccentricity: float  # Eccentricity (dimensionless, 0–1)
+    arg_perigee_deg: float  # Argument of perigee (degrees)
+    mean_anomaly_deg: float  # Mean anomaly at epoch (degrees)
+    mean_motion_rev_day: float  # Mean motion (revolutions/day)
+    revolution_number: int  # Revolution number at epoch
 
     # Drag / ballistic coefficient
-    bstar_drag: float              # BSTAR drag term (Earth radii⁻¹)
+    bstar_drag: float  # BSTAR drag term (Earth radii⁻¹)
 
     # Computed from mean motion
     @property

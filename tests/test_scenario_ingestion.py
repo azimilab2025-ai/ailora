@@ -185,9 +185,9 @@ def test_scenario_different_tenants_isolated() -> None:
 def test_no_spacecraft_command_in_scenario_module() -> None:
     """Scenario module must not contain actual command execution paths."""
     from pathlib import Path
+
     text = (
-        Path(__file__).parent.parent
-        / "src" / "ailora" / "domain" / "ssa" / "scenario.py"
+        Path(__file__).parent.parent / "src" / "ailora" / "domain" / "ssa" / "scenario.py"
     ).read_text()
     # Check for actual capability implementation patterns, not denial statements
     forbidden_patterns = ["execute_command(", "send_uplink(", "maneuver_execute("]

@@ -56,11 +56,9 @@ def test_repository_classes_exist() -> None:
 def test_repositories_module_has_no_raw_sql() -> None:
     """Repositories must not use raw SQL strings (injection risk)."""
     text = REPOS_MODULE.read_text(encoding="utf-8")
-    forbidden = ["execute(\"SELECT", "execute('SELECT", "text(\"SELECT"]
+    forbidden = ['execute("SELECT', "execute('SELECT", 'text("SELECT']
     for pattern in forbidden:
-        assert pattern not in text, (
-            f"repositories.py must not use raw SQL: '{pattern}'"
-        )
+        assert pattern not in text, f"repositories.py must not use raw SQL: '{pattern}'"
 
 
 def test_tenant_id_is_always_filtered() -> None:

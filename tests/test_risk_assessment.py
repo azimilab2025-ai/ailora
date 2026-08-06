@@ -28,8 +28,13 @@ _STAMP = TemporalStamp(epoch=_EPOCH, frame=ReferenceFrame.TEME)
 
 def _state(x_km: float) -> CartesianState:
     return CartesianState(
-        stamp=_STAMP, x_m=x_km * 1_000.0, y_m=0.0, z_m=0.0,
-        vx_ms=0.0, vy_ms=0.0, vz_ms=0.0,
+        stamp=_STAMP,
+        x_m=x_km * 1_000.0,
+        y_m=0.0,
+        z_m=0.0,
+        vx_ms=0.0,
+        vy_ms=0.0,
+        vz_ms=0.0,
     )
 
 
@@ -158,9 +163,9 @@ def test_critical_high_recommend_human_review() -> None:
 
 def test_risk_module_advisory_boundary() -> None:
     from pathlib import Path
+
     text = (
-        Path(__file__).parent.parent
-        / "src" / "ailora" / "domain" / "ssa" / "risk.py"
+        Path(__file__).parent.parent / "src" / "ailora" / "domain" / "ssa" / "risk.py"
     ).read_text()
     assert "advisory" in text.lower()
     assert "prompt 06" in text.lower()

@@ -79,6 +79,7 @@ def test_tracing_module_uses_opentelemetry() -> None:
 def test_logging_module_importable() -> None:
     """ailora.observability.logging must be importable."""
     import importlib
+
     mod = importlib.import_module("ailora.observability.logging")
     assert hasattr(mod, "configure_logging")
     assert hasattr(mod, "get_logger")
@@ -87,6 +88,7 @@ def test_logging_module_importable() -> None:
 def test_configure_logging_idempotent() -> None:
     """configure_logging() must be callable multiple times without error."""
     from ailora.observability.logging import configure_logging
+
     configure_logging()
     configure_logging()  # Second call must not raise
 
@@ -94,6 +96,7 @@ def test_configure_logging_idempotent() -> None:
 def test_get_logger_returns_usable_logger() -> None:
     """get_logger() must return a logger that accepts .info() calls."""
     from ailora.observability.logging import get_logger
+
     log = get_logger("test.observability")
     # Must not raise
     log.info("test_event", component="observability_test")
@@ -103,14 +106,13 @@ def test_configure_logging_called_in_app() -> None:
     """app.py must import and call configure_logging at startup."""
     app_path = REPO_ROOT / "src" / "ailora" / "api" / "app.py"
     text = app_path.read_text(encoding="utf-8")
-    assert "configure_logging" in text, (
-        "api/app.py must import and call configure_logging"
-    )
+    assert "configure_logging" in text, "api/app.py must import and call configure_logging"
 
 
 def test_tracing_module_importable() -> None:
     """ailora.observability.tracing must be importable."""
     import importlib
+
     mod = importlib.import_module("ailora.observability.tracing")
     assert hasattr(mod, "configure_tracing")
     assert hasattr(mod, "get_tracer")
@@ -121,6 +123,7 @@ def test_configure_tracing_is_idempotent() -> None:
     from fastapi import FastAPI
 
     from ailora.observability.tracing import configure_tracing
+
     test_app = FastAPI()
     configure_tracing(test_app)
     configure_tracing(test_app)  # Second call must not raise
@@ -129,6 +132,7 @@ def test_configure_tracing_is_idempotent() -> None:
 def test_enable_tracing_config_field_exists() -> None:
     """Settings must expose enable_tracing field with safe default False."""
     from ailora.config import settings
+
     assert hasattr(settings, "enable_tracing")
     # Default must be False — tracing disabled unless explicitly enabled
     assert settings.enable_tracing is False

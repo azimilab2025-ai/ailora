@@ -226,10 +226,10 @@ class OrbitalRegime(StrEnum):
     Active regimes: LEO · MEO · GEO · HEO.
     """
 
-    LEO = "LEO"      # Low Earth Orbit   (< 2 000 km altitude)
-    MEO = "MEO"      # Medium Earth Orbit (2 000 – 35 786 km)
-    GEO = "GEO"      # Geostationary Orbit (~35 786 km ± 200 km)
-    HEO = "HEO"      # Highly Elliptical Orbit (defined by eccentricity, not altitude)
+    LEO = "LEO"  # Low Earth Orbit   (< 2 000 km altitude)
+    MEO = "MEO"  # Medium Earth Orbit (2 000 – 35 786 km)
+    GEO = "GEO"  # Geostationary Orbit (~35 786 km ± 200 km)
+    HEO = "HEO"  # Highly Elliptical Orbit (defined by eccentricity, not altitude)
     UNKNOWN = "UNKNOWN"
 
     @classmethod

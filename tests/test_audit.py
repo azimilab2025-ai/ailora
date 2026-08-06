@@ -104,9 +104,14 @@ def test_audit_entry_correlation_id_stored() -> None:
 def test_audit_entry_event_types_enumerated() -> None:
     types = {e.value for e in AuditEventType}
     required = {
-        "SCENARIO_INGESTED", "SCENARIO_SCREENED", "SCENARIO_RISK_ASSESSED",
-        "REVIEW_OPENED", "REVIEW_STATE_CHANGED", "REVIEW_CLOSED",
-        "ACCESS_GRANTED", "ACCESS_DENIED",
+        "SCENARIO_INGESTED",
+        "SCENARIO_SCREENED",
+        "SCENARIO_RISK_ASSESSED",
+        "REVIEW_OPENED",
+        "REVIEW_STATE_CHANGED",
+        "REVIEW_CLOSED",
+        "ACCESS_GRANTED",
+        "ACCESS_DENIED",
     }
     assert required.issubset(types)
 

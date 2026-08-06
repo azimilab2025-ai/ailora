@@ -41,6 +41,7 @@ from ailora.security.auth import TokenError, create_access_token, decode_access_
 @pytest.fixture
 async def db() -> AsyncSession:
     from ailora.db.base import Base
+
     engine = create_async_engine(
         "sqlite+aiosqlite:///:memory:",
         echo=False,
