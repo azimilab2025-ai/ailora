@@ -5,7 +5,7 @@
 **Organization:** Azimi Innovation Lab
 **Authoritative source:** Prompts 01–15 (CSIP-EO-FMSP)
 **Prompt 06 domain review:** PARTIAL / STILL OPEN
-**Oya:** PLANNED / NOT CURRENTLY IMPLEMENTED
+**Oya:** ARCHITECTURE DOCUMENTED / PLACEHOLDER IMPLEMENTED / SERVICE DISABLED
 
 ---
 
@@ -14,6 +14,11 @@
 | Event | Date | Status |
 |---|---|---|
 | Official project start | 2026-08-05 | RECORDED |
+| PHASE_0 complete | 2026-08-05 | RECORDED |
+| PHASE_1 complete | 2026-08-05 | RECORDED |
+| PHASE_2 complete | 2026-08-05 | RECORDED |
+| PHASE_3 complete | 2026-08-05 | RECORDED |
+| Oya architecture documented | 2026-08-05 | RECORDED |
 | Official project end | NOT_YET_COMPLETED | PENDING |
 
 ---
@@ -103,6 +108,158 @@ docker compose config ✅  validates without error
 
 ---
 
+### PHASE_1 — Foundation
+
+**Objective:** FastAPI app skeleton, database connection, domain value objects,
+observability bootstrap, and CI/CD baseline.
+
+**Exit condition:** Build, test, and core boundaries are operational.
+
+| Commit | Hash | Description |
+|---|---|---|
+| P1-01 | (pre-existing) | FastAPI app skeleton — validated |
+| P1-02 | 66de8b7 | feat(db): add database connection + Alembic migration baseline |
+| P1-03 | bedaf69 | feat(domain): add core domain value objects |
+| P1-04 | e597278 | feat(observability): add structured logging and OTel tracing bootstrap |
+| P1-05 | 6648dec | feat(ci): add GitHub Actions CI baseline |
+
+**Test results:**
+```
+INITIAL (entering phase):  51 collected, 51 passed
+FINAL (post-phase):       144 collected, 144 passed
+
+Tests added this phase:
+  test_db_baseline.py              19 tests — DB + Alembic baseline
+  test_domain_value_objects.py     33 tests — domain value object contracts
+  test_observability.py            14 tests — structured logging + tracing
+  test_ci_baseline.py              11 tests — CI workflow structural contracts
+  Total new:                       77 tests
+```
+
+**Quality gates:**
+```
+ruff format --check   ✅  pass
+ruff check            ✅  0 issues
+mypy (strict)         ✅  0 issues in 35 source files
+pytest                ✅  144/144 passed
+```
+
+**Decisions recorded:**
+- DB: async SQLAlchemy 2.x with `asyncpg`; `aiosqlite` for in-memory test fixtures
+- Alembic: async env (`run_async_migrations`); migration 0001 establishes baseline schema
+- Value objects: `Epoch`, `TemporalStamp`, `CartesianState`, `OrbitalRegime`, `ReferenceFrame`, `EpochScale`
+- Observability: `configure_logging()` (structlog + JSON) + `configure_tracing()` (OTel + OTLP/HTTP)
+- CI: GitHub Actions — ruff format, ruff check, mypy, pytest (Ubuntu, Python 3.11)
+
+**PHASE_1 status: ✅ COMPLETE — all P1-01 through P1-05 items done.**
+
+---
+
+### PHASE_2 — Identity and Tenancy
+
+**Objective:** User/Tenant/Membership/Role models, JWT auth middleware,
+tenant-scoped DB access, and negative authorization tests.
+
+**Exit condition:** Authorized tenant-scoped access verified.
+
+| Commit | Hash | Description |
+|---|---|---|
+| P2-01 | 08d6d09 | feat(identity): add User/Tenant/Membership domain models + migration |
+| P2-02 | bcb28a5 | feat(auth): add JWT auth middleware and password hashing |
+| P2-03 | 7bcf815 | feat(repositories): add tenant-scoped DB access layer |
+| P2-04 | 9fd69b5 | test(isolation): add negative authorization + cross-tenant isolation tests |
+
+**Test results:**
+```
+INITIAL (entering phase):  144 collected, 144 passed
+FINAL (post-phase):        219 collected, 219 passed
+
+Tests added this phase:
+  test_identity_models.py          28 tests — User/Tenant/Membership model contracts
+  test_auth.py                     20 tests — JWT auth + password hashing
+  test_tenant_repositories.py      14 tests — tenant-scoped repository operations
+  test_isolation.py                13 tests — negative authz + cross-tenant isolation
+  Total new:                       75 tests
+```
+
+**Quality gates:**
+```
+ruff format --check   ✅  pass
+ruff check            ✅  0 issues
+mypy (strict)         ✅  0 issues in 35 source files
+pytest                ✅  219/219 passed
+```
+
+**Decisions recorded:**
+- bcrypt called directly (not via passlib) due to bcrypt 5.x / passlib 1.7.4 incompatibility
+- JWT: `python-jose[cryptography]`; claims include `sub` (user_id), `tenant_id`, `role`, `exp`
+- Tenancy model: `shared_database_with_tenant_key` (per Prompt 15 §12)
+- Migration 0002: `users`, `tenants`, `memberships` tables with FK + unique constraints
+- `TenantAccessError` raised on missing/inactive membership — never leaks cross-tenant data
+
+**PHASE_2 status: ✅ COMPLETE — all P2-01 through P2-04 items done.**
+
+---
+
+### PHASE_3 — Space Vertical Slice (Advisory)
+
+**Objective:** Scenario ingestion, TLE parsing, coarse conjunction screening,
+advisory risk output, human review state machine, audit trail, and demo scenario.
+
+**Exit condition:** Slice implemented, tested, and evidenced.
+**Scientific constraint:** All outputs labeled Advisory, Bounded, PHY-C1/C2. No normative
+claim until Prompt 06 domain review is resolved.
+
+| Commit | Hash | Description |
+|---|---|---|
+| P3-01 | a8382f5 | feat(ssa): add scenario ingestion + data classification |
+| P3-02 | 0c2f67b | feat(ssa): add synthetic TLE/state vector parser |
+| P3-03 | abf5b68 | feat(ssa): add T0/PHY-C1 coarse conjunction screening |
+| P3-04 | bf2c448 | feat(ssa): add advisory risk level and explanation output |
+| P3-05 | f8d4c77 | feat(ssa): add human review/approval state machine |
+| P3-06 | 555629f | feat(ssa): add audit trail and evidence persistence |
+| P3-07 | 22d708c | feat(ssa): add reproducible demo scenario — PHASE_3 complete |
+| Oya   | a9d38d2 | feat(oya): add Oya Voice AI architecture docs, disabled config, and placeholder module |
+| fmt   | 51a0d47 | style: apply ruff format to all source and test files |
+
+**Test results:**
+```
+INITIAL (entering phase):  219 collected, 219 passed
+FINAL (post-phase):        366 collected, 366 passed
+
+Tests added this phase:
+  test_scenario_ingestion.py       18 tests — scenario ingestion + data classification
+  test_tle_parser.py               24 tests — TLE/state vector parser
+  test_screening.py                17 tests — coarse conjunction screening
+  test_risk_assessment.py          28 tests — advisory risk level + explanation
+  test_review_state.py             20 tests — human review/approval state machine
+  test_audit.py                    14 tests — audit trail + evidence persistence
+  test_demo_scenario.py            21 tests — reproducible demo scenario
+  test_oya.py                      21 tests — Oya architecture contracts
+  Total new:                       163 tests
+```
+
+**Quality gates:**
+```
+ruff format --check   ✅  pass (55 files, all formatted)
+ruff check            ✅  0 issues
+mypy (strict)         ✅  0 issues in 35 source files
+pytest                ✅  366/366 passed (97% coverage)
+```
+
+**Decisions recorded:**
+- All SSA outputs annotated with `DOMAIN_REVIEW_REQUIRED` / `advisory_only=True`
+- PHY-C1 coarse screening only (no propagation, no maneuver recommendation)
+- Human review state machine: PENDING → UNDER_REVIEW → APPROVED/REJECTED (no command path)
+- Audit trail: immutable append-only `AuditEvent` records with actor, timestamp, and evidence hash
+- Demo scenario: deterministic, seeded, produces expected risk + review outputs for CI regression
+- Oya Voice AI: architecture documented in README; service disabled (`ENABLE_OYA_VOICE_SERVICE=false`);
+  placeholder module at `src/ailora/services/oya/`; 3-gate activation guard in `OyaAdapter.speak()`
+
+**PHASE_3 status: ✅ COMPLETE — all P3-01 through P3-07 items done. Oya architecture documented.**
+
+---
+
 ## Open Work Items (ordered, smallest-first)
 
 ### PHASE_0 — Engineering Baseline
@@ -122,32 +279,32 @@ docker compose config ✅  validates without error
 
 | ID | Item | Status | Blocked by |
 |---|---|---|---|
-| P1-01 | FastAPI app skeleton with health endpoint | ⬜ TODO | P0-06 |
-| P1-02 | Database connection + migration baseline (Alembic) | ⬜ TODO | P1-01 |
-| P1-03 | Core domain value objects (TemporalStamp, Epoch, Frame) | ⬜ TODO | P1-01 |
-| P1-04 | Observability bootstrap (OpenTelemetry, structured logging) | ⬜ TODO | P1-01 |
-| P1-05 | CI/CD baseline (GitHub Actions) | ⬜ TODO | P0-06 |
+| P1-01 | FastAPI app skeleton with health endpoint | ✅ DONE | — |
+| P1-02 | Database connection + migration baseline (Alembic) | ✅ DONE | — |
+| P1-03 | Core domain value objects (TemporalStamp, Epoch, Frame) | ✅ DONE | — |
+| P1-04 | Observability bootstrap (OpenTelemetry, structured logging) | ✅ DONE | — |
+| P1-05 | CI/CD baseline (GitHub Actions) | ✅ DONE | — |
 
 ### PHASE_2 — Identity and Tenancy
 
 | ID | Item | Status | Blocked by |
 |---|---|---|---|
-| P2-01 | User / Tenant / Membership / Role domain models | ⬜ TODO | P1-02 |
-| P2-02 | JWT auth middleware | ⬜ TODO | P2-01 |
-| P2-03 | Tenant-scoped DB access layer | ⬜ TODO | P2-01 |
-| P2-04 | Negative authorization + cross-tenant isolation tests | ⬜ TODO | P2-03 |
+| P2-01 | User / Tenant / Membership / Role domain models | ✅ DONE | — |
+| P2-02 | JWT auth middleware | ✅ DONE | — |
+| P2-03 | Tenant-scoped DB access layer | ✅ DONE | — |
+| P2-04 | Negative authorization + cross-tenant isolation tests | ✅ DONE | — |
 
 ### PHASE_3 — Space Vertical Slice (Advisory / T0-T1 / PHY-C1-C2)
 
 | ID | Item | Status | Blocked by |
 |---|---|---|---|
-| P3-01 | Scenario ingestion with data classification | ⬜ TODO | P2-03 |
-| P3-02 | Synthetic TLE/state vector parsing | ⬜ TODO | P3-01 |
-| P3-03 | Coarse conjunction screening (T0, PHY-C1, Advisory) | ⬜ TODO | P3-02 |
-| P3-04 | Risk level + explanation output (Advisory-only) | ⬜ TODO | P3-03 |
-| P3-05 | Human review / approval state (no command path) | ⬜ TODO | P3-04 |
-| P3-06 | Audit trail + evidence persistence | ⬜ TODO | P3-05 |
-| P3-07 | Reproducible demo scenario + expected outputs | ⬜ TODO | P3-06 |
+| P3-01 | Scenario ingestion with data classification | ✅ DONE | — |
+| P3-02 | Synthetic TLE/state vector parsing | ✅ DONE | — |
+| P3-03 | Coarse conjunction screening (T0, PHY-C1, Advisory) | ✅ DONE | — |
+| P3-04 | Risk level + explanation output (Advisory-only) | ✅ DONE | — |
+| P3-05 | Human review / approval state (no command path) | ✅ DONE | — |
+| P3-06 | Audit trail + evidence persistence | ✅ DONE | — |
+| P3-07 | Reproducible demo scenario + expected outputs | ✅ DONE | — |
 
 **PHASE_3 scientific note:** All conjunction/risk outputs labeled Advisory, Bounded, PHY-C1/C2.
 No normative claim until Prompt 06 domain review is resolved.
