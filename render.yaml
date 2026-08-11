@@ -10,10 +10,15 @@ services:
     runtime: python
     region: oregon
     plan: free
-    buildCommand: pip install uv && uv sync --no-dev --frozen
-    startCommand: uvicorn ailora.api.app:app --host 0.0.0.0 --port $PORT
+    buildCommand: uv sync --no-dev --frozen
+    # Render pre-deploy commands require a paid web plan. On the single-instance
+    # free prototype, run idempotent Alembic migrations before starting ASGI.
+    startCommand: uv run alembic upgrade head && exec uv run uvicorn ailora.api.app:app --host 0.0.0.0 --port $PORT
     healthCheckPath: /health/live
+    autoDeployTrigger: "off"
     envVars:
+      - key: PYTHON_VERSION
+        value: "3.11.15"
       - key: PYTHONPATH
         value: src
       - key: AILORA_ENVIRONMENT
@@ -30,6 +35,15 @@ services:
         value: "0.1.0"
       # Secrets — set via Render dashboard; never committed to source control.
       - key: AILORA_SECRET_KEY
-        sync: false
+        generateValue: true
       - key: AILORA_DATABASE_URL
-        sync: false
+        fromDatabase:
+          name: ailora-postgres
+          property: connectionString
+
+databases:
+  - name: ailora-postgres
+    databaseName: ailora_db
+    user: ailora
+    region: oregon
+    plan: free

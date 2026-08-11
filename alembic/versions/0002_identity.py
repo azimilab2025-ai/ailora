@@ -13,9 +13,8 @@ Down migration drops all three tables in dependency order.
 from collections.abc import Sequence
 
 import sqlalchemy as sa
-from sqlalchemy.dialects.postgresql import UUID
-
 from alembic import op
+from sqlalchemy.dialects.postgresql import UUID
 
 # revision identifiers
 revision: str = "0002_identity"
@@ -30,7 +29,7 @@ def upgrade() -> None:
     op.create_table(
         "tenants",
         sa.Column("id", UUID(as_uuid=True), primary_key=True, nullable=False),
-        sa.Column("slug", sa.String(64), nullable=False, unique=True, index=True),
+        sa.Column("slug", sa.String(64), nullable=False),
         sa.Column("display_name", sa.String(256), nullable=False),
         sa.Column("is_active", sa.Boolean(), nullable=False, server_default="true"),
         sa.Column(

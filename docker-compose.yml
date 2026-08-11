@@ -1,29 +1,43 @@
 # ─── AILORA Docker Compose ────────────────────────────────────────────────────
-# Local development environment.
-# No credentials are hardcoded — all secrets are loaded from .env (see .env.example).
-# Do NOT commit a .env file containing real credentials to version control.
+# Isolated local development environment.
+# Secrets are loaded from .env and must never be committed.
+
+name: bob-space-project-intake-2026
+
 services:
   ailora:
     build:
       context: .
       target: runtime
     image: ailora:dev
-    container_name: ailora_app
     restart: unless-stopped
+
     ports:
-      # Expose on localhost only for local development
-      - "127.0.0.1:8000:8000"
+      - "127.0.0.1:8001:8000"
+
     env_file:
       - path: .env
-        required: false
+        required: true
+
     environment:
-      - PYTHONUNBUFFERED=1
+      PYTHONUNBUFFERED: "1"
+      AILORA_DATABASE_URL: "postgresql+psycopg://${AILORA_DB_USER}:${AILORA_DB_PASSWORD}@postgres:5432/${AILORA_DB_NAME}"
+
     depends_on:
       postgres:
         condition: service_healthy
+
+    networks:
+      - ailora_internal
+
     healthcheck:
-      test: ["CMD", "python", "-c",
-             "import urllib.request; urllib.request.urlopen('http://localhost:8000/health/live')"]
+      test:
+        [
+          "CMD",
+          "python",
+          "-c",
+          "import urllib.request; urllib.request.urlopen('http://localhost:8000/health/live')"
+        ]
       interval: 30s
       timeout: 10s
       start_period: 15s
@@ -31,25 +45,37 @@ services:
 
   postgres:
     image: postgres:16-alpine
-    container_name: ailora_postgres
     restart: unless-stopped
+
     ports:
-      # Expose on localhost only — not public
-      - "127.0.0.1:5432:5432"
+      - "127.0.0.1:55432:5432"
+
     environment:
-      POSTGRES_DB: ${AILORA_DB_NAME:-ailora_dev}
-      POSTGRES_USER: ${AILORA_DB_USER:-ailora}
-      POSTGRES_PASSWORD: ${AILORA_DB_PASSWORD}
+      POSTGRES_DB: "${AILORA_DB_NAME}"
+      POSTGRES_USER: "${AILORA_DB_USER}"
+      POSTGRES_PASSWORD: "${AILORA_DB_PASSWORD}"
+
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - ailora_postgres_data:/var/lib/postgresql/data
+
+    networks:
+      - ailora_internal
+
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${AILORA_DB_USER:-ailora} -d ${AILORA_DB_NAME:-ailora_dev}"]
-      interval: 10s
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready -U \"$${POSTGRES_USER}\" -d \"$${POSTGRES_DB}\""
+        ]
+      interval: 5s
       timeout: 5s
       start_period: 10s
-      retries: 5
+      retries: 10
 
-# Named volumes — data persists across container restarts
 volumes:
-  postgres_data:
+  ailora_postgres_data:
     driver: local
+
+networks:
+  ailora_internal:
+    driver: bridge

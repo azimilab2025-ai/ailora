@@ -51,6 +51,10 @@ COPY --from=builder /opt/venv /opt/venv
 # Copy application source code only — no lock files, no tests, no secrets
 COPY src/ ./src/
 
+# Copy Alembic configuration and migration scripts
+COPY alembic.ini ./alembic.ini
+COPY alembic/ ./alembic/
+
 # Transfer ownership of the application directory to the non-root user
 RUN chown -R ailora:ailora /app
 
