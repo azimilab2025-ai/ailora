@@ -12,7 +12,7 @@ import asyncio
 from fastapi import APIRouter
 from pydantic import BaseModel
 from sqlalchemy import text
-from sqlalchemy.ext.asyncio import create_async_engine
+from sqlalchemy.ext.asyncio import AsyncEngine, create_async_engine
 
 from ailora.config import settings
 
@@ -72,12 +72,23 @@ async def _probe_database() -> bool:
     Returns True if the database responded within the bounded timeout.
     Returns False on any error or timeout without raising or leaking details.
     """
+    engine: AsyncEngine | None = None
+    probe_ok = False
+
     try:
         engine = create_async_engine(settings.database_url, pool_pre_ping=True)
         async with asyncio.timeout(_DB_PROBE_TIMEOUT_SECONDS):
             async with engine.connect() as conn:
                 await conn.execute(text("SELECT 1"))
-        await engine.dispose()
-        return True
+        probe_ok = True
     except Exception:  # noqa: BLE001
-        return False
+        probe_ok = False
+    finally:
+        if engine is not None:
+            try:
+                async with asyncio.timeout(_DB_PROBE_TIMEOUT_SECONDS):
+                    await engine.dispose()
+            except Exception:  # noqa: BLE001
+                probe_ok = False
+
+    return probe_ok
