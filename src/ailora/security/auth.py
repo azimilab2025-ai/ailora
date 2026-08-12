@@ -23,7 +23,7 @@ from datetime import UTC, datetime, timedelta
 from typing import Any
 
 import bcrypt
-from jose import JWTError, jwt
+import jwt
 
 from ailora.config import settings
 
@@ -69,7 +69,7 @@ def create_access_token(subject: str, extra_claims: dict[str, Any] | None = None
         "exp": expire,
         **(extra_claims or {}),
     }
-    return jwt.encode(payload, settings.secret_key, algorithm=settings.algorithm)  # type: ignore[no-any-return]
+    return jwt.encode(payload, settings.secret_key, algorithm=settings.algorithm)
 
 
 # ---------------------------------------------------------------------------
@@ -100,7 +100,7 @@ def decode_access_token(token: str) -> dict[str, Any]:
             settings.secret_key,
             algorithms=[settings.algorithm],
         )
-    except JWTError as exc:
+    except jwt.InvalidTokenError as exc:
         raise TokenError("Invalid or expired token") from exc
 
     subject = payload.get("sub")
