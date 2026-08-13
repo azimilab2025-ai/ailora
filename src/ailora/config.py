@@ -1,10 +1,29 @@
-"""
-AILORA configuration — loaded from environment variables.
-All secrets must be supplied via environment; never hard-coded.
-"""
+"""AILORA configuration loaded and validated from environment variables."""
 
-from pydantic import field_validator
+from enum import StrEnum
+from urllib.parse import urlsplit
+
+from pydantic import Field, field_validator, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
+
+_DEFAULT_SECRET = "CHANGE_ME_BEFORE_ANY_NON_LOCAL_USE"  # noqa: S105
+_PLACEHOLDER_SECRETS = {
+    "",
+    "change-me",
+    "changeme",
+    "development-only-secret",
+    _DEFAULT_SECRET.casefold(),
+}
+
+
+class Environment(StrEnum):
+    """Supported runtime environments."""
+
+    LOCAL = "local"
+    TEST = "test"
+    INTEGRATION = "integration"
+    STAGING = "staging"
+    PRODUCTION = "production"
 
 
 class Settings(BaseSettings):
@@ -18,17 +37,32 @@ class Settings(BaseSettings):
         extra="ignore",
     )
 
-    # ── Application ──────────────────────────────────────────────────────────
     app_name: str = "AILORA"
     app_version: str = "0.1.0"
     debug: bool = False
-    environment: str = "local"
+    environment: Environment = Environment.LOCAL
 
-    # ── Observability ────────────────────────────────────────────────────────
     enable_tracing: bool = False
 
-    # ── Database ─────────────────────────────────────────────────────────────
     database_url: str = "postgresql+psycopg://ailora:ailora@localhost:55432/ailora_db"
+    database_pool_size: int = Field(default=5, ge=1, le=50)
+    database_max_overflow: int = Field(default=10, ge=0, le=100)
+    database_pool_timeout_seconds: float = Field(default=5.0, gt=0, le=60)
+    database_pool_recycle_seconds: int = Field(default=1800, ge=30)
+    database_probe_timeout_seconds: float = Field(default=3.0, gt=0, le=30)
+
+    secret_key: str = _DEFAULT_SECRET  # noqa: S105
+    access_token_expire_minutes: int = Field(default=30, ge=1, le=1440)
+    algorithm: str = "HS256"
+
+    allowed_origins: list[str] = [
+        "http://localhost:3000",
+        "http://localhost:8000",
+    ]
+
+    port: int = Field(default=8000, ge=1, le=65535)
+
+    enable_oya_voice_service: bool = False  # noqa: S105
 
     @field_validator("database_url", mode="before")
     @classmethod
@@ -38,22 +72,64 @@ class Settings(BaseSettings):
             return value.replace("postgresql://", "postgresql+psycopg://", 1)
         return value
 
-    # ── Security ─────────────────────────────────────────────────────────────
-    secret_key: str = "CHANGE_ME_BEFORE_ANY_NON_LOCAL_USE"  # noqa: S105
-    access_token_expire_minutes: int = 30
-    algorithm: str = "HS256"
+    @field_validator("allowed_origins")
+    @classmethod
+    def validate_allowed_origins(cls, origins: list[str]) -> list[str]:
+        """Reject ambiguous, duplicate, wildcard, or path-bearing CORS origins."""
+        normalized: list[str] = []
 
-    # ── CORS ─────────────────────────────────────────────────────────────────
-    allowed_origins: list[str] = [
-        "http://localhost:3000",
-        "http://localhost:8000",
-    ]
+        for origin in origins:
+            candidate = origin.strip().rstrip("/")
 
-    # ── Server ───────────────────────────────────────────────────────────────
-    port: int = 8000
+            if not candidate or candidate == "*":
+                raise ValueError("CORS origins must be explicit and non-empty")
 
-    # ── Oya Voice AI ─────────────────────────────────────────────────────────
-    enable_oya_voice_service: bool = False  # noqa: S105
+            parsed = urlsplit(candidate)
+
+            if (
+                parsed.scheme not in {"http", "https"}
+                or not parsed.hostname
+                or parsed.username
+                or parsed.password
+                or parsed.query
+                or parsed.fragment
+                or parsed.path not in {"", "/"}
+            ):
+                raise ValueError("CORS origins must be scheme-and-host origins only")
+
+            normalized.append(candidate)
+
+        if len(normalized) != len(set(normalized)):
+            raise ValueError("CORS origins must not contain duplicates")
+
+        return normalized
+
+    @model_validator(mode="after")
+    def validate_deployed_environment(self) -> "Settings":
+        """Fail closed for unsafe staging or production configuration."""
+        if self.environment not in {
+            Environment.STAGING,
+            Environment.PRODUCTION,
+        }:
+            return self
+
+        secret = self.secret_key.strip()
+
+        if len(secret) < 32 or secret.casefold() in _PLACEHOLDER_SECRETS:
+            raise ValueError(
+                "staging and production require a non-placeholder secret of at least 32 characters"
+            )
+
+        if self.debug:
+            raise ValueError("debug mode is forbidden in staging and production")
+
+        insecure_origins = [
+            origin for origin in self.allowed_origins if not origin.startswith("https://")
+        ]
+        if insecure_origins:
+            raise ValueError("staging and production CORS origins must use HTTPS")
+
+        return self
 
 
 settings = Settings()

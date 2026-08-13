@@ -1,10 +1,14 @@
-"""Focused contracts for bounded database readiness behavior."""
+"""Focused contracts for the shared database lifecycle and readiness recovery."""
 
 import asyncio
+from unittest.mock import AsyncMock
 
 import pytest
+from httpx import ASGITransport, AsyncClient
 
+from ailora.api.app import app
 from ailora.api.routers import health as health_router
+from ailora.db import session as database
 
 
 class _FakeConnection:
@@ -32,89 +36,84 @@ class _FakeConnection:
 
 
 class _FakeEngine:
-    def __init__(
-        self,
-        connection: _FakeConnection,
-        *,
-        dispose_fails: bool = False,
-    ) -> None:
+    def __init__(self, connection: _FakeConnection) -> None:
         self._connection = connection
-        self._dispose_fails = dispose_fails
-        self.disposed = False
+        self.connect_count = 0
+        self.dispose_count = 0
 
     def connect(self) -> _FakeConnection:
+        self.connect_count += 1
         return self._connection
 
     async def dispose(self) -> None:
-        self.disposed = True
-        if self._dispose_fails:
-            raise RuntimeError("private disposal detail")
-
-
-def _install_engine(
-    monkeypatch: pytest.MonkeyPatch,
-    engine: _FakeEngine,
-) -> None:
-    def factory(*args: object, **kwargs: object) -> _FakeEngine:
-        del args, kwargs
-        return engine
-
-    monkeypatch.setattr(health_router, "create_async_engine", factory)
+        self.dispose_count += 1
 
 
 @pytest.mark.asyncio
-async def test_probe_disposes_engine_after_success(
+async def test_shared_engine_is_reused_for_multiple_probes(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     engine = _FakeEngine(_FakeConnection())
-    _install_engine(monkeypatch, engine)
+    monkeypatch.setattr(database, "engine", engine)
 
-    assert await health_router._probe_database() is True
-    assert engine.disposed is True
+    assert await database.probe_database() is True
+    assert await database.probe_database() is True
+    assert engine.connect_count == 2
+    assert engine.dispose_count == 0
 
 
 @pytest.mark.asyncio
-async def test_probe_disposes_engine_after_connection_failure(
+async def test_probe_contains_connection_failure(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     engine = _FakeEngine(_FakeConnection(fail=True))
-    _install_engine(monkeypatch, engine)
+    monkeypatch.setattr(database, "engine", engine)
 
-    assert await health_router._probe_database() is False
-    assert engine.disposed is True
+    assert await database.probe_database() is False
 
 
 @pytest.mark.asyncio
-async def test_probe_disposes_engine_after_timeout(
+async def test_probe_contains_timeout(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     engine = _FakeEngine(_FakeConnection(delay=0.05))
-    _install_engine(monkeypatch, engine)
-    monkeypatch.setattr(health_router, "_DB_PROBE_TIMEOUT_SECONDS", 0.001)
+    monkeypatch.setattr(database, "engine", engine)
+    monkeypatch.setattr(
+        database.settings,
+        "database_probe_timeout_seconds",
+        0.001,
+    )
 
-    assert await health_router._probe_database() is False
-    assert engine.disposed is True
-
-
-@pytest.mark.asyncio
-async def test_probe_handles_invalid_configuration(
-    monkeypatch: pytest.MonkeyPatch,
-) -> None:
-    def fail_creation(*args: object, **kwargs: object) -> None:
-        del args, kwargs
-        raise ValueError("invalid database configuration")
-
-    monkeypatch.setattr(health_router, "create_async_engine", fail_creation)
-
-    assert await health_router._probe_database() is False
+    assert await database.probe_database() is False
 
 
 @pytest.mark.asyncio
-async def test_probe_contains_disposal_failure(
+async def test_readiness_recovers_after_dependency_recovery(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    engine = _FakeEngine(_FakeConnection(), dispose_fails=True)
-    _install_engine(monkeypatch, engine)
+    probe = AsyncMock(side_effect=[False, True])
+    monkeypatch.setattr(health_router, "probe_database", probe)
 
-    assert await health_router._probe_database() is False
-    assert engine.disposed is True
+    async with AsyncClient(
+        transport=ASGITransport(app=app),
+        base_url="http://test",
+    ) as client:
+        unavailable = await client.get("/health/ready")
+        recovered = await client.get("/health/ready")
+
+    assert unavailable.status_code == 503
+    assert unavailable.json()["status"] == "not_ready"
+    assert recovered.status_code == 200
+    assert recovered.json()["status"] == "ok"
+
+
+@pytest.mark.asyncio
+async def test_shutdown_disposes_shared_engine(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    engine = _FakeEngine(_FakeConnection())
+    monkeypatch.setattr(database, "engine", engine)
+
+    await database.close_database()
+
+    assert engine.dispose_count == 1

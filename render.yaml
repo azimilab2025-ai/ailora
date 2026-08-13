@@ -25,6 +25,8 @@ services:
         value: production
       - key: AILORA_DEBUG
         value: "false"
+      - key: AILORA_ALLOWED_ORIGINS
+        value: "[]"
       - key: AILORA_ENABLE_TRACING
         value: "false"
       - key: AILORA_ENABLE_OYA_VOICE_SERVICE

@@ -1,29 +1,16 @@
-"""
-Health check router.
+"""Bounded health endpoints that never expose database internals."""
 
-Provides liveness and readiness probes required by Prompt 15 §challenge_deliverables
-and §deployment_contract.
-
-These endpoints must never expose secrets, credentials, or internal error traces.
-"""
-
-import asyncio
-
-from fastapi import APIRouter
+from fastapi import APIRouter, Response, status
 from pydantic import BaseModel
-from sqlalchemy import text
-from sqlalchemy.ext.asyncio import AsyncEngine, create_async_engine
 
 from ailora.config import settings
+from ailora.db.session import probe_database
 
 router = APIRouter(prefix="/health", tags=["Health"])
 
-# Bounded timeout for DB probe — prevents readiness hanging on DB failure
-_DB_PROBE_TIMEOUT_SECONDS = 3.0
-
 
 class HealthResponse(BaseModel):
-    """Standard health check response envelope."""
+    """Standard bounded health response."""
 
     status: str
     service: str
@@ -37,58 +24,41 @@ class HealthResponse(BaseModel):
     description="Returns 200 when the service process is alive. No DB dependency.",
 )
 async def liveness() -> HealthResponse:
-    """Liveness probe — confirms the process is running. Never touches the DB."""
-    return HealthResponse(status="ok", service="ailora", version=settings.app_version)
+    """Confirm process liveness without touching external dependencies."""
+    return HealthResponse(
+        status="ok",
+        service="ailora",
+        version=settings.app_version,
+    )
 
 
 @router.get(
     "/ready",
     response_model=HealthResponse,
+    responses={
+        status.HTTP_503_SERVICE_UNAVAILABLE: {
+            "description": "A required dependency is unavailable.",
+            "model": HealthResponse,
+        }
+    },
     summary="Readiness probe",
     description=(
-        "Returns 200 when the service is ready to accept requests. "
-        "Performs a bounded read-only DB probe. "
-        "Returns 200 with status='not_ready' on DB failure — never leaks internals."
+        "Returns 200 when required dependencies are ready and 503 otherwise. "
+        "No connection details or internal failures are exposed."
     ),
 )
-async def readiness() -> HealthResponse:
-    """
-    Readiness probe — performs a bounded, read-only DB connectivity check.
+async def readiness(response: Response) -> HealthResponse:
+    """Fail closed with HTTP 503 when the shared database probe fails."""
+    if await probe_database():
+        return HealthResponse(
+            status="ok",
+            service="ailora",
+            version=settings.app_version,
+        )
 
-    Returns status='ok' when DB is reachable, status='not_ready' otherwise.
-    The HTTP response is always 200 to allow load-balancer health checks to
-    distinguish a running-but-not-ready service from a crashed process.
-    No secrets, credentials, connection strings, or stack traces are returned.
-    """
-    db_ok = await _probe_database()
-    status = "ok" if db_ok else "not_ready"
-    return HealthResponse(status=status, service="ailora", version=settings.app_version)
-
-
-async def _probe_database() -> bool:
-    """
-    Execute a single lightweight read-only query against the configured database.
-
-    Returns True if the database responded within the bounded timeout.
-    Returns False on any error or timeout without raising or leaking details.
-    """
-    engine: AsyncEngine | None = None
-    probe_ok = False
-
-    try:
-        engine = create_async_engine(settings.database_url, pool_pre_ping=True)
-        async with asyncio.timeout(_DB_PROBE_TIMEOUT_SECONDS):
-            async with engine.connect() as conn:
-                await conn.execute(text("SELECT 1"))
-        probe_ok = True
-    except Exception:  # noqa: BLE001
-        probe_ok = False
-    finally:
-        if engine is not None:
-            try:
-                async with asyncio.timeout(_DB_PROBE_TIMEOUT_SECONDS):
-                    await engine.dispose()
-            except Exception:  # noqa: BLE001
-                probe_ok = False
-
-    return probe_ok
+    response.status_code = status.HTTP_503_SERVICE_UNAVAILABLE
+    return HealthResponse(
+        status="not_ready",
+        service="ailora",
+        version=settings.app_version,
+    )

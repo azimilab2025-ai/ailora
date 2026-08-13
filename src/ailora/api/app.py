@@ -1,17 +1,29 @@
-"""
-AILORA FastAPI application factory.
-"""
+"""AILORA FastAPI application factory."""
+
+from collections.abc import AsyncIterator
+from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from ailora.api.routers import health
 from ailora.config import settings
+from ailora.db import session as database
 from ailora.observability.logging import configure_logging
 
-# Configure structured logging at import time so all modules that call
-# get_logger() receive a configured logger even before the ASGI server starts.
 configure_logging()
+
+
+@asynccontextmanager
+async def lifespan(application: FastAPI) -> AsyncIterator[None]:
+    """Capture startup dependency state and release the shared engine on shutdown."""
+    application.state.database_ready_at_startup = await database.probe_database()
+
+    try:
+        yield
+    finally:
+        await database.close_database()
+
 
 app = FastAPI(
     title=settings.app_name,
@@ -20,6 +32,7 @@ app = FastAPI(
     docs_url="/docs",
     redoc_url="/redoc",
     openapi_url="/openapi.json",
+    lifespan=lifespan,
 )
 
 app.add_middleware(

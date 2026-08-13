@@ -1,33 +1,29 @@
-"""
-AILORA database session factory.
+"""Managed asynchronous database engine and session lifecycle."""
 
-Provides a SQLAlchemy async engine and session factory configured from
-`ailora.config.settings`.  The readiness probe (PHASE_1) and all repository
-layers use `get_db` as a FastAPI dependency.
-
-Security: the database URL is resolved from the environment, never hardcoded.
-Tenant isolation: callers are responsible for applying tenant filters — this
-module only manages the connection lifecycle.
-"""
-
+import asyncio
 from collections.abc import AsyncGenerator
 
-from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
+from sqlalchemy import text
+from sqlalchemy.ext.asyncio import (
+    AsyncEngine,
+    AsyncSession,
+    async_sessionmaker,
+    create_async_engine,
+)
 
 from ailora.config import settings
 
-# --- Engine -------------------------------------------------------------------
-# `echo=False` in production; never log queries containing secrets.
-# `pool_pre_ping=True` detects stale connections before use.
-engine = create_async_engine(
+engine: AsyncEngine = create_async_engine(
     settings.database_url,
     echo=settings.debug,
     pool_pre_ping=True,
-    pool_size=5,
-    max_overflow=10,
+    pool_size=settings.database_pool_size,
+    max_overflow=settings.database_max_overflow,
+    pool_timeout=settings.database_pool_timeout_seconds,
+    pool_recycle=settings.database_pool_recycle_seconds,
+    pool_use_lifo=True,
 )
 
-# --- Session factory ----------------------------------------------------------
 AsyncSessionLocal = async_sessionmaker(
     bind=engine,
     class_=AsyncSession,
@@ -37,8 +33,25 @@ AsyncSessionLocal = async_sessionmaker(
 )
 
 
-# --- FastAPI dependency -------------------------------------------------------
+async def probe_database() -> bool:
+    """Return whether the shared database engine answers a bounded read-only probe."""
+    try:
+        async with asyncio.timeout(settings.database_probe_timeout_seconds):
+            async with engine.connect() as connection:
+                await connection.execute(text("SELECT 1"))
+    except Exception:  # noqa: BLE001
+        return False
+
+    return True
+
+
+async def close_database() -> None:
+    """Dispose the shared engine during graceful application shutdown."""
+    async with asyncio.timeout(settings.database_probe_timeout_seconds):
+        await engine.dispose()
+
+
 async def get_db() -> AsyncGenerator[AsyncSession, None]:
-    """Yield a database session; close it on exit regardless of outcome."""
+    """Yield a managed session and close it regardless of request outcome."""
     async with AsyncSessionLocal() as session:
         yield session
