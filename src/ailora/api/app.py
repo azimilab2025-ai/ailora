@@ -6,7 +6,13 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from ailora.api.routers import authorization, health, identity_sessions, tenant_identity
+from ailora.api.routers import (
+    authorization,
+    health,
+    identity_sessions,
+    ssa_scenarios,
+    tenant_identity,
+)
 from ailora.config import settings
 from ailora.db import session as database
 from ailora.observability.logging import configure_logging
@@ -47,3 +53,4 @@ app.include_router(health.router)
 app.include_router(authorization.router)
 app.include_router(identity_sessions.router)
 app.include_router(tenant_identity.router)
+app.include_router(ssa_scenarios.router)
