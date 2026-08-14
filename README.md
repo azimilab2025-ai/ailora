@@ -104,6 +104,8 @@ situational awareness as a Challenge-ready Enterprise SaaS Foundation.
 | Identity, membership, tenancy | JWT auth, tenant-scoped access, isolation tests | PHASE_2 |
 | Conjunction risk assessment (Advisory) | T0/PHY-C1/C2 screening | PHASE_3 |
 | TLE / state vector parsing | Synthetic orbital data ingestion | PHASE_3 |
+
+> C-10 adds advisory SGP4 propagation with native TEME outputs. Frame conversion and independent scientific approval remain explicit future gates.
 | Explainable advisory recommendations | Human-readable risk output with provenance | PHASE_3 |
 | OpenTelemetry observability | Structured logging and tracing | PHASE_1 |
 | GitHub Actions CI | Lint, type-check, test on every push | PHASE_1 |

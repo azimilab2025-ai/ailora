@@ -30,7 +30,7 @@ states are never equivalent to pass.
 | R-02 | Start rules, baseline evidence, small reversible changes | VERIFIED_BASELINE | C-01, C-02, all | Clean baseline, atomic commits, checkpoints |
 | R-03 | API vertical slice, readiness, secrets, coverage, roles, migrations | PARTIAL | C-03 through C-07 | Working API-to-database slice and negative tests |
 | R-04 | Enterprise architecture and ADRs | PLANNED | C-02, C-03, C-04, C-13, C-19 | ADR pack, trust boundaries, dependency direction |
-| R-05 | Typed and versioned space-data contracts | PLANNED | C-08, C-10, C-11 | Schema compatibility and semantic validation tests |
+| R-05 | Typed and versioned space-data contracts | PARTIAL | C-08, C-10, C-11 | Schema compatibility and semantic validation tests |
 | R-06 | Space-object identity and data quality | IMPLEMENTED | C-08, C-09 | Provenance, quarantine, deduplication, replay evidence |
 | R-07 | Astrodynamics and scientific computing | PARTIAL | C-10 through C-12 | Golden cases, tolerances, scientific limitation labels |
 | R-08 | Qualified real-data connection | EXTERNAL_GATE | C-09 | Provider qualification, license, provenance, outage tests |

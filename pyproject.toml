@@ -34,6 +34,7 @@ dependencies = [
     "structlog>=24.4",
     "opentelemetry-sdk>=1.28",
     "opentelemetry-instrumentation-fastapi>=0.49b0",
+    "sgp4==2.27",
 ]
 
 [project.optional-dependencies]
@@ -51,6 +52,10 @@ dev = [
 
 [project.scripts]
 ailora = "ailora.main:main"
+
+[[tool.uv.index]]
+url = "https://pypi.org/simple"
+default = true
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/ailora"]
