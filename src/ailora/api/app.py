@@ -11,6 +11,7 @@ from ailora.api.routers import (
     health,
     identity_sessions,
     ssa_scenarios,
+    ssa_screenings,
     tenant_identity,
 )
 from ailora.config import settings
@@ -54,3 +55,4 @@ app.include_router(authorization.router)
 app.include_router(identity_sessions.router)
 app.include_router(tenant_identity.router)
 app.include_router(ssa_scenarios.router)
+app.include_router(ssa_screenings.router)
