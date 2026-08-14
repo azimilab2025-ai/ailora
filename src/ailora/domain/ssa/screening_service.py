@@ -8,6 +8,8 @@ import uuid
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from ailora.domain.shared.value_objects import CartesianState, TemporalStamp
+from ailora.domain.ssa.audit import AuditEventType
+from ailora.domain.ssa.audit_service import TenantAuditService
 from ailora.domain.ssa.scenario_models import ScenarioRecord
 from ailora.domain.ssa.scenario_service import TenantScenarioService
 from ailora.domain.ssa.screening import screen_t0_phy_c1
@@ -27,6 +29,7 @@ class TenantScreeningService:
     """Runs and reads tenant-scoped, advisory-only screening snapshots."""
 
     def __init__(self, session: AsyncSession) -> None:
+        self._session = session
         self._scenario_service = TenantScenarioService(session)
         self._repository = ScreeningRepository(session)
 
@@ -98,7 +101,17 @@ class TenantScreeningService:
             advisory_only=True,
             advisory_statement=result.advisory_statement,
         )
-        return await self._repository.create(record)
+        record = await self._repository.create(record)
+        await TenantAuditService(self._session).append_event(
+            tenant_id=tenant_id,
+            actor_user_id=actor_user_id,
+            event_type=AuditEventType.SCENARIO_SCREENED,
+            resource_type="screening",
+            resource_id=record.id,
+            combined_classification=record.combined_classification,
+            detail="Advisory T0 PHY-C1 screening created",
+        )
+        return record
 
     async def list_screenings(
         self,

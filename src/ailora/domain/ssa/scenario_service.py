@@ -9,6 +9,8 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from ailora.domain.identity.models import Membership, Tenant, User
 from ailora.domain.shared.value_objects import TemporalStamp
+from ailora.domain.ssa.audit import AuditEventType
+from ailora.domain.ssa.audit_service import TenantAuditService
 from ailora.domain.ssa.scenario import ConjunctionScenario, OrbitalObjectDescriptor
 from ailora.domain.ssa.scenario_models import ScenarioRecord
 from ailora.domain.ssa.scenario_repository import ScenarioRepository
@@ -104,7 +106,17 @@ class TenantScenarioService:
             combined_classification=scenario.combined_classification.value,
             advisory_only=True,
         )
-        return await self._repository.create(record)
+        record = await self._repository.create(record)
+        await TenantAuditService(self._session).append_event(
+            tenant_id=tenant_id,
+            actor_user_id=actor_user_id,
+            event_type=AuditEventType.SCENARIO_INGESTED,
+            resource_type="scenario",
+            resource_id=record.id,
+            combined_classification=record.combined_classification,
+            detail="Advisory scenario snapshot created",
+        )
+        return record
 
     async def list_scenarios(
         self,

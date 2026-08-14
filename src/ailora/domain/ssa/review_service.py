@@ -9,6 +9,8 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from ailora.domain.identity.models import Membership, Tenant, User
+from ailora.domain.ssa.audit import AuditEventType
+from ailora.domain.ssa.audit_service import TenantAuditService
 from ailora.domain.ssa.review import ReviewRecord as DomainReviewRecord
 from ailora.domain.ssa.review import ReviewState
 from ailora.domain.ssa.review_models import ReviewRecordModel, ReviewTransitionRecord
@@ -159,7 +161,17 @@ class TenantReviewService:
             operational_clearance=False,
         )
         try:
-            return await self._repository.create(record)
+            record = await self._repository.create(record)
+            await TenantAuditService(self._session).append_event(
+                tenant_id=tenant_id,
+                actor_user_id=actor_user_id,
+                event_type=AuditEventType.REVIEW_OPENED,
+                resource_type="review",
+                resource_id=record.id,
+                combined_classification=record.combined_classification,
+                detail="Advisory human review opened",
+            )
+            return record
         except DuplicateReviewError as exc:
             raise ReviewAlreadyExistsError("risk assessment already has a review") from exc
 
@@ -285,6 +297,20 @@ class TenantReviewService:
                 actor_user_id=actor_user_id,
                 notes=notes,
             )
+        )
+        audit_event = (
+            AuditEventType.REVIEW_CLOSED
+            if target_state is ReviewState.CLOSED
+            else AuditEventType.REVIEW_STATE_CHANGED
+        )
+        await TenantAuditService(self._session).append_event(
+            tenant_id=tenant_id,
+            actor_user_id=actor_user_id,
+            event_type=audit_event,
+            resource_type="review",
+            resource_id=record.id,
+            combined_classification=record.combined_classification,
+            detail=(f"Advisory review transition {previous_state.value} to {target_state.value}"),
         )
         await self._session.flush()
         return record

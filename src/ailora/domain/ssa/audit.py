@@ -90,8 +90,13 @@ class AuditEntry:
         """Enforce security invariants on construction."""
         if self.timestamp_utc.tzinfo is None:
             raise ValueError("AuditEntry.timestamp_utc must be timezone-aware (UTC)")
-        # Enforce that detail does not contain obvious secret patterns
-        _check_no_secret(self.detail, field_name="detail")
+        for field_name, value in (
+            ("resource_id", self.resource_id),
+            ("outcome", self.outcome),
+            ("correlation_id", self.correlation_id),
+            ("detail", self.detail),
+        ):
+            _check_no_secret(value, field_name=field_name)
 
     @classmethod
     def create(
@@ -121,7 +126,16 @@ class AuditEntry:
 def _check_no_secret(text: str, field_name: str) -> None:
     """Raise ValueError if text contains patterns that look like secrets."""
     # Detect obvious secret injection patterns
-    forbidden = ["password=", "secret=", "token=Bearer", "api_key="]
+    forbidden = (
+        "password",
+        "secret",
+        "token",
+        "authorization",
+        "api_key",
+        "apikey",
+        "bearer ",
+        "bearer=",
+    )
     lower = text.lower()
     for pattern in forbidden:
         if pattern in lower:

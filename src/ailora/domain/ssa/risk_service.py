@@ -7,6 +7,8 @@ import uuid
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from ailora.domain.ssa.audit import AuditEventType
+from ailora.domain.ssa.audit_service import TenantAuditService
 from ailora.domain.ssa.risk import assess_conjunction_risk
 from ailora.domain.ssa.risk_models import RiskAssessmentRecord
 from ailora.domain.ssa.risk_repository import RiskAssessmentRepository
@@ -31,6 +33,7 @@ class TenantRiskAssessmentService:
     """Creates and reads tenant-scoped, advisory-only risk snapshots."""
 
     def __init__(self, session: AsyncSession) -> None:
+        self._session = session
         self._screening_service = TenantScreeningService(session)
         self._repository = RiskAssessmentRepository(session)
 
@@ -92,7 +95,17 @@ class TenantRiskAssessmentService:
             provenance_label=assessment.provenance_label,
             advisory_only=True,
         )
-        return await self._repository.create(record)
+        record = await self._repository.create(record)
+        await TenantAuditService(self._session).append_event(
+            tenant_id=tenant_id,
+            actor_user_id=actor_user_id,
+            event_type=AuditEventType.SCENARIO_RISK_ASSESSED,
+            resource_type="risk_assessment",
+            resource_id=record.id,
+            combined_classification=record.combined_classification,
+            detail="Advisory bounded risk assessment created",
+        )
+        return record
 
     async def list_assessments(
         self,
