@@ -115,6 +115,8 @@ situational awareness as a Challenge-ready Enterprise SaaS Foundation.
 | Normative conjunction-risk algorithms | Prompt 06 `DOMAIN_REVIEW_REQUIRED` — independent qualified Astrodynamics review required | See [Safety & Scientific Integrity](#safety--scientific-integrity) |
 | Real TLE data integration (NASA/CelesTrak) | Dependency on data access agreements | Future roadmap item with acceptance criteria |
 
+> C-09 provides a disabled-by-default, transport-injected provider boundary. Live access remains unqualified and blocked pending source-specific legal/data-governance evidence.
+
 ---
 
 ## Architecture
