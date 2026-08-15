@@ -41,6 +41,15 @@ Physics-First and AI-Advisory-Only principles.
 
 ## Official Demo
 
+<!-- AILORA_CINEMATIC_V2_DEMO -->
+
+### 30-Second Swagger Demo
+
+<p align="center"><img src="docs/assets/swagger-demo-stage.svg" alt="Reserved stage for the AILORA thirty-second Swagger demo" width="100%" /></p>
+
+> **DEMO RECORDING SLOT:** reserved for an approved 30-second Swagger walkthrough. No recording is attached yet. The live API remains available at [Swagger UI](https://ailora-web.onrender.com/docs).
+
+
 > **Coming soon — To be added after official approval by Amin Azimi.**
 >
 > A reproducible demo scenario demonstrating end-to-end conjunction risk assessment
@@ -67,6 +76,16 @@ Physics-First and AI-Advisory-Only principles.
 
 ---
 
+<!-- AILORA_CINEMATIC_V2_GALLERY -->
+
+## Project Visual Gallery
+
+<p align="center"><img src="docs/assets/project-gallery-stage.svg" alt="Four project media placeholders for GitHub, Render, Swagger and the project workspace" width="100%" /></p>
+
+**MEDIA PLACEHOLDERS:** four approved screenshots will replace these frames after final capture and privacy review: **GitHub**, **Render**, **Swagger**, and **Project Workspace**. Placeholder graphics are presentation scaffolding, not evidence of production authorization.
+
+---
+
 ## Table of Contents
 
 1. [Why AILORA](#why-ailora)
@@ -82,6 +101,16 @@ Physics-First and AI-Advisory-Only principles.
 11. [Documentation Index](#documentation-index)
 12. [Project Links Hub](#project-links-hub)
 13. [Author](#author)
+
+---
+
+<!-- AILORA_CINEMATIC_V2_CONNECTED_WORLDS -->
+
+## Connected Worlds
+
+<p align="center"><img src="docs/assets/ailora-connected-worlds.svg" alt="Two connected worlds representing orbital intelligence and governed human decision support" width="100%" /></p>
+
+AILORA connects the orbital world to the human decision world through a governed evidence bridge. Provenance, uncertainty, review state and audit context may cross that bridge; operational spacecraft authority never does.
 
 ---
 
@@ -104,6 +133,16 @@ for enterprise-grade integration. AILORA addresses this gap by providing:
 
 AILORA targets **LEO · MEO · GEO · HEO** orbital regimes and delivers integrated
 situational awareness as a Challenge-ready Enterprise SaaS Foundation.
+
+---
+
+<!-- AILORA_CINEMATIC_V2_EVIDENCE -->
+
+## Evidence Constellation
+
+<p align="center"><img src="docs/assets/ailora-evidence-constellation.svg" alt="Animated evidence constellation from observation through human review and audit" width="100%" /></p>
+
+The visual sequence presents the system as one continuous mission narrative: **Observe → Analyze → Assess → Review → Audit**. Dense verification tables remain below as inspectable evidence, while this layer communicates the architecture at a glance.
 
 ---
 
@@ -443,6 +482,13 @@ for the full architecture and activation requirements.
 
 ## Bob Engineering Agent
 
+<!-- AILORA_CINEMATIC_V2_BOB_PORTRAIT -->
+
+### Bob Agent Portrait
+
+<p align="center"><img src="docs/assets/bob-agent-portrait.svg" alt="Cinematic portrait of Bob, the bounded engineering copilot" width="100%" /></p>
+
+
 <p align="center"><img src="docs/assets/bob-engineering-agent.svg" alt="Bob bounded engineering-agent workflow" width="100%" /></p>
 
 Bob is the **Engineering copilot** used to help design, implement, inspect and qualify this repository. Bob is **not a deployed runtime service**, scientific authority, production operator or autonomous decision-maker inside AILORA.
@@ -479,6 +525,16 @@ flowchart TD
 ```
 
 Bob improves the system that builds AILORA; Bob does not become an unbounded agent inside AILORA. Runtime identity, authorization, tenant isolation, scientific integrity and audit controls remain enforced by the application.
+
+---
+
+<!-- AILORA_CINEMATIC_V2_ROCKET -->
+
+## Beyond the Horizon
+
+<p align="center"><img src="docs/assets/ailora-technology-rocket.svg" alt="Animated technology rocket traveling from the terrestrial baseline toward an outer digital world" width="100%" /></p>
+
+This animated technology trajectory represents modular growth from the verified terrestrial prototype toward future capability. It is a visual roadmap only: no on-orbit runtime, autonomous maneuver or spacecraft command capability is claimed. NASA live data remains NOT ACTIVATED. Oya remains PLANNED, NOT CURRENTLY IMPLEMENTED, and DISABLED.
 
 ---
 
