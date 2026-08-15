@@ -84,12 +84,16 @@ exclude = ["tests/"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 asyncio_mode = "auto"
-addopts = "--cov=src/ailora --cov-report=term-missing --cov-fail-under=0"
+addopts = "--cov=src/ailora --cov-report=term-missing --cov-fail-under=85"
 
 # ─── Coverage ─────────────────────────────────────────────────────────────────
 [tool.coverage.run]
 source = ["src/ailora"]
 omit = ["*/tests/*"]
+
+[tool.coverage.report]
+fail_under = 85
+show_missing = true
 
 [dependency-groups]
 dev = [
