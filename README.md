@@ -593,6 +593,20 @@ When voice quota, provider availability, or latency limits fail:
 ---
 
 
+
+---
+
+## Command 19 Release-Candidate Evidence
+
+The verified baseline entering Command 19 contains **624 tests** passing with **87.77%** statement coverage against an enforced 85% floor. Command 19 adds local-only continuity, privacy, legal-inventory, staging-smoke and rollback qualification; its final count is reported by the command output and checkpoint.
+
+- Live NASA data: not activated; provider qualification, licensing and scientific approval remain external gates.
+- Oya: disabled, no-op, non-billable and network-free; production activation remains an explicit external gate.
+- Backup/restore: isolated SQLite qualification only; no production RPO/RTO, retention, encryption or recoverability claim.
+- Release candidate: not production-ready and not deployed. All analytical outputs remain advisory-only; spacecraft command paths remain prohibited.
+
+See `docs/runbooks/backup-restore.md`, `docs/runbooks/disaster-recovery.md`, `docs/runbooks/deployment-rollback.md`, `docs/governance/privacy-data-residency.md`, and `docs/governance/third-party-inventory.md`.
+
 ## Author
 
 | Field | Value |

@@ -1,0 +1,7 @@
+AILORA NOTICE
+
+Copyright (c) 2026 Amin Azimi / Azimi Innovation Lab.
+
+This project contains or depends on third-party software. Exact resolved package versions are recorded in uv.lock and local SBOM evidence. Third-party components remain governed by their respective licenses and notices. NASA/CelesTrak data and Oya services are future external gates and are not activated by this release candidate.
+
+This notice is not legal advice. Independent license, privacy, residency, provider-terms and regulatory review remains required before production use.
