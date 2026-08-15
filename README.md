@@ -540,23 +540,11 @@ This animated technology trajectory represents modular growth from the verified 
 
 ## Roadmap
 
-> Roadmap reflects development intent, not committed delivery dates or completed work.
-> Phases are evidence-based and subject to adjustment. No invented dates are included.
+<p align="center"><img src="docs/assets/roadmap-trajectory.svg" alt="AILORA evidence-gated animated roadmap trajectory" width="100%" /></p>
 
-| Phase | Objective | Exit Condition | Status |
-|---|---|---|---|
-| **PHASE_0** — Discovery & Baseline | Establish evidence-based baseline: repo, scope, constraints, risks | Repository, tooling, identity docs, scaffold operational | ✅ Complete |
-| **PHASE_1** — Foundation | Minimal healthy architecture and engineering baseline | Build, test, and core boundaries operational | ✅ Complete |
-| **PHASE_2** — Identity & Tenancy | Identity, membership, policy, and tenant isolation | Authorized tenant-scoped access verified | ✅ Complete |
-| **PHASE_3** — Vertical Slice | One real end-to-end use case (conjunction risk advisory) | Slice implemented, tested, and evidenced | ✅ Complete |
-| **PHASE_4** — Workflow & Events | Durable jobs, state transitions, event handling | Idempotency, retry, and failure behavior verified | 📋 Planned |
-| **PHASE_5** — AI Advisory | Bounded advisory AI capability | Safety, provenance, validation, and cost controls verified | 📋 Planned |
-| **PHASE_6** — Hardening | Security, reliability, performance, observability | Defined readiness criteria have evidence | 📋 Planned |
-| **PHASE_7** — Release Candidate | Reviewable release candidate | Explicit Release Gate decision is possible | 📋 Planned |
+The trajectory communicates verified direction without inventing delivery dates. Completed foundations remain distinct from planned capability, and every transition requires reproducible evidence, explicit authorization, rollback readiness and human review.
 
-> Source: Prompt 15 §29 (CSIP-EO-FMSP-P15 v1.1.0)
-
----
+<!-- AILORA_FINAL_VISUAL_REDESIGN_BEGIN -->
 
 ## Live Prototype Boundaries
 
@@ -623,140 +611,48 @@ The public Render endpoint demonstrates deployment health and API availability; 
 
 ## Future Integration Roadmap: Oya Voice AI
 
-> **Status: PLANNED / NOT CURRENTLY IMPLEMENTED as a production service — PROTOTYPE PHASE — DISABLED / MOCKED / NON-BILLABLE**
+> **PLANNED / NOT CURRENTLY IMPLEMENTED / DISABLED.** This section documents a candidate future integration only. No Oya package, API key, network call, paid service, runtime activation or production claim is introduced by this README redesign.
 
-Oya is integrated into the core architecture as a future enhancement and is intentionally kept disabled during the prototype phase to optimize initial operational overhead.
+<p align="center">
+  <a href="https://github.com/OyaAIProd/oya"><img src="https://github.com/OyaAIProd.png" alt="Official Oya GitHub organization logo — planned integration, currently disabled" width="128" /></a>
+</p>
 
-No Oya API call, vendor charge, or paid service activation occurs in prototype, development, test, or challenge environments.
+<h3 align="center">OYA • PLAN, DON'T REACT</h3>
+<p align="center"><strong>Candidate deterministic agent-runtime layer • evidence required before adoption</strong></p>
 
-### Prototype vs Production Phases
+The [official Oya open-source repository](https://github.com/OyaAIProd/oya) describes a TypeScript/Bun runtime that asks the model for one typed dataflow plan and then executes a statically checked DAG. Intermediate values flow tool-to-tool by reference. Projection levels — `OPAQUE`, `SUMMARY`, and `TRANSPARENT` — control what the model can observe. Oya remains **PLANNED / NOT CURRENTLY IMPLEMENTED / DISABLED** in AILORA.
 
-| Dimension | Prototype Phase (current) | Production Phase (future) |
-|---|---|---|
-| **Service state** | Disabled / no-op adapter | Active after revenue gate |
-| **Network calls** | None — fail-closed | Real vendor API calls |
-| **Cost** | Zero — non-billable | Pay-per-use (vendor TBD) |
-| **API key** | Empty placeholder | Production credential required |
-| **Activation** | Not authorized | Requires explicit authorization |
-| **Fallback** | Always TEXT_CHAT | TEXT_CHAT on failure |
-| **Code module** | `src/ailora/services/oya/` | Same module, production adapter |
+<p align="center"><img src="docs/assets/ailora-capability-hive.svg" alt="AILORA interconnected capability honeycomb" width="100%" /></p>
 
-### Feature / Use-Case Matrix
+### Candidate Execution Model
 
-| Capability | Prototype | Production | Notes |
-|---|---|---|---|
-| Low-latency real-time voice conversation | ✗ Disabled | ✓ Planned | Vendor TBD |
-| Multilingual conversations + language switching | ✗ Disabled | ✓ Planned | BCP-47 language tags |
-| Dynamic accent and emotion adaptation | ✗ Disabled | ✓ Planned | Provider-neutral interface |
-| Voice-driven workflow and tool execution | ✗ Disabled | ✓ Planned | Requires authorization boundary |
-| Sentiment and user-context adaptation | ✗ Disabled | ✓ Planned | Advisory-only output |
-| Voice onboarding flows | ✗ Disabled | ✓ Planned | Tenant-scoped |
-| Real-time customer assistance | ✗ Disabled | ✓ Planned | Human-in-the-loop |
-| Hands-free orbital advisory commands | ✗ Disabled | ✓ Planned | Advisory-only; no spacecraft commands |
-| Interactive audio-guided analysis | ✗ Disabled | ✓ Planned | Space advisory context |
-| Web / Mobile / Embedded integration | ✗ Disabled | ✓ Planned | Modular adapter pattern |
+<p align="center"><img src="docs/assets/oya-plan-dag.svg" alt="Oya typed plan and fixed DAG execution concept" width="100%" /></p>
 
-### Activation Criteria (Production Gate)
+- Planner emits a typed plan once; runtime validation precedes execution.
+- Tool outputs default to opaque handles instead of being re-entered into the model context.
+- Execution order is represented as a fixed DAG rather than repeatedly selected by a model loop.
+- Trace and provenance evidence remain necessary at the AILORA boundary.
+- Human authority and all existing fail-closed application controls remain final.
 
-All of the following must be true simultaneously:
+### Projection and Authority Boundary
 
-1. `AILORA_ENABLE_OYA_VOICE_SERVICE=true` — explicit feature flag
-2. `AILORA_OYA_API_KEY` — non-empty production credential (server-side only)
-3. `AILORA_OYA_ENVIRONMENT=production` — environment gate
-4. Explicit authorization from Amin Azimi
-5. Active revenue generation (production commercial operation)
+<p align="center"><img src="docs/assets/oya-safety-orbit.svg" alt="Oya projection levels orbiting AILORA human authority" width="100%" /></p>
 
-**Fail-closed**: If any condition is missing or invalid, the service remains disabled and falls back to TEXT_CHAT.
+`OPAQUE` hides raw bytes, `SUMMARY` exposes a bounded projection, and `TRANSPARENT` exposes a deliberately declared value. These are promising controls, not substitutes for AILORA authorization, scientific verification, tenant isolation, audit, cost control or human approval.
 
-### Architecture Boundaries
+### Reproducible Evaluation Path
 
-```
-[User / Operator]
-       │
-       ▼
-[AILORA API Gateway] ──── Authorization ──── [JWT + Membership check]
-       │
-       ▼
-[OyaVoiceAdapter interface]   ← Provider-neutral contract
-       │
-       ├── [NoOpOyaAdapter]        ← PROTOTYPE PHASE (current) — no network calls
-       │
-       └── [ProductionOyaAdapter]  ← PRODUCTION PHASE (future) — vendor SDK (TBD)
-                                       Never activated in prototype
-```
+Official upstream installation starts with `bun add oyadotai zod`. Repository-level evaluation is documented through `make install && make demo`, `make test`, `make check`, and `make bench`. Any future AILORA trial must run in an isolated branch and sandbox with pinned upstream commit, dependency review, license review, secret-free fixtures, network-deny defaults, captured benchmark methodology, rollback evidence and explicit human authorization.
 
-- Secrets remain server-side; never exposed to clients, logs, or source control.
-- Tenant context is required for all voice sessions.
-- Session quota, timeout, and circuit-breaker limits are defined in `OyaSettings`.
-- All voice advisory outputs remain advisory-only; no spacecraft command path exists.
+The upstream project reports benchmark observations including fewer tokens, lower latency, fixed ordering and zero corruption in its documented task. Those are upstream benchmark results, not independently verified AILORA findings. **No zero-error guarantee is claimed**, and no production or scientific suitability is inferred.
 
-### Security and Privacy Considerations
+### Candidate Gate Sequence
 
-| Concern | Mitigation |
-|---|---|
-| **Secret exposure** | API key and webhook secret in environment only; never in code/logs |
-| **Prompt injection** | Voice inputs must be validated before tool execution |
-| **Sensitive audio** | Raw audio and transcripts are not retained beyond session scope |
-| **Tenant isolation** | Each session scoped to a verified tenant membership |
-| **Unauthorized tool execution** | Explicit user confirmation required for sensitive actions |
-| **Replay attacks** | Webhook signature verification (TBD — vendor-specific) |
-| **Quota abuse** | Per-tenant rate limits and session budgets enforced in config |
-| **Fallback security** | TEXT_CHAT fallback preserves all authorization controls |
+**Research evidence → dependency and license review → isolated prototype → threat model → deterministic replay → performance benchmark → tenant and authorization tests → independent review → explicit activation decision.**
 
-### Operational Risks
+Until every gate passes, Oya remains **PLANNED / NOT CURRENTLY IMPLEMENTED / DISABLED**, provider-neutral, non-billable and disconnected from AILORA runtime paths.
 
-| Risk | Status | Mitigation |
-|---|---|---|
-| Accidental paid activation | Mitigated by fail-closed config | Three-gate activation requirement |
-| Voice latency degradation | Not yet measured | Circuit-breaker and timeout controls planned |
-| Provider unavailability | Handled by no-op fallback | TEXT_CHAT fallback always available |
-| Audio data residency | TBD — vendor-specific | Data residency requirements to be assessed |
-| Cost overrun | Bounded by session limits | Per-tenant quotas in `OyaSettings` |
-
-### Rollout Stages (Future)
-
-1. **Alpha** — Internal synthetic testing with no real users
-2. **Beta** — Selected tenants with explicit consent and monitored cost
-3. **GA** — Full production rollout after Beta validation
-
-### Observability
-
-Telemetry records for each Oya session must include:
-
-- Session health and state transitions
-- Latency and timeout events
-- Quota and cost signals (no raw audio or transcript)
-- Fallback events and reason codes
-- Error categories (no sensitive stack traces to clients)
-
-**Never recorded**: raw audio, transcripts, API keys, or user PII beyond session ID.
-
-### Fallback Behavior
-
-When voice quota, provider availability, or latency limits fail:
-- Fall back to standard text chat immediately.
-- Preserve tenant context and user session.
-- Log a telemetry fallback event (no sensitive data).
-- Return `OyaSessionState.DEGRADED` with `fallback_applied=True`.
-
-### Cost Controls
-
-- `AILORA_OYA_MAX_SESSIONS_PER_TENANT` — hard session concurrency limit
-- `AILORA_OYA_MAX_AUDIO_DURATION_SECONDS` — maximum audio per session
-- `AILORA_OYA_SESSION_TIMEOUT_SECONDS` — session idle timeout
-- No unbounded retry loops
-- Budget alerts and hard limits required before production activation
-
-> ⚠️ **Vendor-specific details** (SDK methods, pricing, compliance certifications,
-> performance figures, and authentication URLs) are marked **TBD** until vendor
-> documentation and data-access agreements are confirmed.  This blueprint is
-> intentionally provider-adaptable.
-
----
-
-
-
----
+Official sources: [Oya repository](https://github.com/OyaAIProd/oya) • [documentation directory](https://github.com/OyaAIProd/oya/tree/main/docs) • [benchmark methodology](https://github.com/OyaAIProd/oya/tree/main/benchmarks) • [MIT license](https://github.com/OyaAIProd/oya/blob/main/LICENSE)
 
 ## Command 19 Release-Candidate Evidence
 
@@ -771,26 +667,20 @@ See `docs/runbooks/backup-restore.md`, `docs/runbooks/disaster-recovery.md`, `do
 
 ## Author
 
-| Field | Value |
-|---|---|
-| **Author** | Amin Azimi |
-| **Title** | AI Architect |
-| **Responsibility** | End-to-End System Architecture and Project Development |
-| **Organization** | Azimi Innovation Lab |
-| **Portrait** | To be provided by Amin Azimi |
-| **Contact / Profile Links** | To be provided by Amin Azimi |
+<p align="center"><img src="docs/assets/author-command-deck.svg" alt="Amin Azimi AI Architect author command deck" width="100%" /></p>
 
-> *All profile links, portraits, and external references are placeholders and will be
-> added after explicit authorization from Amin Azimi.*
+<h1 align="center">AMIN AZIMI</h1>
+<h3 align="center">AI ARCHITECT</h3>
+<p align="center"><strong>End-to-End System Architecture • Evidence-Based AI • Human-Governed Intelligence</strong></p>
+
+AILORA is architected as a complete decision-support system: from governed data admission and physics-grounded analysis to uncertainty-aware risk, human review, durable evidence and fail-closed release controls. The author position is system-level and end-to-end, with responsibility centered on architectural integrity, reproducibility, safety boundaries and truthful technical communication.
+
+<p align="center"><strong>Azimi Innovation Lab</strong><br/><em>Intelligence Beyond the Horizon</em></p>
+
+> Profile links, portrait and verified external references will be added only after explicit authorization from Amin Azimi.
 
 ---
 
-<div align="center">
-
-*AILORA — An Azimi Innovation Lab Orbital Intelligence System*
-
-*Intelligence Beyond the Horizon*
-
-*© Azimi Innovation Lab — All rights reserved*
+<p align="center"><strong>AILORA — An Azimi Innovation Lab Orbital Intelligence System</strong><br/><em>Intelligence Beyond the Horizon</em><br/>© Azimi Innovation Lab — All rights reserved</p>
 
 </div>
