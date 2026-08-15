@@ -1,0 +1,183 @@
+{
+  "actions": {
+    "credential": "NONE",
+    "live_nasa_oya_or_provider": "NONE",
+    "operational_command": "NONE",
+    "paid": "NONE",
+    "production_or_deploy": "NONE",
+    "remote_write_or_push": "NONE"
+  },
+  "artifact_id": "AILORA-C20-FINAL-EVIDENCE-MANIFEST",
+  "decision": {
+    "final_status": "CONDITIONAL_LOCAL_PROTOTYPE_PASS_PRODUCTION_BLOCKED",
+    "human_release_authority_required": true,
+    "legal_compliance_claim_allowed": false,
+    "live_provider_claim_allowed": false,
+    "production_ready_claim_allowed": false,
+    "production_release": "BLOCKED",
+    "scientific_approval_claim_allowed": false,
+    "verified_scope": "LOCAL_PROTOTYPE"
+  },
+  "evidence": [
+    {
+      "path": "docs/checkpoints/command-07-retrospective-checkpoint.md",
+      "sha256": "cf05515aea089ff4ea9a5fcd05a4ab81b2449013cfe68f4c9cc27e7e6b1fc40a"
+    },
+    {
+      "path": "docs/checkpoints/command-08-controlled-continuation-checkpoint.md",
+      "sha256": "0825cea5a66c1465f91da097e6724720d85005a9e35c6e5cc72abc3ef89e1362"
+    },
+    {
+      "path": "docs/checkpoints/command-09-database-readiness-checkpoint.md",
+      "sha256": "c35c5bd617f34f3927cf131b21c709f64af67424a85826994610635046c48e2d"
+    },
+    {
+      "path": "docs/checkpoints/command-10-final-release-gate-checkpoint.md",
+      "sha256": "199ad6974f80ecac900f220466c485a8895a4797a00ecaf3f66df82a1db6d75c"
+    },
+    {
+      "path": "docs/checkpoints/final-program-command-02-governance-checkpoint.md",
+      "sha256": "e766689b90c1279028fb13dbe6e3e8216405777c4dd4ee4117abc683f9816105"
+    },
+    {
+      "path": "docs/checkpoints/final-program-command-03-runtime-foundation-checkpoint.md",
+      "sha256": "eef2418351a51bd420fea82076a4eff94d864b1b6d3c6d4bfc0ea261d66ca185"
+    },
+    {
+      "path": "docs/checkpoints/final-program-command-04-authorization-checkpoint.md",
+      "sha256": "fef56293f6ac131ce8bc5519382a0d811a7bcaf8682d049dfefec4686ec4d4d8"
+    },
+    {
+      "path": "docs/checkpoints/final-program-command-05-identity-session-checkpoint.md",
+      "sha256": "b85ade198b4f6303c3d61bc15061a0198d5567794e2926edb268c196b4710711"
+    },
+    {
+      "path": "docs/checkpoints/final-program-command-06-tenant-identity-management-checkpoint.md",
+      "sha256": "280d4757ddfa047684ca9fab27f1584fd3702204761b3428063d48509a8c88a1"
+    },
+    {
+      "path": "docs/checkpoints/final-program-command-07-tenant-ssa-scenario-checkpoint.md",
+      "sha256": "a0eac6d918dc8fa1b8627dd98062a779e10518e841883deba610457ab3a39c81"
+    },
+    {
+      "path": "docs/checkpoints/final-program-command-08-tenant-ssa-screening-checkpoint.md",
+      "sha256": "04285a502d0d8e54ffc13aeea958647aa0ac3d71477eca957fcb9515715e09b2"
+    },
+    {
+      "path": "docs/checkpoints/final-program-command-09-tenant-ssa-risk-assessment-checkpoint.md",
+      "sha256": "84a37cb69584723082f7b342ae97fda26f5a27dac9e93a48a43c6858f6a861f3"
+    },
+    {
+      "path": "docs/checkpoints/final-program-command-10-tenant-ssa-review-checkpoint.md",
+      "sha256": "e370286b74cd3098c4baf20838e069caa1873f0914c62e88741757adef895d95"
+    },
+    {
+      "path": "docs/checkpoints/final-program-command-11-tenant-ssa-audit-checkpoint.md",
+      "sha256": "3ead3ff21903227e2d3a2a31362528cfe5df93c62d10345681307eb6bc07d600"
+    },
+    {
+      "path": "docs/checkpoints/final-program-command-12-space-data-contracts-checkpoint.md",
+      "sha256": "c16c325b1d1aa90e084e5e24e5ff66f49e327ca271c6fbd3a7f64c3cdfcbdc82"
+    },
+    {
+      "path": "docs/checkpoints/final-program-command-13-space-data-provider-checkpoint.md",
+      "sha256": "32f3be7e467388e7d3b95726a6fec95c3e6f00543b36d7a31c3e1faf3a9903c7"
+    },
+    {
+      "path": "docs/checkpoints/final-program-command-14-astrodynamics-checkpoint.md",
+      "sha256": "06e0dc8f4417785d33ffe8af2ea3e5320f2ef7cef62d336a0f508c9b3a6d7a07"
+    },
+    {
+      "path": "docs/checkpoints/final-program-command-15-astrodynamics-checkpoint.md",
+      "sha256": "8404b402d4bc53d7a4390c3a7ca7b0f1b7e1bfa9d1685d602a6e99ee7d212167"
+    },
+    {
+      "path": "docs/checkpoints/final-program-command-16-astrodynamics-verification-checkpoint.md",
+      "sha256": "b7f47aeea0a7207db72e27c33c041cb0d0f002e319cb93b50a131a363ad22d17"
+    },
+    {
+      "path": "docs/checkpoints/final-program-command-17-workflows-observability-checkpoint.md",
+      "sha256": "3fd6345d570e154ff801d07f8a66affa2e9b5a1f80d573dc5c210dd503d8d6a1"
+    },
+    {
+      "path": "docs/checkpoints/final-program-command-18-hardening-checkpoint.md",
+      "sha256": "4b7138b5a3552c9514f6919d46c3b4428c662c4d360d294a61b6682c8c920c94"
+    },
+    {
+      "path": "docs/checkpoints/final-program-command-19-release-candidate-checkpoint.md",
+      "sha256": "dbeec93f8303e67a5ac04a45436791e6b1d166e4e029cdd29661e9f42922c7f1"
+    },
+    {
+      "path": "docs/qualification/celestrak-provider-qualification.md",
+      "sha256": "d74398214445859f93bdb1c9b92fad755ced11818fab1764b6dede7a9a02d747"
+    },
+    {
+      "path": "docs/qualification/devsecops-supply-chain.md",
+      "sha256": "cdd3ebe92fcf03c885b7ade91fcd35adf68c53ed35b21d8caf15973358fd3c8d"
+    },
+    {
+      "path": "docs/qualification/disabled-oya-safety.md",
+      "sha256": "f0727f6e4658417cfb226f21fc3dcd388d012270d0fe0c786a57e20def11f449"
+    },
+    {
+      "path": "docs/qualification/durable-observable-workflows.md",
+      "sha256": "1c341cfa267bfd87e72ef463bdbf0e6ee85be599a68a918a57711acfffc8461e"
+    },
+    {
+      "path": "docs/qualification/enhanced-astrodynamics-analysis.md",
+      "sha256": "0b8e84a4615ff328fccb4e59133501669cc54cf8af964afc465ebe2c5d162661"
+    },
+    {
+      "path": "docs/qualification/independent-astrodynamics-verification.md",
+      "sha256": "7bda64fd1439b6fbd2eb5640b53b7dcd73d61e3f28f7e63d02dd586511d7b042"
+    },
+    {
+      "path": "docs/qualification/performance-capacity-finops.md",
+      "sha256": "4dc1414a6d02f09c7080b363392a9e37982a01a273898860a77f825814f55db7"
+    },
+    {
+      "path": "docs/qualification/primary-astrodynamics-adapter.md",
+      "sha256": "7efc929680dd0881af8258f935021e0064a3d46a9ec31905b649c20939eb2e77"
+    }
+  ],
+  "external_gates": [
+    {
+      "closure_evidence": "Independent scientific review and DOMAIN_REVIEW_REQUIRED closure",
+      "id": "SCI-001",
+      "owner": "Qualified astrodynamics review authority",
+      "status": "OPEN_EXTERNAL_GATE"
+    },
+    {
+      "closure_evidence": "Provider terms, qualification, provenance and outage evidence",
+      "id": "DATA-001",
+      "owner": "Data governance and provider owner",
+      "status": "OPEN_EXTERNAL_GATE"
+    },
+    {
+      "closure_evidence": "Written license, privacy, residency and regulatory review",
+      "id": "LEGAL-001",
+      "owner": "Independent legal/privacy authority",
+      "status": "OPEN_EXTERNAL_GATE"
+    },
+    {
+      "closure_evidence": "Vendor due diligence, contract, safety review and activation authority",
+      "id": "OYA-001",
+      "owner": "Product, security and vendor owners",
+      "status": "OPEN_EXTERNAL_GATE"
+    },
+    {
+      "closure_evidence": "Pentest, signing, alerting, soak, capacity and recovery evidence",
+      "id": "OPS-001",
+      "owner": "Production release authority",
+      "status": "OPEN_EXTERNAL_GATE"
+    }
+  ],
+  "metrics": {
+    "coverage_percent": 87.77,
+    "openapi_path_count": 18,
+    "test_count": 633
+  },
+  "schema_version": 1,
+  "source_commit": "a54ed30453e09253a12b5cd88e045c837214c5d2",
+  "version": "1.0.0-local-prototype"
+}
