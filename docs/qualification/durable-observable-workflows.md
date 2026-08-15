@@ -1,0 +1,3 @@
+# Durable and Observable Workflow Qualification
+
+Capability C-13 and C-15 evidence is bounded to database-backed advisory processing. Tenant-scoped idempotency prevents duplicate effects; append-only ordered events support deterministic replay; retries are classified, capped, and deterministic. Cancellation, terminal states, stale ownership, and conflicts fail closed. Telemetry uses bounded labels and secret-field redaction. The documented SLI/SLO and alert mappings are design evidence only: production alerting and soak remain external where infrastructure is absent. No live queue, provider, deployment, operational command, credential, paid service, or Oya action is activated.
