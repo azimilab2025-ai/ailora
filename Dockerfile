@@ -17,8 +17,8 @@ RUN pip install uv
 
 # Copy only the dependency definition files first to exploit Docker layer cache.
 # Source code changes will not invalidate this layer.
-# README.md is required by hatchling (declared as readme in pyproject.toml).
-COPY pyproject.toml uv.lock README.md ./
+# README.md and LICENSE are required by project metadata during package installation.
+COPY pyproject.toml uv.lock README.md LICENSE ./
 
 # Copy source tree — needed for the local `ailora` package editable install
 COPY src/ ./src/
