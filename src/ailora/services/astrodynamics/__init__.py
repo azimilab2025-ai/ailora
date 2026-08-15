@@ -17,6 +17,16 @@ from ailora.services.astrodynamics.tca import (
     TcaSearchConfig,
     TcaSearchRequest,
 )
+from ailora.services.astrodynamics.verification import (
+    DifferentialVerificationResult,
+    IndependentTcaReference,
+    VerificationError,
+    VerificationErrorCode,
+    VerificationStatus,
+    VerificationTolerance,
+    reference_content_digest,
+    verify_tca_result,
+)
 
 __all__ = [
     "AstrodynamicsConfig",
@@ -34,4 +44,12 @@ __all__ = [
     "TcaSearchRequest",
     "TLEInput",
     "assess_bounded_conjunction",
+    "DifferentialVerificationResult",
+    "IndependentTcaReference",
+    "VerificationError",
+    "VerificationErrorCode",
+    "VerificationStatus",
+    "VerificationTolerance",
+    "reference_content_digest",
+    "verify_tca_result",
 ]

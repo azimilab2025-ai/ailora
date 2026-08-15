@@ -32,7 +32,7 @@ states are never equivalent to pass.
 | R-04 | Enterprise architecture and ADRs | PLANNED | C-02, C-03, C-04, C-13, C-19 | ADR pack, trust boundaries, dependency direction |
 | R-05 | Typed and versioned space-data contracts | PARTIAL_C11 | C-08, C-10, C-11 | Schema compatibility and semantic validation tests |
 | R-06 | Space-object identity and data quality | IMPLEMENTED | C-08, C-09 | Provenance, quarantine, deduplication, replay evidence |
-| R-07 | Astrodynamics and scientific computing | PARTIAL_C11 | C-10 through C-12 | Golden cases, tolerances, scientific limitation labels |
+| R-07 | Astrodynamics and scientific computing | EXTERNAL_GATE_C12 | C-10 through C-12 | Golden cases, tolerances, scientific limitation labels |
 | R-08 | Qualified real-data connection | EXTERNAL_GATE | C-09 | Provider qualification, license, provenance, outage tests |
 | R-09 | Oya and agentic integration | PARTIAL | C-14 | Disabled-by-default adapter, safety tests, benchmark report |
 | R-10 | Workflows, events, and state machines | PARTIAL | C-07, C-13 | Invalid-transition, retry, duplicate and race tests |

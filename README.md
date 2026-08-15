@@ -110,6 +110,10 @@ situational awareness as a Challenge-ready Enterprise SaaS Foundation.
 > C-11 adds bounded advisory TCA search, explicit TEME covariance health contracts, and
 > conservative uncertainty labels. It does not compute collision probability, transform frames
 > or covariance, recommend maneuvers, or claim independent scientific approval.
+>
+> C-12 adds a fail-closed differential-verification contract for provenance-bound independent
+> references and explicit conflict states. It does not self-issue scientific approval or install
+> a second engine; qualified independent review remains an external gate.
 | Explainable advisory recommendations | Human-readable risk output with provenance | PHASE_3 |
 | OpenTelemetry observability | Structured logging and tracing | PHASE_1 |
 | GitHub Actions CI | Lint, type-check, test on every push | PHASE_1 |
