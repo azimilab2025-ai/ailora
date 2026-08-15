@@ -2,6 +2,17 @@
 
 # AILORA
 
+<!-- AILORA_CINEMATIC_EXPERIENCE_BEGIN -->
+
+<p align="center"><img src="docs/assets/ailora-cinematic-hero.svg" alt="AILORA cinematic orbital intelligence system" width="100%" /></p>
+
+<p align="center"><a href="https://ailora-web.onrender.com/health/live">Live Service</a> • <a href="https://ailora-web.onrender.com/docs">Interactive API</a> • <a href="#architecture">Architecture</a> • <a href="#bob-engineering-agent">Bob Agent</a> • <a href="#safety--scientific-integrity">Safety</a></p>
+
+> **Live prototype:** the Render service is operational. Analytical outputs remain advisory-only. NASA live data is **NOT ACTIVATED**. The Oya voice service is **PLANNED**, **NOT CURRENTLY IMPLEMENTED**, and **DISABLED**.
+
+<!-- AILORA_CINEMATIC_EXPERIENCE_END -->
+
+
 ### An Azimi Innovation Lab Orbital Intelligence System
 
 *Intelligence Beyond the Horizon*
@@ -35,6 +46,24 @@ Physics-First and AI-Advisory-Only principles.
 > A reproducible demo scenario demonstrating end-to-end conjunction risk assessment
 > and advisory recommendation will be published here upon completion of the
 > Verified Space Vertical Slice (PHASE_3).
+
+---
+
+## Mission Control Snapshot
+
+| Control-plane signal | Verified state |
+|---|---|
+| **Live API** | [`ailora-web.onrender.com`](https://ailora-web.onrender.com) |
+| **Liveness** | [`/health/live`](https://ailora-web.onrender.com/health/live) |
+| **Interactive OpenAPI** | [`/docs`](https://ailora-web.onrender.com/docs) |
+| **API surface** | 18 OpenAPI paths |
+| **Automated verification** | 644 tests passing |
+| **Statement coverage** | 87.77% against an enforced 85% floor |
+| **Deployment model** | Render-hosted terrestrial prototype |
+| **NASA live data** | **NOT ACTIVATED** — qualification remains gated |
+| **Oya voice service** | **DISABLED** — no-op, network-free and non-billable |
+| **Human authority** | **REQUIRED** — AI output remains advisory |
+| **Spacecraft commands** | **PERMANENTLY PROHIBITED** |
 
 ---
 
@@ -126,6 +155,29 @@ situational awareness as a Challenge-ready Enterprise SaaS Foundation.
 | Real TLE data integration (NASA/CelesTrak) | Dependency on data access agreements | Future roadmap item with acceptance criteria |
 
 > C-09 provides a disabled-by-default, transport-injected provider boundary. Live access remains unqualified and blocked pending source-specific legal/data-governance evidence.
+
+---
+
+## Cinematic System Journey
+
+```mermaid
+flowchart LR
+    A[Governed observations] --> B[Scenario]
+    B --> C[Screening]
+    C --> D[Risk assessment]
+    D --> E[Human review]
+    E --> F[Audit evidence]
+```
+
+AILORA treats every analytical journey as a governed evidence chain. Inputs are tenant-scoped, transformations are traceable, uncertainty remains visible, and recommendations cannot silently become operational authority.
+
+| Journey layer | Responsibility | Safety boundary |
+|---|---|---|
+| **Observe** | Admit typed, provenance-bearing observations | Invalid data never becomes trusted evidence |
+| **Analyze** | Build scenarios, screenings and risk assessments | Results remain advisory and uncertainty-aware |
+| **Review** | Present evidence to an authenticated human | Review does not create spacecraft command authority |
+| **Record** | Persist append-only audit and workflow evidence | Historical evidence is preserved |
+| **Recover** | Replay durable workflows and transitions | Failure degrades safely and remains observable |
 
 ---
 
@@ -389,6 +441,47 @@ for the full architecture and activation requirements.
 
 ---
 
+## Bob Engineering Agent
+
+<p align="center"><img src="docs/assets/bob-engineering-agent.svg" alt="Bob bounded engineering-agent workflow" width="100%" /></p>
+
+Bob is the **Engineering copilot** used to help design, implement, inspect and qualify this repository. Bob is **not a deployed runtime service**, scientific authority, production operator or autonomous decision-maker inside AILORA.
+
+### Bob's Responsibilities
+
+| Responsibility | What Bob may do | Required evidence |
+|---|---|---|
+| **Repository analysis** | Inspect architecture, contracts, tests and migrations | File identities, diffs and reproducible diagnostics |
+| **Implementation support** | Propose bounded code and documentation changes | Test-first failure, focused verification and atomic scope |
+| **Quality assurance** | Run formatting, linting, typing, tests and coverage | Captured command output and fail-closed result |
+| **Deployment preparation** | Diagnose Docker, Render and migration failures | Local build, health check and pinned commit evidence |
+| **Documentation** | Maintain truthful architecture and release status | Links to source, tests, checkpoints and live endpoints |
+| **Rollback protection** | Preserve clean state when a gate fails | Explicit rollback and post-failure repository status |
+
+### Bob's Operating Contract
+
+1. Human intent defines scope before any repository-changing action.
+2. Changes are minimized, testable, reviewable and bound to explicit files.
+3. Missing evidence, failed tests or conflicting state never becomes a pass.
+4. Bob cannot approve scientific results or replace independent domain review.
+5. Bob cannot authorize production use, paid services, credentials or legal claims.
+6. Bob cannot execute spacecraft commands, uplinks or autonomous maneuvers.
+7. Git pushes and deployments remain explicit human-controlled actions.
+8. Every successful change ends with reproducible evidence and a clear next gate.
+
+```mermaid
+flowchart TD
+    H[Human owner] --> B[Bob engineering copilot]
+    B --> R[Repository change]
+    R --> Q[Quality gates]
+    Q --> E[Commit evidence]
+    E --> H
+```
+
+Bob improves the system that builds AILORA; Bob does not become an unbounded agent inside AILORA. Runtime identity, authorization, tenant isolation, scientific integrity and audit controls remain enforced by the application.
+
+---
+
 ## Roadmap
 
 > Roadmap reflects development intent, not committed delivery dates or completed work.
@@ -406,6 +499,19 @@ for the full architecture and activation requirements.
 | **PHASE_7** — Release Candidate | Reviewable release candidate | Explicit Release Gate decision is possible | 📋 Planned |
 
 > Source: Prompt 15 §29 (CSIP-EO-FMSP-P15 v1.1.0)
+
+---
+
+## Live Prototype Boundaries
+
+The public Render endpoint demonstrates deployment health and API availability; it does not convert prototype evidence into production, scientific, legal or operational approval.
+
+- **NASA live data:** **NOT ACTIVATED**. Provider qualification, licensing, provenance and scientific approval remain mandatory gates.
+- **Oya voice service:** **DISABLED**. The current adapter is no-op, network-free and non-billable.
+- **Human authority:** **REQUIRED** for review and release decisions.
+- **Scientific authority:** independent competent review remains external.
+- **Operational authority:** no spacecraft command, uplink or autonomous maneuver path exists.
+- **Production status:** live prototype deployment does not equal unrestricted production authorization.
 
 ---
 
@@ -446,15 +552,15 @@ for the full architecture and activation requirements.
 | Resource | URL / Location | Status |
 |---|---|---|
 | Repository (local) | `/Users/amin/Documents/bob-space-project-intake-2026` | Active |
-| Remote Repository | To be provided by Amin Azimi | **[placeholder]** |
+| Remote Repository | [GitHub — azimilab2025-ai/ailora](https://github.com/azimilab2025-ai/ailora) | Active |
 | CI/CD Pipeline | To be configured (GitHub Actions — PHASE_1) | **[placeholder]** |
-| Deployed API | Not yet deployed — no production environment exists | **[placeholder]** |
-| API Documentation (`/docs`) | `http://localhost:8000/docs` (local dev only) | Local only |
-| API Documentation (`/redoc`) | `http://localhost:8000/redoc` (local dev only) | Local only |
+| Deployed API | [https://ailora-web.onrender.com](https://ailora-web.onrender.com) | Live prototype |
+| API Documentation (`/docs`) | [Live Swagger UI](https://ailora-web.onrender.com/docs) | Live prototype |
+| API Documentation (`/redoc`) | [Live ReDoc](https://ailora-web.onrender.com/redoc) | Live prototype |
 | Container Image (local) | `ailora:dev` (built via `docker build . -t ailora:dev`) | Local only |
 | Container Registry | To be provided by Amin Azimi | **[placeholder]** |
-| Project Website | To be provided by Amin Azimi | **[placeholder]** |
-| Demo Environment | To be added after official approval by Amin Azimi | **[placeholder]** |
+| Project Website | [AILORA live prototype](https://ailora-web.onrender.com) | Live prototype |
+| Demo Environment | [Render deployment](https://ailora-web.onrender.com) | Live prototype |
 
 ---
 
