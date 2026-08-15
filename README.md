@@ -106,6 +106,10 @@ situational awareness as a Challenge-ready Enterprise SaaS Foundation.
 | TLE / state vector parsing | Synthetic orbital data ingestion | PHASE_3 |
 
 > C-10 adds advisory SGP4 propagation with native TEME outputs. Frame conversion and independent scientific approval remain explicit future gates.
+>
+> C-11 adds bounded advisory TCA search, explicit TEME covariance health contracts, and
+> conservative uncertainty labels. It does not compute collision probability, transform frames
+> or covariance, recommend maneuvers, or claim independent scientific approval.
 | Explainable advisory recommendations | Human-readable risk output with provenance | PHASE_3 |
 | OpenTelemetry observability | Structured logging and tracing | PHASE_1 |
 | GitHub Actions CI | Lint, type-check, test on every push | PHASE_1 |
