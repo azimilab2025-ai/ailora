@@ -1,7 +1,7 @@
 """Create governed provider qualification, raw artifacts, and attempt evidence.
 
 Revision ID: 0010_space_data_provider_governance
-Revises: 0009_space_data_contracts
+Revises: 0009a_expand_version
 """
 
 from collections.abc import Sequence
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 from alembic import op
 
 revision: str = "0010_space_data_provider_governance"
-down_revision: str | None = "0009_space_data_contracts"
+down_revision: str | None = "0009a_expand_version"
 branch_labels: str | Sequence[str] | None = None
 depends_on: str | Sequence[str] | None = None
 
