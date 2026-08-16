@@ -699,3 +699,13 @@ NASA's public TLE API is CelesTrak-derived, so it is **not treated as an indepen
 cross-validation source**. Independent source diversity and higher-assurance operational
 orbital data remain later qualification work. No Oya package, connection, credential, or
 runtime action is introduced by this command.
+
+
+<!-- ENTERPRISE_COMMAND_02_INTERNAL_RUNTIME -->
+### Governed Live-Provider Runtime Composition
+
+AILORA includes an internal, fail-closed composition path joining the CelesTrak adapter,
+bounded retry, circuit breaking, qualification enforcement and tenant-scoped append-only
+ingestion. It remains disabled by default, has no public API route, and performs no startup
+network action. Render activation, provider approval and operational authorization remain
+separate explicit gates.
