@@ -1,9 +1,9 @@
 """AILORA Oya Voice AI service package.
 
-STATUS: PROTOTYPE PHASE — DISABLED / MOCKED / NON-BILLABLE.
+STATUS: Production-Grade PHASE — DISABLED / MOCKED / NON-BILLABLE.
 
 Oya is a future Voice AI capability planned for a later stage of AILORA's
-evolution.  During the prototype phase this package provides:
+evolution.  During the production-grade phase this package provides:
   - A safe configuration model (disabled by default, fail-closed).
   - Provider-neutral interfaces and type definitions.
   - A no-op / mock adapter that never makes network calls.
@@ -14,5 +14,5 @@ Activation is gated by:
   2. Non-empty OYA_API_KEY (production credential)
   3. OYA_ENVIRONMENT=production (environment gate)
 
-None of these conditions are met in prototype/development/test environments.
+None of these conditions are met in production-grade/development/test environments.
 """

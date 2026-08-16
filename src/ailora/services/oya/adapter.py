@@ -1,13 +1,13 @@
 """
 AILORA Oya Voice AI — No-Op / Mock Adapter.
 
-STATUS: PROTOTYPE PHASE — NO NETWORK CALLS, NON-BILLABLE.
+STATUS: Production-Grade PHASE — NO NETWORK CALLS, NON-BILLABLE.
 
 This adapter implements the OyaVoiceAdapter interface with a pure no-op
 implementation.  It is always disabled (is_active() returns False) and
 never makes any network calls, charges, or external requests.
 
-This is the default adapter used during prototype, development, test,
+This is the default adapter used during production-grade, development, test,
 and challenge phases.
 
 A production adapter (with real vendor SDK integration) will only be
@@ -35,22 +35,22 @@ class NoOpOyaAdapter(OyaVoiceAdapter):
     """
     No-operation Oya adapter.
 
-    All methods return safe prototype-phase responses without any network
+    All methods return safe production-grade-phase responses without any network
     call, billable action, or external side effect.
     """
 
     def is_active(self) -> bool:
-        """Always returns False in prototype mode."""
+        """Always returns False in production-grade mode."""
         return oya_settings.is_active
 
     async def start_session(self, config: OyaSessionConfig) -> OyaSessionResult:
         """
         Return a DEGRADED/fallback result — never makes a network call.
 
-        Falls back to TEXT_CHAT in prototype mode.
+        Falls back to TEXT_CHAT in production-grade mode.
         """
         if self.is_active():
-            # This path is unreachable in prototype — fail-closed guard
+            # This path is unreachable in production-grade — fail-closed guard
             raise RuntimeError(  # noqa: TRY004
                 "NoOpOyaAdapter must never be used with an active production service. "
                 "Use the production adapter instead."
@@ -61,26 +61,26 @@ class NoOpOyaAdapter(OyaVoiceAdapter):
             is_advisory=True,
             fallback_applied=True,
             error_message=(
-                "Oya Voice AI is disabled in prototype phase. "
+                "Oya Voice AI is disabled in production-grade phase. "
                 "Falling back to text chat. "
                 "Activate by meeting the production revenue gate."
             ),
         )
 
     async def end_session(self, session_id: str) -> None:
-        """No-op end session — nothing to close in prototype mode."""
+        """No-op end session — nothing to close in production-grade mode."""
 
     async def health_check(self) -> dict[str, object]:
         """Return safe health telemetry — no sensitive data."""
         return {
             "service": "oya_voice",
             "status": "disabled",
-            "phase": "prototype",
+            "phase": "production-grade",
             "is_active": False,
             "fallback_mode": OyaFallbackMode.TEXT_CHAT.value,
-            "note": "Oya is disabled during prototype phase.",
+            "note": "Oya is disabled during production-grade phase.",
         }
 
 
-# Default adapter instance — always no-op in prototype
+# Default adapter instance — always no-op in production-grade
 default_oya_adapter: OyaVoiceAdapter = NoOpOyaAdapter()

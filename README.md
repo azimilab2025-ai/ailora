@@ -8,7 +8,7 @@
 
 <p align="center"><a href="https://ailora-web.onrender.com/health/live">Live Service</a> • <a href="https://ailora-web.onrender.com/docs">Interactive API</a> • <a href="#architecture">Architecture</a> • <a href="#bob-engineering-agent">Bob Agent</a> • <a href="#safety--scientific-integrity">Safety</a></p>
 
-> **Live prototype:** the Render service is operational. Analytical outputs remain advisory-only. NASA live data is **NOT ACTIVATED**. The Oya voice service is **PLANNED**, **NOT CURRENTLY IMPLEMENTED**, and **DISABLED**.
+> **Live production-grade:** the Render service is operational. Analytical outputs remain advisory-only. NASA live data is **NOT ACTIVATED**. The Oya voice service is **PLANNED**, **NOT CURRENTLY IMPLEMENTED**, and **DISABLED**.
 
 <!-- AILORA_CINEMATIC_EXPERIENCE_END -->
 
@@ -68,7 +68,7 @@ Physics-First and AI-Advisory-Only principles.
 | **API surface** | 18 OpenAPI paths |
 | **Automated verification** | 644 tests passing |
 | **Statement coverage** | 87.77% against an enforced 85% floor |
-| **Deployment model** | Render-hosted terrestrial prototype |
+| **Deployment model** | Render-hosted terrestrial production-grade |
 | **NASA live data** | **NOT ACTIVATED** — qualification remains gated |
 | **Oya voice service** | **DISABLED** — no-op, network-free and non-billable |
 | **Human authority** | **REQUIRED** — AI output remains advisory |
@@ -468,10 +468,10 @@ Operational status.
 > **Status: PLANNED / NOT CURRENTLY IMPLEMENTED**
 
 Oya is planned for a future stage of AILORA's evolution.  The service is
-intentionally kept disabled during the prototype phase.  A safe placeholder
+intentionally kept disabled during the production-grade phase.  A safe placeholder
 module exists in `src/ailora/services/oya/` with a no-op adapter and
 fail-closed configuration.  No real Oya API call, vendor charge, or paid
-service activation occurs in prototype, development, test, or challenge phases.
+service activation occurs in production-grade, development, test, or challenge phases.
 All production activation requires explicit authorization from Amin Azimi and
 the production revenue gate being met.
 
@@ -534,7 +534,7 @@ Bob improves the system that builds AILORA; Bob does not become an unbounded age
 
 <p align="center"><img src="docs/assets/ailora-technology-rocket.svg" alt="Animated technology rocket traveling from the terrestrial baseline toward an outer digital world" width="100%" /></p>
 
-This animated technology trajectory represents modular growth from the verified terrestrial prototype toward future capability. It is a visual roadmap only: no on-orbit runtime, autonomous maneuver or spacecraft command capability is claimed. NASA live data remains NOT ACTIVATED. Oya remains PLANNED, NOT CURRENTLY IMPLEMENTED, and DISABLED.
+This animated technology trajectory represents modular growth from the verified terrestrial production-grade toward future capability. It is a visual roadmap only: no on-orbit runtime, autonomous maneuver or spacecraft command capability is claimed. NASA live data remains NOT ACTIVATED. Oya remains PLANNED, NOT CURRENTLY IMPLEMENTED, and DISABLED.
 
 ---
 
@@ -546,16 +546,16 @@ The trajectory communicates verified direction without inventing delivery dates.
 
 <!-- AILORA_FINAL_VISUAL_REDESIGN_BEGIN -->
 
-## Live Prototype Boundaries
+## Live Production-Grade Boundaries
 
-The public Render endpoint demonstrates deployment health and API availability; it does not convert prototype evidence into production, scientific, legal or operational approval.
+The public Render endpoint demonstrates deployment health and API availability; it does not convert production-grade evidence into production, scientific, legal or operational approval.
 
 - **NASA live data:** **NOT ACTIVATED**. Provider qualification, licensing, provenance and scientific approval remain mandatory gates.
 - **Oya voice service:** **DISABLED**. The current adapter is no-op, network-free and non-billable.
 - **Human authority:** **REQUIRED** for review and release decisions.
 - **Scientific authority:** independent competent review remains external.
 - **Operational authority:** no spacecraft command, uplink or autonomous maneuver path exists.
-- **Production status:** live prototype deployment does not equal unrestricted production authorization.
+- **Production status:** live production-grade deployment does not equal unrestricted production authorization.
 
 ---
 
@@ -598,13 +598,13 @@ The public Render endpoint demonstrates deployment health and API availability; 
 | Repository (local) | `/Users/amin/Documents/bob-space-project-intake-2026` | Active |
 | Remote Repository | [GitHub — azimilab2025-ai/ailora](https://github.com/azimilab2025-ai/ailora) | Active |
 | CI/CD Pipeline | To be configured (GitHub Actions — PHASE_1) | **[placeholder]** |
-| Deployed API | [https://ailora-web.onrender.com](https://ailora-web.onrender.com) | Live prototype |
-| API Documentation (`/docs`) | [Live Swagger UI](https://ailora-web.onrender.com/docs) | Live prototype |
-| API Documentation (`/redoc`) | [Live ReDoc](https://ailora-web.onrender.com/redoc) | Live prototype |
+| Deployed API | [https://ailora-web.onrender.com](https://ailora-web.onrender.com) | Live production-grade |
+| API Documentation (`/docs`) | [Live Swagger UI](https://ailora-web.onrender.com/docs) | Live production-grade |
+| API Documentation (`/redoc`) | [Live ReDoc](https://ailora-web.onrender.com/redoc) | Live production-grade |
 | Container Image (local) | `ailora:dev` (built via `docker build . -t ailora:dev`) | Local only |
 | Container Registry | To be provided by Amin Azimi | **[placeholder]** |
-| Project Website | [AILORA live prototype](https://ailora-web.onrender.com) | Live prototype |
-| Demo Environment | [Render deployment](https://ailora-web.onrender.com) | Live prototype |
+| Project Website | [AILORA live production-grade](https://ailora-web.onrender.com) | Live production-grade |
+| Demo Environment | [Render deployment](https://ailora-web.onrender.com) | Live production-grade |
 
 ---
 
@@ -648,7 +648,7 @@ The upstream project reports benchmark observations including fewer tokens, lowe
 
 ### Candidate Gate Sequence
 
-**Research evidence → dependency and license review → isolated prototype → threat model → deterministic replay → performance benchmark → tenant and authorization tests → independent review → explicit activation decision.**
+**Research evidence → dependency and license review → isolated production-grade → threat model → deterministic replay → performance benchmark → tenant and authorization tests → independent review → explicit activation decision.**
 
 Until every gate passes, Oya remains **PLANNED / NOT CURRENTLY IMPLEMENTED / DISABLED**, provider-neutral, non-billable and disconnected from AILORA runtime paths.
 
@@ -684,3 +684,18 @@ AILORA is architected as a complete decision-support system: from governed data 
 <p align="center"><strong>AILORA — An Azimi Innovation Lab Orbital Intelligence System</strong><br/><em>Intelligence Beyond the Horizon</em><br/>© Azimi Innovation Lab — All rights reserved</p>
 
 </div>
+
+<!-- ENTERPRISE_LIVE_SPACE_DATA_FOUNDATION -->
+### Live Orbital-Data Foundation
+
+AILORA now contains a **real, bounded HTTPS transport path for CelesTrak GP data** with
+canonical-host enforcement, no redirect following, bounded timeout/response size, normalized
+transport failures, provider provenance, qualification gates, retry/circuit-breaker support,
+and an explicit runtime enable switch. The switch remains **off by default** and remains off
+in the Render blueprint until the later staging/release gate intentionally activates it.
+
+The live-data engineering path uses CelesTrak as the directly integrated public GP source.
+NASA's public TLE API is CelesTrak-derived, so it is **not treated as an independent
+cross-validation source**. Independent source diversity and higher-assurance operational
+orbital data remain later qualification work. No Oya package, connection, credential, or
+runtime action is introduced by this command.

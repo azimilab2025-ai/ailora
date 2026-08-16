@@ -1,7 +1,7 @@
 # Final Program Command 20 checkpoint
 
 - Capability: C-20 final evidence pack and release gate.
-- Final status: `CONDITIONAL_LOCAL_PROTOTYPE_PASS_PRODUCTION_BLOCKED`.
+- Final status: `CONDITIONAL_LOCAL_Production-Grade_PASS_PRODUCTION_BLOCKED`.
 - `PRODUCTION_RELEASE=BLOCKED`.
 - Evidence manifest: SHA-256-bound pre-C20 checkpoints and qualification documents.
 - Test baseline entering C20: 633 passed; coverage 87.77%; OpenAPI paths 18; Alembic head 0011.

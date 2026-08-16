@@ -10,7 +10,7 @@ Residual risk is reassessed only after the owning command supplies evidence.
 | K-01 | Health-only API mistaken for operational capability | HIGH | HIGH | Deliver and test a real vertical slice | C-05, C-06 | No |
 | K-02 | Cross-tenant data exposure or IDOR | MEDIUM | CRITICAL | Deny-by-default policy and isolation tests | C-04, C-06 | Security review |
 | K-03 | Weak or invalid production configuration | MEDIUM | HIGH | Typed configuration and fail-closed startup | C-03 | No |
-| K-04 | Scientific prototype presented as operational truth | HIGH | CRITICAL | Coarse labels, validity domains and review gates | C-10 through C-12 | Independent reviewer |
+| K-04 | Scientific production-grade presented as operational truth | HIGH | CRITICAL | Coarse labels, validity domains and review gates | C-10 through C-12 | Independent reviewer |
 | K-05 | Invalid frame, epoch, unit, covariance or stale data | HIGH | CRITICAL | Typed contracts and explicit rejection/degradation | C-08 through C-12 | Domain review |
 | K-06 | Unlicensed or misattributed provider data | MEDIUM | CRITICAL | Qualification and legal approval before activation | C-09, C-18 | Legal approval |
 | K-07 | Agent tool abuse, prompt injection or false claims | MEDIUM | HIGH | Sandboxing, allowlists, budgets and physics verification | C-14 | Vendor assessment |

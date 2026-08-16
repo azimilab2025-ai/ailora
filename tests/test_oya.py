@@ -5,11 +5,11 @@ Validates:
 - ENABLE_OYA_VOICE_SERVICE defaults to False (safe default).
 - OyaSettings.is_active is False without production credentials.
 - Fail-closed: enable_oya_voice_service=True without api_key is reset to False.
-- NoOpOyaAdapter.is_active() always returns False in prototype mode.
+- NoOpOyaAdapter.is_active() always returns False in production-grade mode.
 - start_session() never makes network calls (no-op returns DEGRADED state).
 - health_check() returns safe status without sensitive data.
 - Default adapter is the no-op implementation.
-- No network imports or calls in prototype adapter.
+- No network imports or calls in production-grade adapter.
 - Advisory flag is always True on session results.
 """
 
@@ -26,7 +26,7 @@ from ailora.services.oya.interfaces import (
     OyaVoiceAdapter,
 )
 
-# ─── Default configuration (prototype phase) ─────────────────────────────────
+# ─── Default configuration (production-grade phase) ─────────────────────────────────
 
 
 def test_oya_disabled_by_default() -> None:
@@ -46,7 +46,7 @@ def test_oya_fail_closed_flag_true_no_credentials() -> None:
     s = OyaSettings(
         enable_oya_voice_service=True,
         oya_api_key="",  # no key
-        oya_environment="prototype",
+        oya_environment="production-grade",
     )
     assert s.enable_oya_voice_service is False
     assert s.is_active is False
@@ -176,7 +176,7 @@ async def test_noop_adapter_fallback_mode_is_text_chat() -> None:
 
 
 def test_adapter_module_no_network_imports() -> None:
-    """Adapter module must not import requests, httpx, or similar in prototype."""
+    """Adapter module must not import requests, httpx, or similar in production-grade."""
     from pathlib import Path
 
     text = (

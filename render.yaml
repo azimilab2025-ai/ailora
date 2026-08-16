@@ -1,7 +1,7 @@
 ##############################################################################
 # AILORA — Render deployment configuration
 # Authoritative source: Prompts 01–15 (CSIP-EO-FMSP)
-# Advisory-only prototype: no spacecraft command/telecommand/maneuver path.
+# Advisory-only production-grade: no spacecraft command/telecommand/maneuver path.
 ##############################################################################
 
 services:
@@ -12,7 +12,7 @@ services:
     plan: free
     buildCommand: uv sync --no-dev --frozen
     # Render pre-deploy commands require a paid web plan. On the single-instance
-    # free prototype, run idempotent Alembic migrations before starting ASGI.
+    # free production-grade, run idempotent Alembic migrations before starting ASGI.
     startCommand: uv run alembic upgrade head && exec uv run uvicorn ailora.api.app:app --host 0.0.0.0 --port $PORT
     healthCheckPath: /health/live
     autoDeployTrigger: "off"
@@ -29,6 +29,15 @@ services:
         value: "[]"
       - key: AILORA_ENABLE_TRACING
         value: "false"
+        # Real orbital-data transport exists, but production activation is an explicit release gate.
+      - key: AILORA_ENABLE_LIVE_SPACE_DATA_PROVIDER
+        value: "false"
+      - key: AILORA_CELESTRAK_BASE_URL
+        value: "https://celestrak.org"
+      - key: AILORA_CELESTRAK_TIMEOUT_SECONDS
+        value: "5"
+      - key: AILORA_CELESTRAK_MAX_RESPONSE_BYTES
+        value: "131072"
       - key: AILORA_ENABLE_OYA_VOICE_SERVICE
         value: "false"
       - key: AILORA_APP_NAME

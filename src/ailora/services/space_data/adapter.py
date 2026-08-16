@@ -5,6 +5,8 @@ from collections.abc import Callable
 from datetime import UTC, datetime
 from urllib.parse import urlparse
 
+import httpx
+
 from ailora.services.space_data.config import ProviderConfig
 from ailora.services.space_data.interfaces import (
     ProviderDisabledError,
@@ -12,7 +14,63 @@ from ailora.services.space_data.interfaces import (
     ProviderResponse,
     ProviderResponseError,
     ProviderTransport,
+    TransportResponse,
 )
+
+
+class HttpxProviderTransport:
+    """Bounded HTTPS transport used by live provider adapters."""
+
+    def __init__(
+        self,
+        *,
+        transport: httpx.AsyncBaseTransport | None = None,
+        trust_env: bool = False,
+    ) -> None:
+        self._transport = transport
+        self._trust_env = trust_env
+
+    async def fetch(
+        self,
+        *,
+        url: str,
+        query: tuple[tuple[str, str], ...],
+        timeout_seconds: float,
+    ) -> TransportResponse:
+        try:
+            async with httpx.AsyncClient(
+                follow_redirects=False,
+                transport=self._transport,
+                trust_env=self._trust_env,
+            ) as client:
+                response = await client.get(
+                    url,
+                    params=query,
+                    timeout=timeout_seconds,
+                    headers={
+                        "accept": "text/plain",
+                        "user-agent": "AILORA/0.1 space-data-provider",
+                    },
+                )
+        except (httpx.TimeoutException, httpx.NetworkError) as exc:
+            raise ProviderResponseError(
+                "provider transport failure",
+                retryable=True,
+            ) from exc
+        except httpx.RequestError as exc:
+            raise ProviderResponseError(
+                "provider transport request failure",
+                retryable=False,
+            ) from exc
+
+        canonical_final = response.url.copy_with(query=None, fragment=None)
+        return TransportResponse(
+            status_code=response.status_code,
+            content_type=response.headers.get("content-type", ""),
+            payload=bytes(response.content),
+            final_url=str(canonical_final),
+            headers=tuple(response.headers.multi_items()),
+        )
 
 
 class CelesTrakProviderAdapter:

@@ -112,3 +112,32 @@ async def test_lifespan_records_startup_state_and_closes_database(
 
     probe.assert_awaited_once()
     close.assert_awaited_once()
+
+
+def test_live_space_data_provider_is_disabled_by_default() -> None:
+    from ailora.config import Settings
+
+    runtime = Settings(_env_file=None)
+    assert runtime.enable_live_space_data_provider is False
+    assert runtime.celestrak_base_url == "https://celestrak.org"
+
+
+@pytest.mark.parametrize(
+    "unsafe_url",
+    [
+        "http://celestrak.org",
+        "https://evil.example",
+        "https://user@celestrak.org",
+        "https://celestrak.org:8443",
+        "https://celestrak.org/path",
+    ],
+)
+def test_runtime_rejects_noncanonical_celestrak_origin(
+    monkeypatch: pytest.MonkeyPatch,
+    unsafe_url: str,
+) -> None:
+    from ailora.config import Settings
+
+    monkeypatch.setenv("AILORA_CELESTRAK_BASE_URL", unsafe_url)
+    with pytest.raises(ValueError, match="CelesTrak"):
+        Settings(_env_file=None)

@@ -1,10 +1,10 @@
 """
 AILORA Oya Voice AI — Configuration and Feature Flag.
 
-STATUS: PROTOTYPE PHASE — SERVICE DISABLED / NON-BILLABLE.
+STATUS: Production-Grade PHASE — SERVICE DISABLED / NON-BILLABLE.
 
 All configuration defaults ensure the Oya service is completely disabled
-and non-billable during prototype, development, test, and challenge phases.
+and non-billable during production-grade, development, test, and challenge phases.
 
 Activation requires:
   1. AILORA_ENABLE_OYA_VOICE_SERVICE=true  (explicit opt-in)
@@ -29,7 +29,7 @@ class OyaSettings(BaseSettings):
     """
     Oya Voice AI service configuration.
 
-    All defaults are safe for prototype/development (service disabled).
+    All defaults are safe for production-grade/development (service disabled).
     Production activation requires all three gate conditions.
     """
 
@@ -48,7 +48,7 @@ class OyaSettings(BaseSettings):
     oya_api_key: str = ""  # Must be set in production only
     oya_base_url: str = ""  # TBD — vendor-specific URL
     oya_webhook_secret: str = ""  # TBD — vendor-specific webhook verification
-    oya_environment: str = "prototype"  # Set to "production" only with revenue gate
+    oya_environment: str = "production-grade"  # Set to "production" only with revenue gate
 
     # ── Safety limits ─────────────────────────────────────────────────────────
     oya_session_timeout_seconds: int = 30

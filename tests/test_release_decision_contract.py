@@ -23,7 +23,7 @@ def test_external_gates_remain_open_and_owned() -> None:
 
 def test_fail_closed_decision_rejects_overclaims() -> None:
     decision = _manifest()["decision"]
-    assert decision["final_status"] == "CONDITIONAL_LOCAL_PROTOTYPE_PASS_PRODUCTION_BLOCKED"
+    assert decision["final_status"] == "CONDITIONAL_LOCAL_Production-Grade_PASS_PRODUCTION_BLOCKED"
     assert decision["production_ready_claim_allowed"] is False
     assert decision["scientific_approval_claim_allowed"] is False
     assert decision["legal_compliance_claim_allowed"] is False

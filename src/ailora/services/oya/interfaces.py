@@ -1,7 +1,7 @@
 """
 AILORA Oya Voice AI — Provider-Neutral Interfaces and Type Definitions.
 
-STATUS: PROTOTYPE PHASE — INTERFACES ONLY, NO IMPLEMENTATION.
+STATUS: Production-Grade PHASE — INTERFACES ONLY, NO IMPLEMENTATION.
 
 These interfaces define the contracts that a future Oya provider adapter
 must satisfy.  They are provider-neutral and do not reference any specific

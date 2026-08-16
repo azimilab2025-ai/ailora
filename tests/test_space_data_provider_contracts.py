@@ -5,7 +5,7 @@ from datetime import UTC, datetime
 
 import pytest
 
-from ailora.services.space_data.adapter import CelesTrakProviderAdapter
+from ailora.services.space_data.adapter import CelesTrakProviderAdapter, HttpxProviderTransport
 from ailora.services.space_data.config import ProviderConfig
 from ailora.services.space_data.interfaces import (
     ProviderDisabledError,
@@ -120,3 +120,75 @@ def test_request_rejects_naive_time_and_unsafe_identity() -> None:
         ProviderRequest(uuid.uuid4(), "25544", datetime(2026, 1, 1), "safe")
     with pytest.raises(ValueError):
         ProviderRequest(uuid.uuid4(), "../25544", NOW, "safe")
+
+
+def test_runtime_settings_build_fail_closed_celestrak_provider_config(monkeypatch) -> None:
+    monkeypatch.setenv("AILORA_ENABLE_LIVE_SPACE_DATA_PROVIDER", "true")
+    monkeypatch.setenv("AILORA_CELESTRAK_BASE_URL", "https://celestrak.org")
+    monkeypatch.setenv("AILORA_CELESTRAK_TIMEOUT_SECONDS", "7")
+    monkeypatch.setenv("AILORA_CELESTRAK_MAX_RESPONSE_BYTES", "262144")
+
+    from ailora.config import Settings
+
+    runtime = Settings(_env_file=None)
+    provider = ProviderConfig.from_settings(runtime)
+
+    assert provider.enabled is True
+    assert provider.base_url == "https://celestrak.org"
+    assert provider.allowed_host == "celestrak.org"
+    assert provider.timeout_seconds == 7
+    assert provider.max_response_bytes == 262_144
+
+
+@pytest.mark.asyncio
+async def test_httpx_transport_performs_bounded_https_get_without_redirect_following() -> None:
+    import httpx
+
+    seen: list[httpx.Request] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        seen.append(request)
+        return httpx.Response(
+            200,
+            headers={"content-type": "text/plain; charset=utf-8"},
+            content=b"ISS (ZARYA)\\n1 25544U TEST\\n2 25544 TEST\\n",
+            request=request,
+        )
+
+    transport = HttpxProviderTransport(
+        transport=httpx.MockTransport(handler),
+        trust_env=False,
+    )
+    result = await transport.fetch(
+        url="https://celestrak.org/NORAD/elements/gp.php",
+        query=(("CATNR", "25544"), ("FORMAT", "TLE")),
+        timeout_seconds=5.0,
+    )
+
+    assert len(seen) == 1
+    assert seen[0].url.scheme == "https"
+    assert seen[0].url.host == "celestrak.org"
+    assert seen[0].url.params["CATNR"] == "25544"
+    assert seen[0].url.params["FORMAT"] == "TLE"
+    assert result.status_code == 200
+    assert result.final_url == "https://celestrak.org/NORAD/elements/gp.php"
+    assert result.payload.startswith(b"ISS")
+
+
+@pytest.mark.asyncio
+async def test_httpx_transport_normalizes_network_errors_to_provider_error() -> None:
+    import httpx
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        raise httpx.ConnectError("simulated connect failure", request=request)
+
+    transport = HttpxProviderTransport(
+        transport=httpx.MockTransport(handler),
+        trust_env=False,
+    )
+    with pytest.raises(ProviderResponseError, match="transport"):
+        await transport.fetch(
+            url="https://celestrak.org/NORAD/elements/gp.php",
+            query=(("CATNR", "25544"), ("FORMAT", "TLE")),
+            timeout_seconds=5.0,
+        )

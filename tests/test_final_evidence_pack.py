@@ -15,7 +15,7 @@ def test_final_manifest_identity_metrics_and_scope() -> None:
     assert manifest["schema_version"] == 1
     assert manifest["artifact_id"] == "AILORA-C20-FINAL-EVIDENCE-MANIFEST"
     assert manifest["source_commit"] == "a54ed30453e09253a12b5cd88e045c837214c5d2"
-    assert manifest["decision"]["verified_scope"] == "LOCAL_PROTOTYPE"
+    assert manifest["decision"]["verified_scope"] == "LOCAL_Production-Grade"
     assert manifest["decision"]["production_release"] == "BLOCKED"
     assert manifest["metrics"] == {
         "coverage_percent": 87.77,

@@ -1,7 +1,11 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from typing import TYPE_CHECKING
 from urllib.parse import urlparse
+
+if TYPE_CHECKING:
+    from ailora.config import Settings
 
 
 @dataclass(frozen=True, slots=True)
@@ -15,6 +19,17 @@ class ProviderConfig:
     max_response_bytes: int = 131_072
     allowed_content_types: tuple[str, ...] = ("text/plain", "text/csv")
     attribution_text: str = "CelesTrak source attribution required"
+
+    @classmethod
+    def from_settings(cls, settings: Settings) -> ProviderConfig:
+        """Build the fail-closed live CelesTrak provider contract from app settings."""
+        return cls(
+            enabled=settings.enable_live_space_data_provider,
+            base_url=settings.celestrak_base_url,
+            allowed_host="celestrak.org",
+            timeout_seconds=settings.celestrak_timeout_seconds,
+            max_response_bytes=settings.celestrak_max_response_bytes,
+        )
 
     def __post_init__(self) -> None:
         parsed = urlparse(self.base_url)

@@ -202,7 +202,7 @@ def test_oya_only_planned(readme_text: str) -> None:
             "prohibited",
             "not yet",
             "disabled",
-            "prototype phase",
+            "production-grade phase",
         ]
         # Also safe if this occurrence is within the dedicated Oya roadmap section
         is_in_roadmap_section = oya_roadmap_section in context

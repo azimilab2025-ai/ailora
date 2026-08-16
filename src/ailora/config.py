@@ -43,6 +43,10 @@ class Settings(BaseSettings):
     environment: Environment = Environment.LOCAL
 
     enable_tracing: bool = False
+    enable_live_space_data_provider: bool = False
+    celestrak_base_url: str = "https://celestrak.org"
+    celestrak_timeout_seconds: float = Field(default=5.0, ge=0.1, le=30.0)
+    celestrak_max_response_bytes: int = Field(default=131_072, ge=1, le=1_048_576)
 
     database_url: str = "postgresql+psycopg://ailora:ailora@localhost:55432/ailora_db"
     database_pool_size: int = Field(default=5, ge=1, le=50)
@@ -71,6 +75,25 @@ class Settings(BaseSettings):
         if isinstance(value, str) and value.startswith("postgresql://"):
             return value.replace("postgresql://", "postgresql+psycopg://", 1)
         return value
+
+    @field_validator("celestrak_base_url")
+    @classmethod
+    def validate_celestrak_base_url(cls, value: str) -> str:
+        """Require the canonical credential-free CelesTrak HTTPS origin."""
+        candidate = value.strip().rstrip("/")
+        parsed = urlsplit(candidate)
+        if (
+            parsed.scheme != "https"
+            or parsed.hostname != "celestrak.org"
+            or parsed.username
+            or parsed.password
+            or parsed.port is not None
+            or parsed.path not in {"", "/"}
+            or parsed.query
+            or parsed.fragment
+        ):
+            raise ValueError("CelesTrak base URL must be canonical https://celestrak.org")
+        return candidate
 
     @field_validator("allowed_origins")
     @classmethod
