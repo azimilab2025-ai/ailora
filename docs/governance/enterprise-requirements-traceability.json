@@ -157,18 +157,17 @@
       "id": "ENT-005",
       "implementation_refs": [
         "src/ailora/api/app.py",
-        "src/ailora/api/routers/space_data.py"
+        "src/ailora/api/contracts.py"
       ],
       "owner": "API Engineering",
       "release_gates": [
         "G08_API_PRODUCT_BOUNDARIES"
       ],
-      "remaining_scope": "Add versioning Problem Details correlation idempotency concurrency pagination and budgets.",
-      "status": "PARTIAL",
+      "remaining_scope": "Deploy with explicit acceptance; add a durable multi-instance idempotency adapter, load evidence and independent API security review.",
+      "status": "VERIFIED_BASELINE",
       "title": "Enterprise API contracts and bounded requests",
       "verification_refs": [
-        "tests/test_health.py",
-        "tests/test_space_data_provider_runtime.py"
+        "tests/test_api_contracts.py"
       ]
     },
     {

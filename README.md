@@ -159,14 +159,14 @@ The visual sequence presents the system as one continuous mission narrative: **O
 
 | Capability | Current evidence | Boundary |
 |---|---|---|
-| Health and API composition | Liveness, readiness and versioned FastAPI routers | Deployed surface verified |
+| Health and API composition | Versioned routers, RFC 9457 errors, correlation, bounded requests, ETags and signed cursors | Runtime deployment acceptance remains separate |
 | PostgreSQL persistence and Alembic | Tenant-scoped models through revision `0012_frame_transformations` | HA/PITR qualification remains separate |
 | Identity, sessions and authorization | Tenant membership, OIDC/MFA session policy, asymmetric tokens and tenant-bound workload authorization | Live IdP/OAuth integration and operational qualification remain separate |
 | SSA evidence chain | Scenario → screening → proximity assessment → review → immutable audit evidence | Human-authority-first and advisory-only |
 | Space-data provider chain | Qualified-gate boundary, raw artifacts, quarantine, TLE parsing and CelesTrak transport | Controlled authenticated production E2E is deferred |
 | Astrodynamics foundation | SGP4/TEME, bounded TCA, covariance health and pinned-IERS TEME→GCRF | Independent operational scientific qualification remains required |
 | Durable workflows | Tenant-scoped idempotency, retries, cancellation and deterministic replay | External queue/worker HA remains planned |
-| Engineering assurance | Ruff, strict Mypy, 776 tests, 88.25% coverage, SBOM and package build | Test evidence is not external certification |
+| Engineering assurance | Ruff, strict Mypy, 809 tests, 88.46% coverage, SBOM and package build | Test evidence is not external certification |
 | Deployment foundation | Non-root container contract and live Render service | Multi-instance HA/DR/SLO evidence remains planned |
 
 ### 🔄 Active qualification

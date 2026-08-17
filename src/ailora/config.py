@@ -66,6 +66,10 @@ class Settings(BaseSettings):
 
     port: int = Field(default=8000, ge=1, le=65535)
 
+    api_max_body_bytes: int = Field(default=1_048_576, ge=1, le=16_777_216)
+    api_request_timeout_seconds: float = Field(default=15.0, ge=0.05, le=120)
+    api_max_page_size: int = Field(default=100, ge=1, le=500)
+
     enable_oya_voice_service: bool = False  # noqa: S105
 
     @field_validator("database_url", mode="before")

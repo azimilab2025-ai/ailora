@@ -122,7 +122,7 @@ def test_final_documents_preserve_truthful_boundaries() -> None:
     assert all(claim["risk_refs"] for claim in claims["claims"])
 
     evidence = _json("docs/assurance/evidence-index.json")
-    assert len(evidence["records"]) == 19
+    assert len(evidence["records"]) == 22
     for record in evidence["records"]:
         path = ROOT / record["path"]
         assert path.is_file()

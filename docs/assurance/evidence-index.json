@@ -52,9 +52,15 @@
       "status": "CURRENT_BASELINE_EVIDENCE_NOT_FINAL_QUALIFICATION"
     },
     {
+      "evidence_class": "COMMAND_CHECKPOINT",
+      "path": "docs/checkpoints/master-program-command-10-api-contracts.md",
+      "sha256": "6a3ee49c69add1fcf820be68c68fc3bf335a59cb21da180c963ed4325b6612b3",
+      "status": "CURRENT_BASELINE_EVIDENCE_NOT_FINAL_QUALIFICATION"
+    },
+    {
       "evidence_class": "REQUIREMENTS",
       "path": "docs/governance/enterprise-requirements-traceability.json",
-      "sha256": "b4f1c32644017510a5f4a1f0da673042c79f718b6d9c305ecfe37b19548021e7",
+      "sha256": "99a91a3b4190bd1e112a82feb38aab50f7e7d0d1e71a349840072cb5a5a5060a",
       "status": "CURRENT_BASELINE_EVIDENCE_NOT_FINAL_QUALIFICATION"
     },
     {
@@ -73,6 +79,12 @@
       "evidence_class": "IMPLEMENTATION",
       "path": "src/ailora/security/authorization.py",
       "sha256": "f07bc77bca4cf478eb3555ae09c75074f007ae9401e7ad3dcc6fbe351dd9fc99",
+      "status": "CURRENT_BASELINE_EVIDENCE_NOT_FINAL_QUALIFICATION"
+    },
+    {
+      "evidence_class": "IMPLEMENTATION",
+      "path": "src/ailora/api/contracts.py",
+      "sha256": "6736f60fd38e5e67e361777e2826c307038910b2c36340c11af1bc4368545b7e",
       "status": "CURRENT_BASELINE_EVIDENCE_NOT_FINAL_QUALIFICATION"
     },
     {
@@ -103,6 +115,12 @@
       "evidence_class": "VERIFICATION",
       "path": "tests/test_astrodynamics_verification_contracts.py",
       "sha256": "0004d121b3b5c58ab751d944ab405ddbfe1cf619f5ac31c4991dacec0a1f6076",
+      "status": "CURRENT_BASELINE_EVIDENCE_NOT_FINAL_QUALIFICATION"
+    },
+    {
+      "evidence_class": "VERIFICATION",
+      "path": "tests/test_api_contracts.py",
+      "sha256": "e8ec23460dfe816b2401edfbbb0d2bc1d5e4543fd02dafd33c07392a5e6a8904",
       "status": "CURRENT_BASELINE_EVIDENCE_NOT_FINAL_QUALIFICATION"
     },
     {
