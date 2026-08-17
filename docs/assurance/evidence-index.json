@@ -58,9 +58,15 @@
       "status": "CURRENT_BASELINE_EVIDENCE_NOT_FINAL_QUALIFICATION"
     },
     {
+      "evidence_class": "COMMAND_CHECKPOINT",
+      "path": "docs/checkpoints/master-program-command-11-postgres-tenant-defense.md",
+      "sha256": "8974ec0ca42a38b1096c355da396546a386df3b7e127bc73d540e2b9aaf83115",
+      "status": "CURRENT_BASELINE_EVIDENCE_NOT_FINAL_QUALIFICATION"
+    },
+    {
       "evidence_class": "REQUIREMENTS",
       "path": "docs/governance/enterprise-requirements-traceability.json",
-      "sha256": "99a91a3b4190bd1e112a82feb38aab50f7e7d0d1e71a349840072cb5a5a5060a",
+      "sha256": "ffe2240ee72158f570cba48cdf5d37d8c20b203b8a6b07d1d70e90cccd88da8c",
       "status": "CURRENT_BASELINE_EVIDENCE_NOT_FINAL_QUALIFICATION"
     },
     {
@@ -85,6 +91,18 @@
       "evidence_class": "IMPLEMENTATION",
       "path": "src/ailora/api/contracts.py",
       "sha256": "6736f60fd38e5e67e361777e2826c307038910b2c36340c11af1bc4368545b7e",
+      "status": "CURRENT_BASELINE_EVIDENCE_NOT_FINAL_QUALIFICATION"
+    },
+    {
+      "evidence_class": "IMPLEMENTATION",
+      "path": "src/ailora/db/tenant_context.py",
+      "sha256": "cfd5e196f18343bfcfc6731f109d3e75b35eba025bc40d50daf0bc4f41db41d3",
+      "status": "CURRENT_BASELINE_EVIDENCE_NOT_FINAL_QUALIFICATION"
+    },
+    {
+      "evidence_class": "DATABASE_MIGRATION",
+      "path": "alembic/versions/0013_postgres_tenant_rls.py",
+      "sha256": "39849628cb6323c3bd0e4ec24cf9de0c4ee94a1febc59b0f64a723400cf2320e",
       "status": "CURRENT_BASELINE_EVIDENCE_NOT_FINAL_QUALIFICATION"
     },
     {
@@ -121,6 +139,12 @@
       "evidence_class": "VERIFICATION",
       "path": "tests/test_api_contracts.py",
       "sha256": "e8ec23460dfe816b2401edfbbb0d2bc1d5e4543fd02dafd33c07392a5e6a8904",
+      "status": "CURRENT_BASELINE_EVIDENCE_NOT_FINAL_QUALIFICATION"
+    },
+    {
+      "evidence_class": "VERIFICATION",
+      "path": "tests/test_postgres_tenant_defense.py",
+      "sha256": "dbab455b2a704ebf08590140ea6ba617305905eac4699c463b8524b51904f56c",
       "status": "CURRENT_BASELINE_EVIDENCE_NOT_FINAL_QUALIFICATION"
     },
     {

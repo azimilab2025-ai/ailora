@@ -54,6 +54,13 @@ class Settings(BaseSettings):
     database_pool_timeout_seconds: float = Field(default=5.0, gt=0, le=60)
     database_pool_recycle_seconds: int = Field(default=1800, ge=30)
     database_probe_timeout_seconds: float = Field(default=3.0, gt=0, le=30)
+    database_statement_timeout_ms: int = Field(default=10_000, ge=100, le=120_000)
+    database_lock_timeout_ms: int = Field(default=2_000, ge=50, le=30_000)
+    database_idle_transaction_timeout_ms: int = Field(
+        default=15_000,
+        ge=1_000,
+        le=120_000,
+    )
 
     secret_key: str = _DEFAULT_SECRET  # noqa: S105
     access_token_expire_minutes: int = Field(default=30, ge=1, le=1440)

@@ -3,6 +3,7 @@
 import asyncio
 from collections.abc import AsyncGenerator
 
+from fastapi import Request
 from sqlalchemy import text
 from sqlalchemy.ext.asyncio import (
     AsyncEngine,
@@ -12,6 +13,11 @@ from sqlalchemy.ext.asyncio import (
 )
 
 from ailora.config import settings
+from ailora.db.tenant_context import (
+    clear_session_context,
+    configure_session_context,
+    context_from_request,
+)
 
 engine: AsyncEngine = create_async_engine(
     settings.database_url,
@@ -51,7 +57,17 @@ async def close_database() -> None:
         await engine.dispose()
 
 
-async def get_db() -> AsyncGenerator[AsyncSession, None]:
-    """Yield a managed session and close it regardless of request outcome."""
+async def get_db(request: Request) -> AsyncGenerator[AsyncSession, None]:
+    """Yield a request-bound session and close it regardless of request outcome."""
     async with AsyncSessionLocal() as session:
-        yield session
+        context = context_from_request(
+            request,
+            statement_timeout_ms=settings.database_statement_timeout_ms,
+            lock_timeout_ms=settings.database_lock_timeout_ms,
+            idle_transaction_timeout_ms=settings.database_idle_transaction_timeout_ms,
+        )
+        configure_session_context(session, context)
+        try:
+            yield session
+        finally:
+            clear_session_context(session)
