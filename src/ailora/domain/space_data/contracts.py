@@ -22,6 +22,7 @@ class SchemaVersion(StrEnum):
 
 class ReferenceFrame(StrEnum):
     GCRF = "GCRF"
+    TEME = "TEME"
 
 
 class DistanceUnit(StrEnum):

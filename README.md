@@ -709,3 +709,18 @@ bounded retry, circuit breaking, qualification enforcement and tenant-scoped app
 ingestion. It remains disabled by default, has no public API route, and performs no startup
 network action. Render activation, provider approval and operational authorization remain
 separate explicit gates.
+
+<!-- COMMAND_03_NATIVE_TEME_BRIDGE -->
+### Native TEME Provider-to-Observation Bridge
+
+AILORA now contains an internal, test-first bridge that parses bounded qualified-provider TLE
+bytes, propagates them through the existing SGP4 service, preserves the native **TEME** frame,
+builds canonical tenant-scoped provenance and routes malformed, mismatched or out-of-domain
+inputs to sanitized quarantine evidence. The bridge has no public API route, performs no frame
+relabeling and remains disconnected from application startup and Render activation.
+
+TEME-to-GCRF conversion is possible only through a separately qualified transformation using
+governed Earth-orientation inputs, including UT1-UTC and polar motion from an approved IERS
+data snapshot, explicit time-scale handling, dependency and license review, deterministic
+offline replay and independent reference-vector verification. Until that Command 04 gate
+passes, GCRF conversion remains fail-closed and no TEME vector is represented as GCRF.

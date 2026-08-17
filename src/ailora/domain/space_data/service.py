@@ -17,6 +17,7 @@ from ailora.domain.space_data.models import (
 from ailora.domain.space_data.repository import SpaceDataRepository
 
 _SECRET = re.compile(r"(?i)(password|secret|token|api[_-]?key|authorization|bearer)\s*[:=]")
+_DIGEST = re.compile(r"^[0-9a-f]{64}$")
 
 
 class IngestionStatus(StrEnum):
@@ -199,6 +200,25 @@ class SpaceDataIngestionService:
             canonical_digest=source.canonical_digest,
         )
 
+    async def quarantine_source_failure(
+        self,
+        *,
+        tenant_id: uuid.UUID,
+        actor_user_id: uuid.UUID,
+        source_digest: str,
+    ) -> IngestionResult:
+        """Persist sanitized evidence when source transformation fails closed."""
+        if not _DIGEST.fullmatch(source_digest):
+            raise ValueError("source_digest must be a lowercase SHA-256 digest")
+        return await self._quarantine(
+            tenant_id=tenant_id,
+            actor_user_id=actor_user_id,
+            digest=source_digest,
+            detail="provider payload could not be transformed into a validated observation",
+            now=datetime.now(tz=UTC),
+            reason_code="SOURCE_TRANSFORMATION_FAILED",
+        )
+
     async def _quarantine(
         self,
         *,
@@ -207,13 +227,14 @@ class SpaceDataIngestionService:
         digest: str,
         detail: str,
         now: datetime,
+        reason_code: str = "SEMANTIC_VALIDATION_FAILED",
     ) -> IngestionResult:
         quarantine = SpaceDataQuarantineRecord(
             id=uuid.uuid4().hex,
             tenant_id=tenant_id,
             actor_user_id=actor_user_id,
             canonical_digest=digest,
-            reason_code="SEMANTIC_VALIDATION_FAILED",
+            reason_code=reason_code,
             reason_detail=detail,
             classification="INTERNAL",
             advisory_only=True,
