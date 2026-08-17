@@ -1,6 +1,7 @@
 """AILORA configuration loaded and validated from environment variables."""
 
 from enum import StrEnum
+from ipaddress import ip_address
 from urllib.parse import urlsplit
 
 from pydantic import Field, field_validator, model_validator
@@ -47,6 +48,12 @@ class Settings(BaseSettings):
     celestrak_base_url: str = "https://celestrak.org"
     celestrak_timeout_seconds: float = Field(default=5.0, ge=0.1, le=30.0)
     celestrak_max_response_bytes: int = Field(default=131_072, ge=1, le=1_048_576)
+
+    runtime_read_only: bool = True
+    security_headers_enabled: bool = True
+    outbound_https_only: bool = True
+    outbound_allowed_hosts: list[str] = []
+    rate_limit_requests_per_minute: int = Field(default=120, ge=1, le=10_000)
 
     database_url: str = "postgresql+psycopg://ailora:ailora@localhost:55432/ailora_db"
     database_pool_size: int = Field(default=5, ge=1, le=50)
@@ -106,6 +113,51 @@ class Settings(BaseSettings):
             raise ValueError("CelesTrak base URL must be canonical https://celestrak.org")
         return candidate
 
+    @field_validator("outbound_allowed_hosts")
+    @classmethod
+    def validate_outbound_allowed_hosts(cls, hosts: list[str]) -> list[str]:
+        """Require explicit external DNS hostnames for application egress."""
+        normalized: list[str] = []
+
+        for host in hosts:
+            candidate = host.strip().lower().rstrip(".")
+
+            if (
+                not candidate
+                or candidate == "*"
+                or candidate == "localhost"
+                or candidate.endswith(".local")
+                or any(token in candidate for token in (":", "/", "@", "[", "]"))
+            ):
+                raise ValueError(
+                    "outbound allowlist entries must be explicit external DNS hostnames"
+                )
+
+            try:
+                ip_address(candidate)
+            except ValueError:
+                pass
+            else:
+                raise ValueError("outbound allowlist entries must not be IP-address literals")
+
+            labels = candidate.split(".")
+            if len(labels) < 2 or any(
+                not label
+                or len(label) > 63
+                or label.startswith("-")
+                or label.endswith("-")
+                or not all(ch.isalnum() or ch == "-" for ch in label)
+                for label in labels
+            ):
+                raise ValueError("outbound allowlist entries must be valid DNS hostnames")
+
+            normalized.append(candidate)
+
+        if len(normalized) != len(set(normalized)):
+            raise ValueError("outbound allowlist entries must not contain duplicates")
+
+        return normalized
+
     @field_validator("allowed_origins")
     @classmethod
     def validate_allowed_origins(cls, origins: list[str]) -> list[str]:
@@ -156,6 +208,24 @@ class Settings(BaseSettings):
 
         if self.debug:
             raise ValueError("debug mode is forbidden in staging and production")
+
+        if not self.runtime_read_only:
+            raise ValueError("production runtime must remain read-only")
+
+        if not self.security_headers_enabled:
+            raise ValueError("production security headers must remain enabled")
+
+        if not self.outbound_https_only:
+            raise ValueError("production outbound transport must remain HTTPS-only")
+
+        if (
+            self.enable_live_space_data_provider
+            and "celestrak.org" not in self.outbound_allowed_hosts
+        ):
+            raise ValueError(
+                "CelesTrak live-provider activation requires "
+                "celestrak.org in the outbound allowlist"
+            )
 
         insecure_origins = [
             origin for origin in self.allowed_origins if not origin.startswith("https://")

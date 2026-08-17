@@ -3,6 +3,8 @@
 # Authoritative source: Prompts 01–15 (CSIP-EO-FMSP)
 # Advisory-only production-grade: no spacecraft command/telecommand/maneuver path.
 ##############################################################################
+# COMMAND_16_EXTERNAL_EDGE_GATE_OPEN: WAF, egress broker, and secret-manager
+# enforcement still require selected-platform evidence before release closure.
 
 services:
   - type: web
@@ -25,6 +27,16 @@ services:
         value: production
       - key: AILORA_DEBUG
         value: "false"
+      - key: AILORA_RUNTIME_READ_ONLY
+        value: "true"
+      - key: AILORA_SECURITY_HEADERS_ENABLED
+        value: "true"
+      - key: AILORA_OUTBOUND_HTTPS_ONLY
+        value: "true"
+      - key: AILORA_OUTBOUND_ALLOWED_HOSTS
+        value: '["celestrak.org"]'
+      - key: AILORA_RATE_LIMIT_REQUESTS_PER_MINUTE
+        value: "120"
       - key: AILORA_ALLOWED_ORIGINS
         value: "[]"
       - key: AILORA_ENABLE_TRACING

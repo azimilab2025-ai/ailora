@@ -43,7 +43,7 @@ WORKDIR /app
 # Create a non-root system user and group for running the application.
 # UID 1001 / GID 1001 — avoids collision with common host user IDs.
 RUN groupadd --gid 1001 ailora && \
-    useradd --uid 1001 --gid ailora --shell /bin/bash --create-home ailora
+    useradd --uid 1001 --gid ailora --shell /usr/sbin/nologin --no-create-home ailora
 
 # Copy the pre-built virtual environment from the builder stage
 COPY --from=builder /opt/venv /opt/venv
@@ -55,8 +55,8 @@ COPY src/ ./src/
 COPY alembic.ini ./alembic.ini
 COPY alembic/ ./alembic/
 
-# Transfer ownership of the application directory to the non-root user
-RUN chown -R ailora:ailora /app
+# Keep the application tree root-owned and non-writable by the runtime identity.
+RUN chown -R root:root /app && chmod -R a-w /app
 
 # Switch to the non-root user — no further root operations
 USER ailora

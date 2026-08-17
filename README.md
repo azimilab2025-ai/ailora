@@ -828,3 +828,20 @@ silent degraded-accuracy fallback remain prohibited. `mako==1.4.1` replaces the 
 artifact. This wiring exposes no spacecraft command, telecommand, uplink or autonomous maneuver
 capability, and all analytical outputs remain advisory-only pending independent operational
 scientific approval.
+
+<!-- ENTERPRISE_COMMAND_16_RUNTIME_EDGE_SECURITY -->
+### Runtime and Edge Security Baseline
+
+Command 16 adds repository-enforced, fail-closed runtime security policy without claiming
+external platform enforcement. Staging and production require read-only runtime policy,
+security-header policy enablement and HTTPS-only outbound policy. Application egress uses an
+explicit DNS-host allowlist; IP literals, localhost, `.local`, URL-shaped, credential-bearing,
+port-bearing and duplicate entries are rejected. Live CelesTrak activation additionally requires
+`celestrak.org` in the explicit allowlist, while a disabled provider does not create unnecessary
+egress authority. The application rate-limit policy is bounded to 1–10,000 requests per minute.
+
+The runtime container identity is non-login and has no home directory. `/app` remains root-owned
+and non-writable to the runtime identity. Render declares the fail-closed policy defaults used by
+the application. Final WAF, egress-broker and secret-manager enforcement remain external
+qualification gates; this repository change does not claim those controls are operationally
+enforced or independently approved.
