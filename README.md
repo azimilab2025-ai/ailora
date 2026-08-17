@@ -161,12 +161,12 @@ The visual sequence presents the system as one continuous mission narrative: **O
 |---|---|---|
 | Health and API composition | Liveness, readiness and versioned FastAPI routers | Deployed surface verified |
 | PostgreSQL persistence and Alembic | Tenant-scoped models through revision `0012_frame_transformations` | HA/PITR qualification remains separate |
-| Identity, sessions and authorization | Tenant membership, roles, access tokens and rotating refresh sessions | Enterprise OIDC/MFA/workload identity remains planned |
+| Identity, sessions and authorization | Tenant membership, OIDC/MFA session policy, asymmetric tokens and tenant-bound workload authorization | Live IdP/OAuth integration and operational qualification remain separate |
 | SSA evidence chain | Scenario → screening → proximity assessment → review → immutable audit evidence | Human-authority-first and advisory-only |
 | Space-data provider chain | Qualified-gate boundary, raw artifacts, quarantine, TLE parsing and CelesTrak transport | Controlled authenticated production E2E is deferred |
 | Astrodynamics foundation | SGP4/TEME, bounded TCA, covariance health and pinned-IERS TEME→GCRF | Independent operational scientific qualification remains required |
 | Durable workflows | Tenant-scoped idempotency, retries, cancellation and deterministic replay | External queue/worker HA remains planned |
-| Engineering assurance | Ruff, strict Mypy, 700 tests, 87.61% coverage, SBOM and package build | Test evidence is not external certification |
+| Engineering assurance | Ruff, strict Mypy, 745 tests, 88.01% coverage, SBOM and package build | Test evidence is not external certification |
 | Deployment foundation | Non-root container contract and live Render service | Multi-instance HA/DR/SLO evidence remains planned |
 
 ### 🔄 Active qualification
@@ -249,6 +249,14 @@ immutable session-assurance policy for nonce binding, token freshness, refresh-f
 detection, absolute/idle expiry, idempotent logout and recent MFA before privileged effects. It is
 offline-qualified and disabled from runtime routing; authorization-code exchange, account linking,
 production IdP configuration and durable session-state integration remain explicit later gates.
+
+The workload-identity foundation verifies short-lived RS256 OAuth client-credentials access tokens
+against an injected key ring and an explicit registration catalog. Workload subject, OAuth client,
+tenant, scope, permission, resource and action must all agree; revocation is rechecked immediately
+before authorization. Human identity claims, wildcard scopes, cross-tenant transitions and any
+spacecraft-command authority are rejected. This provider-neutral policy is not a live token endpoint,
+does not store a client secret and remains disabled from runtime routing until tenant credentials,
+durable registration state and controlled production qualification are approved.
 
 The AILORA platform is structured as layered vertical concerns, each with defined
 interfaces, data standards, and governance contracts.
