@@ -8,7 +8,7 @@
 
 <p align="center"><a href="https://ailora-web.onrender.com/health/live">Live Service</a> • <a href="https://ailora-web.onrender.com/docs">Interactive API</a> • <a href="#architecture">Architecture</a> • <a href="#bob-engineering-agent">Bob Agent</a> • <a href="#safety--scientific-integrity">Safety</a></p>
 
-> **Live production-grade:** the Render service is operational. Analytical outputs remain advisory-only. NASA live data is **NOT ACTIVATED**. The Oya voice service is **PLANNED**, **NOT CURRENTLY IMPLEMENTED**, and **DISABLED**.
+> **Production candidate — active qualification:** the Render service is live and the verified software baseline is operational. Analytical outputs remain advisory-only. NASA live data is **NOT ACTIVATED**. Oya remains a planned, disconnected integration.
 
 <!-- AILORA_CINEMATIC_EXPERIENCE_END -->
 
@@ -21,7 +21,7 @@
 
 ![Python](https://img.shields.io/badge/Python-3.11%2B-3776ab?style=flat-square&logo=python&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.115%2B-009688?style=flat-square&logo=fastapi&logoColor=white)
-![Status](https://img.shields.io/badge/Status-Pre--Alpha%20%7C%20Phase%200-6c757d?style=flat-square)
+![Status](https://img.shields.io/badge/Status-Production%20Candidate%20%7C%20Active%20Qualification-355c9a?style=flat-square)
 ![License](https://img.shields.io/badge/License-Proprietary%20%7C%20Azimi%20Innovation%20Lab-7c5cd8?style=flat-square)
 ![Advisory Only](https://img.shields.io/badge/AI%20Outputs-Advisory%20Only-e05d44?style=flat-square)
 
@@ -54,7 +54,7 @@ Physics-First and AI-Advisory-Only principles.
 >
 > A reproducible demo scenario demonstrating end-to-end conjunction risk assessment
 > and advisory recommendation will be published here upon completion of the
-> Verified Space Vertical Slice (PHASE_3).
+> controlled authenticated production E2E and its release evidence are approved.
 
 ---
 
@@ -74,7 +74,7 @@ This telemetry strip is a compact view of verified repository and deployed-surfa
 | **API surface** | 20 OpenAPI paths / 27 operations |
 | **Automated verification** | 700 tests passing |
 | **Statement coverage** | 87.61% against an enforced 85% floor |
-| **Deployment model** | Render-hosted terrestrial production-grade |
+| **Deployment model** | Live Render service; enterprise qualification in progress |
 | **CelesTrak provider chain** | **API DEPLOYED** — controlled production E2E deferred |
 | **NASA integration** | **NOT ACTIVE** — no NASA runtime provider is connected |
 | **Oya voice service** | **DISABLED** — no-op, network-free and non-billable |
@@ -155,54 +155,55 @@ The visual sequence presents the system as one continuous mission narrative: **O
 
 ## Capabilities
 
-### ✅ Implemented
+### ✅ Implemented and verified within declared scope
 
-| Capability | Description | Tests | Status |
-|---|---|---|---|
-| Health endpoints | `/health/live` and `/health/ready` liveness and readiness probes | `test_health.py` | Verified |
-| FastAPI application scaffold | Full ASGI application with structured routing | `test_health.py` | Verified |
-| Configuration management | Pydantic-settings environment-based config | — | Verified |
-| Engineering baseline | `pyproject.toml`, ruff, mypy, pytest, uv toolchain | — | Verified |
-| README documentation contract | Flagship README with 35 contract tests | `test_readme.py` | Verified |
-| Docker containerisation | Multi-stage Dockerfile and docker-compose scaffold | `test_docker_contracts.py` | Verified |
-| Verification baseline | `docs/verification.md` quality-gate evidence skeleton | — | Verified |
-
-### 🔄 In Progress
-
-*No capabilities currently in progress — PHASE_0 complete.*
-
-### 📋 Planned
-
-| Capability | Description | Phase |
+| Capability | Current evidence | Boundary |
 |---|---|---|
-| Database connection + Alembic migrations | PostgreSQL integration | PHASE_1 |
-| Identity, membership, tenancy | JWT auth, tenant-scoped access, isolation tests | PHASE_2 |
-| Conjunction risk assessment (Advisory) | T0/PHY-C1/C2 screening | PHASE_3 |
-| TLE / state vector parsing | Synthetic orbital data ingestion | PHASE_3 |
+| Health and API composition | Liveness, readiness and versioned FastAPI routers | Deployed surface verified |
+| PostgreSQL persistence and Alembic | Tenant-scoped models through revision `0012_frame_transformations` | HA/PITR qualification remains separate |
+| Identity, sessions and authorization | Tenant membership, roles, access tokens and rotating refresh sessions | Enterprise OIDC/MFA/workload identity remains planned |
+| SSA evidence chain | Scenario → screening → proximity assessment → review → immutable audit evidence | Human-authority-first and advisory-only |
+| Space-data provider chain | Qualified-gate boundary, raw artifacts, quarantine, TLE parsing and CelesTrak transport | Controlled authenticated production E2E is deferred |
+| Astrodynamics foundation | SGP4/TEME, bounded TCA, covariance health and pinned-IERS TEME→GCRF | Independent operational scientific qualification remains required |
+| Durable workflows | Tenant-scoped idempotency, retries, cancellation and deterministic replay | External queue/worker HA remains planned |
+| Engineering assurance | Ruff, strict Mypy, 700 tests, 87.61% coverage, SBOM and package build | Test evidence is not external certification |
+| Deployment foundation | Non-root container contract and live Render service | Multi-instance HA/DR/SLO evidence remains planned |
 
-> C-10 adds advisory SGP4 propagation with native TEME outputs. The production pipeline now
+### 🔄 Active qualification
+
+- Enterprise identity, workload authorization and database-enforced tenant isolation.
+- Scientific configuration management, independent reference execution and covariance propagation.
+- Provider/data qualification, collision-probability science and operational evidence.
+- Supply-chain signing, measured SLO/DR, shadow operation and independent assurance.
+
+### 📋 Next qualified capabilities
+
+The implementation roadmap is evidence-driven. Existing components are extended rather than
+rebuilt, and each release-specific claim requires implementation, verification, immutable
+evidence, qualified review and accepted residual risk.
+
+> The current `risk_level` compatibility field is a **distance-based proximity severity** from
+> T0/PHY-C1 screening. **Proximity severity ≠ collision probability ≠ operational decision.**
+> A future `ConjunctionRiskAssessmentV2` will introduce qualified covariance, HBR and Pc semantics
+> without relabeling the current distance thresholds as collision risk.
+>
+> C-10 provides advisory SGP4 propagation with native TEME outputs. The production pipeline
 > performs the separately evidenced TEME-to-GCRF transform; independent operational scientific
-> approval remains an explicit gate.
+> approval remains a separate gate.
 >
-> C-11 adds bounded advisory TCA search, explicit TEME covariance health contracts, and
-> conservative uncertainty labels. It does not compute collision probability, transform frames
-> or covariance, recommend maneuvers, or claim independent scientific approval.
+> C-11 provides bounded TCA search and explicit TEME covariance-health contracts. It does not
+> compute collision probability, propagate covariance or recommend maneuvers.
 >
-> C-12 adds a fail-closed differential-verification contract for provenance-bound independent
-> references and explicit conflict states. It does not self-issue scientific approval or install
-> a second engine; qualified independent review remains an external gate.
-| Explainable advisory recommendations | Human-readable risk output with provenance | PHASE_3 |
-| OpenTelemetry observability | Structured logging and tracing | PHASE_1 |
-| GitHub Actions CI | Lint, type-check, test on every push | PHASE_1 |
+> C-12 provides a fail-closed differential-verification contract. It does not install a second
+> engine or self-issue scientific approval.
 
-### 🔴 Blocked
+### External qualification gates
 
-| Capability | Reason | Resolution |
+| Area | Current condition | Required evidence |
 |---|---|---|
-| Normative conjunction-risk algorithms | Prompt 06 `DOMAIN_REVIEW_REQUIRED` — independent qualified Astrodynamics review required | See [Safety & Scientific Integrity](#safety--scientific-integrity) |
-| Real TLE data integration (NASA/CelesTrak) | Dependency on data access agreements | Future roadmap item with acceptance criteria |
-
-> C-09 provides a disabled-by-default, transport-injected provider boundary. Live access remains unqualified and blocked pending source-specific legal/data-governance evidence.
+| Scientific operation | Advisory implementation exists | Independent engine, corpus, reviewer and accepted validity domain |
+| Provider operation | Transport and governance boundary exist | Legal/technical qualification plus controlled tenant E2E |
+| Enterprise release | Live software candidate exists | HA/DR/SLO, pentest, shadow pilot and human release decision |
 
 ---
 
@@ -549,7 +550,7 @@ Bob improves the system that builds AILORA; Bob does not become an unbounded age
 
 <p align="center"><img src="docs/assets/ailora-technology-rocket.svg" alt="Animated technology rocket traveling from the terrestrial baseline toward an outer digital world" width="100%" /></p>
 
-This animated technology trajectory represents modular growth from the verified terrestrial production-grade toward future capability. It is a visual roadmap only: no on-orbit runtime, autonomous maneuver or spacecraft command capability is claimed. NASA live data remains NOT ACTIVATED. Oya remains PLANNED, NOT CURRENTLY IMPLEMENTED, and DISABLED.
+This animated technology trajectory represents modular growth from the verified terrestrial production-candidate baseline toward future capability. It is a visual roadmap only: no on-orbit runtime, autonomous maneuver or spacecraft command capability is claimed. NASA live data remains NOT ACTIVATED. Oya remains PLANNED, NOT CURRENTLY IMPLEMENTED, and DISABLED.
 
 ---
 
@@ -561,16 +562,16 @@ The trajectory communicates verified direction without inventing delivery dates.
 
 <!-- AILORA_FINAL_VISUAL_REDESIGN_BEGIN -->
 
-## Live Production-Grade Boundaries
+## Live Deployment and Qualification Boundaries
 
-The public Render endpoint demonstrates deployment health and API availability; it does not convert production-grade evidence into production, scientific, legal or operational approval.
+The public Render endpoint demonstrates deployment health and API availability; release-specific scientific, legal, security and operational qualification requires separate evidence.
 
 - **NASA live data:** **NOT ACTIVATED**. Provider qualification, licensing, provenance and scientific approval remain mandatory gates.
 - **Oya voice service:** **DISABLED**. The current adapter is no-op, network-free and non-billable.
 - **Human authority:** **REQUIRED** for review and release decisions.
 - **Scientific authority:** independent competent review remains external.
 - **Operational authority:** no spacecraft command, uplink or autonomous maneuver path exists.
-- **Production status:** live production-grade deployment does not equal unrestricted production authorization.
+- **Production status:** live production candidate under active release qualification.
 
 ---
 
@@ -612,14 +613,14 @@ The public Render endpoint demonstrates deployment health and API availability; 
 |---|---|---|
 | Repository (local) | `/Users/amin/Documents/bob-space-project-intake-2026` | Active |
 | Remote Repository | [GitHub — azimilab2025-ai/ailora](https://github.com/azimilab2025-ai/ailora) | Active |
-| CI/CD Pipeline | To be configured (GitHub Actions — PHASE_1) | **[placeholder]** |
-| Deployed API | [https://ailora-web.onrender.com](https://ailora-web.onrender.com) | Live production-grade |
-| API Documentation (`/docs`) | [Live Swagger UI](https://ailora-web.onrender.com/docs) | Live production-grade |
-| API Documentation (`/redoc`) | [Live ReDoc](https://ailora-web.onrender.com/redoc) | Live production-grade |
+| CI/CD Pipeline | [GitHub Actions](https://github.com/azimilab2025-ai/ailora/actions) | Active quality gates |
+| Deployed API | [https://ailora-web.onrender.com](https://ailora-web.onrender.com) | Live deployment |
+| API Documentation (`/docs`) | [Live Swagger UI](https://ailora-web.onrender.com/docs) | Live deployment |
+| API Documentation (`/redoc`) | [Live ReDoc](https://ailora-web.onrender.com/redoc) | Live deployment |
 | Container Image (local) | `ailora:dev` (built via `docker build . -t ailora:dev`) | Local only |
 | Container Registry | To be provided by Amin Azimi | **[placeholder]** |
-| Project Website | [AILORA live production-grade](https://ailora-web.onrender.com) | Live production-grade |
-| Demo Environment | [Render deployment](https://ailora-web.onrender.com) | Live production-grade |
+| Project Website | [AILORA live service](https://ailora-web.onrender.com) | Live deployment |
+| Demo Environment | [Render deployment](https://ailora-web.onrender.com) | Live deployment |
 
 ---
 
@@ -669,16 +670,22 @@ Until every gate passes, Oya remains **PLANNED / NOT CURRENTLY IMPLEMENTED / DIS
 
 Official sources: [Oya repository](https://github.com/OyaAIProd/oya) • [documentation directory](https://github.com/OyaAIProd/oya/tree/main/docs) • [benchmark methodology](https://github.com/OyaAIProd/oya/tree/main/benchmarks) • [MIT license](https://github.com/OyaAIProd/oya/blob/main/LICENSE)
 
-## Command 19 Release-Candidate Evidence
+## Current Qualification Baseline
 
-The verified baseline entering Command 19 contains **624 tests** passing with **87.77%** statement coverage against an enforced 85% floor. Command 19 adds local-only continuity, privacy, legal-inventory, staging-smoke and rollback qualification; its final count is reported by the command output and checkpoint.
+The current verified repository baseline contains **700 tests passing**, **87.61%** statement
+coverage against an enforced 85% floor, **20 OpenAPI paths / 27 operations**, and one Alembic
+head through revision `0012_frame_transformations`. The Render service is live; controlled
+authenticated provider E2E remains a required deferred qualification exercise.
 
-- Live NASA data: not activated; provider qualification, licensing and scientific approval remain external gates.
-- Oya: disabled, no-op, non-billable and network-free; production activation remains an explicit external gate.
-- Backup/restore: isolated SQLite qualification only; no production RPO/RTO, retention, encryption or recoverability claim.
-- Release candidate: not production-ready and not deployed. All analytical outputs remain advisory-only; spacecraft command paths remain prohibited.
+- NASA runtime integration is not active; CelesTrak is the directly integrated GP source.
+- Oya remains disconnected and non-billable pending any separately authorized evaluation.
+- Backup/restore evidence currently proves an isolated local contract, not production RPO/RTO.
+- Proximity severity is distance-based and must never be represented as collision probability.
+- All analytical outputs remain advisory-only; spacecraft command paths remain prohibited.
 
-See `docs/runbooks/backup-restore.md`, `docs/runbooks/disaster-recovery.md`, `docs/runbooks/deployment-rollback.md`, `docs/governance/privacy-data-residency.md`, and `docs/governance/third-party-inventory.md`.
+See `docs/runbooks/backup-restore.md`, `docs/runbooks/disaster-recovery.md`,
+`docs/runbooks/deployment-rollback.md`, `docs/governance/privacy-data-residency.md`, and
+`docs/governance/third-party-inventory.md`.
 
 ## Author
 

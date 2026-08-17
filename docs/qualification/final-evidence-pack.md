@@ -1,24 +1,30 @@
-# AILORA final evidence pack
+# AILORA enterprise qualification baseline
 
-Artifact: `AILORA-C20-FINAL-EVIDENCE-PACK`
-Version: `1.0.0-local-production-grade`
-Source commit: `a54ed30453e09253a12b5cd88e045c837214c5d2`
-Decision: `CONDITIONAL_LOCAL_Production-Grade_PASS_PRODUCTION_BLOCKED`
+Artifact: `AILORA-ENTERPRISE-QUALIFICATION-BASELINE`
+Version: `2.0.0-production-candidate`
+Baseline source commit: `594324c35ad587207b3515d7e2a9cd34b74f0fcc`
+Decision: `PRODUCTION_CANDIDATE_ACTIVE_QUALIFICATION`
 
-## Verified local scope
+## Verified engineering scope
 
-The immutable baseline contains 633 passing tests, 87.77% statement coverage against an enforced 85% floor, 18 OpenAPI paths, one Alembic head through revision `0011_durable_workflows`, reproducible wheel/sdist evidence, SBOM policy, tenant isolation, advisory-only astrodynamics, durable workflows, disabled Oya safety, local backup/restore qualification, and local staging smoke evidence.
+The current baseline contains 700 passing tests, 87.61% statement coverage against an enforced
+85% floor, 20 OpenAPI paths / 27 operations, and one Alembic head through revision
+`0012_frame_transformations`. It includes tenant-scoped identity and SSA evidence, bounded
+astrodynamics, governed CelesTrak transport, persisted TEME-to-GCRF provenance, durable database
+workflows, SBOM/build controls and a live Render service.
 
-The machine-readable source of this statement is `docs/qualification/final-release-manifest.json`. It binds every pre-C20 checkpoint and qualification document to a SHA-256 digest. A passing local gate proves only the stated local production-grade contract.
+The machine-readable source is `docs/qualification/final-release-manifest.json`. Historical
+evidence remains digest-bound. This baseline identifies implemented software; it does not
+self-issue scientific, legal, security, HA, DR or operational approval.
 
 ## Mandatory boundaries
 
-- `PRODUCTION_RELEASE=BLOCKED`
+- `PRODUCTION_RELEASE=BLOCKED_PENDING_P0_GATES`
+- `CONTROLLED_PROVIDER_E2E=DEFERRED_REQUIRED_BEFORE_FINAL_RELEASE`
+- `PROXIMITY_SEVERITY_IS_NOT_COLLISION_PROBABILITY`
 - `DOMAIN_REVIEW_REQUIRED`
 - `LEGAL_REVIEW_REQUIRED`
 - `LIVE_NASA_DATA=NOT_ACTIVATED`
 - `OYA_STATUS=DISABLED`
 - `HUMAN_RELEASE_AUTHORITY=MANDATORY`
-- Spacecraft command, telecommand, uplink and autonomous maneuver paths remain permanently prohibited.
-
-No production readiness, scientific approval, legal compliance, live-provider qualification, paid capacity, production signing, penetration-test completion, operational RPO/RTO, production SLO, or deployment claim is made.
+- Spacecraft command, telecommand, uplink and autonomous maneuver paths remain prohibited.

@@ -12,10 +12,13 @@ def test_external_gates_remain_open_and_owned() -> None:
     gates = _manifest()["external_gates"]
     assert {gate["id"] for gate in gates} == {
         "DATA-001",
+        "E2E-001",
+        "HA-001",
         "LEGAL-001",
         "OPS-001",
         "OYA-001",
         "SCI-001",
+        "SHADOW-001",
     }
     assert all(gate["status"] == "OPEN_EXTERNAL_GATE" for gate in gates)
     assert all(gate["owner"] and gate["closure_evidence"] for gate in gates)
@@ -23,7 +26,9 @@ def test_external_gates_remain_open_and_owned() -> None:
 
 def test_fail_closed_decision_rejects_overclaims() -> None:
     decision = _manifest()["decision"]
-    assert decision["final_status"] == "CONDITIONAL_LOCAL_Production-Grade_PASS_PRODUCTION_BLOCKED"
+    assert decision["final_status"] == "PRODUCTION_CANDIDATE_ACTIVE_QUALIFICATION"
+    assert decision["controlled_provider_e2e_passed"] is False
+    assert decision["no_spacecraft_command_surface"] is True
     assert decision["production_ready_claim_allowed"] is False
     assert decision["scientific_approval_claim_allowed"] is False
     assert decision["legal_compliance_claim_allowed"] is False

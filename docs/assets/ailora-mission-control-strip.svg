@@ -52,7 +52,7 @@
   </g>
   <path d="M44 96H1396" stroke="url(#mission-line)" stroke-width="2" opacity=".75"/>
   <circle cx="50" cy="42" r="5" fill="#73f4b2" filter="url(#mission-glow)"/>
-  <text class="eyebrow" x="68" y="47">VERIFIED TELEMETRY · SOURCE COMMIT 52A8071</text>
+  <text class="eyebrow" x="68" y="47">VERIFIED TELEMETRY · BASELINE 594324C</text>
   <text class="title" x="50" y="79">MISSION CONTROL SNAPSHOT</text>
   <text class="eyebrow" x="1390" y="61" text-anchor="end">ADVISORY DECISION SUPPORT</text>
 

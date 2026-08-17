@@ -58,21 +58,15 @@ states are never equivalent to pass.
 
 ## Current verified baseline
 
-The following facts were reproduced by Command 01:
+The original twenty-command matrix is retained as historical traceability. The current
+reconciled baseline is branch `main` at commit `594324c35ad587207b3515d7e2a9cd34b74f0fcc` with a clean worktree, 700 passing
+tests, 87.61% statement coverage, 20 OpenAPI paths / 27 operations, Alembic head
+`0012_frame_transformations`, and deployed provider-to-GCRF API composition. Design documents
+remain design evidence only; they are not implementation or qualification proof.
 
-- Branch `main` at commit
-  `159a8c698943b54c61a29955305ad02661ba0f62`.
-- Clean working tree.
-- 376 tests passed with 97 percent statement coverage.
-- Ruff format, Ruff lint, strict Mypy, package build, dependency audit,
-  Alembic graph and Docker Compose configuration passed.
-- No known dependency vulnerability was reported.
-- OpenAPI exposes only `/health/live` and `/health/ready`.
-- No operational non-health vertical slice exists.
-- `cov-fail-under=0` remains configured.
-- Configuration environment is currently typed as `str`.
-- A proprietary license declaration exists in `pyproject.toml`.
-- No tracked `LICENSE`, `NOTICE`, `LICENCE`, or `COPYING` file exists.
+The next enterprise program extends existing implementation without rebuilding verified
+capabilities. Controlled production E2E, independent scientific/security review, provider/legal
+qualification, HA/DR/SLO proof and shadow operation remain release-specific gates.
 
 ## Permanent exclusions
 

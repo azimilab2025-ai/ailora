@@ -13,14 +13,19 @@ def _manifest() -> dict[str, object]:
 def test_final_manifest_identity_metrics_and_scope() -> None:
     manifest = _manifest()
     assert manifest["schema_version"] == 1
-    assert manifest["artifact_id"] == "AILORA-C20-FINAL-EVIDENCE-MANIFEST"
-    assert manifest["source_commit"] == "a54ed30453e09253a12b5cd88e045c837214c5d2"
-    assert manifest["decision"]["verified_scope"] == "LOCAL_Production-Grade"
-    assert manifest["decision"]["production_release"] == "BLOCKED"
+    assert manifest["artifact_id"] == "AILORA-ENTERPRISE-QUALIFICATION-BASELINE"
+    assert manifest["source_commit"] == "594324c35ad587207b3515d7e2a9cd34b74f0fcc"
+    assert manifest["decision"]["verified_scope"] == "ENGINEERING_PRODUCTION_CANDIDATE"
+    assert manifest["decision"]["production_release"] == "BLOCKED_PENDING_P0_GATES"
+    assert manifest["decision"]["risk_semantics"] == (
+        "DISTANCE_BASED_PROXIMITY_SEVERITY_NOT_COLLISION_PROBABILITY"
+    )
     assert manifest["metrics"] == {
-        "coverage_percent": 87.77,
-        "openapi_path_count": 18,
-        "test_count": 633,
+        "alembic_head": "0012_frame_transformations",
+        "coverage_percent": 87.61,
+        "openapi_operation_count": 27,
+        "openapi_path_count": 20,
+        "test_count": 700,
     }
 
 
