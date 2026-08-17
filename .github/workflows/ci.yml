@@ -12,7 +12,7 @@ permissions:
 
 jobs:
   quality:
-    name: Lint · Type-check · Test · Build · SBOM
+    name: Lint · Type-check · Test · Build · Complete locked SBOM
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
@@ -38,7 +38,7 @@ jobs:
         run: uv run mypy src/
       - name: Full tests and measured coverage floor
         run: uv run pytest tests/ -v
-      - name: Generate deterministic direct-dependency SBOM
+      - name: Generate deterministic complete-lock CycloneDX SBOM
         run: uv run python scripts/generate_sbom.py --output ailora.cdx.json
       - name: Build wheel and source distribution
         run: uv build

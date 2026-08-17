@@ -166,9 +166,10 @@ The visual sequence presents the system as one continuous mission narrative: **O
 | Space-data provider chain | Qualified-gate boundary, raw artifacts, quarantine, TLE parsing and CelesTrak transport | Controlled authenticated production E2E is deferred |
 | Astrodynamics foundation | SGP4/TEME, bounded TCA, covariance health and pinned-IERS TEME→GCRF | Independent operational scientific qualification remains required |
 | Scientific reproducibility | Content-addressed algorithm, dataset, configuration, runtime and tolerance registry with deterministic execution manifests and fail-closed drift comparison | Runtime-path adoption, independent configuration review and operational scientific acceptance remain separate |
+| Supply-chain admission | Complete locked-dependency CycloneDX inventory plus signed, digest-bound SAST/SCA/container/history, VEX and SLSA-provenance verification | Scanner execution, protected signing identity, immutable registry and deployment admission remain external |
 | Durable workflows | Tenant-scoped idempotency, retries, cancellation and deterministic replay | External queue/worker HA remains planned |
 | Recovery qualification | Digest-bound isolated-drill evidence with observed RPO, validated-serving RTO and reconciliation RCO | Managed PITR, production topology, objectives and drill evidence remain external |
-| Engineering assurance | Ruff, strict Mypy, 941 tests, 88.72% coverage, SBOM and package build | Test evidence is not external certification |
+| Engineering assurance | Ruff, strict Mypy, 984 tests, 88.77% coverage, complete-lock SBOM and package build | Test evidence is not external certification |
 | Deployment foundation | Non-root container contract and live Render service | Multi-instance HA/DR/SLO evidence remains planned |
 
 ### 🔄 Active qualification
@@ -176,7 +177,8 @@ The visual sequence presents the system as one continuous mission narrative: **O
 - Enterprise identity, workload authorization and database-enforced tenant isolation.
 - Scientific manifest adoption, independent configuration review, reference execution and covariance propagation.
 - Provider/data qualification, collision-probability science and operational evidence.
-- Supply-chain signing, measured SLO/DR, shadow operation and independent assurance.
+- Protected supply-chain signing, scanner execution, immutable registry enforcement, measured
+  SLO/DR, shadow operation and independent assurance.
 
 ### 📋 Next qualified capabilities
 
@@ -702,8 +704,8 @@ Official sources: [Oya repository](https://github.com/OyaAIProd/oya) • [docume
 
 ## Current Qualification Baseline
 
-The current verified repository baseline contains **941 tests passing**, **88.72%** statement
-coverage against an enforced 85% floor, **20 OpenAPI paths / 27 operations**, and one Alembic
+The current verified repository baseline contains **984 tests passing**, **88.77%** statement
+coverage against the enforced 85% floor, **20 OpenAPI paths / 27 operations**, and one Alembic
 head through revision `0014_audit_integrity`. The Render service is live; controlled
 authenticated provider E2E remains a required deferred qualification exercise.
 
@@ -713,6 +715,9 @@ authenticated provider E2E remains a required deferred qualification exercise.
   objectives and production recovery qualification remain open.
 - Scientific execution manifests are deterministic and reject registry, runtime, tolerance, seed
   and source drift; they remain local evidence and cannot self-authorize scientific operation.
+- Supply-chain evidence admission rejects mutable artifact references, rebuilds, missing or failed
+  scan classes, unresolved VEX, untrusted builders or keys, signature tampering and expired evidence;
+  it verifies evidence only and cannot authorize deployment.
 - Proximity severity is distance-based and must never be represented as collision probability.
 - All analytical outputs remain advisory-only; spacecraft command paths remain prohibited.
 

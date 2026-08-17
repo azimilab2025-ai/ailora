@@ -236,18 +236,22 @@
       "implementation_refs": [
         ".github/workflows/ci.yml",
         "Dockerfile",
+        "scripts/generate_sbom.py",
+        "src/ailora/security/supply_chain.py",
         "uv.lock"
       ],
       "owner": "DevSecOps",
       "release_gates": [
         "G01_SOURCE_BUILD_SUPPLY_CHAIN"
       ],
-      "remaining_scope": "Add SAST SCA container and history scans complete SBOM VEX signing SLSA and digest admission.",
-      "status": "PARTIAL",
+      "remaining_scope": "Execute independently governed SAST, SCA, container and history scanners against built artifacts; provision a protected signing identity; publish signed SBOM, VEX and SLSA provenance in an immutable registry; enforce digest admission at deployment; and complete independent review.",
+      "status": "VERIFIED_BASELINE",
       "title": "Supply-chain scans SBOM signing provenance and immutable promotion",
       "verification_refs": [
         "tests/test_ci_baseline.py",
-        "tests/test_artifact_sbom.py"
+        "tests/test_artifact_sbom.py",
+        "tests/test_supply_chain_admission.py",
+        "tests/test_supply_chain_policy.py"
       ]
     },
     {

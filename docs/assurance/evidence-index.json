@@ -82,9 +82,15 @@
       "status": "CURRENT_BASELINE_EVIDENCE_NOT_FINAL_QUALIFICATION"
     },
     {
+      "evidence_class": "COMMAND_CHECKPOINT",
+      "path": "docs/checkpoints/master-program-command-15-supply-chain-admission.md",
+      "sha256": "761e3bf137de486b2d72ebe8355d7fb04154cee6ad6bc91ce6727384e250c075",
+      "status": "CURRENT_BASELINE_EVIDENCE_NOT_FINAL_QUALIFICATION"
+    },
+    {
       "evidence_class": "REQUIREMENTS",
       "path": "docs/governance/enterprise-requirements-traceability.json",
-      "sha256": "ac7b607ad948b7ee9310fd4a71241c16a2856a0dfb504fafea46e51ff1b44268",
+      "sha256": "4b4c97274ac7c10ab1c1bc48806bdfc30c383da1e4f5b25575f6ffbebf47c473",
       "status": "CURRENT_BASELINE_EVIDENCE_NOT_FINAL_QUALIFICATION"
     },
     {
@@ -139,6 +145,24 @@
       "evidence_class": "IMPLEMENTATION",
       "path": "src/ailora/recovery/qualification.py",
       "sha256": "d9186c789d5657d40ccb4d7d24b0fae0594a81efea0b7f3af37170a169253d00",
+      "status": "CURRENT_BASELINE_EVIDENCE_NOT_FINAL_QUALIFICATION"
+    },
+    {
+      "evidence_class": "CI_POLICY",
+      "path": ".github/workflows/ci.yml",
+      "sha256": "3385379dd477aa1df385e25e0fba83892b109387f75324b8560f7e842dec96da",
+      "status": "CURRENT_BASELINE_EVIDENCE_NOT_FINAL_QUALIFICATION"
+    },
+    {
+      "evidence_class": "IMPLEMENTATION",
+      "path": "scripts/generate_sbom.py",
+      "sha256": "40ae140ddff41986b6041cdaeb6d63e4d304fb2b9d960368a214f3b9947b1dfd",
+      "status": "CURRENT_BASELINE_EVIDENCE_NOT_FINAL_QUALIFICATION"
+    },
+    {
+      "evidence_class": "IMPLEMENTATION",
+      "path": "src/ailora/security/supply_chain.py",
+      "sha256": "b7b0c42d2b8a2fe0f3c001531d6806491e1472fc00838d4454ea0953bdc5f793",
       "status": "CURRENT_BASELINE_EVIDENCE_NOT_FINAL_QUALIFICATION"
     },
     {
@@ -217,6 +241,12 @@
       "evidence_class": "VERIFICATION",
       "path": "tests/test_scientific_reproducibility.py",
       "sha256": "5c2c9b9280bc92d975758a2d594c56f03d8ac8358dc0d2ff22e81367572d58af",
+      "status": "CURRENT_BASELINE_EVIDENCE_NOT_FINAL_QUALIFICATION"
+    },
+    {
+      "evidence_class": "VERIFICATION",
+      "path": "tests/test_supply_chain_admission.py",
+      "sha256": "120ec66568876c63e32133ff21cb86ef814207957c05ed909c50bb03e7ae3b60",
       "status": "CURRENT_BASELINE_EVIDENCE_NOT_FINAL_QUALIFICATION"
     },
     {
