@@ -130,6 +130,7 @@
       "id": "ENT-004",
       "implementation_refs": [
         "src/ailora/security/authorization.py",
+        "src/ailora/security/contextual_authorization.py",
         "src/ailora/security/workload_identity.py",
         "src/ailora/domain/identity/management.py"
       ],
@@ -138,11 +139,12 @@
         "G02_SECURITY_IDENTITY",
         "G08_API_PRODUCT_BOUNDARIES"
       ],
-      "remaining_scope": "Integrate a live OAuth token endpoint or approved external authorization server, protected client authentication, durable registration and revocation state, runtime route enforcement, contextual human authorization and controlled tenant E2E qualification.",
+      "remaining_scope": "Integrate an approved authorization server, protected client authentication, durable registration/policy/revocation state, middleware and repository enforcement, policy administration, production monitoring and controlled tenant E2E qualification.",
       "status": "PARTIAL",
       "title": "Tenant-bound workload identity and contextual authorization",
       "verification_refs": [
         "tests/test_authorization_isolation.py",
+        "tests/test_contextual_authorization.py",
         "tests/test_tenant_identity_management.py",
         "tests/test_workload_identity.py"
       ]

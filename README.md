@@ -166,7 +166,7 @@ The visual sequence presents the system as one continuous mission narrative: **O
 | Space-data provider chain | Qualified-gate boundary, raw artifacts, quarantine, TLE parsing and CelesTrak transport | Controlled authenticated production E2E is deferred |
 | Astrodynamics foundation | SGP4/TEME, bounded TCA, covariance health and pinned-IERS TEME→GCRF | Independent operational scientific qualification remains required |
 | Durable workflows | Tenant-scoped idempotency, retries, cancellation and deterministic replay | External queue/worker HA remains planned |
-| Engineering assurance | Ruff, strict Mypy, 745 tests, 88.01% coverage, SBOM and package build | Test evidence is not external certification |
+| Engineering assurance | Ruff, strict Mypy, 776 tests, 88.25% coverage, SBOM and package build | Test evidence is not external certification |
 | Deployment foundation | Non-root container contract and live Render service | Multi-instance HA/DR/SLO evidence remains planned |
 
 ### 🔄 Active qualification
@@ -257,6 +257,14 @@ before authorization. Human identity claims, wildcard scopes, cross-tenant trans
 spacecraft-command authority are rejected. This provider-neutral policy is not a live token endpoint,
 does not store a client secret and remains disabled from runtime routing until tenant credentials,
 durable registration state and controlled production qualification are approved.
+
+Contextual authorization now adds a closed permission-to-resource/action catalog, trusted membership
+tenant reconciliation, principal and actor-class separation, purpose limitation, classification and
+object ceilings, policy-version fencing, current identity/session/credential checks and recent MFA
+for privileged human effects. Ambient delegation, stale grants, lateral resource access and workload
+use of human-only privileges fail closed. The policy remains an offline foundation: middleware and
+repository enforcement, durable policy state and controlled production tenant evidence are not yet
+activated or qualified.
 
 The AILORA platform is structured as layered vertical concerns, each with defined
 interfaces, data standards, and governance contracts.
