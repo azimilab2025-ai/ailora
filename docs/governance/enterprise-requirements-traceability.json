@@ -180,19 +180,24 @@
       "implementation_refs": [
         "src/ailora/db/session.py",
         "src/ailora/db/tenant_context.py",
-        "alembic/versions/0013_postgres_tenant_rls.py"
+        "alembic/versions/0013_postgres_tenant_rls.py",
+        "src/ailora/domain/ssa/audit_integrity.py",
+        "src/ailora/domain/ssa/audit_models.py",
+        "src/ailora/domain/ssa/audit_repository.py",
+        "alembic/versions/0014_audit_integrity.py"
       ],
       "owner": "Database Engineering",
       "release_gates": [
         "G05_DATABASE_EVIDENCE"
       ],
-      "remaining_scope": "Complete append-only tamper-evident audit controls, expand-migrate-contract rehearsal, pre-provisioned role validation, controlled PostgreSQL migration and rollback, and production acceptance.",
-      "status": "PARTIAL",
+      "remaining_scope": "Execute a controlled production-like PostgreSQL upgrade, rollback and concurrency rehearsal with pre-provisioned pgcrypto and roles; validate RLS, trigger and owner behavior, then receive production acceptance.",
+      "status": "VERIFIED_BASELINE",
       "title": "PostgreSQL tenant defense audit immutability and safe migrations",
       "verification_refs": [
         "tests/test_db_baseline.py",
         "tests/test_audit.py",
-        "tests/test_postgres_tenant_defense.py"
+        "tests/test_postgres_tenant_defense.py",
+        "tests/test_audit_integrity.py"
       ]
     },
     {

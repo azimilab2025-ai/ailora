@@ -9,6 +9,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from ailora.domain.identity.models import Membership, Tenant, User
 from ailora.domain.ssa.audit import AuditEntry, AuditEventType
+from ailora.domain.ssa.audit_integrity import GENESIS_HASH, AuditIntegrityError, verify_audit_chain
 from ailora.domain.ssa.audit_models import AuditEventRecord
 from ailora.domain.ssa.audit_repository import AuditEventRepository
 from ailora.security.authorization import (
@@ -28,6 +29,10 @@ class AuditEventNotFoundError(Exception):
 
 class AuditInputError(ValueError):
     """Audit evidence violates the bounded, secret-safe contract."""
+
+
+class AuditIntegrityViolationError(RuntimeError):
+    """Persisted audit evidence failed cryptographic chain verification."""
 
 
 class TenantAuditService:
@@ -120,6 +125,9 @@ class TenantAuditService:
                 combined_classification=combined_classification,
                 advisory_only=True,
                 timestamp_utc=entry.timestamp_utc,
+                sequence_no=0,
+                previous_hash=GENESIS_HASH,
+                event_hash=GENESIS_HASH,
             )
         )
 
@@ -127,13 +135,23 @@ class TenantAuditService:
         self, *, actor_user_id: uuid.UUID, tenant_id: uuid.UUID
     ) -> list[AuditEventRecord]:
         await self.require_tenant_reader(actor_user_id=actor_user_id, tenant_id=tenant_id)
-        return await self._repository.list_for_tenant(tenant_id)
+        records = await self._repository.list_for_tenant(tenant_id)
+        try:
+            verify_audit_chain(records)
+        except AuditIntegrityError as exc:
+            raise AuditIntegrityViolationError("audit integrity verification failed") from exc
+        return records
 
     async def get_event(
         self, *, actor_user_id: uuid.UUID, tenant_id: uuid.UUID, event_id: uuid.UUID
     ) -> AuditEventRecord:
         await self.require_tenant_reader(actor_user_id=actor_user_id, tenant_id=tenant_id)
-        record = await self._repository.get_for_tenant(tenant_id=tenant_id, event_id=event_id)
+        records = await self._repository.list_for_tenant(tenant_id)
+        try:
+            verify_audit_chain(records)
+        except AuditIntegrityError as exc:
+            raise AuditIntegrityViolationError("audit integrity verification failed") from exc
+        record = next((item for item in records if item.id == event_id), None)
         if record is None:
             raise AuditEventNotFoundError("audit event not found")
         return record

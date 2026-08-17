@@ -160,13 +160,13 @@ The visual sequence presents the system as one continuous mission narrative: **O
 | Capability | Current evidence | Boundary |
 |---|---|---|
 | Health and API composition | Versioned routers, RFC 9457 errors, correlation, bounded requests, ETags and signed cursors | Runtime deployment acceptance remains separate |
-| PostgreSQL persistence and Alembic | Tenant-scoped models through revision `0013_postgres_tenant_rls`, forced RLS policy source and transaction-local tenant context | Controlled migration, pre-provisioned roles and production PostgreSQL qualification remain separate |
+| PostgreSQL persistence and Alembic | Tenant-scoped models through revision `0014_audit_integrity`, forced RLS, transaction-local tenant context and hash-chained append-only audit source | Controlled migration, pre-provisioned roles/extensions and production PostgreSQL qualification remain separate |
 | Identity, sessions and authorization | Tenant membership, OIDC/MFA session policy, asymmetric tokens and tenant-bound workload authorization | Live IdP/OAuth integration and operational qualification remain separate |
-| SSA evidence chain | Scenario → screening → proximity assessment → review → immutable audit evidence | Human-authority-first and advisory-only |
+| SSA evidence chain | Scenario → screening → proximity assessment → review → tenant-ordered SHA-256 audit evidence with fail-closed reads | Human-authority-first; live PostgreSQL trigger validation remains separate |
 | Space-data provider chain | Qualified-gate boundary, raw artifacts, quarantine, TLE parsing and CelesTrak transport | Controlled authenticated production E2E is deferred |
 | Astrodynamics foundation | SGP4/TEME, bounded TCA, covariance health and pinned-IERS TEME→GCRF | Independent operational scientific qualification remains required |
 | Durable workflows | Tenant-scoped idempotency, retries, cancellation and deterministic replay | External queue/worker HA remains planned |
-| Engineering assurance | Ruff, strict Mypy, 845 tests, 88.49% coverage, SBOM and package build | Test evidence is not external certification |
+| Engineering assurance | Ruff, strict Mypy, 873 tests, 88.57% coverage, SBOM and package build | Test evidence is not external certification |
 | Deployment foundation | Non-root container contract and live Render service | Multi-instance HA/DR/SLO evidence remains planned |
 
 ### 🔄 Active qualification
@@ -700,9 +700,9 @@ Official sources: [Oya repository](https://github.com/OyaAIProd/oya) • [docume
 
 ## Current Qualification Baseline
 
-The current verified repository baseline contains **845 tests passing**, **88.49%** statement
+The current verified repository baseline contains **873 tests passing**, **88.57%** statement
 coverage against an enforced 85% floor, **20 OpenAPI paths / 27 operations**, and one Alembic
-head through revision `0013_postgres_tenant_rls`. The Render service is live; controlled
+head through revision `0014_audit_integrity`. The Render service is live; controlled
 authenticated provider E2E remains a required deferred qualification exercise.
 
 - NASA runtime integration is not active; CelesTrak is the directly integrated GP source.

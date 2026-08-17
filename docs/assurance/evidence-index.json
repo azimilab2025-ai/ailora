@@ -64,9 +64,15 @@
       "status": "CURRENT_BASELINE_EVIDENCE_NOT_FINAL_QUALIFICATION"
     },
     {
+      "evidence_class": "COMMAND_CHECKPOINT",
+      "path": "docs/checkpoints/master-program-command-12-audit-integrity-migration-rehearsal.md",
+      "sha256": "f9d1424521537456e10cbe0d3bdf8dfbcb26838d3254e3d3bf06d40e52e060b3",
+      "status": "CURRENT_BASELINE_EVIDENCE_NOT_FINAL_QUALIFICATION"
+    },
+    {
       "evidence_class": "REQUIREMENTS",
       "path": "docs/governance/enterprise-requirements-traceability.json",
-      "sha256": "ffe2240ee72158f570cba48cdf5d37d8c20b203b8a6b07d1d70e90cccd88da8c",
+      "sha256": "eed189b552ec6e0b02352a228a2ca34fb981c103a2bd6473807b1953cd0b9525",
       "status": "CURRENT_BASELINE_EVIDENCE_NOT_FINAL_QUALIFICATION"
     },
     {
@@ -100,9 +106,21 @@
       "status": "CURRENT_BASELINE_EVIDENCE_NOT_FINAL_QUALIFICATION"
     },
     {
+      "evidence_class": "IMPLEMENTATION",
+      "path": "src/ailora/domain/ssa/audit_integrity.py",
+      "sha256": "a6ddfd31404001229ad8abb6f999a16a5b2512d2f858f4b0f977f09824d14b60",
+      "status": "CURRENT_BASELINE_EVIDENCE_NOT_FINAL_QUALIFICATION"
+    },
+    {
       "evidence_class": "DATABASE_MIGRATION",
       "path": "alembic/versions/0013_postgres_tenant_rls.py",
       "sha256": "39849628cb6323c3bd0e4ec24cf9de0c4ee94a1febc59b0f64a723400cf2320e",
+      "status": "CURRENT_BASELINE_EVIDENCE_NOT_FINAL_QUALIFICATION"
+    },
+    {
+      "evidence_class": "DATABASE_MIGRATION",
+      "path": "alembic/versions/0014_audit_integrity.py",
+      "sha256": "877b8d5de12ed351addc47684ff5daf467cee870ff9ac2e16a0d9bea481627f9",
       "status": "CURRENT_BASELINE_EVIDENCE_NOT_FINAL_QUALIFICATION"
     },
     {
@@ -145,6 +163,12 @@
       "evidence_class": "VERIFICATION",
       "path": "tests/test_postgres_tenant_defense.py",
       "sha256": "dbab455b2a704ebf08590140ea6ba617305905eac4699c463b8524b51904f56c",
+      "status": "CURRENT_BASELINE_EVIDENCE_NOT_FINAL_QUALIFICATION"
+    },
+    {
+      "evidence_class": "VERIFICATION",
+      "path": "tests/test_audit_integrity.py",
+      "sha256": "4c513adc652bd516b2af5a21ee9a93d64fa8e5c37551a11f6babcc3f43ab9fea",
       "status": "CURRENT_BASELINE_EVIDENCE_NOT_FINAL_QUALIFICATION"
     },
     {

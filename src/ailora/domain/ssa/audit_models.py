@@ -5,7 +5,16 @@ from __future__ import annotations
 import uuid
 from datetime import UTC, datetime
 
-from sqlalchemy import Boolean, CheckConstraint, DateTime, ForeignKey, Index, String, Text
+from sqlalchemy import (
+    BigInteger,
+    Boolean,
+    CheckConstraint,
+    DateTime,
+    ForeignKey,
+    Index,
+    String,
+    Text,
+)
 from sqlalchemy.orm import Mapped, mapped_column
 from sqlalchemy.types import Uuid
 
@@ -37,6 +46,11 @@ class AuditEventRecord(Base):
         CheckConstraint("length(outcome) BETWEEN 1 AND 32", name="ck_ssa_audit_outcome"),
         CheckConstraint("length(detail) <= 1000", name="ck_ssa_audit_detail_length"),
         CheckConstraint("advisory_only", name="ck_ssa_audit_advisory_only"),
+        CheckConstraint("sequence_no > 0", name="ck_ssa_audit_sequence_positive"),
+        CheckConstraint("length(previous_hash) = 64", name="ck_ssa_audit_previous_hash_length"),
+        CheckConstraint("length(event_hash) = 64", name="ck_ssa_audit_event_hash_length"),
+        Index("uq_ssa_audit_tenant_sequence", "tenant_id", "sequence_no", unique=True),
+        Index("uq_ssa_audit_tenant_hash", "tenant_id", "event_hash", unique=True),
     )
 
     id: Mapped[uuid.UUID] = mapped_column(Uuid(as_uuid=True), primary_key=True, default=uuid.uuid4)
@@ -57,3 +71,6 @@ class AuditEventRecord(Base):
     timestamp_utc: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, default=lambda: datetime.now(tz=UTC)
     )
+    sequence_no: Mapped[int] = mapped_column(BigInteger, nullable=False)
+    previous_hash: Mapped[str] = mapped_column(String(64), nullable=False)
+    event_hash: Mapped[str] = mapped_column(String(64), nullable=False)
