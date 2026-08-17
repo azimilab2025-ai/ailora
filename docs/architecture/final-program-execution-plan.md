@@ -1,5 +1,7 @@
 # AILORA Final Twenty-Command Execution Plan
 
+> Historical baseline: this plan records the completed twenty-command foundation. It is preserved for audit history and is not the active thirty-command enterprise qualification map. Current scope and ownership are defined by [`enterprise-requirements-traceability.json`](../governance/enterprise-requirements-traceability.json), [`enterprise-adr-register.md`](enterprise-adr-register.md) and [`release-scope-and-authority.md`](../governance/release-scope-and-authority.md).
+
 ## Program objective
 
 Advance AILORA from its verified foundation to the strongest defensible

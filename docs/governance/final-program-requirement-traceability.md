@@ -1,5 +1,7 @@
 # AILORA Final Program Requirement Traceability Matrix
 
+> Historical baseline: this matrix retains traceability for the completed twenty-command program. The active thirty-command enterprise map is the machine-readable [`enterprise-requirements-traceability.json`](enterprise-requirements-traceability.json); release scope and authority are defined in [`release-scope-and-authority.md`](release-scope-and-authority.md). Historical statuses below are not silently promoted.
+
 ## Purpose
 
 This matrix maps the 29 sections of the approved enterprise engineering

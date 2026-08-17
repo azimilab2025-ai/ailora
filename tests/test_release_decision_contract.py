@@ -37,14 +37,15 @@ def test_fail_closed_decision_rejects_overclaims() -> None:
 
 
 def test_final_documents_preserve_truthful_boundaries() -> None:
-    text = "\n".join(
-        (ROOT / path).read_text()
-        for path in (
-            "docs/qualification/final-evidence-pack.md",
-            "docs/governance/residual-risk-and-release-decision.md",
-            "docs/checkpoints/final-program-command-20-final-evidence-checkpoint.md",
-        )
+    document_paths = (
+        "docs/qualification/final-evidence-pack.md",
+        "docs/governance/residual-risk-and-release-decision.md",
+        "docs/checkpoints/final-program-command-20-final-evidence-checkpoint.md",
+        "docs/governance/release-scope-and-authority.md",
+        "docs/architecture/enterprise-adr-register.md",
+        "docs/checkpoints/master-program-command-04-governance-baseline.md",
     )
+    text = "\n".join((ROOT / path).read_text() for path in document_paths)
     for marker in (
         "PRODUCTION_RELEASE=BLOCKED",
         "DOMAIN_REVIEW_REQUIRED",
@@ -52,5 +53,38 @@ def test_final_documents_preserve_truthful_boundaries() -> None:
         "OYA_STATUS=DISABLED",
         "LEGAL_REVIEW_REQUIRED",
         "HUMAN_RELEASE_AUTHORITY=MANDATORY",
+        "PRODUCTION_CANDIDATE_ACTIVE_QUALIFICATION",
+        "DEFERRED_REQUIRED_BEFORE_FINAL_RELEASE",
+        "Proximity severity is not collision probability",
+        "No spacecraft command",
     ):
         assert marker in text
+
+    traceability = json.loads(
+        (ROOT / "docs/governance/enterprise-requirements-traceability.json").read_text()
+    )
+    assert traceability["baseline_commit"] == "59d0fbc55e9e1b50fe1877af382df382602ae54a"
+    assert traceability["pass_evidence"] == [
+        "IMPLEMENTATION",
+        "VERIFICATION",
+        "IMMUTABLE_EVIDENCE",
+        "QUALIFIED_REVIEW",
+        "ACCEPTED_RESIDUAL_RISK",
+    ]
+    assert len(traceability["release_gates"]) == 10
+    requirements = traceability["requirements"]
+    assert len(requirements) == 23
+    assert len({requirement["id"] for requirement in requirements}) == len(requirements)
+    assert all(requirement["owner"] for requirement in requirements)
+    assert all(requirement["commands"] for requirement in requirements)
+    assert all(requirement["remaining_scope"] for requirement in requirements)
+    assert {"ENT-016", "ENT-017", "ENT-018"} == {
+        requirement["id"] for requirement in requirements if requirement["status"] == "MISSING"
+    }
+    assert {"ENT-022", "ENT-023"} == {
+        requirement["id"]
+        for requirement in requirements
+        if requirement["status"] == "EXTERNAL_GATE"
+    }
+    assert "SPACECRAFT_COMMAND" in traceability["permanent_exclusions"]
+    assert "AI_RELEASE_AUTHORITY" in traceability["permanent_exclusions"]
