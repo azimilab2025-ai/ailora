@@ -173,7 +173,9 @@ The visual sequence presents the system as one continuous mission narrative: **O
 | Conjunction risk assessment (Advisory) | T0/PHY-C1/C2 screening | PHASE_3 |
 | TLE / state vector parsing | Synthetic orbital data ingestion | PHASE_3 |
 
-> C-10 adds advisory SGP4 propagation with native TEME outputs. Frame conversion and independent scientific approval remain explicit future gates.
+> C-10 adds advisory SGP4 propagation with native TEME outputs. The production pipeline now
+> performs the separately evidenced TEME-to-GCRF transform; independent operational scientific
+> approval remains an explicit gate.
 >
 > C-11 adds bounded advisory TCA search, explicit TEME covariance health contracts, and
 > conservative uncertainty labels. It does not compute collision probability, transform frames
@@ -691,8 +693,9 @@ AILORA is architected as a complete decision-support system: from governed data 
 AILORA now contains a **real, bounded HTTPS transport path for CelesTrak GP data** with
 canonical-host enforcement, no redirect following, bounded timeout/response size, normalized
 transport failures, provider provenance, qualification gates, retry/circuit-breaker support,
-and an explicit runtime enable switch. The switch remains **off by default** and remains off
-in the Render blueprint until the later staging/release gate intentionally activates it.
+and an explicit runtime enable switch. The Render blueprint activates the switch for the
+authenticated production API; each request still fails closed unless current provider
+qualification evidence exists.
 
 The live-data engineering path uses CelesTrak as the directly integrated public GP source.
 NASA's public TLE API is CelesTrak-derived, so it is **not treated as an independent
@@ -706,9 +709,9 @@ runtime action is introduced by this command.
 
 AILORA includes an internal, fail-closed composition path joining the CelesTrak adapter,
 bounded retry, circuit breaking, qualification enforcement and tenant-scoped append-only
-ingestion. It remains disabled by default, has no public API route, and performs no startup
-network action. Render activation, provider approval and operational authorization remain
-separate explicit gates.
+ingestion. The composition is reachable only through the authenticated tenant-scoped space-data
+API and performs no startup network action. Provider qualification remains mandatory and cannot
+be bypassed.
 
 <!-- COMMAND_03_NATIVE_TEME_BRIDGE -->
 ### Native TEME Provider-to-Observation Bridge
@@ -716,17 +719,17 @@ separate explicit gates.
 AILORA now contains an internal, test-first bridge that parses bounded qualified-provider TLE
 bytes, propagates them through the existing SGP4 service, preserves the native **TEME** frame,
 builds canonical tenant-scoped provenance and routes malformed, mismatched or out-of-domain
-inputs to sanitized quarantine evidence. The bridge has no public API route, performs no frame
-relabeling and remains disconnected from application startup and Render activation.
+inputs to sanitized quarantine evidence. The bridge performs no frame relabeling. The production
+API now composes it with the qualified GCRF transformer while preserving the native TEME record.
 
 TEME-to-GCRF conversion is possible only through a separately qualified transformation using
 governed Earth-orientation inputs, including UT1-UTC and polar motion from an approved IERS
 data snapshot, explicit time-scale handling, dependency and license review, deterministic
-offline replay and independent reference-vector verification. Until that Command 04 gate
-passes, GCRF conversion remains fail-closed and no TEME vector is represented as GCRF.
+offline replay and independent reference-vector verification. That transformation gate is now
+implemented; unsupported epochs or unavailable qualified inputs still fail closed.
 
 <!-- COMMAND_04_DETERMINISTIC_OFFLINE_GCRF -->
-### Deterministic Offline TEME-to-GCRF Transformation
+### Deterministic Governed TEME-to-GCRF Transformation
 
 AILORA now provides a typed, deterministic transformation from native SGP4 **TEME** state
 vectors to the project-level **GCRF** contract. The concrete implementation realization is
@@ -742,7 +745,28 @@ input digest, and transformation digest. Epochs outside the pinned dataset are r
 explicitly; degraded-accuracy fallback is not permitted.
 
 The Command 03 provider bridge continues to preserve native TEME evidence. Consumers that
-require GCRF must invoke this qualified transformation explicitly before assigning the GCRF
-label. Outputs remain advisory-only and still require independent scientific validation
-before any operational use. This command adds no HTTP route, provider activation, Render
-configuration change, deployment action, or OYA capability.
+require GCRF invoke this qualified transformation before assigning the GCRF label. Outputs remain
+advisory-only and still require independent scientific validation before any operational use.
+
+<!-- COMMAND_05_PRODUCTION_PROVIDER_GCRF_WIRING -->
+### Production Provider-to-GCRF Wiring
+
+The authenticated tenant-scoped space-data API now composes current provider qualification,
+bounded CelesTrak HTTPS retrieval, append-only raw-artifact storage, strict TLE parsing, SGP4
+propagation, native TEME persistence, the pinned Astropy GCRS realization of GCRF, append-only
+transformation provenance, and final GCRF observation persistence. The API returns a GCRF label
+only after position and velocity are transformed together successfully.
+
+Provider qualification evidence is registered only by an authenticated active platform
+superuser and is stored with its terms digest, reviewer reference, validity window, license and
+attribution. Tenant authorization and qualification are checked before any provider network
+request. Stable idempotency keys deduplicate raw artifacts, TEME observations, GCRF observations,
+and transformation records. Provider, parsing, propagation, EOP, transformation and persistence
+failures preserve available evidence and fail closed through sanitized responses or quarantine.
+
+The Render blueprint enables the CelesTrak transport, but no provider request occurs at startup.
+The IERS snapshot remains locally pinned, versioned and digest-verified; runtime auto-download and
+silent degraded-accuracy fallback remain prohibited. `mako==1.4.1` replaces the yanked 1.4.0
+artifact. This wiring exposes no spacecraft command, telecommand, uplink or autonomous maneuver
+capability, and all analytical outputs remain advisory-only pending independent operational
+scientific approval.

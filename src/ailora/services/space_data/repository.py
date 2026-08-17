@@ -1,8 +1,10 @@
 from __future__ import annotations
 
 import uuid
+from datetime import datetime
+from typing import cast
 
-from sqlalchemy import select
+from sqlalchemy import desc, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from ailora.services.space_data.models import (
@@ -36,3 +38,26 @@ class ProviderRepository:
             )
         )
         return result
+
+    async def get_current_qualification(
+        self,
+        *,
+        provider_id: str,
+        provider_version: str,
+        now: datetime,
+    ) -> ProviderQualificationRecord | None:
+        return cast(
+            ProviderQualificationRecord | None,
+            await self._session.scalar(
+                select(ProviderQualificationRecord)
+                .where(
+                    ProviderQualificationRecord.provider_id == provider_id,
+                    ProviderQualificationRecord.provider_version == provider_version,
+                    ProviderQualificationRecord.state == "QUALIFIED",
+                    (ProviderQualificationRecord.expires_at.is_(None))
+                    | (ProviderQualificationRecord.expires_at > now),
+                )
+                .order_by(desc(ProviderQualificationRecord.reviewed_at))
+                .limit(1)
+            ),
+        )

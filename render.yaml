@@ -31,7 +31,7 @@ services:
         value: "false"
         # Real orbital-data transport exists, but production activation is an explicit release gate.
       - key: AILORA_ENABLE_LIVE_SPACE_DATA_PROVIDER
-        value: "false"
+        value: "true"
       - key: AILORA_CELESTRAK_BASE_URL
         value: "https://celestrak.org"
       - key: AILORA_CELESTRAK_TIMEOUT_SECONDS

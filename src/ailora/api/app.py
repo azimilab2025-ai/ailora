@@ -10,6 +10,7 @@ from ailora.api.routers import (
     authorization,
     health,
     identity_sessions,
+    space_data,
     ssa_audit,
     ssa_reviews,
     ssa_risk_assessments,
@@ -57,6 +58,7 @@ app.include_router(health.router)
 app.include_router(authorization.router)
 app.include_router(identity_sessions.router)
 app.include_router(tenant_identity.router)
+app.include_router(space_data.router)
 app.include_router(ssa_scenarios.router)
 app.include_router(ssa_screenings.router)
 app.include_router(ssa_risk_assessments.router)

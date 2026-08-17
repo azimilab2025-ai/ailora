@@ -115,3 +115,74 @@ class SpaceDataEvidenceRecord(Base):
     detail: Mapped[str] = mapped_column(Text, nullable=False)
     advisory_only: Mapped[bool] = mapped_column(Boolean, nullable=False, default=True)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
+
+
+class FrameTransformationEvidenceRecord(Base):
+    """Append-only proof that one native TEME state produced one GCRF state."""
+
+    __tablename__ = "space_data_frame_transformations"
+    __table_args__ = (
+        UniqueConstraint(
+            "tenant_id",
+            "transformation_digest",
+            name="uq_space_transform_tenant_digest",
+        ),
+        CheckConstraint("source_frame = 'TEME'", name="ck_space_transform_source_teme"),
+        CheckConstraint("target_frame = 'GCRF'", name="ck_space_transform_target_gcrf"),
+        CheckConstraint("advisory_only = true", name="ck_space_transform_advisory"),
+        CheckConstraint("length(input_digest) = 64", name="ck_space_transform_input_digest"),
+        CheckConstraint("length(iers_data_digest) = 64", name="ck_space_transform_iers_digest"),
+        CheckConstraint(
+            "length(transformation_digest) = 64",
+            name="ck_space_transform_result_digest",
+        ),
+        Index("ix_space_transform_tenant_epoch", "tenant_id", "epoch"),
+    )
+
+    id: Mapped[str] = mapped_column(String(32), primary_key=True)
+    tenant_id: Mapped[uuid.UUID] = mapped_column(
+        Uuid(as_uuid=True),
+        ForeignKey("tenants.id", ondelete="CASCADE"),
+        nullable=False,
+    )
+    actor_user_id: Mapped[uuid.UUID] = mapped_column(
+        Uuid(as_uuid=True),
+        ForeignKey("users.id", ondelete="RESTRICT"),
+        nullable=False,
+    )
+    raw_artifact_id: Mapped[str] = mapped_column(
+        String(32),
+        ForeignKey("space_data_provider_raw_artifacts.id", ondelete="RESTRICT"),
+        nullable=False,
+    )
+    native_observation_id: Mapped[str] = mapped_column(
+        String(32),
+        ForeignKey("space_data_observations.id", ondelete="RESTRICT"),
+        nullable=False,
+    )
+    gcrf_observation_id: Mapped[str] = mapped_column(
+        String(32),
+        ForeignKey("space_data_observations.id", ondelete="RESTRICT"),
+        nullable=False,
+    )
+    epoch: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
+    source_frame: Mapped[str] = mapped_column(String(16), nullable=False)
+    target_frame: Mapped[str] = mapped_column(String(16), nullable=False)
+    frame_realization: Mapped[str] = mapped_column(String(32), nullable=False)
+    algorithm_id: Mapped[str] = mapped_column(String(64), nullable=False)
+    algorithm_version: Mapped[str] = mapped_column(String(32), nullable=False)
+    astropy_version: Mapped[str] = mapped_column(String(32), nullable=False)
+    iers_data_version: Mapped[str] = mapped_column(String(64), nullable=False)
+    iers_source: Mapped[str] = mapped_column(String(128), nullable=False)
+    iers_mjd_start: Mapped[float] = mapped_column(Float, nullable=False)
+    iers_mjd_end: Mapped[float] = mapped_column(Float, nullable=False)
+    eop_status: Mapped[str] = mapped_column(String(128), nullable=False)
+    input_digest: Mapped[str] = mapped_column(String(64), nullable=False)
+    iers_data_digest: Mapped[str] = mapped_column(String(64), nullable=False)
+    transformation_digest: Mapped[str] = mapped_column(String(64), nullable=False)
+    source_position: Mapped[list[float]] = mapped_column(JSON, nullable=False)
+    source_velocity: Mapped[list[float]] = mapped_column(JSON, nullable=False)
+    target_position: Mapped[list[float]] = mapped_column(JSON, nullable=False)
+    target_velocity: Mapped[list[float]] = mapped_column(JSON, nullable=False)
+    advisory_only: Mapped[bool] = mapped_column(Boolean, nullable=False, default=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)

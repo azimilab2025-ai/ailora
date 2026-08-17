@@ -15,6 +15,7 @@ from ailora.services.space_data.governance import (
 from ailora.services.space_data.interfaces import (
     ProviderError,
     ProviderRequest,
+    ProviderResponse,
     ProviderResponseError,
     SpaceDataProvider,
 )
@@ -31,6 +32,12 @@ class ProviderIngestionResult:
     payload_digest: str
     duplicate: bool
     advisory_only: bool = True
+
+
+@dataclass(frozen=True, slots=True)
+class ProviderAcquisitionResult:
+    ingestion: ProviderIngestionResult
+    response: ProviderResponse
 
 
 class ProviderIngestionService:
@@ -55,6 +62,28 @@ class ProviderIngestionService:
         classification: str,
         now: datetime,
     ) -> ProviderIngestionResult:
+        return (
+            await self.acquire(
+                tenant_id=tenant_id,
+                actor_user_id=actor_user_id,
+                request=request,
+                qualification=qualification,
+                classification=classification,
+                now=now,
+            )
+        ).ingestion
+
+    async def acquire(
+        self,
+        *,
+        tenant_id: uuid.UUID,
+        actor_user_id: uuid.UUID,
+        request: ProviderRequest,
+        qualification: ProviderQualification,
+        classification: str,
+        now: datetime,
+    ) -> ProviderAcquisitionResult:
+        """Fetch and persist raw evidence while retaining the bounded response internally."""
         self._gate.require(qualification, now)
         try:
             response = await self._provider.fetch(request)
@@ -102,7 +131,10 @@ class ProviderIngestionService:
             )
             self._repository.add_attempt(duplicate_attempt)
             await self._commit()
-            return ProviderIngestionResult(existing.id, digest, duplicate=True)
+            return ProviderAcquisitionResult(
+                ProviderIngestionResult(existing.id, digest, duplicate=True),
+                response,
+            )
         raw_id = uuid.uuid4().hex
         raw = ProviderRawArtifactRecord(
             id=raw_id,
@@ -142,7 +174,10 @@ class ProviderIngestionService:
         self._repository.add_raw_artifact(raw)
         self._repository.add_attempt(attempt)
         await self._commit()
-        return ProviderIngestionResult(raw_id, digest, duplicate=False)
+        return ProviderAcquisitionResult(
+            ProviderIngestionResult(raw_id, digest, duplicate=False),
+            response,
+        )
 
     async def _commit(self) -> None:
         try:
