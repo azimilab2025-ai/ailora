@@ -166,7 +166,8 @@ The visual sequence presents the system as one continuous mission narrative: **O
 | Space-data provider chain | Qualified-gate boundary, raw artifacts, quarantine, TLE parsing and CelesTrak transport | Controlled authenticated production E2E is deferred |
 | Astrodynamics foundation | SGP4/TEME, bounded TCA, covariance health and pinned-IERS TEME→GCRF | Independent operational scientific qualification remains required |
 | Durable workflows | Tenant-scoped idempotency, retries, cancellation and deterministic replay | External queue/worker HA remains planned |
-| Engineering assurance | Ruff, strict Mypy, 873 tests, 88.57% coverage, SBOM and package build | Test evidence is not external certification |
+| Recovery qualification | Digest-bound isolated-drill evidence with observed RPO, validated-serving RTO and reconciliation RCO | Managed PITR, production topology, objectives and drill evidence remain external |
+| Engineering assurance | Ruff, strict Mypy, 898 tests, 88.66% coverage, SBOM and package build | Test evidence is not external certification |
 | Deployment foundation | Non-root container contract and live Render service | Multi-instance HA/DR/SLO evidence remains planned |
 
 ### 🔄 Active qualification
@@ -700,14 +701,15 @@ Official sources: [Oya repository](https://github.com/OyaAIProd/oya) • [docume
 
 ## Current Qualification Baseline
 
-The current verified repository baseline contains **873 tests passing**, **88.57%** statement
+The current verified repository baseline contains **898 tests passing**, **88.66%** statement
 coverage against an enforced 85% floor, **20 OpenAPI paths / 27 operations**, and one Alembic
 head through revision `0014_audit_integrity`. The Render service is live; controlled
 authenticated provider E2E remains a required deferred qualification exercise.
 
 - NASA runtime integration is not active; CelesTrak is the directly integrated GP source.
 - Oya remains disconnected and non-billable pending any separately authorized evaluation.
-- Backup/restore evidence currently proves an isolated local contract, not production RPO/RTO.
+- Backup/restore evidence records isolated local RPO/RTO/RCO observations only; managed PITR,
+  objectives and production recovery qualification remain open.
 - Proximity severity is distance-based and must never be represented as collision probability.
 - All analytical outputs remain advisory-only; spacecraft command paths remain prohibited.
 

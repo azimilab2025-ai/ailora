@@ -70,9 +70,15 @@
       "status": "CURRENT_BASELINE_EVIDENCE_NOT_FINAL_QUALIFICATION"
     },
     {
+      "evidence_class": "COMMAND_CHECKPOINT",
+      "path": "docs/checkpoints/master-program-command-13-recovery-qualification.md",
+      "sha256": "0004a5672b09d92da8e1dce3e9917a148eea0799b39cc400ac48820dedbfcfed",
+      "status": "CURRENT_BASELINE_EVIDENCE_NOT_FINAL_QUALIFICATION"
+    },
+    {
       "evidence_class": "REQUIREMENTS",
       "path": "docs/governance/enterprise-requirements-traceability.json",
-      "sha256": "eed189b552ec6e0b02352a228a2ca34fb981c103a2bd6473807b1953cd0b9525",
+      "sha256": "f9021d36e57d53b5b8ca20c78866f4e1df6ced001c7be871a7fc621c3256b430",
       "status": "CURRENT_BASELINE_EVIDENCE_NOT_FINAL_QUALIFICATION"
     },
     {
@@ -85,6 +91,18 @@
       "evidence_class": "RELEASE_MANIFEST",
       "path": "docs/qualification/final-release-manifest.json",
       "sha256": "b036c6395b503e3f6c6b5a2b04745fb3fc039fbc82981a14e5f38586ecf47cd9",
+      "status": "CURRENT_BASELINE_EVIDENCE_NOT_FINAL_QUALIFICATION"
+    },
+    {
+      "evidence_class": "RECOVERY_RUNBOOK",
+      "path": "docs/runbooks/backup-restore.md",
+      "sha256": "453ffa1a8cebcb67046e396e2bca52209837ad4242ad00312b0e7ce56798420e",
+      "status": "CURRENT_BASELINE_EVIDENCE_NOT_FINAL_QUALIFICATION"
+    },
+    {
+      "evidence_class": "RECOVERY_RUNBOOK",
+      "path": "docs/runbooks/disaster-recovery.md",
+      "sha256": "56d8c536536f4569108d567f9df4f0fe3cf4ac3cf549af5460200b98ea3efed0",
       "status": "CURRENT_BASELINE_EVIDENCE_NOT_FINAL_QUALIFICATION"
     },
     {
@@ -109,6 +127,12 @@
       "evidence_class": "IMPLEMENTATION",
       "path": "src/ailora/domain/ssa/audit_integrity.py",
       "sha256": "a6ddfd31404001229ad8abb6f999a16a5b2512d2f858f4b0f977f09824d14b60",
+      "status": "CURRENT_BASELINE_EVIDENCE_NOT_FINAL_QUALIFICATION"
+    },
+    {
+      "evidence_class": "IMPLEMENTATION",
+      "path": "src/ailora/recovery/qualification.py",
+      "sha256": "d9186c789d5657d40ccb4d7d24b0fae0594a81efea0b7f3af37170a169253d00",
       "status": "CURRENT_BASELINE_EVIDENCE_NOT_FINAL_QUALIFICATION"
     },
     {
@@ -169,6 +193,12 @@
       "evidence_class": "VERIFICATION",
       "path": "tests/test_audit_integrity.py",
       "sha256": "4c513adc652bd516b2af5a21ee9a93d64fa8e5c37551a11f6babcc3f43ab9fea",
+      "status": "CURRENT_BASELINE_EVIDENCE_NOT_FINAL_QUALIFICATION"
+    },
+    {
+      "evidence_class": "VERIFICATION",
+      "path": "tests/test_recovery_qualification.py",
+      "sha256": "732d9e52c6a2b74c0682bdd98156e7ca45450a387a8bd7a8b0c660b300a40d29",
       "status": "CURRENT_BASELINE_EVIDENCE_NOT_FINAL_QUALIFICATION"
     },
     {

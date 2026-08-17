@@ -209,19 +209,21 @@
       "id": "ENT-007",
       "implementation_refs": [
         "docs/runbooks/backup-restore.md",
-        "docs/runbooks/disaster-recovery.md"
+        "docs/runbooks/disaster-recovery.md",
+        "src/ailora/recovery/qualification.py"
       ],
       "owner": "SRE and Database Operations",
       "release_gates": [
         "G05_DATABASE_EVIDENCE",
         "G06_RUNTIME_HA"
       ],
-      "remaining_scope": "Qualify managed PITR isolated restore integrity failover and measured RTO RPO.",
+      "remaining_scope": "Define approved recovery objectives through business impact analysis, provision a PITR-capable managed PostgreSQL topology, execute independently reviewed isolated restore and failover drills, and measure production-like RPO, validated-serving RTO and reconciliation RCO.",
       "status": "PARTIAL",
       "title": "PITR restore RTO RPO and disaster recovery",
       "verification_refs": [
         "tests/test_backup_restore.py",
-        "tests/test_recovery_failures.py"
+        "tests/test_recovery_failures.py",
+        "tests/test_recovery_qualification.py"
       ]
     },
     {
