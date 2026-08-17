@@ -79,6 +79,10 @@ creation date, expiration date, affected requirements, evidence references and e
 acceptance. Exceptions cannot authorize spacecraft command paths, silently convert missing evidence
 to PASS or permanently waive a P0 gate.
 
+## Active assurance artifacts
+
+Threats, hazards, risks, claims and evidence digests are bound through [`docs/assurance/assurance-case.md`](../assurance/assurance-case.md). The current status is `SKELETON_BLOCKED_PENDING_IMPLEMENTATION_EVIDENCE_AND_INDEPENDENT_REVIEW`; creation of the assurance structure does not close any external gate.
+
 ## Release decision rule
 
 The Release Authority may choose `APPROVE`, `REJECT` or `DEFER`. `APPROVE` is valid only when the

@@ -1,5 +1,7 @@
 # AILORA Final Program Risk Register
 
+> Historical baseline: this register is preserved for the completed twenty-command program. The active threat/hazard-linked register is [`docs/assurance/risk-register.json`](../assurance/risk-register.json); historical rows below are not silently closed or promoted.
+
 ## Scoring
 
 Likelihood and impact use `LOW`, `MEDIUM`, `HIGH`, or `CRITICAL`.

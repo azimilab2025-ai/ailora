@@ -1,0 +1,122 @@
+{
+  "artifact_id": "AILORA-ASSURANCE-EVIDENCE-INDEX",
+  "baseline_commit": "7ed0569e2bd6c5b37ed903df61ac1f95c2198d6f",
+  "evidence_rule": "Indexed evidence supports bounded baseline claims only; independent and operational gates remain open.",
+  "records": [
+    {
+      "evidence_class": "ARCHITECTURE",
+      "path": "docs/architecture/enterprise-adr-register.md",
+      "sha256": "82d2cb4d8e03e12f2d6a279d3212a51c16e4329939c999e7cc089c95d95b9a85",
+      "status": "CURRENT_BASELINE_EVIDENCE_NOT_FINAL_QUALIFICATION"
+    },
+    {
+      "evidence_class": "ASSURANCE_ARGUMENT",
+      "path": "docs/assurance/assurance-case.md",
+      "sha256": "f5e90b406de4c52b6c50539c5bb8aa6de64e05a179a9868157ceb848adbbbcac",
+      "status": "CURRENT_BASELINE_EVIDENCE_NOT_FINAL_QUALIFICATION"
+    },
+    {
+      "evidence_class": "ASSURANCE_CLAIMS",
+      "path": "docs/assurance/claims.json",
+      "sha256": "afd68f4eb41c30ba6fb5a3e1583d343689a832d3887352908d194719da457cc9",
+      "status": "CURRENT_BASELINE_EVIDENCE_NOT_FINAL_QUALIFICATION"
+    },
+    {
+      "evidence_class": "HAZARD_ANALYSIS",
+      "path": "docs/assurance/hazards.md",
+      "sha256": "06a32a22b952f649db25cb7540e3a4336434227566d40bc3a71b1169a1ee8294",
+      "status": "CURRENT_BASELINE_EVIDENCE_NOT_FINAL_QUALIFICATION"
+    },
+    {
+      "evidence_class": "RISK_REGISTER",
+      "path": "docs/assurance/risk-register.json",
+      "sha256": "4ccb23313895f0246f074497dce2037c2a6071813ef867c9faac0c39cd61f7e1",
+      "status": "CURRENT_BASELINE_EVIDENCE_NOT_FINAL_QUALIFICATION"
+    },
+    {
+      "evidence_class": "THREAT_MODEL",
+      "path": "docs/assurance/threat-model.md",
+      "sha256": "73ce637c2c777e84b89a5964d83eb2de4bc8f5cfa5ba05b5d2e8cfc7d3975f4c",
+      "status": "CURRENT_BASELINE_EVIDENCE_NOT_FINAL_QUALIFICATION"
+    },
+    {
+      "evidence_class": "COMMAND_CHECKPOINT",
+      "path": "docs/checkpoints/master-program-command-04-governance-baseline.md",
+      "sha256": "3fe3599e6007bc409073aab52a6f27c9737d8fca3ac62f336d1088c71384e205",
+      "status": "CURRENT_BASELINE_EVIDENCE_NOT_FINAL_QUALIFICATION"
+    },
+    {
+      "evidence_class": "COMMAND_CHECKPOINT",
+      "path": "docs/checkpoints/master-program-command-05-assurance-baseline.md",
+      "sha256": "ce802c8b1c3fbe7515ec54a74caed7b3a1827ff9a35a425dcf206c514030eb17",
+      "status": "CURRENT_BASELINE_EVIDENCE_NOT_FINAL_QUALIFICATION"
+    },
+    {
+      "evidence_class": "REQUIREMENTS",
+      "path": "docs/governance/enterprise-requirements-traceability.json",
+      "sha256": "376c1eca2474f588f7975fa8b28a9ecd33cdcfb8dd72db0900f03df7ae5c1865",
+      "status": "CURRENT_BASELINE_EVIDENCE_NOT_FINAL_QUALIFICATION"
+    },
+    {
+      "evidence_class": "RELEASE_SCOPE",
+      "path": "docs/governance/release-scope-and-authority.md",
+      "sha256": "54b1c453d2cd723efecd8e64af4d6233f8960a7c5e1b534b0833d113670872a4",
+      "status": "CURRENT_BASELINE_EVIDENCE_NOT_FINAL_QUALIFICATION"
+    },
+    {
+      "evidence_class": "RELEASE_MANIFEST",
+      "path": "docs/qualification/final-release-manifest.json",
+      "sha256": "b036c6395b503e3f6c6b5a2b04745fb3fc039fbc82981a14e5f38586ecf47cd9",
+      "status": "CURRENT_BASELINE_EVIDENCE_NOT_FINAL_QUALIFICATION"
+    },
+    {
+      "evidence_class": "IMPLEMENTATION",
+      "path": "src/ailora/security/authorization.py",
+      "sha256": "f07bc77bca4cf478eb3555ae09c75074f007ae9401e7ad3dcc6fbe351dd9fc99",
+      "status": "CURRENT_BASELINE_EVIDENCE_NOT_FINAL_QUALIFICATION"
+    },
+    {
+      "evidence_class": "IMPLEMENTATION",
+      "path": "src/ailora/services/astrodynamics/covariance.py",
+      "sha256": "bab42efaacb3a1684a17acf5768545ba2290647b656f64580ce3688453bff4d0",
+      "status": "CURRENT_BASELINE_EVIDENCE_NOT_FINAL_QUALIFICATION"
+    },
+    {
+      "evidence_class": "IMPLEMENTATION",
+      "path": "src/ailora/services/astrodynamics/frame_transform.py",
+      "sha256": "32327346da8e9e12766780476621318c8a120abcc048288880f0cb8d972db734",
+      "status": "CURRENT_BASELINE_EVIDENCE_NOT_FINAL_QUALIFICATION"
+    },
+    {
+      "evidence_class": "IMPLEMENTATION",
+      "path": "src/ailora/services/astrodynamics/verification.py",
+      "sha256": "a6daab02f91f51c2473bda83ffb41ce9d2d562aadde48f471545a281ba712380",
+      "status": "CURRENT_BASELINE_EVIDENCE_NOT_FINAL_QUALIFICATION"
+    },
+    {
+      "evidence_class": "IMPLEMENTATION",
+      "path": "src/ailora/services/space_data/production_wiring.py",
+      "sha256": "7a394ea0e2800f0649d5bb81f96ced42fbfa1b2a281da0cec9126f8351b05d92",
+      "status": "CURRENT_BASELINE_EVIDENCE_NOT_FINAL_QUALIFICATION"
+    },
+    {
+      "evidence_class": "VERIFICATION",
+      "path": "tests/test_astrodynamics_verification_contracts.py",
+      "sha256": "0004d121b3b5c58ab751d944ab405ddbfe1cf619f5ac31c4991dacec0a1f6076",
+      "status": "CURRENT_BASELINE_EVIDENCE_NOT_FINAL_QUALIFICATION"
+    },
+    {
+      "evidence_class": "VERIFICATION",
+      "path": "tests/test_authorization_isolation.py",
+      "sha256": "a04d30081c1651062faed72f090fb46bf6b8292ffcec334df183ff95879a35a4",
+      "status": "CURRENT_BASELINE_EVIDENCE_NOT_FINAL_QUALIFICATION"
+    },
+    {
+      "evidence_class": "VERIFICATION",
+      "path": "tests/test_space_data_production_wiring.py",
+      "sha256": "5827e4b2bbf4d9fd3c42724b1f79fa71980a9e7c211cdb9adbc38fd38362ae99",
+      "status": "CURRENT_BASELINE_EVIDENCE_NOT_FINAL_QUALIFICATION"
+    }
+  ],
+  "schema_version": 1
+}
