@@ -724,3 +724,25 @@ governed Earth-orientation inputs, including UT1-UTC and polar motion from an ap
 data snapshot, explicit time-scale handling, dependency and license review, deterministic
 offline replay and independent reference-vector verification. Until that Command 04 gate
 passes, GCRF conversion remains fail-closed and no TEME vector is represented as GCRF.
+
+<!-- COMMAND_04_DETERMINISTIC_OFFLINE_GCRF -->
+### Deterministic Offline TEME-to-GCRF Transformation
+
+AILORA now provides a typed, deterministic transformation from native SGP4 **TEME** state
+vectors to the project-level **GCRF** contract. The concrete implementation realization is
+Astropy **GCRS**; that realization is recorded explicitly rather than silently treating a
+TEME vector as GCRF. Position and velocity transform together at the same timezone-aware UTC
+epoch and retain kilometre and kilometre-per-second units.
+
+The scientific runtime is reproducibly pinned to `astropy==8.0.1` and
+`astropy-iers-data==0.2026.8.10.0.32.39`. IERS and leap-second automatic downloads are disabled
+during every transformation. The result records the Astropy version, IERS-data version,
+bundled `finals2000A.all` coverage range, Earth-orientation status, dataset SHA-256 digest,
+input digest, and transformation digest. Epochs outside the pinned dataset are rejected
+explicitly; degraded-accuracy fallback is not permitted.
+
+The Command 03 provider bridge continues to preserve native TEME evidence. Consumers that
+require GCRF must invoke this qualified transformation explicitly before assigning the GCRF
+label. Outputs remain advisory-only and still require independent scientific validation
+before any operational use. This command adds no HTTP route, provider activation, Render
+configuration change, deployment action, or OYA capability.

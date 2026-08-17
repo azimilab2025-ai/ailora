@@ -35,6 +35,8 @@ dependencies = [
     "opentelemetry-sdk>=1.28",
     "opentelemetry-instrumentation-fastapi>=0.49b0",
     "sgp4==2.27",
+    "astropy==8.0.1",
+    "astropy-iers-data==0.2026.8.10.0.32.39",
 ]
 
 [project.optional-dependencies]
