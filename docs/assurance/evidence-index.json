@@ -76,9 +76,15 @@
       "status": "CURRENT_BASELINE_EVIDENCE_NOT_FINAL_QUALIFICATION"
     },
     {
+      "evidence_class": "COMMAND_CHECKPOINT",
+      "path": "docs/checkpoints/master-program-command-14-scientific-reproducibility.md",
+      "sha256": "a037c1052539899b0d8bf1ec28bc7e000f2a614ec2418251a987534f04a1bf67",
+      "status": "CURRENT_BASELINE_EVIDENCE_NOT_FINAL_QUALIFICATION"
+    },
+    {
       "evidence_class": "REQUIREMENTS",
       "path": "docs/governance/enterprise-requirements-traceability.json",
-      "sha256": "f9021d36e57d53b5b8ca20c78866f4e1df6ced001c7be871a7fc621c3256b430",
+      "sha256": "ac7b607ad948b7ee9310fd4a71241c16a2856a0dfb504fafea46e51ff1b44268",
       "status": "CURRENT_BASELINE_EVIDENCE_NOT_FINAL_QUALIFICATION"
     },
     {
@@ -161,6 +167,12 @@
     },
     {
       "evidence_class": "IMPLEMENTATION",
+      "path": "src/ailora/services/astrodynamics/reproducibility.py",
+      "sha256": "420c509536392e996407a26564fa8b99447cd0f79369e0fa2ffc43d0c5d83334",
+      "status": "CURRENT_BASELINE_EVIDENCE_NOT_FINAL_QUALIFICATION"
+    },
+    {
+      "evidence_class": "IMPLEMENTATION",
       "path": "src/ailora/services/astrodynamics/verification.py",
       "sha256": "a6daab02f91f51c2473bda83ffb41ce9d2d562aadde48f471545a281ba712380",
       "status": "CURRENT_BASELINE_EVIDENCE_NOT_FINAL_QUALIFICATION"
@@ -199,6 +211,12 @@
       "evidence_class": "VERIFICATION",
       "path": "tests/test_recovery_qualification.py",
       "sha256": "732d9e52c6a2b74c0682bdd98156e7ca45450a387a8bd7a8b0c660b300a40d29",
+      "status": "CURRENT_BASELINE_EVIDENCE_NOT_FINAL_QUALIFICATION"
+    },
+    {
+      "evidence_class": "VERIFICATION",
+      "path": "tests/test_scientific_reproducibility.py",
+      "sha256": "5c2c9b9280bc92d975758a2d594c56f03d8ac8358dc0d2ff22e81367572d58af",
       "status": "CURRENT_BASELINE_EVIDENCE_NOT_FINAL_QUALIFICATION"
     },
     {

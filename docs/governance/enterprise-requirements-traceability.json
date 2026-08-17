@@ -300,25 +300,28 @@
     },
     {
       "commands": [
+        14,
         18
       ],
       "external_dependency": null,
       "id": "ENT-011",
       "implementation_refs": [
         "src/ailora/services/astrodynamics/config.py",
-        "src/ailora/services/astrodynamics/models.py"
+        "src/ailora/services/astrodynamics/models.py",
+        "src/ailora/services/astrodynamics/reproducibility.py"
       ],
       "owner": "Scientific Configuration Manager",
       "release_gates": [
         "G04_SCIENTIFIC_QUALIFICATION",
         "G09_GOVERNANCE_ASSURANCE"
       ],
-      "remaining_scope": "Unify content-addressed registry execution manifest runtime matrix tolerance and drift profiles.",
-      "status": "PARTIAL",
+      "remaining_scope": "Bind manifest creation to every applicable scientific execution path, retain promoted manifests immutably, execute controlled cross-platform repeatability evidence, obtain independent configuration review and accept release-specific drift baselines.",
+      "status": "VERIFIED_BASELINE",
       "title": "Scientific configuration and reproducibility manifest",
       "verification_refs": [
         "tests/test_astrodynamics_propagation.py",
-        "tests/test_astrodynamics_frame_transform.py"
+        "tests/test_astrodynamics_frame_transform.py",
+        "tests/test_scientific_reproducibility.py"
       ]
     },
     {

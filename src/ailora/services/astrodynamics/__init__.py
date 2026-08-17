@@ -10,6 +10,15 @@ from ailora.services.astrodynamics.analysis import (
 from ailora.services.astrodynamics.config import AstrodynamicsConfig
 from ailora.services.astrodynamics.covariance import CovarianceContract
 from ailora.services.astrodynamics.models import PropagationRequest, PropagationResult, TLEInput
+from ailora.services.astrodynamics.reproducibility import (
+    ScientificExecutionContext,
+    ScientificRegistryEntry,
+    ScientificToleranceProfile,
+    ToleranceSetting,
+    compare_scientific_execution_manifests,
+    create_scientific_execution_manifest,
+    verify_scientific_execution_manifest,
+)
 from ailora.services.astrodynamics.service import AstrodynamicsService
 from ailora.services.astrodynamics.tca import (
     TcaAnalyzer,
@@ -36,6 +45,9 @@ __all__ = [
     "CovarianceContract",
     "PropagationRequest",
     "PropagationResult",
+    "ScientificExecutionContext",
+    "ScientificRegistryEntry",
+    "ScientificToleranceProfile",
     "Sgp4Engine",
     "SafeScientificLabel",
     "TcaAnalyzer",
@@ -43,7 +55,10 @@ __all__ = [
     "TcaSearchConfig",
     "TcaSearchRequest",
     "TLEInput",
+    "ToleranceSetting",
     "assess_bounded_conjunction",
+    "compare_scientific_execution_manifests",
+    "create_scientific_execution_manifest",
     "DifferentialVerificationResult",
     "IndependentTcaReference",
     "VerificationError",
@@ -52,4 +67,5 @@ __all__ = [
     "VerificationTolerance",
     "reference_content_digest",
     "verify_tca_result",
+    "verify_scientific_execution_manifest",
 ]
