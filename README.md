@@ -238,6 +238,12 @@ AILORA treats every analytical journey as a governed evidence chain. Inputs are 
 
 The blueprint summarizes responsibility flow from governed orbital input to human authority. It supplements the detailed technical Mermaid architecture below; it does not replace component-level contracts or imply operational approval.
 
+The security foundation now includes an opt-in, offline-qualified RS256 access-token profile with
+exact issuer and audience validation, mandatory `jti`, public-only JWKS publication and bounded
+verification overlap during key rotation. Existing runtime authentication is not silently switched:
+production activation still requires protected key custody, approved configuration, OIDC integration,
+operational rotation evidence and an explicit deployment decision.
+
 The AILORA platform is structured as layered vertical concerns, each with defined
 interfaces, data standards, and governance contracts.
 
