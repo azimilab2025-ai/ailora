@@ -244,6 +244,12 @@ verification overlap during key rotation. Existing runtime authentication is not
 production activation still requires protected key custody, approved configuration, OIDC integration,
 operational rotation evidence and an explicit deployment decision.
 
+The next identity layer adds a provider-neutral, injected-JWKS OIDC verification boundary and an
+immutable session-assurance policy for nonce binding, token freshness, refresh-family replay
+detection, absolute/idle expiry, idempotent logout and recent MFA before privileged effects. It is
+offline-qualified and disabled from runtime routing; authorization-code exchange, account linking,
+production IdP configuration and durable session-state integration remain explicit later gates.
+
 The AILORA platform is structured as layered vertical concerns, each with defined
 interfaces, data standards, and governance contracts.
 

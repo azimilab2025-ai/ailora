@@ -104,19 +104,21 @@
       "implementation_refs": [
         "src/ailora/security/asymmetric_tokens.py",
         "src/ailora/security/auth.py",
+        "src/ailora/security/oidc_sessions.py",
         "src/ailora/security/session_tokens.py"
       ],
       "owner": "Security Engineering",
       "release_gates": [
         "G02_SECURITY_IDENTITY"
       ],
-      "remaining_scope": "Integrate approved OIDC, privileged MFA, protected production key custody, revocation and operational rotation qualification without replacing session controls.",
+      "remaining_scope": "Complete authorization-code exchange, account linking, MFA enrollment, durable replay-state integration, protected production key custody, approved IdP configuration and operational qualification.",
       "status": "PARTIAL",
       "title": "OIDC MFA asymmetric JWT JWKS and hardened sessions",
       "verification_refs": [
         "tests/test_asymmetric_tokens.py",
         "tests/test_auth.py",
-        "tests/test_identity_session_lifecycle.py"
+        "tests/test_identity_session_lifecycle.py",
+        "tests/test_oidc_sessions.py"
       ]
     },
     {
