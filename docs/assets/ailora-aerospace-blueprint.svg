@@ -1,0 +1,154 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="760" viewBox="0 0 1440 760" role="img" aria-labelledby="blueprint-title blueprint-desc">
+  <title id="blueprint-title">AILORA aerospace system engineering blueprint</title>
+  <desc id="blueprint-desc">A five-stage responsibility flow from governed orbital intelligence through physics, bounded advisory analysis, evidence, and human authority.</desc>
+  <defs>
+    <linearGradient id="blueprint-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#020915"/>
+      <stop offset="0.56" stop-color="#061b36"/>
+      <stop offset="1" stop-color="#130b32"/>
+    </linearGradient>
+    <linearGradient id="blueprint-flow" x1="0" x2="1">
+      <stop stop-color="#55efff"/>
+      <stop offset="0.55" stop-color="#648cff"/>
+      <stop offset="1" stop-color="#c47cff"/>
+    </linearGradient>
+    <marker id="blueprint-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10Z" fill="#65dfff"/>
+    </marker>
+    <filter id="blueprint-glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <style>
+    .bg { fill: url(#blueprint-bg); }
+    .grid { stroke: #3c5a79; opacity: .18; }
+    .orbit { fill: none; stroke: #4e81aa; opacity: .25; }
+    .stage { fill: #071a34; stroke: #315575; stroke-width: 1.5; }
+    .stage-accent { fill: none; stroke: url(#blueprint-flow); stroke-width: 3; }
+    .flow { fill: none; stroke: #65dfff; stroke-width: 2; marker-end: url(#blueprint-arrow); }
+    .eyebrow { fill: #819fc5; font: 700 13px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; letter-spacing: 2px; }
+    .headline { fill: #f5fbff; font: 800 30px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; letter-spacing: 1px; }
+    .number { fill: #64e8ff; font: 800 13px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    .name { fill: #f6fbff; font: 800 17px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; letter-spacing: .6px; }
+    .detail { fill: #a9bdd7; font: 500 12px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    .tag { fill: #73f4b2; font: 700 11px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; letter-spacing: 1px; }
+    .warning { fill: #ffd17a; font: 700 11px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; letter-spacing: 1px; }
+    .rail { fill: #ffb2ca; font: 800 13px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; letter-spacing: 1.5px; }
+    @media (prefers-color-scheme: light) {
+      .bg { fill: #eef6ff; }
+      .grid { stroke: #7794b2; opacity: .20; }
+      .orbit { stroke: #6289ad; opacity: .30; }
+      .stage { fill: #ffffff; stroke: #9ab4cf; }
+      .eyebrow, .detail { fill: #496480; }
+      .headline, .name { fill: #091a31; }
+      .number { fill: #007f99; }
+      .tag { fill: #08754a; }
+      .warning { fill: #8b5700; }
+      .rail { fill: #9a2851; }
+    }
+  </style>
+  <rect class="bg" width="1440" height="760" rx="28"/>
+  <g class="grid" fill="none">
+    <path d="M0 80H1440M0 160H1440M0 240H1440M0 320H1440M0 400H1440M0 480H1440M0 560H1440M0 640H1440M0 720H1440"/>
+    <path d="M80 0V760M160 0V760M240 0V760M320 0V760M400 0V760M480 0V760M560 0V760M640 0V760M720 0V760M800 0V760M880 0V760M960 0V760M1040 0V760M1120 0V760M1200 0V760M1280 0V760M1360 0V760"/>
+  </g>
+  <ellipse class="orbit" cx="720" cy="400" rx="660" ry="250" transform="rotate(-6 720 400)"/>
+  <ellipse class="orbit" cx="720" cy="400" rx="520" ry="310" transform="rotate(8 720 400)"/>
+  <circle cx="1320" cy="128" r="5" fill="#55efff" filter="url(#blueprint-glow)"/>
+  <path d="M1268 112L1320 128L1282 168" fill="none" stroke="#55efff" stroke-width="2"/>
+
+  <text class="eyebrow" x="56" y="55">SYSTEM RESPONSIBILITY FLOW · AEROSPACE BLUEPRINT</text>
+  <text class="headline" x="56" y="96">AILORA ORBITAL INTELLIGENCE ARCHITECTURE</text>
+  <text class="eyebrow" x="1384" y="78" text-anchor="end">EARTH ORBIT · ADVISORY ONLY</text>
+
+  <g transform="translate(55 180)">
+    <rect class="stage" width="235" height="300" rx="18"/>
+    <path class="stage-accent" d="M20 2H215"/>
+    <text class="number" x="22" y="38">01 / INPUT</text>
+    <text class="name" x="22" y="75">ORBITAL</text>
+    <text class="name" x="22" y="99">INTELLIGENCE</text>
+    <text class="detail" x="22" y="137">Qualified provider boundary</text>
+    <text class="detail" x="22" y="158">Tenant-scoped request</text>
+    <text class="detail" x="22" y="179">Raw artifact + provenance</text>
+    <path d="M22 202H213" stroke="#294968"/>
+    <text class="tag" x="22" y="231">CELESTRAK API</text>
+    <text class="warning" x="22" y="255">PRODUCTION E2E DEFERRED</text>
+    <text class="detail" x="22" y="279">No startup provider fetch</text>
+  </g>
+
+  <path class="flow" d="M300 330H335"/>
+  <g transform="translate(345 180)">
+    <rect class="stage" width="235" height="300" rx="18"/>
+    <path class="stage-accent" d="M20 2H215"/>
+    <text class="number" x="22" y="38">02 / PHYSICS</text>
+    <text class="name" x="22" y="75">PHYSICS</text>
+    <text class="name" x="22" y="99">LAYER</text>
+    <text class="detail" x="22" y="137">TLE parse + SGP4</text>
+    <text class="detail" x="22" y="158">Native TEME evidence</text>
+    <text class="detail" x="22" y="179">TEME → GCRF transform</text>
+    <path d="M22 202H213" stroke="#294968"/>
+    <text class="tag" x="22" y="231">POSITION + VELOCITY</text>
+    <text class="tag" x="22" y="255">PINNED IERS DATA</text>
+    <text class="detail" x="22" y="279">No degraded fallback</text>
+  </g>
+
+  <path class="flow" d="M590 330H625"/>
+  <g transform="translate(635 180)">
+    <rect class="stage" width="235" height="300" rx="18"/>
+    <path class="stage-accent" d="M20 2H215"/>
+    <text class="number" x="22" y="38">03 / ANALYSIS</text>
+    <text class="name" x="22" y="75">AI ADVISORY</text>
+    <text class="name" x="22" y="99">BOUNDARY</text>
+    <text class="detail" x="22" y="137">Bounded risk assessment</text>
+    <text class="detail" x="22" y="158">Explainable recommendations</text>
+    <text class="detail" x="22" y="179">Visible uncertainty</text>
+    <path d="M22 202H213" stroke="#294968"/>
+    <text class="warning" x="22" y="231">NON-AUTHORITATIVE</text>
+    <text class="tag" x="22" y="255">FAIL-CLOSED CONTRACTS</text>
+    <text class="detail" x="22" y="279">No autonomous decision</text>
+  </g>
+
+  <path class="flow" d="M880 330H915"/>
+  <g transform="translate(925 180)">
+    <rect class="stage" width="235" height="300" rx="18"/>
+    <path class="stage-accent" d="M20 2H215"/>
+    <text class="number" x="22" y="38">04 / EVIDENCE</text>
+    <text class="name" x="22" y="75">EVIDENCE</text>
+    <text class="name" x="22" y="99">CHAIN</text>
+    <text class="detail" x="22" y="137">Transformation provenance</text>
+    <text class="detail" x="22" y="158">Append-only audit trail</text>
+    <text class="detail" x="22" y="179">Quarantine on failure</text>
+    <path d="M22 202H213" stroke="#294968"/>
+    <text class="tag" x="22" y="231">DIGEST-BOUND</text>
+    <text class="tag" x="22" y="255">TENANT-SCOPED</text>
+    <text class="detail" x="22" y="279">Replayable evidence</text>
+  </g>
+
+  <path class="flow" d="M1170 330H1205"/>
+  <g transform="translate(1215 180)">
+    <rect class="stage" width="170" height="300" rx="18"/>
+    <path class="stage-accent" d="M20 2H150"/>
+    <text class="number" x="20" y="38">05 / AUTHORITY</text>
+    <text class="name" x="20" y="75">HUMAN</text>
+    <text class="name" x="20" y="99">AUTHORITY</text>
+    <text class="detail" x="20" y="137">Authenticated review</text>
+    <text class="detail" x="20" y="158">Evidence inspection</text>
+    <text class="detail" x="20" y="179">Governed release</text>
+    <path d="M20 202H150" stroke="#294968"/>
+    <text class="warning" x="20" y="231">REQUIRED</text>
+    <text class="tag" x="20" y="255">FINAL CONTROL</text>
+    <text class="detail" x="20" y="279">No machine authority</text>
+  </g>
+
+  <g transform="translate(55 530)">
+    <rect class="stage" width="1330" height="112" rx="18"/>
+    <text class="eyebrow" x="24" y="34">CROSS-CUTTING CONTROL PLANE</text>
+    <text class="detail" x="24" y="64">JWT AUTHENTICATION · TENANT ISOLATION · POSTGRESQL · ALEMBIC · STRUCTURED LOGGING · TRACING · DURABLE WORKFLOWS</text>
+    <text class="tag" x="24" y="91">PROVENANCE AND FAILURE EVIDENCE REMAIN INSPECTABLE ACROSS EVERY STAGE</text>
+  </g>
+  <g transform="translate(55 666)">
+    <rect x="0" y="0" width="1330" height="54" rx="14" fill="#2a1025" stroke="#8f3a62"/>
+    <text class="rail" x="665" y="34" text-anchor="middle">PERMANENT SAFETY RAIL · NO SPACECRAFT COMMAND · NO TELECOMMAND · NO UPLINK · NO AUTONOMOUS MANEUVER</text>
+  </g>
+</svg>

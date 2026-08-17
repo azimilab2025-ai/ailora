@@ -60,16 +60,23 @@ Physics-First and AI-Advisory-Only principles.
 
 ## Mission Control Snapshot
 
+<!-- AILORA_MISSION_CONTROL_STRIP -->
+
+<p align="center"><img src="docs/assets/ailora-mission-control-strip.svg" alt="AILORA verified mission-control status strip" width="100%" /></p>
+
+This telemetry strip is a compact view of verified repository and deployed-surface evidence. The inspectable table below remains authoritative; the controlled authenticated production E2E provider exercise is explicitly deferred, and no NASA runtime integration is claimed.
+
 | Control-plane signal | Verified state |
 |---|---|
 | **Live API** | [`ailora-web.onrender.com`](https://ailora-web.onrender.com) |
 | **Liveness** | [`/health/live`](https://ailora-web.onrender.com/health/live) |
 | **Interactive OpenAPI** | [`/docs`](https://ailora-web.onrender.com/docs) |
-| **API surface** | 18 OpenAPI paths |
-| **Automated verification** | 644 tests passing |
-| **Statement coverage** | 87.77% against an enforced 85% floor |
+| **API surface** | 20 OpenAPI paths / 27 operations |
+| **Automated verification** | 700 tests passing |
+| **Statement coverage** | 87.61% against an enforced 85% floor |
 | **Deployment model** | Render-hosted terrestrial production-grade |
-| **NASA live data** | **NOT ACTIVATED** — qualification remains gated |
+| **CelesTrak provider chain** | **API DEPLOYED** — controlled production E2E deferred |
+| **NASA integration** | **NOT ACTIVE** — no NASA runtime provider is connected |
 | **Oya voice service** | **DISABLED** — no-op, network-free and non-billable |
 | **Human authority** | **REQUIRED** — AI output remains advisory |
 | **Spacecraft commands** | **PERMANENTLY PROHIBITED** |
@@ -223,6 +230,12 @@ AILORA treats every analytical journey as a governed evidence chain. Inputs are 
 ---
 
 ## Architecture
+
+<!-- AILORA_AEROSPACE_BLUEPRINT -->
+
+<p align="center"><img src="docs/assets/ailora-aerospace-blueprint.svg" alt="AILORA aerospace system responsibility blueprint" width="100%" /></p>
+
+The blueprint summarizes responsibility flow from governed orbital input to human authority. It supplements the detailed technical Mermaid architecture below; it does not replace component-level contracts or imply operational approval.
 
 The AILORA platform is structured as layered vertical concerns, each with defined
 interfaces, data standards, and governance contracts.

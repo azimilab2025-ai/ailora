@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="360" viewBox="0 0 1440 360" role="img" aria-labelledby="mission-title mission-desc">
+  <title id="mission-title">AILORA mission control verified-status strip</title>
+  <desc id="mission-desc">A compact telemetry console showing the verified API, test, coverage, provider, human-authority, and safety states.</desc>
+  <defs>
+    <linearGradient id="mission-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#020714"/>
+      <stop offset="0.54" stop-color="#071a36"/>
+      <stop offset="1" stop-color="#160b35"/>
+    </linearGradient>
+    <linearGradient id="mission-line" x1="0" x2="1">
+      <stop stop-color="#4de8ff"/>
+      <stop offset="0.52" stop-color="#5d8cff"/>
+      <stop offset="1" stop-color="#bd72ff"/>
+    </linearGradient>
+    <filter id="mission-glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <style>
+    .bg { fill: url(#mission-bg); }
+    .panel { fill: #08152c; stroke: #29476b; }
+    .grid { stroke: #315475; opacity: .20; }
+    .eyebrow { fill: #7f9fca; font: 600 13px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; letter-spacing: 2px; }
+    .title { fill: #f4fbff; font: 800 26px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; letter-spacing: 1px; }
+    .label { fill: #8eaacb; font: 700 11px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; letter-spacing: 1.5px; }
+    .value { fill: #f7fbff; font: 800 18px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    .cyan { fill: #55efff; }
+    .green { fill: #73f4b2; }
+    .amber { fill: #ffd17a; }
+    .violet { fill: #c999ff; }
+    .rail { fill: #a9bad2; font: 700 12px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; letter-spacing: 1.2px; }
+    @media (prefers-color-scheme: light) {
+      .bg { fill: #edf5ff; }
+      .panel { fill: #ffffff; stroke: #a6bdd7; }
+      .grid { stroke: #7d9ab8; opacity: .18; }
+      .eyebrow, .label { fill: #48617f; }
+      .title, .value { fill: #0a1830; }
+      .rail { fill: #314965; }
+      .cyan { fill: #007e98; }
+      .green { fill: #08774a; }
+      .amber { fill: #8b5700; }
+      .violet { fill: #6e3db0; }
+    }
+  </style>
+  <rect class="bg" width="1440" height="360" rx="28"/>
+  <g class="grid" fill="none">
+    <path d="M0 76H1440M0 154H1440M0 232H1440M0 310H1440"/>
+    <path d="M90 0V360M270 0V360M450 0V360M630 0V360M810 0V360M990 0V360M1170 0V360M1350 0V360"/>
+    <path d="M-60 344Q720 120 1500 344" stroke-width="2"/>
+    <path d="M40 344Q720 176 1400 344"/>
+  </g>
+  <path d="M44 96H1396" stroke="url(#mission-line)" stroke-width="2" opacity=".75"/>
+  <circle cx="50" cy="42" r="5" fill="#73f4b2" filter="url(#mission-glow)"/>
+  <text class="eyebrow" x="68" y="47">VERIFIED TELEMETRY · SOURCE COMMIT 52A8071</text>
+  <text class="title" x="50" y="79">MISSION CONTROL SNAPSHOT</text>
+  <text class="eyebrow" x="1390" y="61" text-anchor="end">ADVISORY DECISION SUPPORT</text>
+
+  <g transform="translate(50 118)">
+    <rect class="panel" width="208" height="96" rx="14"/>
+    <circle cx="22" cy="22" r="4" fill="#73f4b2"/>
+    <text class="label" x="36" y="27">LIVE API</text>
+    <text class="value green" x="20" y="63">ONLINE</text>
+    <text class="label" x="20" y="83">HEALTH VERIFIED</text>
+  </g>
+  <g transform="translate(276 118)">
+    <rect class="panel" width="208" height="96" rx="14"/>
+    <text class="label" x="20" y="27">TESTS</text>
+    <text class="value cyan" x="20" y="63">700 PASS</text>
+    <text class="label" x="20" y="83">FULL SUITE</text>
+  </g>
+  <g transform="translate(502 118)">
+    <rect class="panel" width="208" height="96" rx="14"/>
+    <text class="label" x="20" y="27">COVERAGE</text>
+    <text class="value cyan" x="20" y="63">87.61%</text>
+    <text class="label" x="20" y="83">FLOOR 85%</text>
+  </g>
+  <g transform="translate(728 118)">
+    <rect class="panel" width="208" height="96" rx="14"/>
+    <text class="label" x="20" y="27">OPENAPI</text>
+    <text class="value violet" x="20" y="63">20 PATHS</text>
+    <text class="label" x="20" y="83">27 OPERATIONS</text>
+  </g>
+  <g transform="translate(954 118)">
+    <rect class="panel" width="208" height="96" rx="14"/>
+    <text class="label" x="20" y="27">CELESTRAK</text>
+    <text class="value green" x="20" y="63">API DEPLOYED</text>
+    <text class="label amber" x="20" y="83">E2E DEFERRED</text>
+  </g>
+  <g transform="translate(1180 118)">
+    <rect class="panel" width="210" height="96" rx="14"/>
+    <text class="label" x="20" y="27">HUMAN AUTHORITY</text>
+    <text class="value amber" x="20" y="63">REQUIRED</text>
+    <text class="label" x="20" y="83">ADVISORY ONLY</text>
+  </g>
+
+  <g transform="translate(50 238)">
+    <rect class="panel" width="1340" height="74" rx="14"/>
+    <circle cx="24" cy="24" r="4" fill="#ffd17a"/>
+    <text class="label" x="38" y="29">NASA INTEGRATION</text>
+    <text class="value amber" x="20" y="57">NOT ACTIVE</text>
+    <path d="M220 14V60" stroke="#29476b"/>
+    <circle cx="250" cy="24" r="4" fill="#73f4b2"/>
+    <text class="label" x="264" y="29">PROVIDER CHAIN</text>
+    <text class="value" x="246" y="57">CELESTRAK → TLE → TEME → GCRF</text>
+    <path d="M800 14V60" stroke="#29476b"/>
+    <circle cx="830" cy="24" r="4" fill="#c999ff"/>
+    <text class="label" x="844" y="29">SAFETY RAIL</text>
+    <text class="value violet" x="826" y="57">NO SPACECRAFT COMMAND</text>
+  </g>
+  <text class="rail" x="720" y="340" text-anchor="middle">TRUTHFUL STATUS · TENANT-SCOPED EVIDENCE · HUMAN REVIEW · NO UPLINK · NO AUTONOMOUS MANEUVER</text>
+</svg>
