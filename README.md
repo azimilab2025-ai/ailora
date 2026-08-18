@@ -699,7 +699,7 @@ The upstream project reports benchmark observations including fewer tokens, lowe
 
 **Research evidence → dependency and license review → isolated production-grade → threat model → deterministic replay → performance benchmark → tenant and authorization tests → independent review → explicit activation decision.**
 
-Until every gate passes, Oya remains **PLANNED / NOT CURRENTLY IMPLEMENTED / DISABLED**, provider-neutral, non-billable and disconnected from AILORA runtime paths.
+Until every gate passes and explicit authorization is granted, Oya remains **DISABLED BY DESIGN**, provider-neutral, non-billable and disconnected from AILORA runtime paths.
 
 Official sources: [Oya repository](https://github.com/OyaAIProd/oya) • [documentation directory](https://github.com/OyaAIProd/oya/tree/main/docs) • [benchmark methodology](https://github.com/OyaAIProd/oya/tree/main/benchmarks) • [MIT license](https://github.com/OyaAIProd/oya/blob/main/LICENSE)
 
