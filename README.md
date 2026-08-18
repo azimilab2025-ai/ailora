@@ -8,7 +8,7 @@
 
 <p align="center"><a href="https://ailora-web.onrender.com/health/live">Live Service</a> • <a href="https://ailora-web.onrender.com/docs">Interactive API</a> • <a href="#architecture">Architecture</a> • <a href="#bob-engineering-agent">Bob Agent</a> • <a href="#safety--scientific-integrity">Safety</a></p>
 
-> **Production candidate — active qualification:** the Render service is live and the verified software baseline is operational. Analytical outputs remain advisory-only. NASA live data is **NOT ACTIVATED**. Oya remains a planned, disconnected integration.
+> **Production candidate — active qualification:** the Render service is live and the verified software baseline is operational. Analytical outputs remain advisory-only. NASA live data is **NOT ACTIVATED**. Oya is realigned to a library-agent direction (typed tool catalog + plan DAG). Hosted service model removed. Still disabled and non-billable by design.
 
 <!-- AILORA_CINEMATIC_EXPERIENCE_END -->
 
@@ -77,7 +77,7 @@ This telemetry strip is a compact view of verified repository and deployed-surfa
 | **Deployment model** | Live Render service; enterprise qualification in progress |
 | **CelesTrak provider chain** | **API DEPLOYED** — controlled production E2E deferred |
 | **NASA integration** | **NOT ACTIVE** — no NASA runtime provider is connected |
-| **Oya voice service** | **DISABLED** — no-op, network-free and non-billable |
+| **Oya library-agent** | **DISABLED** — typed catalog + plan validation, no network clients, non-billable |
 | **Human authority** | **REQUIRED** — AI output remains advisory |
 | **Spacecraft commands** | **PERMANENTLY PROHIBITED** |
 
@@ -511,20 +511,21 @@ Operational status.
 - This gate is **non-blocking** for identity and foundation development, but **blocking**
   for any Normative scientific claim.
 
-### Oya — Future Direction
+### Oya — Library-Agent Direction
 
-> **Status: PLANNED / NOT CURRENTLY IMPLEMENTED**
+> **Status: REALIGNED / LIBRARY-AGENT / DISABLED BY DESIGN**
 
-Oya is planned for a future stage of AILORA's evolution.  The service is
-intentionally kept disabled during the production-grade phase.  A safe placeholder
-module exists in `src/ailora/services/oya/` with a no-op adapter and
-fail-closed configuration.  No real Oya API call, vendor charge, or paid
-service activation occurs in production-grade, development, test, or challenge phases.
-All production activation requires explicit authorization from Amin Azimi and
-the production revenue gate being met.
+Oya has been realigned from the previous hosted-service concept to a pure
+library-agent surface. The package now provides a governed typed tool catalog
+(`agent_tools.py`) and plan/DAG validation (`typed_plan.py`). All tools map
+exclusively to existing AILORA HTTP routes. No external network clients, no
+API keys, no voice session, and no hosted configuration remain.
 
-See [Future Integration Roadmap: Oya Voice AI](#future-integration-roadmap-oya-voice-ai)
-for the full architecture and activation requirements.
+The feature stays disabled and non-billable. Activation still requires explicit
+authorization from Amin Azimi.
+
+See [Future Integration Roadmap: Oya Library-Agent](#future-integration-roadmap-oya-voice-ai)
+for the updated architecture.
 
 ---
 
@@ -582,7 +583,7 @@ Bob improves the system that builds AILORA; Bob does not become an unbounded age
 
 <p align="center"><img src="docs/assets/ailora-technology-rocket.svg" alt="Animated technology rocket traveling from the terrestrial baseline toward an outer digital world" width="100%" /></p>
 
-This animated technology trajectory represents modular growth from the verified terrestrial production-candidate baseline toward future capability. It is a visual roadmap only: no on-orbit runtime, autonomous maneuver or spacecraft command capability is claimed. NASA live data remains NOT ACTIVATED. Oya remains PLANNED, NOT CURRENTLY IMPLEMENTED, and DISABLED.
+This animated technology trajectory represents modular growth from the verified terrestrial production-candidate baseline toward future capability. It is a visual roadmap only: no on-orbit runtime, autonomous maneuver or spacecraft command capability is claimed. NASA live data remains NOT ACTIVATED. Oya is realigned to library-agent direction and remains DISABLED / NON-BILLABLE.
 
 ---
 
@@ -599,7 +600,7 @@ The trajectory communicates verified direction without inventing delivery dates.
 The public Render endpoint demonstrates deployment health and API availability; release-specific scientific, legal, security and operational qualification requires separate evidence.
 
 - **NASA live data:** **NOT ACTIVATED**. Provider qualification, licensing, provenance and scientific approval remain mandatory gates.
-- **Oya voice service:** **DISABLED**. The current adapter is no-op, network-free and non-billable.
+- **Oya library-agent:** **DISABLED**. Typed catalog + plan validation, no network clients, non-billable.
 - **Human authority:** **REQUIRED** for review and release decisions.
 - **Scientific authority:** independent competent review remains external.
 - **Operational authority:** no spacecraft command, uplink or autonomous maneuver path exists.
@@ -657,18 +658,18 @@ The public Render endpoint demonstrates deployment health and API availability; 
 ---
 
 
-## Future Integration Roadmap: Oya Voice AI
+## Future Integration Roadmap: Oya Library-Agent
 
-> **PLANNED / NOT CURRENTLY IMPLEMENTED / DISABLED.** This section documents a candidate future integration only. No Oya package, API key, network call, paid service, runtime activation or production claim is introduced by this README redesign.
+> **REALIGNED / LIBRARY-AGENT / DISABLED BY DESIGN.** Oya now provides a typed tool catalog and plan validation surface. Hosted service model, API keys, network clients and voice session have been removed. The feature remains disabled and non-billable.
 
 <p align="center">
   <a href="https://github.com/OyaAIProd/oya"><img src="https://github.com/OyaAIProd.png" alt="Official Oya GitHub organization logo — planned integration, currently disabled" width="128" /></a>
 </p>
 
-<h3 align="center">OYA • PLAN, DON'T REACT</h3>
-<p align="center"><strong>Candidate deterministic agent-runtime layer • evidence required before adoption</strong></p>
+<h3 align="center">OYA • LIBRARY-AGENT (TYPED CATALOG + PLAN DAG)</h3>
+<p align="center"><strong>Governed library-agent surface • typed tools map only to existing AILORA routes • still disabled</strong></p>
 
-The [official Oya open-source repository](https://github.com/OyaAIProd/oya) describes a TypeScript/Bun runtime that asks the model for one typed dataflow plan and then executes a statically checked DAG. Intermediate values flow tool-to-tool by reference. Projection levels — `OPAQUE`, `SUMMARY`, and `TRANSPARENT` — control what the model can observe. Oya remains **PLANNED / NOT CURRENTLY IMPLEMENTED / DISABLED** in AILORA.
+Oya inside AILORA is now a pure library-agent surface. It exposes a governed typed tool catalog and a plan/DAG validator. All tools map exclusively to existing AILORA HTTP routes. No external network clients, no API keys, no voice session and no hosted configuration are present. The feature remains **DISABLED / NON-BILLABLE** by design until explicit authorization.
 
 <p align="center"><img src="docs/assets/ailora-capability-hive.svg" alt="AILORA interconnected capability honeycomb" width="100%" /></p>
 
@@ -710,7 +711,7 @@ head through revision `0014_audit_integrity`. The Render service is live; contro
 authenticated provider E2E remains a required deferred qualification exercise.
 
 - NASA runtime integration is not active; CelesTrak is the directly integrated GP source.
-- Oya remains disconnected and non-billable pending any separately authorized evaluation.
+- Oya library-agent surface is present, disabled and non-billable pending explicit authorization.
 - Backup/restore evidence records isolated local RPO/RTO/RCO observations only; managed PITR,
   objectives and production recovery qualification remain open.
 - Scientific execution manifests are deterministic and reject registry, runtime, tolerance, seed
