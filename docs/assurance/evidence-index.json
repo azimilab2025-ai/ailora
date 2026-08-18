@@ -90,7 +90,7 @@
     {
       "evidence_class": "REQUIREMENTS",
       "path": "docs/governance/enterprise-requirements-traceability.json",
-      "sha256": "4b4c97274ac7c10ab1c1bc48806bdfc30c383da1e4f5b25575f6ffbebf47c473",
+      "sha256": "62878bd5dd9eb0dfbfa1c9d0e8848d70844940fa0fb01d75739e2daec0147805",
       "status": "CURRENT_BASELINE_EVIDENCE_NOT_FINAL_QUALIFICATION"
     },
     {
@@ -186,7 +186,7 @@
     {
       "evidence_class": "IMPLEMENTATION",
       "path": "src/ailora/services/astrodynamics/frame_transform.py",
-      "sha256": "32327346da8e9e12766780476621318c8a120abcc048288880f0cb8d972db734",
+      "sha256": "f6e4c5f4da517432901af55ac5b52712c176fdebcec065b85346d897be872319",
       "status": "CURRENT_BASELINE_EVIDENCE_NOT_FINAL_QUALIFICATION"
     },
     {

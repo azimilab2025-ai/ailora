@@ -341,12 +341,13 @@
       "release_gates": [
         "G04_SCIENTIFIC_QUALIFICATION"
       ],
-      "remaining_scope": "Add first-class UTC TAI TT UT1 ITRF leap/EOP lineage conventions and independent truth vectors.",
+      "remaining_scope": "Obtain independently sourced truth vectors, execute independent scientific review, and accept release-specific tolerances; the pinned local Astropy/PyERFA regression fixture is not independent qualification evidence.",
       "status": "PARTIAL",
       "title": "Time scales EOP leap seconds frames and ITRF qualification",
       "verification_refs": [
         "tests/test_astrodynamics_frame_transform.py",
-        "tests/test_astrodynamics_frames_units.py"
+        "tests/test_astrodynamics_frames_units.py",
+        "tests/test_astrodynamics_time_eop_itrf.py"
       ]
     },
     {
