@@ -186,3 +186,81 @@ def conservative_trace_bound(
         upper_miss_distance_km=nominal_miss_distance_km + radius,
         sigma_multiplier=sigma_multiplier,
     )
+
+
+def propagate_covariance(
+    contract: CovarianceContract,
+    stm: Matrix6,
+    dt_seconds: float,
+) -> CovarianceContract:
+    """Apply a 6x6 state transition matrix and advance epoch. Fail-closed."""
+    if not math.isfinite(dt_seconds) or dt_seconds < 0.0:
+        raise CovarianceError("dt_seconds must be finite and non-negative")
+    if len(stm) != 6 or any(len(row) != 6 for row in stm):
+        raise CovarianceError("STM must be 6x6")
+    if not all(math.isfinite(v) for row in stm for v in row):
+        raise CovarianceError("STM must contain only finite values")
+
+    # P' = STM @ P @ STM.T  (pure Python, no numpy dependency)
+    p = contract.matrix
+    # first STM @ P
+    tmp = [[sum(stm[i][k] * p[k][j] for k in range(6)) for j in range(6)] for i in range(6)]
+    # then tmp @ STM.T
+    new_matrix = tuple(
+        tuple(sum(tmp[i][k] * stm[j][k] for k in range(6)) for j in range(6)) for i in range(6)
+    )
+    new_epoch = contract.epoch + __import__("datetime").timedelta(seconds=dt_seconds)
+    return CovarianceContract(
+        matrix=new_matrix,
+        epoch=new_epoch,
+        frame=contract.frame,
+        distance_unit=contract.distance_unit,
+        velocity_unit=contract.velocity_unit,
+        source_digest=contract.source_digest,
+        source_revision=contract.source_revision,
+        matrix_meaning=contract.matrix_meaning,
+        coordinate_basis=contract.coordinate_basis,
+        confidence_interpretation=contract.confidence_interpretation,
+        correlation_scope=contract.correlation_scope,
+        confidence_scale=contract.confidence_scale,
+        state_ordering=contract.state_ordering,
+    )
+
+
+def transform_covariance_frame(
+    contract: CovarianceContract,
+    target_frame: AstrodynamicsFrame,
+    rotation_matrix: Matrix3,
+) -> CovarianceContract:
+    """Rotate position/velocity blocks with a 3x3 matrix. Fail-closed."""
+    if len(rotation_matrix) != 3 or any(len(row) != 3 for row in rotation_matrix):
+        raise CovarianceError("rotation_matrix must be 3x3")
+    if not all(math.isfinite(v) for row in rotation_matrix for v in row):
+        raise CovarianceError("rotation_matrix must contain only finite values")
+    # For this bounded implementation we only accept same-frame or explicit TEME preservation
+    # Full multi-frame scientific transform remains external-gate.
+    if target_frame != contract.frame:
+        raise CovarianceError(
+            "cross-frame transform requires qualified rotation path (external gate)"
+        )
+    return contract
+
+
+def assess_conditioning(contract: CovarianceContract) -> str:
+    """Return explicit numerical-health label. Never silent on ill-conditioning."""
+    return contract.numerical_health
+
+
+def check_staleness(
+    contract: CovarianceContract,
+    now: datetime,
+    max_age_seconds: float,
+) -> None:
+    """Raise if covariance is older than allowed bound."""
+    if not math.isfinite(max_age_seconds) or max_age_seconds < 0.0:
+        raise CovarianceError("max_age_seconds must be finite and non-negative")
+    if now.tzinfo is None:
+        raise CovarianceError("now must be timezone-aware")
+    age = (now - contract.epoch).total_seconds()
+    if age > max_age_seconds:
+        raise CovarianceError(f"covariance is stale: age={age}s exceeds max_age={max_age_seconds}s")

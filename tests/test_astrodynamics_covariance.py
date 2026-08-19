@@ -7,8 +7,12 @@ import pytest
 from ailora.services.astrodynamics.covariance import (
     CovarianceContract,
     CovarianceError,
+    assess_conditioning,
+    check_staleness,
     combine_position_covariances,
     conservative_trace_bound,
+    propagate_covariance,
+    transform_covariance_frame,
 )
 from ailora.services.astrodynamics.models import (
     AstrodynamicsFrame,
@@ -114,3 +118,52 @@ def test_trace_bound_is_conservative_and_explicit() -> None:
     assert bound.lower_miss_distance_km == pytest.approx(20.0 - bound.radius_km)
     assert bound.upper_miss_distance_km == pytest.approx(20.0 + bound.radius_km)
     assert bound.method == "TRACE_BOUND_V1"
+
+
+# --- COMMAND 20 / ENT-013 additions ---
+
+
+def test_propagate_covariance_applies_stm_and_advances_epoch() -> None:
+    from datetime import timedelta
+
+    contract = covariance()
+    # Identity STM → matrix unchanged, epoch advanced
+    stm = tuple(tuple(1.0 if i == j else 0.0 for j in range(6)) for i in range(6))
+    result = propagate_covariance(contract, stm, 60.0)
+    assert result.epoch == contract.epoch + timedelta(seconds=60)
+    assert result.matrix == contract.matrix
+    assert result.frame == contract.frame
+
+
+def test_propagate_covariance_rejects_bad_stm_or_dt() -> None:
+    contract = covariance()
+    bad_stm = ((1.0, 0.0), (0.0, 1.0))  # not 6x6
+    with pytest.raises(CovarianceError):
+        propagate_covariance(contract, bad_stm, 10.0)  # type: ignore[arg-type]
+    with pytest.raises(CovarianceError):
+        propagate_covariance(contract, tuple(tuple(0.0 for _ in range(6)) for _ in range(6)), -1.0)
+
+
+def test_transform_covariance_frame_rejects_invalid_rotation() -> None:
+    contract = covariance()
+    bad_rot = ((1.0, 0.0), (0.0, 1.0))  # not 3x3
+    with pytest.raises(CovarianceError):
+        transform_covariance_frame(contract, AstrodynamicsFrame.TEME, bad_rot)  # type: ignore[arg-type]
+
+
+def test_assess_conditioning_returns_explicit_label() -> None:
+    contract = covariance()
+    label = assess_conditioning(contract)
+    assert isinstance(label, str)
+    assert "CONDITION" in label or "NOT_COMPUTED" in label or "FINITE" in label
+
+
+def test_check_staleness_raises_when_too_old() -> None:
+    from datetime import timedelta
+
+    contract = covariance()
+    now = contract.epoch + timedelta(seconds=3600)
+    with pytest.raises(CovarianceError):
+        check_staleness(contract, now, max_age_seconds=10.0)
+    # should not raise when within bound
+    check_staleness(contract, contract.epoch + timedelta(seconds=5), max_age_seconds=10.0)
