@@ -289,3 +289,69 @@ def verify_tca_result(
         evidence_digest=evidence,
         limitations=limitations,
     )
+
+
+@dataclass(frozen=True, slots=True)
+class IndependentCorpusRecord:
+    """Bounded independent corpus metadata. Fail-closed."""
+
+    source_id: str
+    digest: str
+    revision: str
+    object_pair_count: int
+    notes: str
+
+    def __post_init__(self) -> None:
+        if not self.source_id.strip() or len(self.source_id) > 128:
+            raise VerificationError("INVALID_INPUT", "source_id must be explicit and bounded")
+        if not re.fullmatch(r"[0-9a-f]{64}", self.digest):
+            raise VerificationError("INVALID_INPUT", "digest must be lowercase SHA-256")
+        if not self.revision.strip() or len(self.revision) > 128:
+            raise VerificationError("INVALID_INPUT", "revision must be explicit")
+        if self.object_pair_count < 0:
+            raise VerificationError("INVALID_INPUT", "object_pair_count must be non-negative")
+
+
+@dataclass(frozen=True, slots=True)
+class CommonModeMap:
+    """Primary vs independent TCA comparison. Advisory only."""
+
+    primary_tca_epoch: datetime
+    independent_tca_epoch: datetime
+    delta_seconds: float
+    primary_miss_distance_km: float
+    independent_miss_distance_km: float
+    agreement_status: str  # AGREE | DISAGREE | INCONCLUSIVE
+
+    def __post_init__(self) -> None:
+        if self.agreement_status not in {"AGREE", "DISAGREE", "INCONCLUSIVE"}:
+            raise VerificationError(
+                "INVALID_INPUT", "agreement_status must be AGREE|DISAGREE|INCONCLUSIVE"
+            )
+        if not math.isfinite(self.delta_seconds):
+            raise VerificationError("INVALID_INPUT", "delta_seconds must be finite")
+        if not math.isfinite(self.primary_miss_distance_km) or not math.isfinite(
+            self.independent_miss_distance_km
+        ):
+            raise VerificationError("INVALID_INPUT", "miss distances must be finite")
+
+
+@dataclass(frozen=True, slots=True)
+class MultipleMinimumEvidence:
+    """Evidence of multiple local minima search completeness. Advisory only."""
+
+    candidate_count: int
+    ranked_epochs: tuple[datetime, ...]
+    ranked_miss_distances: tuple[float, ...]
+    completeness_flag: str  # COMPLETE | PARTIAL | UNKNOWN
+
+    def __post_init__(self) -> None:
+        if self.candidate_count < 0:
+            raise VerificationError("INVALID_INPUT", "candidate_count must be non-negative")
+        if self.completeness_flag not in {"COMPLETE", "PARTIAL", "UNKNOWN"}:
+            raise VerificationError(
+                "INVALID_INPUT", "completeness_flag must be COMPLETE|PARTIAL|UNKNOWN"
+            )
+        if len(self.ranked_miss_distances) != self.candidate_count and self.candidate_count > 0:
+            # allow empty ranked lists when count is declared
+            pass
