@@ -64,3 +64,73 @@ def test_invalid_terms_digest_and_non_https_uri_rejected() -> None:
         replace(qualification(), terms_digest="bad")
     with pytest.raises(ValueError):
         replace(qualification(), terms_uri="http://celestrak.org")
+
+
+# --- COMMAND 22 / ENT-015 additions ---
+
+
+def test_legal_status_record_accepts_valid() -> None:
+    from datetime import UTC, datetime
+
+    from ailora.services.space_data.governance import LegalStatusRecord
+
+    rec = LegalStatusRecord(
+        provider_id="PROV-1",
+        legal_status="ACTIVE",
+        effective_from=datetime(2026, 1, 1, tzinfo=UTC),
+        evidence_digest="a" * 64,
+    )
+    assert rec.legal_status == "ACTIVE"
+
+
+def test_legal_status_record_rejects_bad_digest() -> None:
+    from datetime import UTC, datetime
+
+    from ailora.services.space_data.governance import GovernanceError, LegalStatusRecord
+
+    with pytest.raises(GovernanceError):
+        LegalStatusRecord(
+            provider_id="PROV-1",
+            legal_status="ACTIVE",
+            effective_from=datetime(2026, 1, 1, tzinfo=UTC),
+            evidence_digest="bad",
+        )
+
+
+def test_freshness_taxonomy_accepts_valid() -> None:
+    from ailora.services.space_data.governance import FreshnessTaxonomy
+
+    t = FreshnessTaxonomy(
+        source_class="TLE_PROVIDER",
+        max_age_seconds=86400,
+        poisoning_risk_class="LOW",
+    )
+    assert t.max_age_seconds == 86400
+
+
+def test_poisoning_defense_signal_accepts_valid() -> None:
+    from datetime import UTC, datetime
+
+    from ailora.services.space_data.governance import PoisoningDefenseSignal
+
+    s = PoisoningDefenseSignal(
+        signal_id="SIG-1",
+        detected_at=datetime(2026, 8, 19, tzinfo=UTC),
+        severity="MEDIUM",
+        mitigation_action="HOLD_AND_REVIEW",
+    )
+    assert s.severity == "MEDIUM"
+
+
+def test_provider_change_monitor_snapshot_accepts_valid() -> None:
+    from datetime import UTC, datetime
+
+    from ailora.services.space_data.governance import ProviderChangeMonitorSnapshot
+
+    snap = ProviderChangeMonitorSnapshot(
+        provider_id="PROV-1",
+        last_change_epoch=datetime(2026, 8, 19, tzinfo=UTC),
+        change_digest="b" * 64,
+        monitor_status="WATCHING",
+    )
+    assert snap.monitor_status == "WATCHING"
