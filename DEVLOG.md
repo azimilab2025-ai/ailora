@@ -326,3 +326,14 @@ No normative claim until Prompt 06 domain review is resolved.
 - Oya implementation: NOT_AUTHORIZED in this phase
 - Production deploy / public release: NOT_AUTHORIZED
 - Push / remote / PR: NOT_AUTHORIZED (local commits only)
+
+---
+
+### 2026-08-20 — Local evidence surfaces (Commands 20-30)
+
+- Minimal frozen evidence types added for ENT-015 through ENT-023 local scope.
+- Test count baseline synchronized to 1065 collected tests.
+- Governance remaining_scope annotated; EXTERNAL_GATE and PARTIAL statuses intentionally unchanged.
+- Oya remains library-agent / DISABLED by design.
+- Prompt 06 domain review remains PARTIAL / STILL OPEN.
+

@@ -1,5 +1,12 @@
 # AILORA — Changelog
 
+## [Unreleased]
+
+### Changed
+- docs: synchronize test count and coverage metrics to current baseline (1065 tests)
+- docs(governance): annotate local evidence surfaces for ENT-015..023 (status flags unchanged)
+
+
 All significant changes to this project are recorded here.
 This file is append-only in meaning; earlier entries must not be silently rewritten.
 
