@@ -1,5 +1,3 @@
-"""Pure durable-workflow state and retry contracts."""
-
 from __future__ import annotations
 
 import hashlib
@@ -26,7 +24,7 @@ from sqlalchemy.types import Uuid
 
 from ailora.db.base import Base
 
-_KEY = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._:-]{7,127}$")
+_KEY = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]{7,127}$")
 
 
 class WorkflowState(StrEnum):
@@ -226,3 +224,74 @@ class WorkflowEventRecord(Base):
     occurred_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, default=lambda: datetime.now(tz=UTC)
     )
+
+
+@dataclass(frozen=True, slots=True)
+class DurableQueueMessage:
+    """Durable queue message evidence. Fail-closed. No live broker."""
+
+    message_id: str
+    queue_name: str
+    payload_digest: str
+    priority: int
+    enqueued_at: datetime
+
+    def __post_init__(self) -> None:
+        if not self.message_id.strip() or len(self.message_id) > 128:
+            raise WorkflowContractError("message_id must be explicit and bounded")
+        if not self.queue_name.strip() or len(self.queue_name) > 128:
+            raise WorkflowContractError("queue_name must be explicit and bounded")
+        if not re.fullmatch(r"[0-9a-f]{64}", self.payload_digest):
+            raise WorkflowContractError("payload_digest must be lowercase SHA-256")
+        if not (0 <= self.priority <= 100):
+            raise WorkflowContractError("priority must be in [0, 100]")
+
+
+@dataclass(frozen=True, slots=True)
+class DeadLetterRecord:
+    """Dead-letter evidence. Explicit only."""
+
+    original_message_id: str
+    reason: str
+    attempts: int
+    moved_at: datetime
+
+    def __post_init__(self) -> None:
+        if not self.original_message_id.strip():
+            raise WorkflowContractError("original_message_id must be explicit")
+        if not self.reason.strip():
+            raise WorkflowContractError("reason must be explicit")
+        if self.attempts < 1:
+            raise WorkflowContractError("attempts must be >= 1")
+
+
+@dataclass(frozen=True, slots=True)
+class BackpressureSignal:
+    """Queue backpressure signal. Advisory only."""
+
+    queue_name: str
+    depth: int
+    threshold: int
+    signal_state: str
+
+    def __post_init__(self) -> None:
+        if not self.queue_name.strip():
+            raise WorkflowContractError("queue_name must be explicit")
+        if self.depth < 0 or self.threshold < 0:
+            raise WorkflowContractError("depth and threshold must be non-negative")
+        if self.signal_state not in {"NORMAL", "THROTTLED", "REJECTING"}:
+            raise WorkflowContractError("signal_state must be NORMAL|THROTTLED|REJECTING")
+
+
+@dataclass(frozen=True, slots=True)
+class SchedulerLease:
+    """Worker scheduler lease with cancellation flag. Bounded."""
+
+    lease_id: str
+    worker_id: str
+    expires_at: datetime
+    cancel_requested: bool
+
+    def __post_init__(self) -> None:
+        if not self.lease_id.strip() or not self.worker_id.strip():
+            raise WorkflowContractError("lease_id and worker_id must be explicit")
