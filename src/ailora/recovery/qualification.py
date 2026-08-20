@@ -260,3 +260,72 @@ class RollbackDecisionRecord:
     def __post_init__(self) -> None:
         if not self.decision_id.strip() or not self.reason.strip() or not self.initiated_by.strip():
             raise RecoveryContractError("decision_id, reason, initiated_by must be explicit")
+
+
+@dataclass(frozen=True, slots=True)
+class ResidualRiskRecord:
+    risk_id: str
+    severity: str
+    acceptance_status: str
+    evidence_digest: str
+
+    def __post_init__(self) -> None:
+        if not self.risk_id.strip():
+            raise RecoveryContractError("risk_id must be explicit")
+        if self.severity not in ("LOW", "MEDIUM", "HIGH", "CRITICAL"):
+            raise RecoveryContractError("severity must be LOW|MEDIUM|HIGH|CRITICAL")
+        if self.acceptance_status not in ("ACCEPTED", "DEFERRED", "REJECTED"):
+            raise RecoveryContractError("acceptance_status must be ACCEPTED|DEFERRED|REJECTED")
+        if len(self.evidence_digest) != 64 or not all(
+            c in "0123456789abcdef" for c in self.evidence_digest.lower()
+        ):
+            raise RecoveryContractError("evidence_digest must be 64 hex chars")
+
+
+@dataclass(frozen=True, slots=True)
+class AssuranceCaseIndexEntry:
+    entry_id: str
+    claim_ref: str
+    evidence_ref: str
+    coverage_status: str
+
+    def __post_init__(self) -> None:
+        if not self.entry_id.strip():
+            raise RecoveryContractError("entry_id must be explicit")
+        if self.coverage_status not in ("COVERED", "PARTIAL", "GAP"):
+            raise RecoveryContractError("coverage_status must be COVERED|PARTIAL|GAP")
+
+
+@dataclass(frozen=True, slots=True)
+class ReleaseAuthorityBoundary:
+    boundary_id: str
+    human_authority_required: bool
+    no_command_enforced: bool
+    audit_ref: str
+
+    def __post_init__(self) -> None:
+        if not self.boundary_id.strip():
+            raise RecoveryContractError("boundary_id must be explicit")
+        if not self.human_authority_required:
+            raise RecoveryContractError("human_authority_required must be True (ENT-001)")
+        if not self.no_command_enforced:
+            raise RecoveryContractError("no_command_enforced must be True (ENT-001)")
+
+
+@dataclass(frozen=True, slots=True)
+class FinalReleaseDecisionRecord:
+    decision_id: str
+    residual_risks: tuple[str, ...]
+    assurance_index_digest: str
+    authority_ack: str
+    outcome: str
+
+    def __post_init__(self) -> None:
+        if not self.decision_id.strip():
+            raise RecoveryContractError("decision_id must be explicit")
+        if len(self.assurance_index_digest) != 64:
+            raise RecoveryContractError("assurance_index_digest must be 64 chars")
+        if not self.authority_ack.strip():
+            raise RecoveryContractError("authority_ack must be explicit")
+        if self.outcome not in ("READY_FOR_EXTERNAL", "BLOCKED", "ADVISORY_ONLY"):
+            raise RecoveryContractError("outcome must be READY_FOR_EXTERNAL|BLOCKED|ADVISORY_ONLY")
