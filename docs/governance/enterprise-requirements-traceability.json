@@ -1,599 +1,599 @@
 {
-  "artifact_id": "AILORA-ENTERPRISE-REQUIREMENTS-TRACEABILITY",
-  "assurance_artifacts": {
-    "assurance_case": "docs/assurance/assurance-case.md",
-    "claims": "docs/assurance/claims.json",
-    "evidence_index": "docs/assurance/evidence-index.json",
-    "hazards": "docs/assurance/hazards.md",
-    "risks": "docs/assurance/risk-register.json",
-    "threats": "docs/assurance/threat-model.md"
-  },
-  "baseline_commit": "59d0fbc55e9e1b50fe1877af382df382602ae54a",
-  "pass_evidence": [
-    "IMPLEMENTATION",
-    "VERIFICATION",
-    "IMMUTABLE_EVIDENCE",
-    "QUALIFIED_REVIEW",
-    "ACCEPTED_RESIDUAL_RISK"
-  ],
-  "permanent_exclusions": [
-    "SPACECRAFT_COMMAND",
-    "UPLINK",
-    "TELECOMMAND",
-    "AUTONOMOUS_MANEUVER_EXECUTION",
-    "AI_SECURITY_AUTHORITY",
-    "AI_SCIENTIFIC_AUTHORITY",
-    "AI_RELEASE_AUTHORITY"
-  ],
-  "program": "MASTER_ENTERPRISE_30_COMMAND_QUALIFICATION_PROGRAM",
-  "release_gates": [
-    "G01_SOURCE_BUILD_SUPPLY_CHAIN",
-    "G02_SECURITY_IDENTITY",
-    "G03_SPACE_DATA",
-    "G04_SCIENTIFIC_QUALIFICATION",
-    "G05_DATABASE_EVIDENCE",
-    "G06_RUNTIME_HA",
-    "G07_SRE_OPERATIONAL_QUALIFICATION",
-    "G08_API_PRODUCT_BOUNDARIES",
-    "G09_GOVERNANCE_ASSURANCE",
-    "G10_FINAL_RELEASE"
-  ],
-  "requirements": [
-    {
-      "commands": [
-        4,
-        5,
-        30
-      ],
-      "external_dependency": null,
-      "id": "ENT-001",
-      "implementation_refs": [
-        "src/ailora/security/authorization.py",
-        "src/ailora/domain/ssa/review.py"
-      ],
-      "owner": "Release Authority",
-      "release_gates": [
+    "artifact_id": "AILORA-ENTERPRISE-REQUIREMENTS-TRACEABILITY",
+    "assurance_artifacts": {
+        "assurance_case": "docs/assurance/assurance-case.md",
+        "claims": "docs/assurance/claims.json",
+        "evidence_index": "docs/assurance/evidence-index.json",
+        "hazards": "docs/assurance/hazards.md",
+        "risks": "docs/assurance/risk-register.json",
+        "threats": "docs/assurance/threat-model.md"
+    },
+    "baseline_commit": "59d0fbc55e9e1b50fe1877af382df382602ae54a",
+    "pass_evidence": [
+        "IMPLEMENTATION",
+        "VERIFICATION",
+        "IMMUTABLE_EVIDENCE",
+        "QUALIFIED_REVIEW",
+        "ACCEPTED_RESIDUAL_RISK"
+    ],
+    "permanent_exclusions": [
+        "SPACECRAFT_COMMAND",
+        "UPLINK",
+        "TELECOMMAND",
+        "AUTONOMOUS_MANEUVER_EXECUTION",
+        "AI_SECURITY_AUTHORITY",
+        "AI_SCIENTIFIC_AUTHORITY",
+        "AI_RELEASE_AUTHORITY"
+    ],
+    "program": "MASTER_ENTERPRISE_30_COMMAND_QUALIFICATION_PROGRAM",
+    "release_gates": [
+        "G01_SOURCE_BUILD_SUPPLY_CHAIN",
+        "G02_SECURITY_IDENTITY",
+        "G03_SPACE_DATA",
+        "G04_SCIENTIFIC_QUALIFICATION",
+        "G05_DATABASE_EVIDENCE",
+        "G06_RUNTIME_HA",
+        "G07_SRE_OPERATIONAL_QUALIFICATION",
         "G08_API_PRODUCT_BOUNDARIES",
         "G09_GOVERNANCE_ASSURANCE",
         "G10_FINAL_RELEASE"
-      ],
-      "remaining_scope": "Preserve boundary in every subsequent change and independently audit final release.",
-      "status": "VERIFIED_BASELINE",
-      "title": "Human authority and permanent no-command boundary",
-      "verification_refs": [
-        "tests/test_authorization_isolation.py",
-        "tests/test_review_state.py"
-      ]
-    },
-    {
-      "commands": [
-        4,
-        5,
-        30
-      ],
-      "external_dependency": "Independent approvals and final human release decision",
-      "id": "ENT-002",
-      "implementation_refs": [
-        "docs/qualification/final-release-manifest.json",
-        "docs/assurance/assurance-case.md",
-        "docs/assurance/claims.json",
-        "docs/assurance/evidence-index.json",
-        "docs/assurance/hazards.md",
-        "docs/assurance/risk-register.json",
-        "docs/assurance/threat-model.md"
-      ],
-      "owner": "Release Authority",
-      "release_gates": [
-        "G09_GOVERNANCE_ASSURANCE",
-        "G10_FINAL_RELEASE"
-      ],
-      "remaining_scope": "Complete assurance case evidence index independent approvals and accepted residual risk.",
-      "status": "PARTIAL",
-      "title": "Release-specific traceability assurance and decision authority",
-      "verification_refs": [
-        "tests/test_release_decision_contract.py"
-      ]
-    },
-    {
-      "commands": [
-        6,
-        7
-      ],
-      "external_dependency": "Production IdP configuration for final acceptance",
-      "id": "ENT-003",
-      "implementation_refs": [
-        "src/ailora/security/asymmetric_tokens.py",
-        "src/ailora/security/auth.py",
-        "src/ailora/security/oidc_sessions.py",
-        "src/ailora/security/session_tokens.py"
-      ],
-      "owner": "Security Engineering",
-      "release_gates": [
-        "G02_SECURITY_IDENTITY"
-      ],
-      "remaining_scope": "Complete authorization-code exchange, account linking, MFA enrollment, durable replay-state integration, protected production key custody, approved IdP configuration and operational qualification.",
-      "status": "PARTIAL",
-      "title": "OIDC MFA asymmetric JWT JWKS and hardened sessions",
-      "verification_refs": [
-        "tests/test_asymmetric_tokens.py",
-        "tests/test_auth.py",
-        "tests/test_identity_session_lifecycle.py",
-        "tests/test_oidc_sessions.py"
-      ]
-    },
-    {
-      "commands": [
-        8,
-        9
-      ],
-      "external_dependency": "Production tenant credential for controlled E2E",
-      "id": "ENT-004",
-      "implementation_refs": [
-        "src/ailora/security/authorization.py",
-        "src/ailora/security/contextual_authorization.py",
-        "src/ailora/security/workload_identity.py",
-        "src/ailora/domain/identity/management.py"
-      ],
-      "owner": "Identity and Authorization Engineering",
-      "release_gates": [
-        "G02_SECURITY_IDENTITY",
-        "G08_API_PRODUCT_BOUNDARIES"
-      ],
-      "remaining_scope": "Integrate an approved authorization server, protected client authentication, durable registration/policy/revocation state, middleware and repository enforcement, policy administration, production monitoring and controlled tenant E2E qualification.",
-      "status": "PARTIAL",
-      "title": "Tenant-bound workload identity and contextual authorization",
-      "verification_refs": [
-        "tests/test_authorization_isolation.py",
-        "tests/test_contextual_authorization.py",
-        "tests/test_tenant_identity_management.py",
-        "tests/test_workload_identity.py"
-      ]
-    },
-    {
-      "commands": [
-        10
-      ],
-      "external_dependency": null,
-      "id": "ENT-005",
-      "implementation_refs": [
-        "src/ailora/api/app.py",
-        "src/ailora/api/contracts.py"
-      ],
-      "owner": "API Engineering",
-      "release_gates": [
-        "G08_API_PRODUCT_BOUNDARIES"
-      ],
-      "remaining_scope": "Deploy with explicit acceptance; add a durable multi-instance idempotency adapter, load evidence and independent API security review.",
-      "status": "VERIFIED_BASELINE",
-      "title": "Enterprise API contracts and bounded requests",
-      "verification_refs": [
-        "tests/test_api_contracts.py"
-      ]
-    },
-    {
-      "commands": [
-        11,
-        12
-      ],
-      "external_dependency": "Production PostgreSQL validation for final acceptance",
-      "id": "ENT-006",
-      "implementation_refs": [
-        "src/ailora/db/session.py",
-        "src/ailora/db/tenant_context.py",
-        "alembic/versions/0013_postgres_tenant_rls.py",
-        "src/ailora/domain/ssa/audit_integrity.py",
-        "src/ailora/domain/ssa/audit_models.py",
-        "src/ailora/domain/ssa/audit_repository.py",
-        "alembic/versions/0014_audit_integrity.py"
-      ],
-      "owner": "Database Engineering",
-      "release_gates": [
-        "G05_DATABASE_EVIDENCE"
-      ],
-      "remaining_scope": "Execute a controlled production-like PostgreSQL upgrade, rollback and concurrency rehearsal with pre-provisioned pgcrypto and roles; validate RLS, trigger and owner behavior, then receive production acceptance.",
-      "status": "VERIFIED_BASELINE",
-      "title": "PostgreSQL tenant defense audit immutability and safe migrations",
-      "verification_refs": [
-        "tests/test_db_baseline.py",
-        "tests/test_audit.py",
-        "tests/test_postgres_tenant_defense.py",
-        "tests/test_audit_integrity.py"
-      ]
-    },
-    {
-      "commands": [
-        13,
-        28
-      ],
-      "external_dependency": "PITR-capable managed database and controlled production-like drill",
-      "id": "ENT-007",
-      "implementation_refs": [
-        "docs/runbooks/backup-restore.md",
-        "docs/runbooks/disaster-recovery.md",
-        "src/ailora/recovery/qualification.py"
-      ],
-      "owner": "SRE and Database Operations",
-      "release_gates": [
-        "G05_DATABASE_EVIDENCE",
-        "G06_RUNTIME_HA"
-      ],
-      "remaining_scope": "Define approved recovery objectives through business impact analysis, provision a PITR-capable managed PostgreSQL topology, execute independently reviewed isolated restore and failover drills, and measure production-like RPO, validated-serving RTO and reconciliation RCO.",
-      "status": "PARTIAL",
-      "title": "PITR restore RTO RPO and disaster recovery",
-      "verification_refs": [
-        "tests/test_backup_restore.py",
-        "tests/test_recovery_failures.py",
-        "tests/test_recovery_qualification.py"
-      ]
-    },
-    {
-      "commands": [
-        14,
-        15
-      ],
-      "external_dependency": "Trusted signing identity or protected key for final signature",
-      "id": "ENT-008",
-      "implementation_refs": [
-        ".github/workflows/ci.yml",
-        "Dockerfile",
-        "scripts/generate_sbom.py",
-        "src/ailora/security/supply_chain.py",
-        "uv.lock"
-      ],
-      "owner": "DevSecOps",
-      "release_gates": [
-        "G01_SOURCE_BUILD_SUPPLY_CHAIN"
-      ],
-      "remaining_scope": "Execute independently governed SAST, SCA, container and history scanners against built artifacts; provision a protected signing identity; publish signed SBOM, VEX and SLSA provenance in an immutable registry; enforce digest admission at deployment; and complete independent review.",
-      "status": "VERIFIED_BASELINE",
-      "title": "Supply-chain scans SBOM signing provenance and immutable promotion",
-      "verification_refs": [
-        "tests/test_ci_baseline.py",
-        "tests/test_artifact_sbom.py",
-        "tests/test_supply_chain_admission.py",
-        "tests/test_supply_chain_policy.py"
-      ]
-    },
-    {
-      "commands": [
-        16
-      ],
-      "external_dependency": "Selected WAF edge and secret-management platform for final proof",
-      "id": "ENT-009",
-      "implementation_refs": [
-        "Dockerfile",
-        "render.yaml",
-        "src/ailora/config.py"
-      ],
-      "owner": "Security and Platform Engineering",
-      "release_gates": [
-        "G02_SECURITY_IDENTITY",
-        "G06_RUNTIME_HA"
-      ],
-      "remaining_scope": "Add SSRF egress secret manager headers rate limits read-only runtime and edge controls.",
-      "status": "PARTIAL",
-      "title": "Runtime and edge security hardening",
-      "verification_refs": [
-        "tests/test_docker_contracts.py",
-        "tests/test_render_deployment.py"
-      ]
-    },
-    {
-      "commands": [
-        17,
-        27,
-        29
-      ],
-      "external_dependency": "Production monitoring backend and measured workload",
-      "id": "ENT-010",
-      "implementation_refs": [
-        "src/ailora/observability/logging.py",
-        "src/ailora/observability/tracing.py"
-      ],
-      "owner": "SRE",
-      "release_gates": [
-        "G07_SRE_OPERATIONAL_QUALIFICATION"
-      ],
-      "remaining_scope": "Wire end-to-end signals dashboards alerts burn policy scientific metrics and synthetics.",
-      "status": "PARTIAL",
-      "title": "OpenTelemetry SLO alerts error budget and synthetic monitoring",
-      "verification_refs": [
-        "tests/test_observability.py",
-        "tests/test_workflow_observability.py"
-      ]
-    },
-    {
-      "commands": [
-        14,
-        18
-      ],
-      "external_dependency": null,
-      "id": "ENT-011",
-      "implementation_refs": [
-        "src/ailora/services/astrodynamics/config.py",
-        "src/ailora/services/astrodynamics/models.py",
-        "src/ailora/services/astrodynamics/reproducibility.py"
-      ],
-      "owner": "Scientific Configuration Manager",
-      "release_gates": [
-        "G04_SCIENTIFIC_QUALIFICATION",
-        "G09_GOVERNANCE_ASSURANCE"
-      ],
-      "remaining_scope": "Bind manifest creation to every applicable scientific execution path, retain promoted manifests immutably, execute controlled cross-platform repeatability evidence, obtain independent configuration review and accept release-specific drift baselines.",
-      "status": "VERIFIED_BASELINE",
-      "title": "Scientific configuration and reproducibility manifest",
-      "verification_refs": [
-        "tests/test_astrodynamics_propagation.py",
-        "tests/test_astrodynamics_frame_transform.py",
-        "tests/test_scientific_reproducibility.py"
-      ]
-    },
-    {
-      "commands": [
-        19
-      ],
-      "external_dependency": "Independent scientific review for final qualification",
-      "id": "ENT-012",
-      "implementation_refs": [
-        "src/ailora/services/astrodynamics/frame_transform.py"
-      ],
-      "owner": "Astrodynamics Engineering",
-      "release_gates": [
-        "G04_SCIENTIFIC_QUALIFICATION"
-      ],
-      "remaining_scope": "Obtain independently sourced truth vectors, execute independent scientific review, and accept release-specific tolerances; the pinned local Astropy/PyERFA regression fixture is not independent qualification evidence.",
-      "status": "PARTIAL",
-      "title": "Time scales EOP leap seconds frames and ITRF qualification",
-      "verification_refs": [
-        "tests/test_astrodynamics_frame_transform.py",
-        "tests/test_astrodynamics_frames_units.py",
-        "tests/test_astrodynamics_time_eop_itrf.py"
-      ]
-    },
-    {
-      "commands": [
-        20
-      ],
-      "external_dependency": "Independent covariance corpus for final qualification",
-      "id": "ENT-013",
-      "implementation_refs": [
-        "src/ailora/services/astrodynamics/covariance.py"
-      ],
-      "owner": "Astrodynamics Engineering",
-      "release_gates": [
-        "G04_SCIENTIFIC_QUALIFICATION"
-      ],
-      "remaining_scope": "Add propagation Jacobian frame/epoch transformation conditioning staleness and correlation policy.",
-      "status": "PARTIAL",
-      "title": "Covariance propagation transformation and quality controls",
-      "verification_refs": [
-        "tests/test_astrodynamics_covariance.py"
-      ]
-    },
-    {
-      "commands": [
-        21
-      ],
-      "external_dependency": "Independent scientific reviewer sign-off",
-      "id": "ENT-014",
-      "implementation_refs": [
-        "src/ailora/services/astrodynamics/tca.py",
-        "src/ailora/services/astrodynamics/verification.py"
-      ],
-      "owner": "Scientific Verifier",
-      "release_gates": [
-        "G04_SCIENTIFIC_QUALIFICATION"
-      ],
-      "remaining_scope": "Add executable independent path independent corpus common-mode map and multiple-minimum recall evidence.",
-      "status": "PARTIAL",
-      "title": "Independent scientific engine corpus and complete TCA search",
-      "verification_refs": [
-        "tests/test_astrodynamics_tca.py",
-        "tests/test_astrodynamics_verification_contracts.py"
-      ]
-    },
-    {
-      "commands": [
-        22
-      ],
-      "external_dependency": "Authorized legal/provider approval",
-      "id": "ENT-015",
-      "implementation_refs": [
-        "src/ailora/services/space_data/adapter.py",
-        "src/ailora/services/space_data/governance.py"
-      ],
-      "owner": "Data Governance and Provider Owner",
-      "release_gates": [
-        "G03_SPACE_DATA"
-      ],
-      "remaining_scope": "Complete legal status freshness taxonomy poisoning defense change monitoring and qualification evidence.",
-      "status": "PARTIAL",
-      "title": "Provider legal technical freshness poisoning and outage qualification",
-      "verification_refs": [
-        "tests/test_space_data_provider_governance.py",
-        "tests/test_space_data_provider_outages.py"
-      ]
-    },
-    {
-      "commands": [
-        23
-      ],
-      "external_dependency": "Qualified covariance-capable data source",
-      "id": "ENT-016",
-      "implementation_refs": [
-        "src/ailora/services/space_data/production_wiring.py"
-      ],
-      "owner": "Space Data Engineering",
-      "release_gates": [
-        "G03_SPACE_DATA",
-        "G04_SCIENTIFIC_QUALIFICATION"
-      ],
-      "remaining_scope": "Add qualified covariance source object crosswalk multi-source reconciliation and explicit conflicts.",
-      "status": "MISSING",
-      "title": "Covariance-capable multi-source ingest reconciliation and conflict states",
-      "verification_refs": [
-        "tests/test_space_data_production_wiring.py"
-      ]
-    },
-    {
-      "commands": [
-        24
-      ],
-      "external_dependency": "Independent reference cases",
-      "id": "ENT-017",
-      "implementation_refs": [],
-      "owner": "Astrodynamics Engineering",
-      "release_gates": [
-        "G04_SCIENTIFIC_QUALIFICATION"
-      ],
-      "remaining_scope": "Implement encounter geometry combined covariance HBR provenance and fail-closed regime selection.",
-      "status": "MISSING",
-      "title": "Encounter plane HBR and validity-domain enforcement",
-      "verification_refs": []
-    },
-    {
-      "commands": [
-        25
-      ],
-      "external_dependency": "Independent scientific sign-off",
-      "id": "ENT-018",
-      "implementation_refs": [
-        "src/ailora/domain/ssa/risk.py"
-      ],
-      "owner": "Astrodynamics Engineering and Scientific Verifier",
-      "release_gates": [
-        "G04_SCIENTIFIC_QUALIFICATION",
-        "G08_API_PRODUCT_BOUNDARIES"
-      ],
-      "remaining_scope": "Implement qualified Pc methods deterministic Monte Carlo limitations and ConjunctionRiskAssessmentV2.",
-      "status": "MISSING",
-      "title": "Dual-method Pc Monte Carlo and risk semantic V2",
-      "verification_refs": [
-        "tests/test_risk_assessment.py"
-      ]
-    },
-    {
-      "commands": [
-        26
-      ],
-      "external_dependency": "Production queue service for final operational proof",
-      "id": "ENT-019",
-      "implementation_refs": [
-        "src/ailora/domain/workflows/models.py",
-        "src/ailora/domain/workflows/service.py"
-      ],
-      "owner": "Workflow and Platform Engineering",
-      "release_gates": [
-        "G06_RUNTIME_HA",
-        "G07_SRE_OPERATIONAL_QUALIFICATION"
-      ],
-      "remaining_scope": "Split web/workers and add durable broker scheduler DLQ priority backpressure cancellation and redundancy.",
-      "status": "PARTIAL",
-      "title": "Durable queue scheduler workers DLQ backpressure and replay",
-      "verification_refs": [
-        "tests/test_durable_workflow_replay.py",
-        "tests/test_durable_workflow_failures.py"
-      ]
-    },
-    {
-      "commands": [
-        27
-      ],
-      "external_dependency": "Controlled paid load environment for final proof",
-      "id": "ENT-020",
-      "implementation_refs": [
-        "src/ailora/performance/benchmark.py",
-        "src/ailora/performance/budgets.py"
-      ],
-      "owner": "SRE and Performance Engineering",
-      "release_gates": [
-        "G07_SRE_OPERATIONAL_QUALIFICATION"
-      ],
-      "remaining_scope": "Run representative capacity 100k-object recall failure soak and cost evidence.",
-      "status": "PARTIAL",
-      "title": "Capacity fault injection soak scientific telemetry and cost guardrails",
-      "verification_refs": [
-        "tests/test_performance_contracts.py",
-        "tests/test_performance_regressions.py"
-      ]
-    },
-    {
-      "commands": [
-        28
-      ],
-      "external_dependency": "Paid HA production-like infrastructure",
-      "id": "ENT-021",
-      "implementation_refs": [
-        "render.yaml",
-        "docs/runbooks/deployment-rollback.md"
-      ],
-      "owner": "Platform and SRE",
-      "release_gates": [
-        "G06_RUNTIME_HA",
-        "G07_SRE_OPERATIONAL_QUALIFICATION"
-      ],
-      "remaining_scope": "Qualify redundant web/workers database failover parity rollout rollback and outage behavior.",
-      "status": "PARTIAL",
-      "title": "Multi-instance HA staging parity rollout rollback and failover",
-      "verification_refs": [
-        "tests/test_render_deployment.py",
-        "tests/test_staging_smoke_contracts.py"
-      ]
-    },
-    {
-      "commands": [
-        29
-      ],
-      "external_dependency": "Tenant identity provider approval qualified data and controlled pilot workload",
-      "id": "ENT-022",
-      "implementation_refs": [
-        "src/ailora/services/space_data/production_wiring.py"
-      ],
-      "owner": "Scientific Operations and Release Authorities",
-      "release_gates": [
-        "G03_SPACE_DATA",
-        "G07_SRE_OPERATIONAL_QUALIFICATION",
-        "G10_FINAL_RELEASE"
-      ],
-      "remaining_scope": "Run authenticated tenant-scoped E2E frozen-criteria shadow comparisons burn-in and drills.",
-      "status": "EXTERNAL_GATE",
-      "title": "Controlled tenant E2E shadow pilot and incident drills",
-      "verification_refs": [
-        "tests/test_space_data_production_wiring.py"
-      ]
-    },
-    {
-      "commands": [
-        30
-      ],
-      "external_dependency": "Authorized external assessors legal reviewer scientific reviewer and human Release Authority",
-      "id": "ENT-023",
-      "implementation_refs": [
-        "docs/qualification/final-release-manifest.json"
-      ],
-      "owner": "Independent Assessors and Release Authority",
-      "release_gates": [
-        "G09_GOVERNANCE_ASSURANCE",
-        "G10_FINAL_RELEASE"
-      ],
-      "remaining_scope": "Accept independent findings assurance case evidence integrity residual risks and exact release decision.",
-      "status": "EXTERNAL_GATE",
-      "title": "Independent pentest IVV legal assurance and final release",
-      "verification_refs": [
-        "tests/test_final_evidence_pack.py",
-        "tests/test_release_decision_contract.py"
-      ]
-    }
-  ],
-  "schema_version": 1,
-  "status_vocabulary": [
-    "VERIFIED_BASELINE",
-    "COMPLETE_BOUNDED",
-    "PARTIAL",
-    "MISSING",
-    "TARGET",
-    "EXTERNAL_GATE",
-    "OUT_OF_SCOPE",
-    "BLOCKED"
-  ]
+    ],
+    "requirements": [
+        {
+            "commands": [
+                4,
+                5,
+                30
+            ],
+            "external_dependency": null,
+            "id": "ENT-001",
+            "implementation_refs": [
+                "src/ailora/security/authorization.py",
+                "src/ailora/domain/ssa/review.py"
+            ],
+            "owner": "Release Authority",
+            "release_gates": [
+                "G08_API_PRODUCT_BOUNDARIES",
+                "G09_GOVERNANCE_ASSURANCE",
+                "G10_FINAL_RELEASE"
+            ],
+            "remaining_scope": "Preserve boundary in every subsequent change and independently audit final release.",
+            "status": "VERIFIED_BASELINE",
+            "title": "Human authority and permanent no-command boundary",
+            "verification_refs": [
+                "tests/test_authorization_isolation.py",
+                "tests/test_review_state.py"
+            ]
+        },
+        {
+            "commands": [
+                4,
+                5,
+                30
+            ],
+            "external_dependency": "Independent approvals and final human release decision",
+            "id": "ENT-002",
+            "implementation_refs": [
+                "docs/qualification/final-release-manifest.json",
+                "docs/assurance/assurance-case.md",
+                "docs/assurance/claims.json",
+                "docs/assurance/evidence-index.json",
+                "docs/assurance/hazards.md",
+                "docs/assurance/risk-register.json",
+                "docs/assurance/threat-model.md"
+            ],
+            "owner": "Release Authority",
+            "release_gates": [
+                "G09_GOVERNANCE_ASSURANCE",
+                "G10_FINAL_RELEASE"
+            ],
+            "remaining_scope": "Complete assurance case evidence index independent approvals and accepted residual risk.",
+            "status": "PARTIAL",
+            "title": "Release-specific traceability assurance and decision authority",
+            "verification_refs": [
+                "tests/test_release_decision_contract.py"
+            ]
+        },
+        {
+            "commands": [
+                6,
+                7
+            ],
+            "external_dependency": "Production IdP configuration for final acceptance",
+            "id": "ENT-003",
+            "implementation_refs": [
+                "src/ailora/security/asymmetric_tokens.py",
+                "src/ailora/security/auth.py",
+                "src/ailora/security/oidc_sessions.py",
+                "src/ailora/security/session_tokens.py"
+            ],
+            "owner": "Security Engineering",
+            "release_gates": [
+                "G02_SECURITY_IDENTITY"
+            ],
+            "remaining_scope": "Complete authorization-code exchange, account linking, MFA enrollment, durable replay-state integration, protected production key custody, approved IdP configuration and operational qualification.",
+            "status": "PARTIAL",
+            "title": "OIDC MFA asymmetric JWT JWKS and hardened sessions",
+            "verification_refs": [
+                "tests/test_asymmetric_tokens.py",
+                "tests/test_auth.py",
+                "tests/test_identity_session_lifecycle.py",
+                "tests/test_oidc_sessions.py"
+            ]
+        },
+        {
+            "commands": [
+                8,
+                9
+            ],
+            "external_dependency": "Production tenant credential for controlled E2E",
+            "id": "ENT-004",
+            "implementation_refs": [
+                "src/ailora/security/authorization.py",
+                "src/ailora/security/contextual_authorization.py",
+                "src/ailora/security/workload_identity.py",
+                "src/ailora/domain/identity/management.py"
+            ],
+            "owner": "Identity and Authorization Engineering",
+            "release_gates": [
+                "G02_SECURITY_IDENTITY",
+                "G08_API_PRODUCT_BOUNDARIES"
+            ],
+            "remaining_scope": "Integrate an approved authorization server, protected client authentication, durable registration/policy/revocation state, middleware and repository enforcement, policy administration, production monitoring and controlled tenant E2E qualification.",
+            "status": "PARTIAL",
+            "title": "Tenant-bound workload identity and contextual authorization",
+            "verification_refs": [
+                "tests/test_authorization_isolation.py",
+                "tests/test_contextual_authorization.py",
+                "tests/test_tenant_identity_management.py",
+                "tests/test_workload_identity.py"
+            ]
+        },
+        {
+            "commands": [
+                10
+            ],
+            "external_dependency": null,
+            "id": "ENT-005",
+            "implementation_refs": [
+                "src/ailora/api/app.py",
+                "src/ailora/api/contracts.py"
+            ],
+            "owner": "API Engineering",
+            "release_gates": [
+                "G08_API_PRODUCT_BOUNDARIES"
+            ],
+            "remaining_scope": "Deploy with explicit acceptance; add a durable multi-instance idempotency adapter, load evidence and independent API security review.",
+            "status": "VERIFIED_BASELINE",
+            "title": "Enterprise API contracts and bounded requests",
+            "verification_refs": [
+                "tests/test_api_contracts.py"
+            ]
+        },
+        {
+            "commands": [
+                11,
+                12
+            ],
+            "external_dependency": "Production PostgreSQL validation for final acceptance",
+            "id": "ENT-006",
+            "implementation_refs": [
+                "src/ailora/db/session.py",
+                "src/ailora/db/tenant_context.py",
+                "alembic/versions/0013_postgres_tenant_rls.py",
+                "src/ailora/domain/ssa/audit_integrity.py",
+                "src/ailora/domain/ssa/audit_models.py",
+                "src/ailora/domain/ssa/audit_repository.py",
+                "alembic/versions/0014_audit_integrity.py"
+            ],
+            "owner": "Database Engineering",
+            "release_gates": [
+                "G05_DATABASE_EVIDENCE"
+            ],
+            "remaining_scope": "Execute a controlled production-like PostgreSQL upgrade, rollback and concurrency rehearsal with pre-provisioned pgcrypto and roles; validate RLS, trigger and owner behavior, then receive production acceptance.",
+            "status": "VERIFIED_BASELINE",
+            "title": "PostgreSQL tenant defense audit immutability and safe migrations",
+            "verification_refs": [
+                "tests/test_db_baseline.py",
+                "tests/test_audit.py",
+                "tests/test_postgres_tenant_defense.py",
+                "tests/test_audit_integrity.py"
+            ]
+        },
+        {
+            "commands": [
+                13,
+                28
+            ],
+            "external_dependency": "PITR-capable managed database and controlled production-like drill",
+            "id": "ENT-007",
+            "implementation_refs": [
+                "docs/runbooks/backup-restore.md",
+                "docs/runbooks/disaster-recovery.md",
+                "src/ailora/recovery/qualification.py"
+            ],
+            "owner": "SRE and Database Operations",
+            "release_gates": [
+                "G05_DATABASE_EVIDENCE",
+                "G06_RUNTIME_HA"
+            ],
+            "remaining_scope": "Define approved recovery objectives through business impact analysis, provision a PITR-capable managed PostgreSQL topology, execute independently reviewed isolated restore and failover drills, and measure production-like RPO, validated-serving RTO and reconciliation RCO.",
+            "status": "PARTIAL",
+            "title": "PITR restore RTO RPO and disaster recovery",
+            "verification_refs": [
+                "tests/test_backup_restore.py",
+                "tests/test_recovery_failures.py",
+                "tests/test_recovery_qualification.py"
+            ]
+        },
+        {
+            "commands": [
+                14,
+                15
+            ],
+            "external_dependency": "Trusted signing identity or protected key for final signature",
+            "id": "ENT-008",
+            "implementation_refs": [
+                ".github/workflows/ci.yml",
+                "Dockerfile",
+                "scripts/generate_sbom.py",
+                "src/ailora/security/supply_chain.py",
+                "uv.lock"
+            ],
+            "owner": "DevSecOps",
+            "release_gates": [
+                "G01_SOURCE_BUILD_SUPPLY_CHAIN"
+            ],
+            "remaining_scope": "Execute independently governed SAST, SCA, container and history scanners against built artifacts; provision a protected signing identity; publish signed SBOM, VEX and SLSA provenance in an immutable registry; enforce digest admission at deployment; and complete independent review.",
+            "status": "VERIFIED_BASELINE",
+            "title": "Supply-chain scans SBOM signing provenance and immutable promotion",
+            "verification_refs": [
+                "tests/test_ci_baseline.py",
+                "tests/test_artifact_sbom.py",
+                "tests/test_supply_chain_admission.py",
+                "tests/test_supply_chain_policy.py"
+            ]
+        },
+        {
+            "commands": [
+                16
+            ],
+            "external_dependency": "Selected WAF edge and secret-management platform for final proof",
+            "id": "ENT-009",
+            "implementation_refs": [
+                "Dockerfile",
+                "render.yaml",
+                "src/ailora/config.py"
+            ],
+            "owner": "Security and Platform Engineering",
+            "release_gates": [
+                "G02_SECURITY_IDENTITY",
+                "G06_RUNTIME_HA"
+            ],
+            "remaining_scope": "Add SSRF egress secret manager headers rate limits read-only runtime and edge controls.",
+            "status": "PARTIAL",
+            "title": "Runtime and edge security hardening",
+            "verification_refs": [
+                "tests/test_docker_contracts.py",
+                "tests/test_render_deployment.py"
+            ]
+        },
+        {
+            "commands": [
+                17,
+                27,
+                29
+            ],
+            "external_dependency": "Production monitoring backend and measured workload",
+            "id": "ENT-010",
+            "implementation_refs": [
+                "src/ailora/observability/logging.py",
+                "src/ailora/observability/tracing.py"
+            ],
+            "owner": "SRE",
+            "release_gates": [
+                "G07_SRE_OPERATIONAL_QUALIFICATION"
+            ],
+            "remaining_scope": "Wire end-to-end signals dashboards alerts burn policy scientific metrics and synthetics.",
+            "status": "PARTIAL",
+            "title": "OpenTelemetry SLO alerts error budget and synthetic monitoring",
+            "verification_refs": [
+                "tests/test_observability.py",
+                "tests/test_workflow_observability.py"
+            ]
+        },
+        {
+            "commands": [
+                14,
+                18
+            ],
+            "external_dependency": null,
+            "id": "ENT-011",
+            "implementation_refs": [
+                "src/ailora/services/astrodynamics/config.py",
+                "src/ailora/services/astrodynamics/models.py",
+                "src/ailora/services/astrodynamics/reproducibility.py"
+            ],
+            "owner": "Scientific Configuration Manager",
+            "release_gates": [
+                "G04_SCIENTIFIC_QUALIFICATION",
+                "G09_GOVERNANCE_ASSURANCE"
+            ],
+            "remaining_scope": "Bind manifest creation to every applicable scientific execution path, retain promoted manifests immutably, execute controlled cross-platform repeatability evidence, obtain independent configuration review and accept release-specific drift baselines.",
+            "status": "VERIFIED_BASELINE",
+            "title": "Scientific configuration and reproducibility manifest",
+            "verification_refs": [
+                "tests/test_astrodynamics_propagation.py",
+                "tests/test_astrodynamics_frame_transform.py",
+                "tests/test_scientific_reproducibility.py"
+            ]
+        },
+        {
+            "commands": [
+                19
+            ],
+            "external_dependency": "Independent scientific review for final qualification",
+            "id": "ENT-012",
+            "implementation_refs": [
+                "src/ailora/services/astrodynamics/frame_transform.py"
+            ],
+            "owner": "Astrodynamics Engineering",
+            "release_gates": [
+                "G04_SCIENTIFIC_QUALIFICATION"
+            ],
+            "remaining_scope": "Obtain independently sourced truth vectors, execute independent scientific review, and accept release-specific tolerances; the pinned local Astropy/PyERFA regression fixture is not independent qualification evidence.",
+            "status": "PARTIAL",
+            "title": "Time scales EOP leap seconds frames and ITRF qualification",
+            "verification_refs": [
+                "tests/test_astrodynamics_frame_transform.py",
+                "tests/test_astrodynamics_frames_units.py",
+                "tests/test_astrodynamics_time_eop_itrf.py"
+            ]
+        },
+        {
+            "commands": [
+                20
+            ],
+            "external_dependency": "Independent covariance corpus for final qualification",
+            "id": "ENT-013",
+            "implementation_refs": [
+                "src/ailora/services/astrodynamics/covariance.py"
+            ],
+            "owner": "Astrodynamics Engineering",
+            "release_gates": [
+                "G04_SCIENTIFIC_QUALIFICATION"
+            ],
+            "remaining_scope": "Add propagation Jacobian frame/epoch transformation conditioning staleness and correlation policy.",
+            "status": "PARTIAL",
+            "title": "Covariance propagation transformation and quality controls",
+            "verification_refs": [
+                "tests/test_astrodynamics_covariance.py"
+            ]
+        },
+        {
+            "commands": [
+                21
+            ],
+            "external_dependency": "Independent scientific reviewer sign-off",
+            "id": "ENT-014",
+            "implementation_refs": [
+                "src/ailora/services/astrodynamics/tca.py",
+                "src/ailora/services/astrodynamics/verification.py"
+            ],
+            "owner": "Scientific Verifier",
+            "release_gates": [
+                "G04_SCIENTIFIC_QUALIFICATION"
+            ],
+            "remaining_scope": "Add executable independent path independent corpus common-mode map and multiple-minimum recall evidence.",
+            "status": "PARTIAL",
+            "title": "Independent scientific engine corpus and complete TCA search",
+            "verification_refs": [
+                "tests/test_astrodynamics_tca.py",
+                "tests/test_astrodynamics_verification_contracts.py"
+            ]
+        },
+        {
+            "commands": [
+                22
+            ],
+            "external_dependency": "Authorized legal/provider approval",
+            "id": "ENT-015",
+            "implementation_refs": [
+                "src/ailora/services/space_data/adapter.py",
+                "src/ailora/services/space_data/governance.py"
+            ],
+            "owner": "Data Governance and Provider Owner",
+            "release_gates": [
+                "G03_SPACE_DATA"
+            ],
+            "remaining_scope": "Complete legal status freshness taxonomy poisoning defense change monitoring and qualification evidence. Local minimal evidence surface (legal status, freshness, poisoning, change-monitor) added in Command 22; full legal/technical qualification still open.",
+            "status": "PARTIAL",
+            "title": "Provider legal technical freshness poisoning and outage qualification",
+            "verification_refs": [
+                "tests/test_space_data_provider_governance.py",
+                "tests/test_space_data_provider_outages.py"
+            ]
+        },
+        {
+            "commands": [
+                23
+            ],
+            "external_dependency": "Qualified covariance-capable data source",
+            "id": "ENT-016",
+            "implementation_refs": [
+                "src/ailora/services/space_data/production_wiring.py"
+            ],
+            "owner": "Space Data Engineering",
+            "release_gates": [
+                "G03_SPACE_DATA",
+                "G04_SCIENTIFIC_QUALIFICATION"
+            ],
+            "remaining_scope": "Add qualified covariance source object crosswalk multi-source reconciliation and explicit conflicts. Local minimal evidence surface (CovarianceSourceRef, crosswalk, conflict, multi-source result) added in Command 23; full qualification still open.",
+            "status": "MISSING",
+            "title": "Covariance-capable multi-source ingest reconciliation and conflict states",
+            "verification_refs": [
+                "tests/test_space_data_production_wiring.py"
+            ]
+        },
+        {
+            "commands": [
+                24
+            ],
+            "external_dependency": "Independent reference cases",
+            "id": "ENT-017",
+            "implementation_refs": [],
+            "owner": "Astrodynamics Engineering",
+            "release_gates": [
+                "G04_SCIENTIFIC_QUALIFICATION"
+            ],
+            "remaining_scope": "Implement encounter geometry combined covariance HBR provenance and fail-closed regime selection. Local minimal evidence surface (EncounterGeometry, HBR, validity-domain gate) added in Command 24; full qualification still open.",
+            "status": "MISSING",
+            "title": "Encounter plane HBR and validity-domain enforcement",
+            "verification_refs": []
+        },
+        {
+            "commands": [
+                25
+            ],
+            "external_dependency": "Independent scientific sign-off",
+            "id": "ENT-018",
+            "implementation_refs": [
+                "src/ailora/domain/ssa/risk.py"
+            ],
+            "owner": "Astrodynamics Engineering and Scientific Verifier",
+            "release_gates": [
+                "G04_SCIENTIFIC_QUALIFICATION",
+                "G08_API_PRODUCT_BOUNDARIES"
+            ],
+            "remaining_scope": "Implement qualified Pc methods deterministic Monte Carlo limitations and ConjunctionRiskAssessmentV2. Local minimal evidence surface (dual-method Pc, DeterministicMonteCarloSpec, ConjunctionRiskAssessmentV2) added in Command 25; full scientific qualification still open.",
+            "status": "MISSING",
+            "title": "Dual-method Pc Monte Carlo and risk semantic V2",
+            "verification_refs": [
+                "tests/test_risk_assessment.py"
+            ]
+        },
+        {
+            "commands": [
+                26
+            ],
+            "external_dependency": "Production queue service for final operational proof",
+            "id": "ENT-019",
+            "implementation_refs": [
+                "src/ailora/domain/workflows/models.py",
+                "src/ailora/domain/workflows/service.py"
+            ],
+            "owner": "Workflow and Platform Engineering",
+            "release_gates": [
+                "G06_RUNTIME_HA",
+                "G07_SRE_OPERATIONAL_QUALIFICATION"
+            ],
+            "remaining_scope": "Split web/workers and add durable broker scheduler DLQ priority backpressure cancellation and redundancy. Local minimal evidence surface (DurableQueueMessage, DLQ, backpressure, SchedulerLease) added in Command 26; full broker split and redundancy still open.",
+            "status": "PARTIAL",
+            "title": "Durable queue scheduler workers DLQ backpressure and replay",
+            "verification_refs": [
+                "tests/test_durable_workflow_replay.py",
+                "tests/test_durable_workflow_failures.py"
+            ]
+        },
+        {
+            "commands": [
+                27
+            ],
+            "external_dependency": "Controlled paid load environment for final proof",
+            "id": "ENT-020",
+            "implementation_refs": [
+                "src/ailora/performance/benchmark.py",
+                "src/ailora/performance/budgets.py"
+            ],
+            "owner": "SRE and Performance Engineering",
+            "release_gates": [
+                "G07_SRE_OPERATIONAL_QUALIFICATION"
+            ],
+            "remaining_scope": "Run representative capacity 100k-object recall failure soak and cost evidence. Local minimal evidence surface (capacity, soak, fault-injection, cost guardrail) added in Command 27; full 100k soak execution still open.",
+            "status": "PARTIAL",
+            "title": "Capacity fault injection soak scientific telemetry and cost guardrails",
+            "verification_refs": [
+                "tests/test_performance_contracts.py",
+                "tests/test_performance_regressions.py"
+            ]
+        },
+        {
+            "commands": [
+                28
+            ],
+            "external_dependency": "Paid HA production-like infrastructure",
+            "id": "ENT-021",
+            "implementation_refs": [
+                "render.yaml",
+                "docs/runbooks/deployment-rollback.md"
+            ],
+            "owner": "Platform and SRE",
+            "release_gates": [
+                "G06_RUNTIME_HA",
+                "G07_SRE_OPERATIONAL_QUALIFICATION"
+            ],
+            "remaining_scope": "Qualify redundant web/workers database failover parity rollout rollback and outage behavior. Local minimal evidence surface (RecoveryObjectiveRecord, failover drill, parity, rollback decision) added in Command 28; full multi-instance HA drills still open.",
+            "status": "PARTIAL",
+            "title": "Multi-instance HA staging parity rollout rollback and failover",
+            "verification_refs": [
+                "tests/test_render_deployment.py",
+                "tests/test_staging_smoke_contracts.py"
+            ]
+        },
+        {
+            "commands": [
+                29
+            ],
+            "external_dependency": "Tenant identity provider approval qualified data and controlled pilot workload",
+            "id": "ENT-022",
+            "implementation_refs": [
+                "src/ailora/services/space_data/production_wiring.py"
+            ],
+            "owner": "Scientific Operations and Release Authorities",
+            "release_gates": [
+                "G03_SPACE_DATA",
+                "G07_SRE_OPERATIONAL_QUALIFICATION",
+                "G10_FINAL_RELEASE"
+            ],
+            "remaining_scope": "Run authenticated tenant-scoped E2E frozen-criteria shadow comparisons burn-in and drills. Local frozen-criteria and shadow-pilot evidence types added in Command 29; authenticated tenant-scoped E2E remains EXTERNAL_GATE.",
+            "status": "EXTERNAL_GATE",
+            "title": "Controlled tenant E2E shadow pilot and incident drills",
+            "verification_refs": [
+                "tests/test_space_data_production_wiring.py"
+            ]
+        },
+        {
+            "commands": [
+                30
+            ],
+            "external_dependency": "Authorized external assessors legal reviewer scientific reviewer and human Release Authority",
+            "id": "ENT-023",
+            "implementation_refs": [
+                "docs/qualification/final-release-manifest.json"
+            ],
+            "owner": "Independent Assessors and Release Authority",
+            "release_gates": [
+                "G09_GOVERNANCE_ASSURANCE",
+                "G10_FINAL_RELEASE"
+            ],
+            "remaining_scope": "Accept independent findings assurance case evidence integrity residual risks and exact release decision. Local residual-risk and release-authority evidence types added in Command 30; independent assessor acceptance remains EXTERNAL_GATE.",
+            "status": "EXTERNAL_GATE",
+            "title": "Independent pentest IVV legal assurance and final release",
+            "verification_refs": [
+                "tests/test_final_evidence_pack.py",
+                "tests/test_release_decision_contract.py"
+            ]
+        }
+    ],
+    "schema_version": 1,
+    "status_vocabulary": [
+        "VERIFIED_BASELINE",
+        "COMPLETE_BOUNDED",
+        "PARTIAL",
+        "MISSING",
+        "TARGET",
+        "EXTERNAL_GATE",
+        "OUT_OF_SCOPE",
+        "BLOCKED"
+    ]
 }
