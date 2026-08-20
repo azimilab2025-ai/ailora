@@ -1,33 +1,11 @@
-"""
-AILORA Advisory Risk Level and Explanation Output.
-
-Produces human-readable, bounded risk assessments from T0/PHY-C1 screening
-results.  All outputs are advisory-only and non-normative.
-
-Scientific boundary (Prompt 06):
-  SENTINEL: DOMAIN_REVIEW_REQUIRED
-  Risk levels are advisory categories only, NOT operationally authoritative.
-  No output may be used to directly command or guide spacecraft operations.
-
-Risk level taxonomy (PHY-C1, Advisory):
-  NEGLIGIBLE     — Distance far exceeds CDT; no further analysis indicated.
-  LOW            — Distance exceeds CDT but within 10× CDT range.
-  MODERATE       — Distance ≤ 2× CDT; warrants human review.
-  HIGH           — Distance ≤ CDT; conjunction possible; human review required.
-  CRITICAL       — Objects within very close range (< 1 km); immediate attention.
-
-No spacecraft command path — permanently denied.
-"""
-
 from __future__ import annotations
 
+import math
+import re
+from dataclasses import dataclass
 from enum import StrEnum
 
 from ailora.domain.ssa.screening import ConjunctionScreeningResult
-
-# ---------------------------------------------------------------------------
-# Risk level enum
-# ---------------------------------------------------------------------------
 
 
 class RiskLevel(StrEnum):
@@ -184,3 +162,72 @@ def assess_conjunction_risk(
         ConjunctionRiskAssessment with risk level, explanation, and recommendation.
     """
     return ConjunctionRiskAssessment(screening_result)
+
+
+class RiskAssessmentError(ValueError):
+    """Fail-closed risk assessment contract error."""
+
+    def __init__(self, detail: str) -> None:
+        super().__init__(detail.strip()[:256] or "RISK_ASSESSMENT_ERROR")
+
+
+@dataclass(frozen=True, slots=True)
+class PcMethodResult:
+    """Qualified Pc method result. Fail-closed. Advisory only."""
+
+    method_id: str
+    method_kind: str
+    pc_value: float
+    limitations: str
+    evidence_digest: str
+
+    def __post_init__(self) -> None:
+        if not self.method_id.strip() or len(self.method_id) > 128:
+            raise RiskAssessmentError("method_id must be explicit and bounded")
+        if self.method_kind not in {"ALFANO", "FOSTER", "DETERMINISTIC_MC", "OTHER"}:
+            raise RiskAssessmentError("method_kind must be ALFANO|FOSTER|DETERMINISTIC_MC|OTHER")
+        if not math.isfinite(self.pc_value) or not (0.0 <= self.pc_value <= 1.0):
+            raise RiskAssessmentError("pc_value must be finite in [0, 1]")
+        if not self.limitations.strip():
+            raise RiskAssessmentError("limitations must be explicit")
+        if not re.fullmatch(r"[0-9a-f]{64}", self.evidence_digest):
+            raise RiskAssessmentError("evidence_digest must be lowercase SHA-256")
+
+
+@dataclass(frozen=True, slots=True)
+class DeterministicMonteCarloSpec:
+    """Bounded deterministic Monte Carlo specification. No non-deterministic RNG."""
+
+    sample_count: int
+    seed: int
+    max_runtime_ms: int
+    limitation_notes: str
+
+    def __post_init__(self) -> None:
+        if self.sample_count <= 0 or self.sample_count > 1_000_000:
+            raise RiskAssessmentError("sample_count must be in (0, 1e6]")
+        if self.max_runtime_ms <= 0:
+            raise RiskAssessmentError("max_runtime_ms must be positive")
+        if not self.limitation_notes.strip():
+            raise RiskAssessmentError("limitation_notes must be explicit")
+
+
+@dataclass(frozen=True, slots=True)
+class ConjunctionRiskAssessmentV2:
+    """Dual-method conjunction risk assessment V2. Advisory only."""
+
+    assessment_id: str
+    primary_pc: PcMethodResult
+    secondary_pc: PcMethodResult
+    combined_level: str
+    notes: str
+
+    def __post_init__(self) -> None:
+        if not self.assessment_id.strip():
+            raise RiskAssessmentError("assessment_id must be explicit")
+        if self.combined_level not in {"NEGLIGIBLE", "LOW", "MEDIUM", "HIGH", "CRITICAL"}:
+            raise RiskAssessmentError("combined_level invalid")
+        if self.primary_pc.method_kind == self.secondary_pc.method_kind:
+            raise RiskAssessmentError("dual-method requires distinct method_kind")
+        if not self.notes.strip():
+            raise RiskAssessmentError("notes must be explicit")

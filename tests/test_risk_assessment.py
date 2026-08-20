@@ -170,3 +170,74 @@ def test_risk_module_advisory_boundary() -> None:
     assert "advisory" in text.lower()
     assert "prompt 06" in text.lower()
     assert "domain_review_required" in text.lower()
+
+
+# --- COMMAND 25 / ENT-018 additions ---
+
+
+def test_pc_method_result_accepts_valid() -> None:
+    from ailora.domain.ssa.risk import PcMethodResult
+
+    r = PcMethodResult(
+        method_id="M-1",
+        method_kind="ALFANO",
+        pc_value=1.2e-5,
+        limitations="Gaussian assumption",
+        evidence_digest="a" * 64,
+    )
+    assert r.method_kind == "ALFANO"
+
+
+def test_pc_method_result_rejects_out_of_range() -> None:
+    from ailora.domain.ssa.risk import PcMethodResult, RiskAssessmentError
+
+    with pytest.raises(RiskAssessmentError):
+        PcMethodResult(
+            method_id="M-1",
+            method_kind="ALFANO",
+            pc_value=1.5,
+            limitations="bad",
+            evidence_digest="a" * 64,
+        )
+
+
+def test_deterministic_monte_carlo_spec_accepts_valid() -> None:
+    from ailora.domain.ssa.risk import DeterministicMonteCarloSpec
+
+    s = DeterministicMonteCarloSpec(
+        sample_count=10000,
+        seed=42,
+        max_runtime_ms=5000,
+        limitation_notes="bounded samples only",
+    )
+    assert s.sample_count == 10000
+
+
+def test_conjunction_risk_assessment_v2_accepts_valid() -> None:
+    from ailora.domain.ssa.risk import (
+        ConjunctionRiskAssessmentV2,
+        PcMethodResult,
+    )
+
+    primary = PcMethodResult(
+        method_id="M-1",
+        method_kind="ALFANO",
+        pc_value=1e-5,
+        limitations="none",
+        evidence_digest="a" * 64,
+    )
+    secondary = PcMethodResult(
+        method_id="M-2",
+        method_kind="FOSTER",
+        pc_value=2e-5,
+        limitations="none",
+        evidence_digest="b" * 64,
+    )
+    v2 = ConjunctionRiskAssessmentV2(
+        assessment_id="A-1",
+        primary_pc=primary,
+        secondary_pc=secondary,
+        combined_level="LOW",
+        notes="dual-method advisory",
+    )
+    assert v2.combined_level == "LOW"
