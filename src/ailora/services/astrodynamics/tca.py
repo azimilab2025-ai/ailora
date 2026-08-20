@@ -337,3 +337,94 @@ class TcaAnalyzer:
             ):
                 best = candidate
         return best
+
+
+@dataclass(frozen=True, slots=True)
+class EncounterGeometry:
+    """Bounded encounter geometry in RTN. Fail-closed."""
+
+    relative_position_rtn: tuple[float, float, float]
+    relative_velocity_rtn: tuple[float, float, float]
+    miss_distance_m: float
+
+    def __post_init__(self) -> None:
+        for name, vec in (
+            ("relative_position_rtn", self.relative_position_rtn),
+            ("relative_velocity_rtn", self.relative_velocity_rtn),
+        ):
+            if len(vec) != 3 or any(not math.isfinite(v) for v in vec):
+                raise TcaAnalysisError(
+                    TcaErrorCode.INVALID_INPUT, f"{name} must be finite 3-vector"
+                )
+        if not math.isfinite(self.miss_distance_m) or self.miss_distance_m < 0.0:
+            raise TcaAnalysisError(
+                TcaErrorCode.INVALID_INPUT, "miss_distance_m must be finite and non-negative"
+            )
+
+
+@dataclass(frozen=True, slots=True)
+class CombinedCovarianceProvenance:
+    """Explicit combined covariance provenance. Advisory only."""
+
+    primary_source_id: str
+    secondary_source_id: str
+    combined_digest: str
+    method: str
+
+    def __post_init__(self) -> None:
+        if not self.primary_source_id.strip() or not self.secondary_source_id.strip():
+            raise TcaAnalysisError(TcaErrorCode.INVALID_INPUT, "source ids must be explicit")
+        if not re.fullmatch(r"[0-9a-f]{64}", self.combined_digest):
+            raise TcaAnalysisError(
+                TcaErrorCode.INVALID_INPUT, "combined_digest must be lowercase SHA-256"
+            )
+        if self.method not in {"SUM", "RSS", "MAX", "OTHER"}:
+            raise TcaAnalysisError(TcaErrorCode.INVALID_INPUT, "method must be SUM|RSS|MAX|OTHER")
+
+
+@dataclass(frozen=True, slots=True)
+class HardBodyRadiusRecord:
+    """Hard-body radius evidence. Fail-closed."""
+
+    object_id: str
+    radius_m: float
+    source_class: str
+    evidence_digest: str
+
+    def __post_init__(self) -> None:
+        if not self.object_id.strip() or len(self.object_id) > 128:
+            raise TcaAnalysisError(
+                TcaErrorCode.INVALID_INPUT, "object_id must be explicit and bounded"
+            )
+        if not math.isfinite(self.radius_m) or self.radius_m <= 0.0:
+            raise TcaAnalysisError(
+                TcaErrorCode.INVALID_INPUT, "radius_m must be finite and positive"
+            )
+        if self.source_class not in {"CATALOG", "OPERATOR", "ESTIMATED", "OTHER"}:
+            raise TcaAnalysisError(TcaErrorCode.INVALID_INPUT, "source_class invalid")
+        if not re.fullmatch(r"[0-9a-f]{64}", self.evidence_digest):
+            raise TcaAnalysisError(
+                TcaErrorCode.INVALID_INPUT, "evidence_digest must be lowercase SHA-256"
+            )
+
+
+@dataclass(frozen=True, slots=True)
+class ValidityDomainGate:
+    """Fail-closed validity domain / regime gate. Advisory only."""
+
+    domain_id: str
+    regime: str
+    accepted: bool
+    reject_reason: str
+
+    def __post_init__(self) -> None:
+        if not self.domain_id.strip():
+            raise TcaAnalysisError(TcaErrorCode.INVALID_INPUT, "domain_id must be explicit")
+        if self.regime not in {"NOMINAL", "DEGRADED", "INVALID"}:
+            raise TcaAnalysisError(
+                TcaErrorCode.INVALID_INPUT, "regime must be NOMINAL|DEGRADED|INVALID"
+            )
+        if not self.accepted and not self.reject_reason.strip():
+            raise TcaAnalysisError(
+                TcaErrorCode.INVALID_INPUT, "reject_reason required when not accepted"
+            )

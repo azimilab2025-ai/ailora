@@ -130,3 +130,64 @@ def test_request_and_config_reject_invalid_windows_and_bounds() -> None:
         TcaSearchConfig(coarse_intervals=3)
     with pytest.raises(ValueError, match="max_evaluations"):
         TcaSearchConfig(coarse_intervals=48, max_evaluations=50)
+
+
+# --- COMMAND 24 / ENT-017 additions ---
+
+
+def test_encounter_geometry_accepts_valid() -> None:
+    from ailora.services.astrodynamics.tca import EncounterGeometry
+
+    g = EncounterGeometry(
+        relative_position_rtn=(100.0, 0.0, 0.0),
+        relative_velocity_rtn=(0.0, 1.0, 0.0),
+        miss_distance_m=100.0,
+    )
+    assert g.miss_distance_m == 100.0
+
+
+def test_encounter_geometry_rejects_nonfinite() -> None:
+    from ailora.services.astrodynamics.tca import EncounterGeometry, TcaAnalysisError
+
+    with pytest.raises(TcaAnalysisError):
+        EncounterGeometry(
+            relative_position_rtn=(float("nan"), 0.0, 0.0),
+            relative_velocity_rtn=(0.0, 1.0, 0.0),
+            miss_distance_m=100.0,
+        )
+
+
+def test_hard_body_radius_record_accepts_valid() -> None:
+    from ailora.services.astrodynamics.tca import HardBodyRadiusRecord
+
+    r = HardBodyRadiusRecord(
+        object_id="OBJ-1",
+        radius_m=5.0,
+        source_class="CATALOG",
+        evidence_digest="a" * 64,
+    )
+    assert r.radius_m == 5.0
+
+
+def test_hard_body_radius_record_rejects_nonpositive() -> None:
+    from ailora.services.astrodynamics.tca import HardBodyRadiusRecord, TcaAnalysisError
+
+    with pytest.raises(TcaAnalysisError):
+        HardBodyRadiusRecord(
+            object_id="OBJ-1",
+            radius_m=0.0,
+            source_class="CATALOG",
+            evidence_digest="a" * 64,
+        )
+
+
+def test_validity_domain_gate_accepts_valid() -> None:
+    from ailora.services.astrodynamics.tca import ValidityDomainGate
+
+    gate = ValidityDomainGate(
+        domain_id="DOM-1",
+        regime="NOMINAL",
+        accepted=True,
+        reject_reason="",
+    )
+    assert gate.regime == "NOMINAL"
