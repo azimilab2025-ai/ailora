@@ -264,3 +264,84 @@ def check_staleness(
     age = (now - contract.epoch).total_seconds()
     if age > max_age_seconds:
         raise CovarianceError(f"covariance is stale: age={age}s exceeds max_age={max_age_seconds}s")
+
+
+@dataclass(frozen=True, slots=True)
+class CovarianceSourceRef:
+    """Qualified covariance source reference. Fail-closed."""
+
+    source_id: str
+    source_kind: str
+    object_id: str
+    epoch: datetime
+    evidence_digest: str
+
+    def __post_init__(self) -> None:
+        if not self.source_id.strip() or len(self.source_id) > 128:
+            raise CovarianceError("source_id must be explicit and bounded")
+        if self.source_kind not in {"TLE", "OEM", "GPS", "RADAR", "OTHER"}:
+            raise CovarianceError("source_kind must be TLE|OEM|GPS|RADAR|OTHER")
+        if not self.object_id.strip() or len(self.object_id) > 128:
+            raise CovarianceError("object_id must be explicit and bounded")
+        if not re.fullmatch(r"[0-9a-f]{64}", self.evidence_digest):
+            raise CovarianceError("evidence_digest must be lowercase SHA-256")
+
+
+@dataclass(frozen=True, slots=True)
+class SourceObjectCrosswalk:
+    """Explicit source-object pairing. No auto-merge."""
+
+    primary_object_id: str
+    secondary_object_id: str
+    match_confidence: float
+    crosswalk_digest: str
+
+    def __post_init__(self) -> None:
+        if not self.primary_object_id.strip() or not self.secondary_object_id.strip():
+            raise CovarianceError("object ids must be explicit")
+        if not (0.0 <= self.match_confidence <= 1.0):
+            raise CovarianceError("match_confidence must be in [0, 1]")
+        if not re.fullmatch(r"[0-9a-f]{64}", self.crosswalk_digest):
+            raise CovarianceError("crosswalk_digest must be lowercase SHA-256")
+
+
+@dataclass(frozen=True, slots=True)
+class ReconciliationConflict:
+    """Explicit multi-source conflict state. Advisory only."""
+
+    conflict_id: str
+    left_source_id: str
+    right_source_id: str
+    conflict_class: str
+    detail: str
+
+    def __post_init__(self) -> None:
+        if not self.conflict_id.strip():
+            raise CovarianceError("conflict_id must be explicit")
+        if self.conflict_class not in {
+            "EPOCH_MISMATCH",
+            "FRAME_MISMATCH",
+            "SCALE_MISMATCH",
+            "OBJECT_MISMATCH",
+            "OTHER",
+        }:
+            raise CovarianceError("conflict_class invalid")
+        if not self.detail.strip():
+            raise CovarianceError("detail must be explicit")
+
+
+@dataclass(frozen=True, slots=True)
+class MultiSourceReconciliationResult:
+    """Bounded multi-source reconciliation evidence. No operational claim."""
+
+    result_id: str
+    accepted_sources: tuple[str, ...]
+    conflicts: tuple[ReconciliationConflict, ...]
+    crosswalks: tuple[SourceObjectCrosswalk, ...]
+    status: str
+
+    def __post_init__(self) -> None:
+        if not self.result_id.strip():
+            raise CovarianceError("result_id must be explicit")
+        if self.status not in {"RECONCILED", "CONFLICTED", "INCOMPLETE"}:
+            raise CovarianceError("status must be RECONCILED|CONFLICTED|INCOMPLETE")

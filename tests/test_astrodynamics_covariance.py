@@ -167,3 +167,74 @@ def test_check_staleness_raises_when_too_old() -> None:
         check_staleness(contract, now, max_age_seconds=10.0)
     # should not raise when within bound
     check_staleness(contract, contract.epoch + timedelta(seconds=5), max_age_seconds=10.0)
+
+
+# --- COMMAND 23 / ENT-016 additions ---
+
+
+def test_covariance_source_ref_accepts_valid() -> None:
+    from datetime import UTC, datetime
+
+    from ailora.services.astrodynamics.covariance import CovarianceSourceRef
+
+    ref = CovarianceSourceRef(
+        source_id="SRC-1",
+        source_kind="TLE",
+        object_id="OBJ-1",
+        epoch=datetime(2026, 8, 19, tzinfo=UTC),
+        evidence_digest="a" * 64,
+    )
+    assert ref.source_kind == "TLE"
+
+
+def test_covariance_source_ref_rejects_bad_digest() -> None:
+    from datetime import UTC, datetime
+
+    from ailora.services.astrodynamics.covariance import CovarianceError, CovarianceSourceRef
+
+    with pytest.raises(CovarianceError):
+        CovarianceSourceRef(
+            source_id="SRC-1",
+            source_kind="TLE",
+            object_id="OBJ-1",
+            epoch=datetime(2026, 8, 19, tzinfo=UTC),
+            evidence_digest="bad",
+        )
+
+
+def test_source_object_crosswalk_accepts_valid() -> None:
+    from ailora.services.astrodynamics.covariance import SourceObjectCrosswalk
+
+    cw = SourceObjectCrosswalk(
+        primary_object_id="OBJ-1",
+        secondary_object_id="OBJ-2",
+        match_confidence=0.92,
+        crosswalk_digest="b" * 64,
+    )
+    assert cw.match_confidence == 0.92
+
+
+def test_reconciliation_conflict_accepts_valid() -> None:
+    from ailora.services.astrodynamics.covariance import ReconciliationConflict
+
+    c = ReconciliationConflict(
+        conflict_id="C-1",
+        left_source_id="SRC-1",
+        right_source_id="SRC-2",
+        conflict_class="EPOCH_MISMATCH",
+        detail="epoch delta exceeds bound",
+    )
+    assert c.conflict_class == "EPOCH_MISMATCH"
+
+
+def test_multi_source_reconciliation_result_accepts_valid() -> None:
+    from ailora.services.astrodynamics.covariance import MultiSourceReconciliationResult
+
+    r = MultiSourceReconciliationResult(
+        result_id="R-1",
+        accepted_sources=("SRC-1",),
+        conflicts=(),
+        crosswalks=(),
+        status="RECONCILED",
+    )
+    assert r.status == "RECONCILED"
