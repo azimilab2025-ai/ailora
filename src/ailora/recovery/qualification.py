@@ -1,13 +1,14 @@
-"""Bounded recovery evidence for isolated drills, never production qualification."""
-
 from __future__ import annotations
 
 import hashlib
 import json
+import re
 from collections.abc import Mapping
 from dataclasses import dataclass
 from datetime import UTC, datetime
 from typing import Final
+
+"""Bounded recovery evidence for isolated drills, never production qualification."""
 
 OBSERVATION_SCHEMA: Final = "AILORA-RECOVERY-OBSERVATION-V1"
 LOCAL_STATUS: Final = "LOCAL_OBSERVATION_NOT_PRODUCTION_RPO_RTO_QUALIFICATION"
@@ -184,3 +185,78 @@ def verify_recovery_observation(document: str) -> Mapping[str, object]:
     if payload.get("objectives") != {"rpo": None, "rto": None, "rco": None}:
         raise RecoveryQualificationError("unapproved recovery objectives were introduced")
     return payload
+
+
+class RecoveryContractError(ValueError):
+    """Fail-closed recovery/HA contract error."""
+
+    def __init__(self, detail: str) -> None:
+        super().__init__(detail.strip()[:256] or "RECOVERY_CONTRACT_ERROR")
+
+
+@dataclass(frozen=True, slots=True)
+class RecoveryObjectiveRecord:
+    """Approved recovery objectives evidence. Fail-closed."""
+
+    objective_id: str
+    rpo_seconds: int
+    rto_seconds: int
+    rco_seconds: int
+    evidence_digest: str
+
+    def __post_init__(self) -> None:
+        if not self.objective_id.strip() or len(self.objective_id) > 128:
+            raise RecoveryContractError("objective_id must be explicit and bounded")
+        if self.rpo_seconds <= 0 or self.rto_seconds <= 0 or self.rco_seconds <= 0:
+            raise RecoveryContractError("rpo/rto/rco must be positive")
+        if not re.fullmatch(r"[0-9a-f]{64}", self.evidence_digest):
+            raise RecoveryContractError("evidence_digest must be lowercase SHA-256")
+
+
+@dataclass(frozen=True, slots=True)
+class FailoverDrillEvidence:
+    """Isolated failover drill evidence. No live claim."""
+
+    drill_id: str
+    topology: str
+    started_at: datetime
+    completed_at: datetime
+    outcome: str
+
+    def __post_init__(self) -> None:
+        if not self.drill_id.strip() or not self.topology.strip():
+            raise RecoveryContractError("drill_id and topology must be explicit")
+        if self.outcome not in {"PASSED", "FAILED", "PARTIAL"}:
+            raise RecoveryContractError("outcome must be PASSED|FAILED|PARTIAL")
+        if self.completed_at < self.started_at:
+            raise RecoveryContractError("completed_at must be >= started_at")
+
+
+@dataclass(frozen=True, slots=True)
+class RolloutParitySnapshot:
+    """Multi-instance web/worker parity evidence."""
+
+    snapshot_id: str
+    web_instances: int
+    worker_instances: int
+    parity_ok: bool
+
+    def __post_init__(self) -> None:
+        if not self.snapshot_id.strip():
+            raise RecoveryContractError("snapshot_id must be explicit")
+        if self.web_instances < 1 or self.worker_instances < 1:
+            raise RecoveryContractError("instance counts must be >= 1")
+
+
+@dataclass(frozen=True, slots=True)
+class RollbackDecisionRecord:
+    """Explicit rollback decision evidence."""
+
+    decision_id: str
+    reason: str
+    initiated_by: str
+    reversible: bool
+
+    def __post_init__(self) -> None:
+        if not self.decision_id.strip() or not self.reason.strip() or not self.initiated_by.strip():
+            raise RecoveryContractError("decision_id, reason, initiated_by must be explicit")
