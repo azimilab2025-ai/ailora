@@ -198,10 +198,10 @@
   ],
   "metrics": {
     "alembic_head": "0012_frame_transformations",
-    "coverage_percent": 87.61,
+    "coverage_percent": 88.77,
     "openapi_operation_count": 27,
     "openapi_path_count": 20,
-    "test_count": 700
+    "test_count": 1065
   },
   "schema_version": 1,
   "source_commit": "594324c35ad587207b3515d7e2a9cd34b74f0fcc",
