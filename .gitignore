@@ -14,7 +14,6 @@ MANIFEST
 venv/
 env/
 ENV/
-
 # ─── Secrets and environment files ────────────────────────────────────────────
 .env
 .env.*
@@ -25,7 +24,6 @@ ENV/
 *.pfx
 secrets/
 credentials/
-
 # ─── Test artifacts ───────────────────────────────────────────────────────────
 .pytest_cache/
 .coverage
@@ -33,12 +31,10 @@ coverage.xml
 htmlcov/
 .tox/
 .hypothesis/
-
 # ─── Linting / type checking ──────────────────────────────────────────────────
 .mypy_cache/
 .ruff_cache/
 .pyright/
-
 # ─── IDE / editor ─────────────────────────────────────────────────────────────
 .vscode/
 .idea/
@@ -47,18 +43,16 @@ htmlcov/
 *~
 .DS_Store
 Thumbs.db
-
 # ─── Docker ───────────────────────────────────────────────────────────────────
 .docker/
-
 # ─── Database ─────────────────────────────────────────────────────────────────
 *.sqlite3
 *.db
 pgdata/
-
 # ─── Logs / cache / temp ──────────────────────────────────────────────────────
 *.log
 logs/
 .cache/
 *.tmp
 *.bak
+backups/
