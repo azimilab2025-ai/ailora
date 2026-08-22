@@ -3,6 +3,12 @@
 
 ## [Unreleased]
 
+### Documentation
+- Governance PARTIAL items (ENT-002..021): added honest local-vs-live notes; status remains PARTIAL (commit 9adf525, 2026-08-22).
+- Explicit boundary: local evidence is not production/live qualification.
+
+## [Unreleased]
+
 ### Fixed
 - Durable workflow contract test fixture: idempotency key aligned to safe-character validation (`screening-12345`); domain rules unchanged.
 

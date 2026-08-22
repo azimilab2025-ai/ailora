@@ -904,3 +904,15 @@ The following results were captured on the local engineering workstation after t
 - No operational go/no-go claim is made from unit/contract tests alone
 - Live external gates (real tenant email path, OYA activation) remain out of scope of this evidence block
 - Evidence is reproducible by re-running the same focused pytest targets under the project virtualenv
+
+
+## Honest qualification status (PARTIAL vs live gates)
+
+AILORA keeps **PARTIAL** for requirements that still need production/live or independent scientific gates. This is intentional and production-grade practice: local contracts, tests, and evidence types are present; live topology drills, IdP/MFA production qualification, PITR-measured RPO/RTO, and independent scientific review remain explicitly open.
+
+- Annotated in `docs/governance/enterprise-requirements-traceability.json` with `HONEST_LOCAL_VS_LIVE` notes (status unchanged: PARTIAL).
+- Local evidence examples already in-repo: covariance/TCA surfaces, provider governance types, durable queue evidence types, capacity/soak evidence types, HA recovery evidence types, focused pytest contracts.
+- Not claimed: full broker HA, 100k soak execution, multi-instance failover drills, production OIDC MFA, managed Postgres PITR measurement as closed COMPLETE.
+
+OYA activation and real-email tenant E2E are tracked separately and are outside this documentation pass.
+
