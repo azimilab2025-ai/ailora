@@ -53,8 +53,8 @@ def test_readme_adds_visuals_without_replacing_inspectable_content() -> None:
     assert "| Control-plane signal | Verified state |" in source
     assert "```mermaid\ngraph TB" in source
     assert "20 OpenAPI paths" in source
-    assert "700 tests passing" in source
-    assert "87.61% against an enforced 85% floor" in source
+    assert "1053 passed passing" in source
+    assert "87.56% against an enforced 85% floor" in source
 
 
 def test_visual_copy_preserves_verified_status_and_safety_boundaries() -> None:
@@ -66,7 +66,7 @@ def test_visual_copy_preserves_verified_status_and_safety_boundaries() -> None:
     )
     for token in (
         "700 PASS",
-        "87.61%",
+        "87.56%",
         "20 PATHS",
         "CELESTRAK",
         "E2E DEFERRED",

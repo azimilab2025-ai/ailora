@@ -30,7 +30,7 @@ def make_request(session: AsyncSession, *, digest: str = "a" * 64) -> WorkflowRe
     return WorkflowRequest(
         tenant_id=session.info["tenant_id"],
         actor_user_id=session.info["user_id"],
-        idempotency_key="screening:stable-001",
+        idempotency_key="screening-stable-001",
         workflow_type="SSA_SCREENING",
         payload_digest=digest,
         correlation_id=uuid.uuid4(),
