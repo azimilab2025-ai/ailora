@@ -14,7 +14,7 @@ def request(**changes: object) -> WorkflowRequest:
     values: dict[str, object] = {
         "tenant_id": uuid.uuid4(),
         "actor_user_id": uuid.uuid4(),
-        "idempotency_key": "screening:12345",
+        "idempotency_key": "screening-12345",
         "workflow_type": "SSA_SCREENING",
         "payload_digest": "a" * 64,
         "correlation_id": uuid.uuid4(),
