@@ -894,6 +894,14 @@ This is **not** a NASA Open API integration and does not claim a NASA-branded AP
 OYA (library-agent) consumes governed AILORA HTTP tools; when the live space-data path is enabled and data is available through AILORA services, agent tools can operate on that data without OYA opening direct external network clients.
 
 
+## Verified candidate baseline metrics
+
+Measured on local full pytest for **Production Candidate — Active Qualification** baseline (not Production-Ready):
+
+- **1053 passed**, 12 failed recorded then partially remediated in subsequent test-alignment commits
+- Coverage approximately **87.56%–88%** (threshold 85% met)
+- Metrics are advisory evidence only; open live gates remain explicit elsewhere in this README
+
 ## Verified automated test evidence
 
 The following results were captured on the local engineering workstation after the durable-workflow contract fixture alignment.
