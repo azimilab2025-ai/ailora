@@ -1,5 +1,14 @@
 # AILORA — Changelog
 
+
+## [Unreleased]
+
+### Fixed
+- Durable workflow contract test fixture: idempotency key aligned to safe-character validation (`screening-12345`); domain rules unchanged.
+
+### Documentation
+- README: verified automated test evidence section (focused contract suite post-fix, honesty bounds, no coverage-threshold claim).
+
 ## [Unreleased]
 
 ### Changed
