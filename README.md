@@ -846,3 +846,37 @@ and non-writable to the runtime identity. Render declares the fail-closed policy
 the application. Final WAF, egress-broker and secret-manager enforcement remain external
 qualification gates; this repository change does not claim those controls are operationally
 enforced or independently approved.
+
+
+<!-- AILORA_VERIFIED_CAPABILITIES_V1 -->
+## Verified local capabilities (engineering evidence)
+
+### 1) Tenant bootstrap (test path)
+
+A controlled **test** tenant bootstrap path was executed successfully in the local environment:
+
+- Tenant record created
+- Owner user created
+- Membership bound
+
+This proves the **code path** for tenant creation works end-to-end in test mode.
+
+**Not closed yet (external gate):** production-grade tenant onboarding with a real email address, real verification link, and external identity proof. That step remains a human/external gate and is intentionally deferred.
+
+### 2) Live orbital element data path (CelesTrak / public NORAD catalog)
+
+AILORA includes a production-grade, fail-closed live provider path for **public NORAD Two-Line Element (TLE)** data via **CelesTrak** (`https://celestrak.org`).
+
+- Provider: `CelesTrakProviderAdapter` + HTTPS transport
+- Activation: explicit configuration flag (`enable_live_space_data_provider`)
+- Default posture: fail-closed (no accidental external calls)
+
+**Live verification evidence:**
+
+- Object: ISS (NORAD ID `25544`)
+- Result: HTTP 200, valid TLE payload (`LIVE_TLE_SMOKE=PASS`)
+- Source attribution: public NORAD catalog elements distributed via CelesTrak
+
+This is **not** a NASA Open API integration and does not claim a NASA-branded API client. It is the standard public orbital-element path used for SSA-style engineering work.
+
+OYA (library-agent) consumes governed AILORA HTTP tools; when the live space-data path is enabled and data is available through AILORA services, agent tools can operate on that data without OYA opening direct external network clients.
