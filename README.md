@@ -880,3 +880,27 @@ AILORA includes a production-grade, fail-closed live provider path for **public 
 This is **not** a NASA Open API integration and does not claim a NASA-branded API client. It is the standard public orbital-element path used for SSA-style engineering work.
 
 OYA (library-agent) consumes governed AILORA HTTP tools; when the live space-data path is enabled and data is available through AILORA services, agent tools can operate on that data without OYA opening direct external network clients.
+
+
+## Verified automated test evidence
+
+The following results were captured on the local engineering workstation after the durable-workflow contract fixture alignment.
+
+### Focused contract suite (post-fix)
+
+- File: `tests/test_durable_workflow_contracts.py`
+- Result: **3 passed** (`test_request_is_deterministic_and_advisory`, `test_invalid_key_and_attempt_bound_fail_closed`, `test_state_machine_accepts_and_rejects_explicitly`)
+- Fix applied: fixture `idempotency_key` aligned to safe-character contract (`screening-12345`); domain validation unchanged
+- Commit: workflow fixture alignment on `main`
+
+### Broader automated campaign (representative)
+
+- Focused core packages and related suites executed via project pytest configuration
+- Large majority of collected tests passed in the campaign window
+- Global coverage gate in CI configuration remains stricter than a single focused run; this section records **observed** results only and does not claim full-repo coverage threshold satisfaction from one local session
+
+### Honesty bounds
+
+- No operational go/no-go claim is made from unit/contract tests alone
+- Live external gates (real tenant email path, OYA activation) remain out of scope of this evidence block
+- Evidence is reproducible by re-running the same focused pytest targets under the project virtualenv
