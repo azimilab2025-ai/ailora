@@ -197,21 +197,24 @@
     }
   ],
   "metrics": {
-    "alembic_head": "0012_frame_transformations",
-    "coverage_percent": 88.77,
-    "openapi_operation_count": 27,
-    "openapi_path_count": 20,
-    "test_count": 1065,
-    "metrics_note": "Reconfirm test_count/coverage on full suite for this exact source_commit before submission freeze."
+    "test_passed": 1053,
+    "test_failed": 12,
+    "test_errors": 0,
+    "test_skipped": 0,
+    "test_total_approx": 1065,
+    "coverage_total_pct": 88.0,
+    "summary_line": "12 failed, 1053 passed, 1 warning in 13.26s",
+    "measured_at_utc": "2026-08-22T11:11:39Z",
+    "metrics_note": "Measured on local full pytest for candidate baseline. Not Production-Ready."
   },
   "schema_version": 1,
-  "source_commit": "29c6dd92dd687f229f28c92beba79e261ea65d2d",
+  "source_commit": "915238e95a92f168f5002813502fd0598927707f",
   "version": "2.0.0-production-candidate",
   "status": "PRODUCTION_CANDIDATE_ACTIVE_QUALIFICATION",
   "maturity": "Production Candidate — Active Qualification",
-  "source_commit_short": "29c6dd9",
+  "source_commit_short": "915238e",
   "alembic_head": "0014_audit_integrity",
-  "generated_at_utc": "2026-08-22T11:02:14Z",
+  "generated_at_utc": "2026-08-22T11:11:39Z",
   "honesty_rule": "Local evidence and CI-facing metrics are candidate baseline only. Not PRODUCTION_READY. Live gates remain open.",
   "open_gates_policy": "See docs/governance/partial-residual-matrix.md and README Known Open Gates; status remains PARTIAL where applicable."
 }
