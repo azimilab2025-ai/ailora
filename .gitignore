@@ -56,3 +56,8 @@ logs/
 *.tmp
 *.bak
 backups/
+
+# Local edit backups (do not commit)
+*.bak.*
+*.md.bak.*
+docs/**/*.bak.*
