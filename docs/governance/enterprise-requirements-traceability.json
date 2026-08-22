@@ -92,7 +92,8 @@
       "title": "Release-specific traceability assurance and decision authority",
       "verification_refs": [
         "tests/test_release_decision_contract.py"
-      ]
+      ],
+      "notes": "[HONEST_LOCAL_VS_LIVE 2026-08-22T01:37:29Z] LOCAL_NOTE: assurance/evidence artifacts and release process exist in-repo; independent approvals and residual-risk acceptance remain human/process gates (not auto-COMPLETE)."
     },
     {
       "commands": [
@@ -119,7 +120,8 @@
         "tests/test_auth.py",
         "tests/test_identity_session_lifecycle.py",
         "tests/test_oidc_sessions.py"
-      ]
+      ],
+      "notes": "[HONEST_LOCAL_VS_LIVE 2026-08-22T01:37:29Z] LOCAL_NOTE: OIDC/session code paths exist; production IdP, MFA enrollment, and operational qualification remain live/external gates."
     },
     {
       "commands": [
@@ -147,7 +149,8 @@
         "tests/test_contextual_authorization.py",
         "tests/test_tenant_identity_management.py",
         "tests/test_workload_identity.py"
-      ]
+      ],
+      "notes": "[HONEST_LOCAL_VS_LIVE 2026-08-22T01:37:29Z] LOCAL_NOTE: tenant-bound identity and authorization surfaces exist in code; approved auth-server integration and controlled tenant E2E remain live/external gates."
     },
     {
       "commands": [
@@ -224,7 +227,8 @@
         "tests/test_backup_restore.py",
         "tests/test_recovery_failures.py",
         "tests/test_recovery_qualification.py"
-      ]
+      ],
+      "notes": "[HONEST_LOCAL_VS_LIVE 2026-08-22T01:37:29Z] LOCAL_NOTE: recovery objective and drill evidence types exist; PITR-capable managed Postgres topology and measured production-like RPO/RTO remain live gates."
     },
     {
       "commands": [
@@ -276,7 +280,8 @@
       "verification_refs": [
         "tests/test_docker_contracts.py",
         "tests/test_render_deployment.py"
-      ]
+      ],
+      "notes": "[HONEST_LOCAL_VS_LIVE 2026-08-22T01:37:29Z] LOCAL_NOTE: security modules present in-repo; full edge SSRF/egress/secret-manager/runtime hardening qualification remains environment-dependent."
     },
     {
       "commands": [
@@ -300,7 +305,8 @@
       "verification_refs": [
         "tests/test_observability.py",
         "tests/test_workflow_observability.py"
-      ]
+      ],
+      "notes": "[HONEST_LOCAL_VS_LIVE 2026-08-22T01:37:29Z] LOCAL_NOTE: observability modules present; end-to-end OTel dashboards, alerts, and synthetic monitoring in production remain live gates."
     },
     {
       "commands": [
@@ -348,7 +354,8 @@
         "tests/test_astrodynamics_frame_transform.py",
         "tests/test_astrodynamics_frames_units.py",
         "tests/test_astrodynamics_time_eop_itrf.py"
-      ]
+      ],
+      "notes": "[HONEST_LOCAL_VS_LIVE 2026-08-22T01:37:29Z] LOCAL_NOTE: local Astropy/PyERFA fixtures are regression aids only; independent truth vectors and scientific review remain open (not independent qualification)."
     },
     {
       "commands": [
@@ -368,7 +375,8 @@
       "title": "Covariance propagation transformation and quality controls",
       "verification_refs": [
         "tests/test_astrodynamics_covariance.py"
-      ]
+      ],
+      "notes": "[HONEST_LOCAL_VS_LIVE 2026-08-22T01:37:29Z] LOCAL_NOTE: covariance contract surface implemented in-repo; residual correlation/policy qualification remains advisory until independently reviewed."
     },
     {
       "commands": [
@@ -390,7 +398,8 @@
       "verification_refs": [
         "tests/test_astrodynamics_tca.py",
         "tests/test_astrodynamics_verification_contracts.py"
-      ]
+      ],
+      "notes": "[HONEST_LOCAL_VS_LIVE 2026-08-22T01:37:29Z] LOCAL_NOTE: TCA engine surfaces exist; independent executable path/corpus and multi-minimum recall evidence remain scientific gates."
     },
     {
       "commands": [
@@ -412,7 +421,8 @@
       "verification_refs": [
         "tests/test_space_data_provider_governance.py",
         "tests/test_space_data_provider_outages.py"
-      ]
+      ],
+      "notes": "[HONEST_LOCAL_VS_LIVE 2026-08-22T01:37:29Z] LOCAL_NOTE: minimal legal/freshness/poisoning/change-monitor evidence added (Command 22); full legal/technical qualification still open."
     },
     {
       "commands": [
@@ -499,7 +509,8 @@
       "verification_refs": [
         "tests/test_durable_workflow_replay.py",
         "tests/test_durable_workflow_failures.py"
-      ]
+      ],
+      "notes": "[HONEST_LOCAL_VS_LIVE 2026-08-22T01:37:29Z] LOCAL_NOTE: minimal DurableQueueMessage/DLQ/backpressure/lease evidence added (Command 26); full broker split and redundancy still open."
     },
     {
       "commands": [
@@ -521,7 +532,8 @@
       "verification_refs": [
         "tests/test_performance_contracts.py",
         "tests/test_performance_regressions.py"
-      ]
+      ],
+      "notes": "[HONEST_LOCAL_VS_LIVE 2026-08-22T01:37:29Z] LOCAL_NOTE: minimal capacity/soak/fault-injection/cost evidence types added (Command 27); full 100k soak execution still open."
     },
     {
       "commands": [
@@ -544,7 +556,8 @@
       "verification_refs": [
         "tests/test_render_deployment.py",
         "tests/test_staging_smoke_contracts.py"
-      ]
+      ],
+      "notes": "[HONEST_LOCAL_VS_LIVE 2026-08-22T01:37:29Z] LOCAL_NOTE: minimal HA recovery evidence types added (Command 28); full multi-instance HA drills still open."
     },
     {
       "commands": [
