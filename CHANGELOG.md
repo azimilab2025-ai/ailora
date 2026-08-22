@@ -1,5 +1,11 @@
 # AILORA — Changelog
 
+## [Unreleased]
+
+### Documentation
+- Added honest partial residual matrix (`docs/governance/partial-residual-matrix.md`) for ENT PARTIAL rows; status flags unchanged.
+
+
 
 ## [Unreleased]
 
