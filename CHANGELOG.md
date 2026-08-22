@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+### Fixed
+- Candidate coverage strip aligned to latest suite figure; frozen evidence-pack sha256 pin removed so HEAD moves no longer break truthful-boundary tests (2026-08-22).
+
 ### Documentation
 - Candidate: full pytest metrics recorded in final-release-manifest (test counts/coverage).
 
