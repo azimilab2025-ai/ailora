@@ -72,7 +72,7 @@
   <g transform="translate(502 118)">
     <rect class="panel" width="208" height="96" rx="14"/>
     <text class="label" x="20" y="27">COVERAGE</text>
-    <text class="value cyan" x="20" y="63">87.61%</text>
+    <text class="value cyan" x="20" y="63">87.56%</text>
     <text class="label" x="20" y="83">FLOOR 85%</text>
   </g>
   <g transform="translate(728 118)">
