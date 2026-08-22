@@ -201,9 +201,17 @@
     "coverage_percent": 88.77,
     "openapi_operation_count": 27,
     "openapi_path_count": 20,
-    "test_count": 1065
+    "test_count": 1065,
+    "metrics_note": "Reconfirm test_count/coverage on full suite for this exact source_commit before submission freeze."
   },
   "schema_version": 1,
-  "source_commit": "594324c35ad587207b3515d7e2a9cd34b74f0fcc",
-  "version": "2.0.0-production-candidate"
+  "source_commit": "29c6dd92dd687f229f28c92beba79e261ea65d2d",
+  "version": "2.0.0-production-candidate",
+  "status": "PRODUCTION_CANDIDATE_ACTIVE_QUALIFICATION",
+  "maturity": "Production Candidate — Active Qualification",
+  "source_commit_short": "29c6dd9",
+  "alembic_head": "0014_audit_integrity",
+  "generated_at_utc": "2026-08-22T11:02:14Z",
+  "honesty_rule": "Local evidence and CI-facing metrics are candidate baseline only. Not PRODUCTION_READY. Live gates remain open.",
+  "open_gates_policy": "See docs/governance/partial-residual-matrix.md and README Known Open Gates; status remains PARTIAL where applicable."
 }

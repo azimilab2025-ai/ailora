@@ -2,6 +2,18 @@
 
 # AILORA
 
+<!-- AILORA_CANDIDATE_STATUS_BLOCK_V1 -->
+## Release status (Production Candidate)
+
+AILORA is a **Production Candidate under Active Qualification**.
+
+The deployed software baseline is operational within the declared **advisory-only** scope.
+This is **not** a claim of final Production-Ready / Production-Qualified status.
+
+Exact candidate baseline is recorded in `docs/qualification/final-release-manifest.json` (source_commit + alembic_head).
+Open qualification gates remain explicit (HA, independent scientific/legal review, production IdP/MFA ops, OYA activation, real-email tenant E2E, and related PARTIAL ENT items).
+
+
 <!-- AILORA_CINEMATIC_EXPERIENCE_BEGIN -->
 
 <p align="center"><img src="docs/assets/ailora-cinematic-hero.svg" alt="AILORA cinematic orbital intelligence system" width="100%" /></p>

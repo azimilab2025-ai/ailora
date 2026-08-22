@@ -3,6 +3,13 @@
 ## [Unreleased]
 
 ### Documentation
+- Candidate P1: sync final-release-manifest to exact HEAD + alembic head; maturity vocabulary set to Production Candidate — Active Qualification (not Production-Ready).
+- pyproject development status moved Alpha → Beta to match candidate maturity.
+
+
+## [Unreleased]
+
+### Documentation
 - Added claims/evidence alignment note (`docs/assurance/claims-evidence-alignment-note.md`); no COMPLETE status flips.
 
 
