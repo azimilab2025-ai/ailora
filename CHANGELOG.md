@@ -3,6 +3,12 @@
 ## [Unreleased]
 
 ### Documentation
+- Added claims/evidence alignment note (`docs/assurance/claims-evidence-alignment-note.md`); no COMPLETE status flips.
+
+
+## [Unreleased]
+
+### Documentation
 - Added honest partial residual matrix (`docs/governance/partial-residual-matrix.md`) for ENT PARTIAL rows; status flags unchanged.
 
 
