@@ -1,6 +1,6 @@
 {
   "artifact_id": "AILORA-ASSURANCE-EVIDENCE-INDEX",
-  "baseline_commit": "7ed0569e2bd6c5b37ed903df61ac1f95c2198d6f",
+  "baseline_commit": "2896a6f8f8229a139e8029e7f1ee7712791a0cf8",
   "evidence_rule": "Indexed evidence supports bounded baseline claims only; independent and operational gates remain open.",
   "records": [
     {

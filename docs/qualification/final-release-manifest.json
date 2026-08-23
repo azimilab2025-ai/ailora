@@ -208,11 +208,11 @@
     "metrics_note": "Measured on local full pytest for candidate baseline. Not Production-Ready."
   },
   "schema_version": 1,
-  "source_commit": "daaca2a0b74c0091982de55366c2df8025105a63",
+  "source_commit": "2896a6f8f8229a139e8029e7f1ee7712791a0cf8",
   "version": "2.0.0-production-candidate",
   "status": "PRODUCTION_CANDIDATE_ACTIVE_QUALIFICATION",
   "maturity": "candidate_active_qualification",
-  "source_commit_short": "915238e",
+  "source_commit_short": "2896a6f",
   "alembic_head": "0014_audit_integrity",
   "generated_at_utc": "2026-08-22T22:56:10Z",
   "honesty_rule": "Local evidence and CI-facing metrics are candidate baseline only. Not PRODUCTION_READY. Live gates remain open.",

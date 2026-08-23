@@ -8,7 +8,7 @@
     "risks": "docs/assurance/risk-register.json",
     "threats": "docs/assurance/threat-model.md"
   },
-  "baseline_commit": "59d0fbc55e9e1b50fe1877af382df382602ae54a",
+  "baseline_commit": "2896a6f8f8229a139e8029e7f1ee7712791a0cf8",
   "pass_evidence": [
     "IMPLEMENTATION",
     "VERIFICATION",
