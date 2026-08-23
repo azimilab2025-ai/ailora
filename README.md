@@ -62,7 +62,7 @@ Physics-First and AI-Advisory-Only principles.
 > **DEMO RECORDING SLOT:** reserved for an approved 30-second Swagger walkthrough. No recording is attached yet. The live API remains available at [Swagger UI](https://ailora-web.onrender.com/docs).
 
 
-> **Coming soon — To be added after official approval by Amin Azimi.**
+> **(see Candidate Evidence Pack) — (see Candidate Evidence Pack) after official approval by Amin Azimi.**
 >
 > A reproducible demo scenario demonstrating end-to-end conjunction risk assessment
 > and advisory recommendation will be published here upon completion of the
@@ -972,3 +972,7 @@ Exact-commit candidate evidence index:
 `docs/qualification/candidate-evidence-pack.json`
 
 Status: **Production Candidate — Active Qualification** (not Production Ready).
+
+---
+**Status:** Production Candidate – Active Qualification  
+No Production-Ready claim. See `docs/qualification/candidate-evidence-pack.json` for exact baseline.
