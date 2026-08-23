@@ -936,3 +936,32 @@ AILORA keeps **PARTIAL** for requirements that still need production/live or ind
 
 OYA activation and real-email tenant E2E are tracked separately and are outside this documentation pass.
 
+
+## Swagger UI Security Verification (Fail-Closed)
+
+Date of verification: 2026-08-23
+
+All protected SSA and Audit endpoints were exercised through the live Swagger UI (`https://ailora-web.onrender.com/docs`) without any Bearer token.
+
+### Scope exercised
+- Tenant Identity Management (memberships)
+- SSA Scenarios (list / read / create)
+- SSA Screenings (list / read / create)
+- SSA Risk Assessments (list / read / create)
+- SSA Reviews (list / read / transition)
+- SSA Audit Events (list / read)
+
+### Observed behaviour
+Every protected endpoint returned HTTP 401 with a structured problem+json body containing:
+- `"detail": "Not authenticated"`
+- `www-authenticate: Bearer`
+- a unique `correlation_id`
+
+No business logic was reached. The API correctly implements fail-closed authentication enforcement.
+
+### Notes
+- This verification was performed on the live Render deployment.
+- Positive-path testing (with a real access token) is intentionally deferred until a production-grade tenant and real credentials are available.
+- The Authorize dialog in Swagger UI is ready for use once a valid access token is obtained via `/v1/identity/login`.
+
+Status: **PASS – Fail-closed security surface confirmed.**
