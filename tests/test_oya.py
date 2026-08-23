@@ -6,8 +6,13 @@ Validates the new library-agent surface after removal of the hosted service mode
 from __future__ import annotations
 
 from ailora.services.oya.agent_tools import OYA_TOOL_CATALOG, HttpMethod, OyaTool
-from ailora.services.oya.typed_plan import OyaPlan, OyaPlanStep, OyaPlanValidationError, validate_oya_plan
 from ailora.services.oya.safety import OyaSafetyPolicy, SafetyDecision
+from ailora.services.oya.typed_plan import (
+    OyaPlan,
+    OyaPlanStep,
+    OyaPlanValidationError,
+    validate_oya_plan,
+)
 
 
 def test_catalog_is_non_empty() -> None:
@@ -38,7 +43,7 @@ def test_validate_oya_plan_rejects_unknown_tool() -> None:
     plan = OyaPlan(steps=(OyaPlanStep(tool_name="non_existent_tool"),))
     try:
         validate_oya_plan(plan)
-        assert False, "should have raised"
+        raise AssertionError("should have raised")
     except OyaPlanValidationError:
         pass
 

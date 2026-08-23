@@ -303,13 +303,24 @@ class IndependentCorpusRecord:
 
     def __post_init__(self) -> None:
         if not self.source_id.strip() or len(self.source_id) > 128:
-            raise VerificationError("INVALID_INPUT", "source_id must be explicit and bounded")
+            raise VerificationError(
+                VerificationErrorCode.INVALID_INPUT,
+                "source_id must be explicit and bounded",
+            )
         if not re.fullmatch(r"[0-9a-f]{64}", self.digest):
-            raise VerificationError("INVALID_INPUT", "digest must be lowercase SHA-256")
+            raise VerificationError(
+                VerificationErrorCode.INVALID_INPUT,
+                "digest must be lowercase SHA-256",
+            )
         if not self.revision.strip() or len(self.revision) > 128:
-            raise VerificationError("INVALID_INPUT", "revision must be explicit")
+            raise VerificationError(
+                VerificationErrorCode.INVALID_INPUT, "revision must be explicit"
+            )
         if self.object_pair_count < 0:
-            raise VerificationError("INVALID_INPUT", "object_pair_count must be non-negative")
+            raise VerificationError(
+                VerificationErrorCode.INVALID_INPUT,
+                "object_pair_count must be non-negative",
+            )
 
 
 @dataclass(frozen=True, slots=True)
@@ -326,14 +337,20 @@ class CommonModeMap:
     def __post_init__(self) -> None:
         if self.agreement_status not in {"AGREE", "DISAGREE", "INCONCLUSIVE"}:
             raise VerificationError(
-                "INVALID_INPUT", "agreement_status must be AGREE|DISAGREE|INCONCLUSIVE"
+                VerificationErrorCode.INVALID_INPUT,
+                "agreement_status must be AGREE|DISAGREE|INCONCLUSIVE",
             )
         if not math.isfinite(self.delta_seconds):
-            raise VerificationError("INVALID_INPUT", "delta_seconds must be finite")
+            raise VerificationError(
+                VerificationErrorCode.INVALID_INPUT, "delta_seconds must be finite"
+            )
         if not math.isfinite(self.primary_miss_distance_km) or not math.isfinite(
             self.independent_miss_distance_km
         ):
-            raise VerificationError("INVALID_INPUT", "miss distances must be finite")
+            raise VerificationError(
+                VerificationErrorCode.INVALID_INPUT,
+                "miss distances must be finite",
+            )
 
 
 @dataclass(frozen=True, slots=True)
@@ -347,10 +364,14 @@ class MultipleMinimumEvidence:
 
     def __post_init__(self) -> None:
         if self.candidate_count < 0:
-            raise VerificationError("INVALID_INPUT", "candidate_count must be non-negative")
+            raise VerificationError(
+                VerificationErrorCode.INVALID_INPUT,
+                "candidate_count must be non-negative",
+            )
         if self.completeness_flag not in {"COMPLETE", "PARTIAL", "UNKNOWN"}:
             raise VerificationError(
-                "INVALID_INPUT", "completeness_flag must be COMPLETE|PARTIAL|UNKNOWN"
+                VerificationErrorCode.INVALID_INPUT,
+                "completeness_flag must be COMPLETE|PARTIAL|UNKNOWN",
             )
         if len(self.ranked_miss_distances) != self.candidate_count and self.candidate_count > 0:
             # allow empty ranked lists when count is declared

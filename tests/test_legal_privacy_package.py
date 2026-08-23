@@ -21,7 +21,12 @@ def test_license_and_notice_are_tracked_and_truthful() -> None:
 
 def test_readme_release_candidate_truthfulness() -> None:
     text = (ROOT / "README.md").read_text()
-    assert ("1053 passed" in text) or ("1053" in text and "passed" in text) or ("tests" in text.lower()) and "87.56%" in text
+    assert (
+        ("1053 passed" in text)
+        or ("1053" in text and "passed" in text)
+        or ("tests" in text.lower())
+        and "87.56%" in text
+    )
     assert "NASA runtime integration is not active" in text
     assert "Proximity severity ≠ collision probability" in text
     assert "Production candidate — active qualification" in text

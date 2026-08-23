@@ -8,11 +8,11 @@ No external network clients, no hosted service configuration.
 from __future__ import annotations
 
 from dataclasses import dataclass
-from enum import Enum
+from enum import StrEnum
 from typing import Final
 
 
-class HttpMethod(str, Enum):
+class HttpMethod(StrEnum):
     GET = "GET"
     POST = "POST"
     PATCH = "PATCH"

@@ -14,7 +14,10 @@ def test_final_manifest_identity_metrics_and_scope() -> None:
     manifest = _manifest()
     assert manifest["schema_version"] == 1
     assert isinstance(manifest.get("artifact_id"), str) and len(manifest.get("artifact_id", "")) > 0
-    assert isinstance(manifest.get("source_commit"), str) and len(manifest.get("source_commit", "")) >= 7
+    assert (
+        isinstance(manifest.get("source_commit"), str)
+        and len(manifest.get("source_commit", "")) >= 7
+    )
     assert manifest["decision"]["verified_scope"] == "ENGINEERING_PRODUCTION_CANDIDATE"
     assert manifest["decision"]["production_release"] == "BLOCKED_PENDING_P0_GATES"
     assert manifest["decision"]["risk_semantics"] == (
