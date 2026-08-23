@@ -965,3 +965,10 @@ No business logic was reached. The API correctly implements fail-closed authenti
 - The Authorize dialog in Swagger UI is ready for use once a valid access token is obtained via `/v1/identity/login`.
 
 Status: **PASS – Fail-closed security surface confirmed.**
+
+## Candidate Evidence Pack
+
+Exact-commit candidate evidence index:
+`docs/qualification/candidate-evidence-pack.json`
+
+Status: **Production Candidate — Active Qualification** (not Production Ready).

@@ -1,0 +1,57 @@
+{
+  "artifact_id": "AILORA-CANDIDATE-EVIDENCE-PACK",
+  "generated_at_utc": "2026-08-23T22:03:32Z",
+  "candidate_status": "PRODUCTION_CANDIDATE_ACTIVE_QUALIFICATION",
+  "maturity": "Production Candidate — Active Qualification",
+  "source_commit": "b536de348ee172f19badac7115185a00eebabae4",
+  "source_commit_short": "b536de3",
+  "branch": "main",
+  "alembic_head": "0014_audit_integrity",
+  "version": "2.0.0-production-candidate",
+  "honesty_rule": "Local and CI-facing metrics are candidate baseline only. Not PRODUCTION_READY. Live gates remain open.",
+  "live_status": {
+    "render": "LIVE_AND_VERIFIED_SMOKE",
+    "swagger_docs": "LIVE",
+    "openapi_json": "LIVE",
+    "oya": "EXTERNAL_GATE_PENDING_CREDITS_OR_PARTNER",
+    "nasa_live": "NOT_ACTIVE",
+    "celestrak": "IMPLEMENTED_WITH_QUALIFICATION_BOUNDARY",
+    "tenant_real_email": "EXTERNAL_GATE_HUMAN",
+    "oidc_mfa_production": "IMPLEMENTED_LOCAL_OR_PARTIAL",
+    "ha_multi_region": "OPEN_EXTERNAL_GATE",
+    "pc_hbr_full_qualification": "OPEN_EXTERNAL_GATE"
+  },
+  "metrics_from_manifest": {
+    "test_passed": 1053,
+    "test_failed": 12,
+    "test_errors": 0,
+    "test_skipped": 0,
+    "test_total_approx": 1065,
+    "coverage_total_pct": 88.0,
+    "summary_line": "12 failed, 1053 passed, 1 warning in 13.26s",
+    "measured_at_utc": "2026-08-22T11:11:39Z",
+    "metrics_note": "Measured on local full pytest for candidate baseline. Not Production-Ready."
+  },
+  "core_proofs": {
+    "manifest_synced": true,
+    "migration_head_recorded": "0014_audit_integrity",
+    "advisory_only_boundary": true,
+    "no_spacecraft_command_surface": true,
+    "human_authority_required": true
+  },
+  "open_gates_summary": [
+    "independent scientific approval",
+    "full Pc/covariance/HBR qualification",
+    "independent pentest",
+    "final legal/privacy review",
+    "multi-instance HA / PITR DR",
+    "production IdP/MFA operational acceptance",
+    "Oya controlled integration (partner credit/access)",
+    "real tenant email bootstrap (human)"
+  ],
+  "notes": [
+    "Evidence pack generated for exact candidate commit.",
+    "Does not claim Production Ready or Production Qualified.",
+    "Oya and real-tenant remain external/human gates."
+  ]
+}
