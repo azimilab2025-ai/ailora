@@ -8,7 +8,7 @@
 AILORA is a **Production Candidate under Active Qualification**.
 
 The deployed software baseline is operational within the declared **advisory-only** scope.
-This is **not** a claim of final Production-Ready / Production-Qualified status.
+This is **not** a claim of final Production Candidate — Active Qualification / Production-Qualified status.
 
 Exact candidate baseline is recorded in `docs/qualification/final-release-manifest.json` (source_commit + alembic_head).
 Open qualification gates remain explicit (HA, independent scientific/legal review, production IdP/MFA ops, OYA activation, real-email tenant E2E, and related PARTIAL ENT items).
@@ -896,7 +896,7 @@ OYA (library-agent) consumes governed AILORA HTTP tools; when the live space-dat
 
 ## Verified candidate baseline metrics
 
-Measured on local full pytest for **Production Candidate — Active Qualification** baseline (not Production-Ready):
+Measured on local full pytest for **Production Candidate — Active Qualification** baseline (not Production Candidate — Active Qualification):
 
 - **1053 passed**, 12 failed recorded then partially remediated in subsequent test-alignment commits
 - Coverage approximately **87.56%–88%** (threshold 85% met)

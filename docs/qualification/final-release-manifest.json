@@ -208,14 +208,19 @@
     "metrics_note": "Measured on local full pytest for candidate baseline. Not Production-Ready."
   },
   "schema_version": 1,
-  "source_commit": "2896a6f8f8229a139e8029e7f1ee7712791a0cf8",
+  "source_commit": "b272735ddced808b22dcc3b42a3ef9b6541a2da7",
   "version": "2.0.0-production-candidate",
   "status": "PRODUCTION_CANDIDATE_ACTIVE_QUALIFICATION",
-  "maturity": "candidate_active_qualification",
-  "source_commit_short": "2896a6f",
+  "maturity": "Production Candidate — Active Qualification",
+  "source_commit_short": "b272735",
   "alembic_head": "0014_audit_integrity",
   "generated_at_utc": "2026-08-22T22:56:10Z",
   "honesty_rule": "Local evidence and CI-facing metrics are candidate baseline only. Not PRODUCTION_READY. Live gates remain open.",
   "open_gates_policy": "See docs/governance/partial-residual-matrix.md and README Known Open Gates; status remains PARTIAL where applicable.",
-  "metrics_note": "suite captured in command 155; candidate honesty preserved; not Production-Ready"
+  "metrics_note": "suite captured in command 155; candidate honesty preserved; not Production-Ready",
+  "candidate_status": "PRODUCTION_CANDIDATE_ACTIVE_QUALIFICATION",
+  "updated_at": "2026-08-23T21:54:25Z",
+  "notes": [
+    "Candidate sync: source_commit and alembic_head aligned to repository HEAD; maturity vocabulary set to Production Candidate — Active Qualification."
+  ]
 }
