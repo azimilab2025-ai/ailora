@@ -1,5 +1,17 @@
 # AILORA — Changelog
 
+## [Unreleased] — Production Candidate quality freeze
+
+### Fixed
+- Ruff/mypy quality gates (HttpMethod StrEnum, assert False removal, VerificationErrorCode enum)
+- README contract tests tolerant of evidence/qualification sections
+- Governance baselines synced to quality-gate commit (manifest, claims, evidence-index, traceability)
+
+### Notes
+- Status remains PRODUCTION_CANDIDATE_ACTIVE_QUALIFICATION
+- No operational qualification claim; external gates (Oya live install, real tenant email) stay open by design
+
+
 ## [Unreleased]
 
 ### Fixed
