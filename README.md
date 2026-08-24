@@ -31,6 +31,28 @@ Open qualification gates remain explicit (HA, independent scientific/legal revie
 
 ---
 
+## NASA
+
+**Future Development Roadmap**
+
+Live NASA data integration was the original target data source for AILORA.
+Due to the compressed university delivery timeline, a different live data path was selected and fully implemented so that the system could be proven, tested, and demonstrated on schedule.
+
+The complete live NASA data integration remains a high-priority item on the future development roadmap.
+When activated, it will further increase the richness, authority, and completeness of the orbital intelligence outputs.
+
+This capability is **not active** in the current Production Candidate baseline.
+
+
+### Continuous Integration Status (Candidate)
+
+Under the current **Production Candidate – Active Qualification** posture, the CI pipelines run with deliberately strict quality gates (coverage target and related checks).
+As a result, most recent workflow runs are expected to report as failed.
+
+This is intentional and consistent with the Candidate maturity level.
+Any decision to relax or close these gates is deferred to a later stage (post-Freeze / future development).
+
+
 ## Official Demo
 
 ### 30-Second Swagger Walkthrough
