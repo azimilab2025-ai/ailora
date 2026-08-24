@@ -31,6 +31,19 @@ Open qualification gates remain explicit (HA, independent scientific/legal revie
 
 ---
 
+## Official Demo
+
+### 30-Second Swagger Walkthrough
+
+<video width="100%" controls>
+  <source src="docs/assets/05-swagger-demo-30s.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+> Live interactive OpenAPI demonstration of the Production Candidate baseline.
+
+---
+
 ## Project Visual Gallery
 
 > Four verified views of the live Production Candidate baseline.
@@ -79,23 +92,6 @@ Physics-First and AI-Advisory-Only principles.
 </div>
 
 ---
-
-## Official Demo
-
-<!-- AILORA_CINEMATIC_V2_DEMO -->
-
-### 30-Second Swagger Demo
-
-<p align="center"><img src="docs/assets/swagger-demo-stage.svg" alt="Reserved stage for the AILORA thirty-second Swagger demo" width="100%" /></p>
-
-> **DEMO RECORDING SLOT:** reserved for an approved 30-second Swagger walkthrough. No recording is attached yet. The live API remains available at [Swagger UI](https://ailora-web.onrender.com/docs).
-
-
-> **(see Candidate Evidence Pack) — (see Candidate Evidence Pack) after official approval by Amin Azimi.**
->
-> A reproducible demo scenario demonstrating end-to-end conjunction risk assessment
-> and advisory recommendation will be published here upon completion of the
-> controlled authenticated production E2E and its release evidence are approved.
 
 ---
 
