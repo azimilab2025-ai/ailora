@@ -35,12 +35,11 @@ Open qualification gates remain explicit (HA, independent scientific/legal revie
 
 ### 30-Second Swagger Walkthrough
 
-<video width="100%" controls>
-  <source src="docs/assets/05-swagger-demo-30s.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+![30-Second Swagger Demo](docs/assets/05-swagger-demo-30s.gif)
 
 > Live interactive OpenAPI demonstration of the Production Candidate baseline.
+
+---
 
 ---
 
