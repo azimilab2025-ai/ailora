@@ -31,6 +31,35 @@ Open qualification gates remain explicit (HA, independent scientific/legal revie
 
 ---
 
+## Project Visual Gallery
+
+> Four verified views of the live Production Candidate baseline.
+
+<table>
+  <tr>
+    <td width="50%" align="center">
+      <img src="docs/assets/screenshots/01-render-live-deployment.png" alt="Render Live Deployment" width="100%"/><br/>
+      <sub>Live Deployment on Render</sub>
+    </td>
+    <td width="50%" align="center">
+      <img src="docs/assets/screenshots/02-swagger-ui-openapi.png" alt="Swagger UI OpenAPI" width="100%"/><br/>
+      <sub>Interactive OpenAPI (Swagger UI)</sub>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" align="center">
+      <img src="docs/assets/screenshots/03-vscode-project-workspace.png" alt="VS Code Project Workspace" width="100%"/><br/>
+      <sub>Project Workspace</sub>
+    </td>
+    <td width="50%" align="center">
+      <img src="docs/assets/screenshots/04-github-repository-main.png" alt="GitHub Repository Main" width="100%"/><br/>
+      <sub>GitHub Main Branch</sub>
+    </td>
+  </tr>
+</table>
+
+---
+
 ![Python](https://img.shields.io/badge/Python-3.11%2B-3776ab?style=flat-square&logo=python&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.115%2B-009688?style=flat-square&logo=fastapi&logoColor=white)
 ![Status](https://img.shields.io/badge/Status-Production%20Candidate%20%7C%20Active%20Qualification-355c9a?style=flat-square)
@@ -97,11 +126,6 @@ This telemetry strip is a compact view of verified repository and deployed-surfa
 
 <!-- AILORA_CINEMATIC_V2_GALLERY -->
 
-## Project Visual Gallery
-
-<p align="center"><img src="docs/assets/project-gallery-stage.svg" alt="Four project media placeholders for GitHub, Render, Swagger and the project workspace" width="100%" /></p>
-
-**MEDIA PLACEHOLDERS:** four approved screenshots will replace these frames after final capture and privacy review: **GitHub**, **Render**, **Swagger**, and **Project Workspace**. Placeholder graphics are presentation scaffolding, not evidence of production authorization.
 
 ---
 
