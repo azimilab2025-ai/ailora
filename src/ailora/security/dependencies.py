@@ -25,7 +25,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from fastapi import Depends, HTTPException, status
+from fastapi import Depends, HTTPException, Request, status
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 
 from ailora.security.auth import TokenError, decode_access_token
@@ -40,6 +40,7 @@ _UNAUTHORIZED = HTTPException(
 
 
 async def require_authenticated_user(
+    request: Request,
     credentials: HTTPAuthorizationCredentials | None = Depends(_bearer_scheme),  # noqa: B008
 ) -> dict[str, Any]:
     """
@@ -57,4 +58,8 @@ async def require_authenticated_user(
         payload = decode_access_token(credentials.credentials)
     except TokenError:
         raise _UNAUTHORIZED  # noqa: B904 — intentional: no chain exposure
+
+    # Propagate the authenticated principal into request-scoped database context.
+    # tenant_context validates UUID shape before applying PostgreSQL transaction state.
+    request.state.actor_id = payload["sub"]
     return payload

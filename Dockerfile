@@ -13,7 +13,7 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 WORKDIR /build
 
 # Install uv for fast, reproducible dependency resolution
-RUN pip install uv
+RUN pip install --no-cache-dir "uv==0.12.2"
 
 # Copy only the dependency definition files first to exploit Docker layer cache.
 # Source code changes will not invalidate this layer.

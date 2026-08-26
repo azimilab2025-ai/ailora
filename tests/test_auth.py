@@ -15,7 +15,7 @@ from __future__ import annotations
 from datetime import UTC, datetime, timedelta
 
 import pytest
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.testclient import TestClient
 from httpx import ASGITransport, AsyncClient
 
@@ -145,9 +145,13 @@ def _make_protected_app() -> FastAPI:
 
     @app.get("/protected")
     async def protected(
+        request: Request,
         token_data: dict[str, Any] = Depends(require_authenticated_user),  # noqa: B008
     ) -> dict[str, Any]:
-        return {"sub": token_data["sub"]}
+        return {
+            "sub": token_data["sub"],
+            "actor_id": getattr(request.state, "actor_id", None),
+        }
 
     return app
 
@@ -160,6 +164,17 @@ async def test_protected_route_with_valid_token() -> None:
         resp = await client.get("/protected", headers={"Authorization": f"Bearer {token}"})
     assert resp.status_code == 200
     assert resp.json()["sub"] == "user-xyz"
+
+
+@pytest.mark.asyncio
+async def test_protected_route_propagates_actor_id_to_request_state() -> None:
+    app = _make_protected_app()
+    subject = "11111111-1111-4111-8111-111111111111"
+    token = create_access_token(subject)
+    async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as client:
+        resp = await client.get("/protected", headers={"Authorization": f"Bearer {token}"})
+    assert resp.status_code == 200
+    assert resp.json()["actor_id"] == subject
 
 
 @pytest.mark.asyncio

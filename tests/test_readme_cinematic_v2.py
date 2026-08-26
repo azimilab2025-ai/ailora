@@ -36,12 +36,18 @@ def test_three_new_cinematic_chapters_are_embedded() -> None:
         assert value in source
 
 
-def test_demo_and_four_frame_gallery_slots_are_explicit() -> None:
+def test_demo_and_four_frame_gallery_media_are_explicit() -> None:
     source = README.read_text(encoding="utf-8")
     assert "30-Second Swagger Demo" in source
-    assert "docs/assets/swagger-demo-stage.svg" in source
+    assert "docs/assets/05-swagger-demo-30s.gif" in source
     assert "## Project Visual Gallery" in source
-    assert "docs/assets/project-gallery-stage.svg" in source
+    for asset in (
+        "docs/assets/screenshots/01-render-live-deployment.png",
+        "docs/assets/screenshots/02-swagger-ui-openapi.png",
+        "docs/assets/screenshots/03-vscode-project-workspace.png",
+        "docs/assets/screenshots/04-github-repository-main.png",
+    ):
+        assert asset in source
     for label in ("GitHub", "Render", "Swagger", "Project Workspace"):
         assert label in source
 
@@ -57,10 +63,14 @@ def test_bob_portrait_is_inside_bob_section() -> None:
 
 def test_v2_truth_and_media_boundaries_are_explicit() -> None:
     source = README.read_text(encoding="utf-8")
-    assert "DEMO RECORDING SLOT" in source
-    assert "MEDIA PLACEHOLDERS" in source
-    assert "not evidence of production authorization" in source
+    assert "Live interactive OpenAPI demonstration of the Production Candidate baseline." in source
+    assert "Four verified views of the live Production Candidate baseline." in source
+    assert (
+        "release-specific scientific, legal, security and operational "
+        "qualification requires separate evidence" in source
+    )
     assert "NASA live data remains NOT ACTIVATED" in source
+    assert "No Production-Ready claim" in source
     assert ("Oya" in source) and (
         ("PLANNED" in source)
         or ("planned" in source.lower())

@@ -25,7 +25,7 @@ jobs:
       - name: Install pinned uv action
         uses: astral-sh/setup-uv@38f3f104447c67c051c4a08e39b64a148898af3a # v4.2.0
         with:
-          version: "0.5.7"
+          version: "0.12.2"
       - name: Verify lock and install dependencies
         run: |
           uv lock --check
