@@ -130,8 +130,8 @@ This telemetry strip is a compact view of verified repository and deployed-surfa
 | **Liveness** | [`/health/live`](https://ailora-web.onrender.com/health/live) |
 | **Interactive OpenAPI** | [`/docs`](https://ailora-web.onrender.com/docs) |
 | **API surface** | 20 OpenAPI paths / 27 operations |
-| **Automated verification** | 1065 tests passing |
-| **Statement coverage** | 88.77% against an enforced 85% floor |
+| **Automated verification** | 1058 tests passing |
+| **Statement coverage** | 87.91% against an enforced 85% floor |
 | **Deployment model** | Live Render service; enterprise qualification in progress |
 | **CelesTrak provider chain** | **API DEPLOYED** — controlled production E2E deferred |
 | **NASA integration** | **NOT ACTIVE** — no NASA runtime provider is connected |
@@ -222,7 +222,7 @@ The visual sequence presents the system as one continuous mission narrative: **O
 | Supply-chain admission | Complete locked-dependency CycloneDX inventory plus signed, digest-bound SAST/SCA/container/history, VEX and SLSA-provenance verification | Scanner execution, protected signing identity, immutable registry and deployment admission remain external |
 | Durable workflows | Tenant-scoped idempotency, retries, cancellation and deterministic replay | External queue/worker HA remains planned |
 | Recovery qualification | Digest-bound isolated-drill evidence with observed RPO, validated-serving RTO and reconciliation RCO | Managed PITR, production topology, objectives and drill evidence remain external |
-| Engineering assurance | Ruff, strict Mypy, 1065 tests, 88.77% coverage, complete-lock SBOM and package build | Test evidence is not external certification |
+| Engineering assurance | Ruff, strict Mypy, 1058 tests, 87.91% coverage, complete-lock SBOM and package build | Test evidence is not external certification |
 | Deployment foundation | Non-root container contract and live Render service | Multi-instance HA/DR/SLO evidence remains planned |
 
 ### 🔄 Active qualification
@@ -758,7 +758,7 @@ Official sources: [Oya repository](https://github.com/OyaAIProd/oya) • [docume
 
 ## Current Qualification Baseline
 
-The current verified repository baseline contains **1065 tests passing**, **88.77%** statement
+The current verified repository baseline contains **1058 tests passing**, **87.91%** statement
 coverage against the enforced 85% floor, **20 OpenAPI paths / 27 operations**, and one Alembic
 head through revision `0014_audit_integrity`. The Render service is live; controlled
 authenticated provider E2E remains a required deferred qualification exercise.
@@ -937,7 +937,7 @@ OYA (library-agent) consumes governed AILORA HTTP tools; when the live space-dat
 
 ## Verified candidate baseline metrics
 
-Measured on local full pytest for **Production Candidate — Active Qualification** baseline (not Production Candidate — Active Qualification):
+Earlier local-run evidence is retained below for context; authoritative current qualified baseline: 1058 passing tests, 87.91% coverage:
 
 - **1053 passed**, 12 failed recorded then partially remediated in subsequent test-alignment commits
 - Coverage approximately **87.56%–88%** (threshold 85% met)

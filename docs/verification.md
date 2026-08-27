@@ -21,6 +21,9 @@ contract are all operational and verified.
 
 #### Test Results
 
+> **Historical phase evidence:** Counts in this section are phase-specific, not current release metrics. Current qualified engineering baseline: 1058 passing tests, 87.91% statement coverage, GitHub CI run 33025990734. Production Ready / Production Qualified is not claimed.
+
+
 | Suite | Collected | Passed | Failed | Notes |
 |---|---|---|---|---|
 | `tests/test_health.py` | 2 | 2 | 0 | Liveness + readiness probes |

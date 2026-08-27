@@ -5,7 +5,7 @@
 #           This manifest does NOT authorize implementation, deployment,
 #           repository creation, package installation, or any other
 #           development action.
-# Status  : IDENTITY_BASELINE — IMPLEMENTATION_NOT_STARTED
+# Status  : ACTIVE_IMPLEMENTATION — PRODUCTION_CANDIDATE_ACTIVE_QUALIFICATION — NOT_FROZEN
 # Source  : User-approved decision (AILORA Identity Gate) +
 #           Authoritative Prompts 01–15 (CSIP-EO-FMSP)
 # ─────────────────────────────────────────────────────────────────────────────
@@ -32,13 +32,13 @@ authorship:
   organization:               "Azimi Innovation Lab"
 
 repository:
-  proposed_form:              "azimi-innovation-lab/ailora"
+  proposed_form:              "azimilab2025-ai/ailora"
   canonical_slug:             "ailora"
   git_remote_name:            "origin"
-  status:                     "NOT_CREATED — requires separate explicit authorization"
-  collision_scan_required:    true
-  collision_result:           "NOT_VERIFIED"
-  user_approval:              "PENDING_REPOSITORY_CREATION_GATE"
+  status:                     "ACTIVE — GitHub origin verified"
+  collision_scan_required:    false
+  collision_result:           "VERIFIED_BY_ACTIVE_REMOTE"
+  user_approval:              "REPOSITORY_ACTIVE"
 
 scope:
   system_type:                "Space decision-support, analysis and simulation platform"
@@ -64,16 +64,16 @@ technical_identifiers:
 
 governance:
   authoritative_source_set:   "CSIP-EO-FMSP Prompts 01–15"
-  lifecycle_state:            "RECONSTITUTED_DRAFT — NOT_APPROVED — NOT_FROZEN"
+  lifecycle_state:            "ACTIVE_IMPLEMENTATION — PRODUCTION_CANDIDATE_ACTIVE_QUALIFICATION — NOT_FROZEN"
   prompt_06_domain_review:    "OPEN — REQUIRED — NOT_NORMATIVELY_ACTIVATED"
   prompt_06_effect:           "Astrodynamics and scientific-algorithm contracts require independent qualified review before any Normative or Operational claim can be made. Demo algorithms must be presented as Advisory, Bounded, and non-Normative."
 
 future_direction:
   oya:
-    status:                   "PLANNED / NOT CURRENTLY IMPLEMENTED"
-    description:              "Oya is planned for a future stage of AILORA's evolution."
-    implementation:           "NOT_STARTED"
-    note:                     "Oya's eventual role, architecture, interfaces, dependencies, configuration, and deployment model remain subject to later design and explicit authorization."
+    status:                   "IMPLEMENTED_LIBRARY_AGENT_SURFACE — DISABLED_BY_DESIGN"
+    description:              "Oya exists as a governed library-agent surface and remains disabled by design."
+    implementation:           "PRESENT_DISABLED"
+    note:                     "Typed catalog and plan validation are present; no hosted activation or independent external authority is claimed. Activation remains a separate explicit gate."
 
 language_policy:
   user_facing_explanations:   "Persian"
@@ -84,11 +84,11 @@ language_policy:
   invented_persian_transliterations: false
 
 implementation_gate:
-  implementation_authorized:  false
-  repository_created:         false
-  git_initialized:            false
-  any_code_written:           false
-  explicit_statement:         "This manifest records identity only. It does not authorize implementation, repository creation, scaffold generation, package installation, deployment, or any other development action."
+  implementation_authorized:  true
+  repository_created:         true
+  git_initialized:            true
+  any_code_written:           true
+  explicit_statement:         "Repository and implementation are active. This manifest does not authorize Production-Ready claims, candidate freeze, tag movement, deployment, or external-gate closure."
 
 protected_identifiers_must_not_reuse:
   - "IBM-Bob-Challenge-2026"

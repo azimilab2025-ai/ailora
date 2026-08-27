@@ -1,19 +1,19 @@
 {
   "artifact_id": "AILORA-CANDIDATE-EVIDENCE-PACK",
-  "generated_at_utc": "2026-08-23T22:03:32Z",
+  "generated_at_utc": "2026-08-27T00:12:25Z",
   "candidate_status": "PRODUCTION_CANDIDATE_ACTIVE_QUALIFICATION",
   "maturity": "Production Candidate — Active Qualification",
-  "source_commit": "b536de348ee172f19badac7115185a00eebabae4",
-  "source_commit_short": "b536de3",
+  "source_commit": "9571b168080605b72a464d39d1fed5239242330d",
+  "source_commit_short": "9571b16",
   "branch": "main",
   "alembic_head": "0014_audit_integrity",
-  "version": "2.0.0-production-candidate",
-  "honesty_rule": "Local and CI-facing metrics are candidate baseline only. Not PRODUCTION_READY. Live gates remain open.",
+  "version": "0.1.0",
+  "honesty_rule": "Qualified engineering-candidate metrics are release-specific evidence only. Not PRODUCTION_READY. External/live gates remain open.",
   "live_status": {
     "render": "LIVE_AND_VERIFIED_SMOKE",
     "swagger_docs": "LIVE",
     "openapi_json": "LIVE",
-    "oya": "EXTERNAL_GATE_PENDING_CREDITS_OR_PARTNER",
+    "oya": "IMPLEMENTED_LIBRARY_AGENT_SURFACE_DISABLED_BY_DESIGN",
     "nasa_live": "NOT_ACTIVE",
     "celestrak": "IMPLEMENTED_WITH_QUALIFICATION_BOUNDARY",
     "tenant_real_email": "EXTERNAL_GATE_HUMAN",
@@ -22,15 +22,15 @@
     "pc_hbr_full_qualification": "OPEN_EXTERNAL_GATE"
   },
   "metrics_from_manifest": {
-    "test_passed": 1053,
-    "test_failed": 12,
+    "test_passed": 1058,
+    "test_failed": 0,
     "test_errors": 0,
     "test_skipped": 0,
-    "test_total_approx": 1065,
-    "coverage_total_pct": 88.0,
-    "summary_line": "12 failed, 1053 passed, 1 warning in 13.26s",
-    "measured_at_utc": "2026-08-22T11:11:39Z",
-    "metrics_note": "Measured on local full pytest for candidate baseline. Not Production-Ready."
+    "test_total_approx": 1058,
+    "coverage_total_pct": 87.91,
+    "summary_line": "1058 passed, 1 warning in 12.96s",
+    "measured_at_utc": "2026-08-27T00:12:25Z",
+    "metrics_note": "Qualified engineering-candidate evidence bound to GitHub CI run 33025990734; not Production Ready or Production Qualified."
   },
   "core_proofs": {
     "manifest_synced": true,
@@ -50,8 +50,9 @@
     "real tenant email bootstrap (human)"
   ],
   "notes": [
-    "Evidence pack generated for exact candidate commit.",
+    "Evidence pack synchronized to qualified engineering baseline 9571b168080605b72a464d39d1fed5239242330d.",
+    "GitHub CI run 33025990734 completed successfully for that baseline.",
     "Does not claim Production Ready or Production Qualified.",
-    "Oya and real-tenant remain external/human gates."
+    "Oya library-agent remains disabled by design; real-tenant authenticated E2E remains a separate gate."
   ]
 }

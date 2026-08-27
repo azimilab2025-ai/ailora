@@ -197,30 +197,33 @@
     }
   ],
   "metrics": {
-    "test_passed": 1053,
-    "test_failed": 12,
+    "test_passed": 1058,
+    "test_failed": 0,
     "test_errors": 0,
     "test_skipped": 0,
-    "test_total_approx": 1065,
-    "coverage_total_pct": 88.0,
-    "summary_line": "12 failed, 1053 passed, 1 warning in 13.26s",
-    "measured_at_utc": "2026-08-22T11:11:39Z",
-    "metrics_note": "Measured on local full pytest for candidate baseline. Not Production-Ready."
+    "test_total_approx": 1058,
+    "coverage_total_pct": 87.91,
+    "summary_line": "1058 passed, 1 warning in 12.96s",
+    "measured_at_utc": "2026-08-27T00:12:25Z",
+    "metrics_note": "Qualified engineering-candidate evidence bound to GitHub CI run 33025990734; not Production Ready or Production Qualified."
   },
   "schema_version": 1,
-  "source_commit": "b272735ddced808b22dcc3b42a3ef9b6541a2da7",
-  "version": "2.0.0-production-candidate",
+  "source_commit": "9571b168080605b72a464d39d1fed5239242330d",
+  "version": "0.1.0",
   "status": "PRODUCTION_CANDIDATE_ACTIVE_QUALIFICATION",
   "maturity": "Production Candidate — Active Qualification",
-  "source_commit_short": "b272735",
+  "source_commit_short": "9571b16",
   "alembic_head": "0014_audit_integrity",
-  "generated_at_utc": "2026-08-22T22:56:10Z",
-  "honesty_rule": "Local evidence and CI-facing metrics are candidate baseline only. Not PRODUCTION_READY. Live gates remain open.",
+  "generated_at_utc": "2026-08-27T00:12:25Z",
+  "honesty_rule": "Qualified engineering-candidate evidence is not Production Ready or Production Qualified. External/live qualification gates remain open.",
   "open_gates_policy": "See docs/governance/partial-residual-matrix.md and README Known Open Gates; status remains PARTIAL where applicable.",
-  "metrics_note": "suite captured in command 155; candidate honesty preserved; not Production-Ready",
+  "metrics_note": "Qualified baseline: 1058 passing tests, 87.91% statement coverage, GitHub CI run 33025990734; not Production Ready.",
   "candidate_status": "PRODUCTION_CANDIDATE_ACTIVE_QUALIFICATION",
-  "updated_at": "2026-08-23T21:54:25Z",
+  "updated_at": "2026-08-27T00:12:25Z",
   "notes": [
-    "Candidate sync: source_commit and alembic_head aligned to repository HEAD; maturity vocabulary set to Production Candidate — Active Qualification."
+    "Release-truth synchronization bound to qualified engineering baseline 9571b168080605b72a464d39d1fed5239242330d.",
+    "GitHub CI run 33025990734 succeeded for that baseline.",
+    "Package/release version identity reconciled to 0.1.0 without moving or recreating any Git tag.",
+    "No candidate freeze, release freeze, or Production-Ready claim is created by this synchronization."
   ]
 }
