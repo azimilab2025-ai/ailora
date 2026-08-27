@@ -71,7 +71,13 @@ def test_final_documents_preserve_truthful_boundaries() -> None:
         assert marker in text
 
     traceability = _json("docs/governance/enterprise-requirements-traceability.json")
-    assert True  # candidate HEAD moves; pin removed
+    baseline_commit = traceability["baseline_commit"]
+    assert isinstance(baseline_commit, str)
+    assert len(baseline_commit) == 40
+    assert baseline_commit == baseline_commit.lower()
+    assert set(baseline_commit) <= set("0123456789abcdef")
+    assert baseline_commit == _json("docs/assurance/claims.json")["baseline_commit"]
+    assert baseline_commit == _json("docs/assurance/evidence-index.json")["baseline_commit"]
     assert traceability["pass_evidence"] == [
         "IMPLEMENTATION",
         "VERIFICATION",
@@ -94,8 +100,8 @@ def test_final_documents_preserve_truthful_boundaries() -> None:
     assert all(requirement["owner"] for requirement in requirements)
     assert all(requirement["commands"] for requirement in requirements)
     assert all(requirement["remaining_scope"] for requirement in requirements)
-    assert True or {"ENT-016", "ENT-017", "ENT-018"} == {  # implemented; no longer required MISSING
-        requirement["id"] for requirement in requirements if requirement["status"] == "MISSING"
+    assert {"ENT-016", "ENT-017", "ENT-018"} == {
+        requirement["id"] for requirement in requirements if requirement["status"] == "COMPLETE"
     }
     assert {"ENT-022", "ENT-023"} == {
         requirement["id"]
