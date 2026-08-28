@@ -5,9 +5,18 @@
 **Organization:** Azimi Innovation Lab
 **Authoritative source:** Prompts 01–15 (CSIP-EO-FMSP)
 **Prompt 06 domain review:** PARTIAL / STILL OPEN
-**Oya:** ARCHITECTURE DOCUMENTED / PLACEHOLDER IMPLEMENTED / SERVICE DISABLED
+**Oya:** IN-REPO LIBRARY-AGENT SEPARATE / EXTERNAL GETOYA.AI LIVE IN PRODUCTION GRADE CANDIDATE FREEZE
 
 ---
+
+
+
+#### 2026-08-28 — External Oya live alignment
+
+- External Oya runtime at getoya.ai verified against Render.
+- Live agents: AILORA Assistant, AILORA API Agent Live.
+- README contract updated; in-repo src/ailora/services/oya remains a local library-agent package.
+- Historical PHASE notes below stay as dated history and are not current status.
 
 ## Timeline
 

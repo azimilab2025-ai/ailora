@@ -11,7 +11,7 @@ The deployed software baseline is operational within the declared **advisory-onl
 This is **not** a claim of final Production Candidate — Active Qualification / Production-Qualified status.
 
 Exact candidate baseline is recorded in `docs/qualification/final-release-manifest.json` (source_commit + alembic_head).
-Open qualification gates remain explicit (HA, independent scientific/legal review, production IdP/MFA ops, OYA activation, real-email tenant E2E, and related PARTIAL ENT items).
+Open qualification gates remain explicit (HA, independent scientific/legal review, production IdP/MFA ops, and related PARTIAL ENT items). External Oya runtime and real-tenant E2E for login/session/memberships/SSA create-list are recorded in this Production Grade Candidate freeze.
 
 
 <!-- AILORA_CINEMATIC_EXPERIENCE_BEGIN -->
@@ -20,7 +20,7 @@ Open qualification gates remain explicit (HA, independent scientific/legal revie
 
 <p align="center"><a href="https://ailora-web.onrender.com/health/live">Live Service</a> • <a href="https://ailora-web.onrender.com/docs">Interactive API</a> • <a href="#architecture">Architecture</a> • <a href="#bob-engineering-agent">Bob Agent</a> • <a href="#safety--scientific-integrity">Safety</a></p>
 
-> **Production candidate — active qualification:** the Render service is live and the verified software baseline is operational. Analytical outputs remain advisory-only. NASA live data is **NOT ACTIVATED**. Oya is realigned to a library-agent direction (typed tool catalog + plan DAG). Hosted service model removed. Still disabled and non-billable by design.
+> **Production candidate — active qualification:** the Render service is live and the verified software baseline is operational. Analytical outputs remain advisory-only. NASA live data is **NOT ACTIVATED**. In-repo Oya remains a local library-agent package. External Oya at getoya.ai is live against Render in this Production Grade Candidate freeze.
 
 <!-- AILORA_CINEMATIC_EXPERIENCE_END -->
 
@@ -763,7 +763,7 @@ Boundary: Oya may call documented HTTP endpoints. It does not add spacecraft com
 
 ## Future Integration Roadmap: Oya Library-Agent
 
-> **REALIGNED / LIBRARY-AGENT / DISABLED BY DESIGN.** Oya now provides a typed tool catalog and plan validation surface. Hosted service model, API keys, network clients and voice session have been removed. The feature remains disabled and non-billable.
+> **REALIGNED / LIBRARY-AGENT / DISABLED BY DESIGN.** Oya now provides a typed tool catalog and plan validation surface. Hosted service model, API keys, network clients and voice session have been removed. The in-repo package remains a local library-agent surface. The external getoya.ai runtime is live in this Production Grade Candidate freeze.
 
 <p align="center">
   <a href="https://github.com/OyaAIProd/oya"><img src="https://github.com/OyaAIProd.png" alt="Official Oya GitHub organization logo — planned integration, currently disabled" width="128" /></a>
@@ -772,7 +772,7 @@ Boundary: Oya may call documented HTTP endpoints. It does not add spacecraft com
 <h3 align="center">OYA • LIBRARY-AGENT (TYPED CATALOG + PLAN DAG)</h3>
 <p align="center"><strong>Governed library-agent surface • typed tools map only to existing AILORA routes • still disabled</strong></p>
 
-Oya inside AILORA is now a pure library-agent surface. It exposes a governed typed tool catalog and a plan/DAG validator. All tools map exclusively to existing AILORA HTTP routes. No external network clients, no API keys, no voice session and no hosted configuration are present. The feature remains **DISABLED / NON-BILLABLE** by design until explicit authorization.
+Oya inside AILORA is now a pure library-agent surface. It exposes a governed typed tool catalog and a plan/DAG validator. All tools map exclusively to existing AILORA HTTP routes. No external network clients, no API keys, no voice session and no hosted configuration are present. The in-repo package remains a local library-agent surface. External Oya at getoya.ai is live in this Production Grade Candidate freeze.
 
 <p align="center"><img src="docs/assets/ailora-capability-hive.svg" alt="AILORA interconnected capability honeycomb" width="100%" /></p>
 
@@ -802,7 +802,7 @@ The upstream project reports benchmark observations including fewer tokens, lowe
 
 **Research evidence → dependency and license review → isolated production-grade → threat model → deterministic replay → performance benchmark → tenant and authorization tests → independent review → explicit activation decision.**
 
-Until every gate passes and explicit authorization is granted, Oya remains **DISABLED BY DESIGN**, provider-neutral, non-billable and disconnected from AILORA runtime paths.
+The in-repo Oya package stays a local library-agent surface. External Oya at getoya.ai is connected to the live AILORA HTTP API in this Production Grade Candidate freeze.
 
 Official sources: [Oya repository](https://github.com/OyaAIProd/oya) • [documentation directory](https://github.com/OyaAIProd/oya/tree/main/docs) • [benchmark methodology](https://github.com/OyaAIProd/oya/tree/main/benchmarks) • [MIT license](https://github.com/OyaAIProd/oya/blob/main/LICENSE)
 
@@ -814,7 +814,7 @@ head through revision `0014_audit_integrity`. The Render service is live; contro
 authenticated provider E2E remains a required deferred qualification exercise.
 
 - NASA runtime integration is not active; CelesTrak is the directly integrated GP source.
-- Oya library-agent surface is present, disabled and non-billable pending explicit authorization.
+- In-repo Oya library-agent surface remains local. External Oya runtime is live (`AILORA Assistant`, `AILORA API Agent Live`).
 - Backup/restore evidence records isolated local RPO/RTO/RCO observations only; managed PITR,
   objectives and production recovery qualification remain open.
 - Scientific execution manifests are deterministic and reject registry, runtime, tolerance, seed
@@ -1013,7 +1013,7 @@ The following results were captured on the local engineering workstation after t
 ### Honesty bounds
 
 - No operational go/no-go claim is made from unit/contract tests alone
-- Live external gates (real tenant email path, OYA activation) remain out of scope of this evidence block
+- Live external gates recorded in this freeze: real tenant login/session/memberships/SSA create-list, plus external Oya list_endpoints and authenticated session/memberships.
 - Evidence is reproducible by re-running the same focused pytest targets under the project virtualenv
 
 
@@ -1025,7 +1025,7 @@ AILORA keeps **PARTIAL** for requirements that still need production/live or ind
 - Local evidence examples already in-repo: covariance/TCA surfaces, provider governance types, durable queue evidence types, capacity/soak evidence types, HA recovery evidence types, focused pytest contracts.
 - Not claimed: full broker HA, 100k soak execution, multi-instance failover drills, production OIDC MFA, managed Postgres PITR measurement as closed COMPLETE.
 
-OYA activation and real-email tenant E2E are tracked separately and are outside this documentation pass.
+External Oya activation and real-tenant E2E for the verified paths above are recorded in External Oya Integration.
 
 
 ## Swagger UI Security Verification (Fail-Closed)
