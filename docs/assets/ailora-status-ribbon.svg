@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 120">
+  <rect width="1400" height="120" fill="#061016"/>
+  <rect x="20" y="20" width="250" height="80" rx="10" fill="#0b2a24" stroke="#3ee0c2"/>
+  <text x="145" y="52" text-anchor="middle" fill="#3ee0c2" font-size="12">RENDER</text>
+  <text x="145" y="78" text-anchor="middle" fill="#e8fff8" font-size="18">LIVE</text>
+  <rect x="290" y="20" width="250" height="80" rx="10" fill="#102033" stroke="#7eb6ff"/>
+  <text x="415" y="52" text-anchor="middle" fill="#7eb6ff" font-size="12">OPENAPI</text>
+  <text x="415" y="78" text-anchor="middle" fill="#e8f3ff" font-size="18">27 OPS</text>
+  <rect x="560" y="20" width="250" height="80" rx="10" fill="#2a1030" stroke="#e85cff"/>
+  <text x="685" y="52" text-anchor="middle" fill="#e85cff" font-size="12">EXTERNAL OYA</text>
+  <text x="685" y="78" text-anchor="middle" fill="#f8e8ff" font-size="18">LIVE</text>
+  <rect x="830" y="20" width="250" height="80" rx="10" fill="#2a1208" stroke="#ff6a3d"/>
+  <text x="955" y="52" text-anchor="middle" fill="#ff6a3d" font-size="12">NASA LIVE</text>
+  <text x="955" y="78" text-anchor="middle" fill="#ffe0d4" font-size="18">NOT ACTIVATED</text>
+  <rect x="1100" y="20" width="280" height="80" rx="10" fill="#241c08" stroke="#e0b34d"/>
+  <text x="1240" y="52" text-anchor="middle" fill="#e0b34d" font-size="12">STATUS</text>
+  <text x="1240" y="78" text-anchor="middle" fill="#fff4d2" font-size="16">CANDIDATE</text>
+</svg>

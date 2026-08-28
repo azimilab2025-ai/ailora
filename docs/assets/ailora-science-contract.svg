@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 220">
+  <rect width="1400" height="220" fill="#0a0a0c"/>
+  <text x="700" y="36" text-anchor="middle" fill="#f2e6c9" font-size="20">SCIENTIFIC OUTPUT CONTRACT</text>
+  <rect x="40" y="60" width="420" height="130" rx="12" fill="#161018" stroke="#c9a36a"/>
+  <text x="250" y="110" text-anchor="middle" fill="#c9a36a" font-size="14">PROXIMITY SEVERITY</text>
+  <text x="250" y="145" text-anchor="middle" fill="#fff6e0" font-size="22">distance screen</text>
+  <rect x="490" y="60" width="420" height="130" rx="12" fill="#14080c" stroke="#ff6a3d"/>
+  <text x="700" y="110" text-anchor="middle" fill="#ff6a3d" font-size="14">NOT COLLISION PROBABILITY</text>
+  <text x="700" y="145" text-anchor="middle" fill="#ffd0bf" font-size="22">Pc is not computed</text>
+  <rect x="940" y="60" width="420" height="130" rx="12" fill="#08140f" stroke="#3ee0a0"/>
+  <text x="1150" y="110" text-anchor="middle" fill="#3ee0a0" font-size="14">NOT OPERATIONAL DECISION</text>
+  <text x="1150" y="145" text-anchor="middle" fill="#d8fff0" font-size="22">human authority</text>
+</svg>

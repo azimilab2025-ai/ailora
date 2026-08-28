@@ -3,6 +3,17 @@
 # AILORA
 
 <!-- AILORA_CANDIDATE_STATUS_BLOCK_V1 -->
+
+
+<p align="center"><strong>Official Demo</strong> — live Render API and authenticated tenant path.</p>
+<!-- AILORA_STATUS_RIBBON_BEGIN -->
+<div align="center">
+  <h2>Live Status Ribbon</h2>
+  <p><em>Production Grade Candidate · one-line operational truth</em></p>
+  <p><img src="docs/assets/ailora-status-ribbon.svg" alt="Live status ribbon for Render, OpenAPI, Oya, NASA and candidate posture" width="100%" /></p>
+</div>
+<!-- AILORA_STATUS_RIBBON_END -->
+
 ## Release status (Production Candidate)
 
 AILORA is a **Production Candidate under Active Qualification**.
@@ -526,6 +537,29 @@ pytest                ✅  51 tests collected, 51 passed
 
 ## Safety & Scientific Integrity
 
+<!-- AILORA_THREAT_CARD_BEGIN -->
+### Threat and control card
+
+<table>
+  <tr>
+    <td width="25%"><b>Stolen session</b><br/>asymmetric tokens, short session, fail-closed tenant membership</td>
+    <td width="25%"><b>Cross-tenant read</b><br/>tenant context required; negatives were part of the candidate contract</td>
+    <td width="25%"><b>False science claim</b><br/>advisory outputs; Prompt 06 domain review remains a gate</td>
+    <td width="25%"><b>Command injection</b><br/>no telecommand, no uplink, no spacecraft command surface</td>
+  </tr>
+</table>
+<!-- AILORA_THREAT_CARD_END -->
+
+<!-- AILORA_SCIENCE_CONTRACT_BEGIN -->
+<div align="center">
+  <h2>Scientific Output Contract</h2>
+  <p><img src="docs/assets/ailora-science-contract.svg" alt="Proximity is not collision probability and not an operational decision" width="100%" /></p>
+</div>
+
+Proximity severity is a distance-based screen. It is not collision probability. It is not an operational maneuver decision. Human authority remains required.
+<!-- AILORA_SCIENCE_CONTRACT_END -->
+
+
 <!-- AILORA_COMMAND_SEAL_BEGIN -->
 <p align="center">
   <img alt="advisory only" src="https://img.shields.io/badge/Outputs-Advisory%20Only-e05d44?style=for-the-badge">
@@ -732,6 +766,19 @@ The public Render endpoint demonstrates deployment health and API availability; 
 
 ## Documentation Index
 
+<!-- AILORA_HANDOFF_BEGIN -->
+### Handoff after this freeze
+
+| Do not touch first | Start here | Secrets stay out of git |
+|---|---|---|
+| Advisory-only boundary and no-command surface | Act I release qualification on a tagged SHA | Tenant email, password, tokens |
+| Live Render contract already proven | Act II NASA-class catalogs | Render and getoya credentials |
+| In-repo Oya library-agent package unless redesign is explicit | Act V service lifecycle after the live agents | Database URLs with passwords |
+
+A later owner inherits a Production Grade Candidate, not a Production Qualified system.
+<!-- AILORA_HANDOFF_END -->
+
+
 | Document | Location | Description |
 |---|---|---|
 | Prompt Sequence (CSIP-EO-FMSP) | [`docs/prompt-sequence/`](docs/prompt-sequence/) | Authoritative 15-part governing specification |
@@ -772,6 +819,20 @@ The public Render endpoint demonstrates deployment health and API availability; 
 
 
 ## External Oya Integration
+
+<!-- AILORA_EVIDENCE_CARD_BEGIN -->
+### Verifiable evidence card
+
+<table>
+  <tr>
+    <td width="25%"><b>SHA</b><br/><code>46d6e2a</code> plus later documentation commits on this line</td>
+    <td width="25%"><b>Dates</b><br/>2026-08-27 / 2026-08-28</td>
+    <td width="25%"><b>Proven</b><br/>login, session authenticated, memberships owner, SSA create 201 / list 200, Oya 27 endpoints</td>
+    <td width="25%"><b>Not claimed</b><br/>Production Qualified, NASA live, collision probability, spacecraft command</td>
+  </tr>
+</table>
+<!-- AILORA_EVIDENCE_CARD_END -->
+
 
 <!-- AILORA_OYA_LIVE_CHIPS_BEGIN -->
 <p align="center">
