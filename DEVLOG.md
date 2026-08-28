@@ -11,6 +11,13 @@
 
 
 
+#### 2026-08-28 — Companion truth alignment
+
+- Residual-risk now splits in-repo Oya from live external getoya.ai.
+- NOTICE no longer treats external Oya as an inactive future gate.
+- Compose project name in .env.example is `ailora`.
+- Candidate freeze identity and qualification SHA refresh remain TXT-3.
+
 #### 2026-08-28 — External Oya live alignment
 
 - External Oya runtime at getoya.ai verified against Render.

@@ -2,6 +2,6 @@ AILORA NOTICE
 
 Copyright (c) 2026 Amin Azimi / Azimi Innovation Lab.
 
-This project contains or depends on third-party software. Exact resolved package versions are recorded in uv.lock and local SBOM evidence. Third-party components remain governed by their respective licenses and notices. NASA/CelesTrak data and Oya services are future external gates and are not activated by this release candidate.
+This project contains or depends on third-party software. Exact resolved package versions are recorded in uv.lock and local SBOM evidence. Third-party components remain governed by their respective licenses and notices. NASA live data is not activated in this candidate baseline. Public NORAD / CelesTrak transport exists and is not a qualified operational catalog. The in-repo Oya package is a local library-agent. The external getoya.ai runtime is a live candidate integration against Render and remains outside production-use authorization.
 
 This notice is not legal advice. Independent license, privacy, residency, provider-terms and regulatory review remains required before production use.
