@@ -636,9 +636,32 @@ Bob improves the system that builds AILORA; Bob does not become an unbounded age
 
 <p align="center"><img src="docs/assets/ailora-technology-rocket.svg" alt="Animated technology rocket traveling from the terrestrial baseline toward an outer digital world" width="100%" /></p>
 
-This animated technology trajectory represents modular growth from the verified terrestrial production-candidate baseline toward future capability. It is a visual roadmap only: no on-orbit runtime, autonomous maneuver or spacecraft command capability is claimed. NASA live data remains NOT ACTIVATED. Oya is realigned to library-agent direction and remains DISABLED / NON-BILLABLE.
+This animated technology trajectory represents modular growth from the verified terrestrial production-candidate baseline toward future capability. It is a visual roadmap only: no on-orbit runtime, autonomous maneuver or spacecraft command capability is claimed. NASA live data remains NOT ACTIVATED. In-repo Oya remains a local library-agent package. External Oya at getoya.ai is live for this Production Grade Candidate freeze.
 
 ---
+
+
+<!-- AILORA_FIVE_ACTS_HORIZON_BEGIN -->
+<div align="center">
+  <h2>Beyond the Horizon — Five Acts</h2>
+  <p><em>Production Grade Candidate · planned path after this freeze</em></p>
+  <p>
+    <img src="docs/assets/ailora-five-acts.svg" alt="Five planned acts: The Gate, The Catalog, The Tenancy, The Bridge, Service Lifecycle" width="100%" />
+  </p>
+</div>
+
+<table>
+  <tr>
+    <td width="20%"><b>Act I · The Gate</b><br/>Release Qualification<br/>SHA, CI, evidence pack<br/><code>PLANNED</code></td>
+    <td width="20%"><b>Act II · The Catalog</b><br/>NASA-class live catalogs<br/>provenance, fail-closed ingest<br/><code>PLANNED</code></td>
+    <td width="20%"><b>Act III · The Tenancy</b><br/>Tenant assurance<br/>E2E, isolation, negatives<br/><code>PLANNED</code></td>
+    <td width="20%"><b>Act IV · The Bridge</b><br/>Oya hardening<br/>two live agents, email login<br/><code>PLANNED</code></td>
+    <td width="20%"><b>Act V · Service Lifecycle</b><br/>Operational gates<br/>observe, restore, rotate<br/><code>PLANNED</code></td>
+  </tr>
+</table>
+
+Act II uses a custom NASA-CLASS mark inside the artwork. It is not an official NASA emblem and does not imply NASA endorsement.
+<!-- AILORA_FIVE_ACTS_HORIZON_END -->
 
 ## Roadmap
 
@@ -653,7 +676,8 @@ The trajectory communicates verified direction without inventing delivery dates.
 The public Render endpoint demonstrates deployment health and API availability; release-specific scientific, legal, security and operational qualification requires separate evidence.
 
 - **NASA live data:** **NOT ACTIVATED**. Provider qualification, licensing, provenance and scientific approval remain mandatory gates.
-- **Oya library-agent:** **DISABLED**. Typed catalog + plan validation, no network clients, non-billable.
+- **In-repo Oya library-agent:** local typed catalog + plan validation; not the live getoya.ai runtime.
+- **External Oya runtime:** live against Render in this Production Grade Candidate freeze (`AILORA Assistant`, `AILORA API Agent Live`).
 - **Human authority:** **REQUIRED** for review and release decisions.
 - **Scientific authority:** independent competent review remains external.
 - **Operational authority:** no spacecraft command, uplink or autonomous maneuver path exists.
@@ -709,6 +733,32 @@ The public Render endpoint demonstrates deployment health and API availability; 
 | Demo Environment | [Render deployment](https://ailora-web.onrender.com) | Live deployment |
 
 ---
+
+
+## External Oya Integration
+
+External Oya is live against the Render service in this Production Grade Candidate freeze.
+
+- Live API: https://ailora-web.onrender.com
+- Swagger: https://ailora-web.onrender.com/docs
+- Oya runtime: https://getoya.ai
+
+Live agents in this baseline:
+
+| Agent | Role | Status | Verified |
+|---|---|---|---|
+| AILORA Assistant | User-facing assistant | Live | Listed live AILORA endpoints from the Render OpenAPI document |
+| AILORA API Agent Live | API execution agent | Live | `ailora_list_endpoints` and `ailora_call_endpoint` |
+
+Verified on 2026-08-27 / 2026-08-28
+
+Swagger, real tenant: login, session `authenticated true`, memberships role `owner`, SSA scenario create `201`, tenant scenario list `200`.
+
+Oya Playground: `ailora_list_endpoints` returned 27 live endpoints; `GET /v1/auth/session` returned `200` / `authenticated true` / `fail_closed_tenant_membership`; memberships returned `200 OK` / role `owner`.
+
+The in-repo package `src/ailora/services/oya` remains a separate library-agent surface. It is not the live getoya.ai runtime.
+
+Boundary: Oya may call documented HTTP endpoints. It does not add spacecraft command, telecommand, or uplink.
 
 
 ## Future Integration Roadmap: Oya Library-Agent

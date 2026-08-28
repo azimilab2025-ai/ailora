@@ -144,24 +144,14 @@ def test_author_is_last_substantive_section(readme_lines: list[str]) -> None:
     )
 
 
-def test_oya_only_planned(readme_text: str) -> None:
-    """Oya mentions must remain non-operational for candidate scope."""
-    if "Oya" not in readme_text and "oya" not in readme_text.lower():
-        return
-    lower = readme_text.lower()
-    ok = any(
-        w in lower
-        for w in (
-            "planned",
-            "not currently implemented",
-            "disabled",
-            "library-agent",
-            "pending",
-            "active qualification",
-            "not implemented",
-        )
-    )
-    assert ok, "Oya appears without an honest non-operational qualifier somewhere in README"
+def test_oya_live_external_and_library_agent(readme_text: str) -> None:
+    """External Oya runtime is live; in-repo Oya remains a separate library-agent surface."""
+    assert "Oya" in readme_text or "oya" in readme_text.lower()
+    assert "AILORA Assistant" in readme_text
+    assert "AILORA API Agent Live" in readme_text
+    assert "getoya.ai" in readme_text
+    assert "library-agent" in readme_text.lower()
+    assert "Production Grade Candidate" in readme_text or "production grade candidate" in readme_text.lower()
 
 
 def test_no_invented_live_url() -> None:

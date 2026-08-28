@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 520" role="img" aria-label="Five Acts Beyond the Horizon">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#140804"/>
+      <stop offset="0.5" stop-color="#090607"/>
+      <stop offset="1" stop-color="#1a0c06"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="520" fill="url(#bg)"/>
+  <text x="800" y="48" text-anchor="middle" font-family="Georgia, serif" font-size="22" letter-spacing="8" fill="#f3d48a">BEYOND THE HORIZON</text>
+  <text x="800" y="78" text-anchor="middle" font-family="Georgia, serif" font-size="28" fill="#fff4d2">FIVE ACTS</text>
+  <text x="800" y="104" text-anchor="middle" font-family="ui-sans-serif, system-ui" font-size="13" letter-spacing="3" fill="#c9a36a">PRODUCTION GRADE CANDIDATE — PLANNED PATH</text>
+  <g transform="translate(30,130)">
+    <rect width="292" height="340" rx="18" fill="#1c1008" stroke="#e0b34d" stroke-width="1.5"/>
+    <text x="146" y="36" text-anchor="middle" fill="#e0b34d" font-size="12" letter-spacing="3">ACT I</text>
+    <text x="146" y="68" text-anchor="middle" fill="#ffe7a3" font-size="22" font-family="Georgia, serif">The Gate</text>
+    <circle cx="146" cy="150" r="46" fill="none" stroke="#e0b34d" stroke-width="3"/>
+    <circle cx="146" cy="150" r="22" fill="#e0b34d"/>
+    <text x="146" y="250" text-anchor="middle" fill="#f6e6b8" font-size="16" font-family="Georgia, serif">Release Qualification</text>
+    <text x="146" y="278" text-anchor="middle" fill="#c9a36a" font-size="12">SHA · CI · evidence pack</text>
+    <text x="146" y="312" text-anchor="middle" fill="#8d6b32" font-size="11" letter-spacing="2">PLANNED</text>
+  </g>
+  <g transform="translate(334,130)">
+    <rect width="292" height="340" rx="18" fill="#220b08" stroke="#ff6a3d" stroke-width="1.5"/>
+    <text x="146" y="36" text-anchor="middle" fill="#ff8a5b" font-size="12" letter-spacing="3">ACT II</text>
+    <text x="146" y="68" text-anchor="middle" fill="#ffd0bf" font-size="22" font-family="Georgia, serif">The Catalog</text>
+    <ellipse cx="146" cy="150" rx="70" ry="28" fill="none" stroke="#ff6a3d" stroke-width="2"/>
+    <circle cx="146" cy="150" r="10" fill="#fff1c8"/>
+    <text x="146" y="214" text-anchor="middle" fill="#ffb089" font-size="13" letter-spacing="2">NASA-CLASS</text>
+    <text x="146" y="250" text-anchor="middle" fill="#ffd0bf" font-size="16" font-family="Georgia, serif">Live Catalogs</text>
+    <text x="146" y="278" text-anchor="middle" fill="#d9896c" font-size="12">provenance · fail-closed ingest</text>
+    <text x="146" y="312" text-anchor="middle" fill="#8d4a32" font-size="11" letter-spacing="2">PLANNED</text>
+  </g>
+  <g transform="translate(638,130)">
+    <rect width="292" height="340" rx="18" fill="#07140f" stroke="#3ee0a0" stroke-width="1.5"/>
+    <text x="146" y="36" text-anchor="middle" fill="#7dffc9" font-size="12" letter-spacing="3">ACT III</text>
+    <text x="146" y="68" text-anchor="middle" fill="#d8fff0" font-size="22" font-family="Georgia, serif">The Tenancy</text>
+    <circle cx="118" cy="150" r="34" fill="none" stroke="#3ee0a0" stroke-width="2"/>
+    <circle cx="174" cy="150" r="34" fill="none" stroke="#9bffe0" stroke-width="2"/>
+    <text x="146" y="250" text-anchor="middle" fill="#d8fff0" font-size="16" font-family="Georgia, serif">Tenant Assurance</text>
+    <text x="146" y="278" text-anchor="middle" fill="#6fb89a" font-size="12">E2E · isolation · negatives</text>
+    <text x="146" y="312" text-anchor="middle" fill="#2f6d57" font-size="11" letter-spacing="2">PLANNED</text>
+  </g>
+  <g transform="translate(942,130)">
+    <rect width="292" height="340" rx="18" fill="#140814" stroke="#e85cff" stroke-width="1.5"/>
+    <text x="146" y="36" text-anchor="middle" fill="#f3a7ff" font-size="12" letter-spacing="3">ACT IV</text>
+    <text x="146" y="68" text-anchor="middle" fill="#f8d6ff" font-size="22" font-family="Georgia, serif">The Bridge</text>
+    <path d="M70 150 C110 110, 182 190, 222 150" fill="none" stroke="#e85cff" stroke-width="3"/>
+    <circle cx="70" cy="150" r="8" fill="#e85cff"/>
+    <circle cx="222" cy="150" r="8" fill="#ffd6ff"/>
+    <text x="146" y="250" text-anchor="middle" fill="#f8d6ff" font-size="16" font-family="Georgia, serif">Oya Hardening</text>
+    <text x="146" y="278" text-anchor="middle" fill="#c07ad0" font-size="12">two live agents · email login</text>
+    <text x="146" y="312" text-anchor="middle" fill="#6e3a78" font-size="11" letter-spacing="2">PLANNED</text>
+  </g>
+  <g transform="translate(1246,130)">
+    <rect width="292" height="340" rx="18" fill="#1a0f07" stroke="#ffbf66" stroke-width="1.5"/>
+    <text x="146" y="36" text-anchor="middle" fill="#ffbf66" font-size="12" letter-spacing="3">ACT V</text>
+    <text x="146" y="68" text-anchor="middle" fill="#ffe0b0" font-size="22" font-family="Georgia, serif">Service Lifecycle</text>
+    <rect x="96" y="118" width="100" height="64" rx="8" fill="none" stroke="#ffbf66" stroke-width="2"/>
+    <circle cx="146" cy="150" r="6" fill="#ffbf66"/>
+    <text x="146" y="250" text-anchor="middle" fill="#ffe0b0" font-size="16" font-family="Georgia, serif">Operational Gates</text>
+    <text x="146" y="278" text-anchor="middle" fill="#c4965c" font-size="12">observe · restore · rotate</text>
+    <text x="146" y="312" text-anchor="middle" fill="#7a5a2c" font-size="11" letter-spacing="2">PLANNED</text>
+  </g>
+</svg>
