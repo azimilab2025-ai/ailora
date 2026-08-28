@@ -21,6 +21,8 @@ Open gates: HA/DR, measured SLO, operational IdP/MFA, independent scientific/leg
 In-repo Oya: local library-agent package. External Oya at getoya.ai: live against Render in this candidate baseline.
 
 Live checks: https://ailora-web.onrender.com/health/live and https://ailora-web.onrender.com/docs
+
+Render may use environment name `production`. That name is not a Production-Ready claim. The live web service is a paid single instance, not an HA topology.
 <!-- AILORA_TRUTH_BLOCK_END -->
 
 <!-- AILORA_STATUS_RIBBON_BEGIN -->
@@ -39,7 +41,7 @@ The deployed software baseline is operational within the declared **advisory-onl
 This is **not** a claim of final Production Candidate — Active Qualification / Production-Qualified status.
 
 Exact candidate baseline is recorded in `docs/qualification/final-release-manifest.json` (source_commit + alembic_head).
-Open qualification gates remain explicit (HA, independent scientific/legal review, production IdP/MFA ops, and related PARTIAL ENT items). External Oya runtime and real-tenant E2E for login/session/memberships/SSA create-list are recorded in this Production Grade Candidate freeze.
+Open qualification gates remain explicit (HA, independent scientific/legal review, production IdP/MFA ops, and related PARTIAL ENT items). External Oya runtime and real-tenant E2E for login/session/memberships/SSA create-list are recorded in this Production Grade Candidate baseline.
 
 
 <!-- AILORA_CINEMATIC_EXPERIENCE_BEGIN -->
@@ -48,7 +50,7 @@ Open qualification gates remain explicit (HA, independent scientific/legal revie
 
 <p align="center"><a href="https://ailora-web.onrender.com/health/live">Live Service</a> • <a href="https://ailora-web.onrender.com/docs">Interactive API</a> • <a href="#architecture">Architecture</a> • <a href="#bob-engineering-agent">Bob Agent</a> • <a href="#safety--scientific-integrity">Safety</a></p>
 
-> **Production candidate — active qualification:** the Render service is live and the verified software baseline is operational. Analytical outputs remain advisory-only. NASA live data is **NOT ACTIVATED**. In-repo Oya remains a local library-agent package. External Oya at getoya.ai is live against Render in this Production Grade Candidate freeze.
+> **Production candidate — active qualification:** the Render service is live and the verified software baseline is operational. Analytical outputs remain advisory-only. NASA live data is **NOT ACTIVATED**. In-repo Oya remains a local library-agent package. External Oya at getoya.ai is live against Render in this Production Grade Candidate baseline.
 
 <!-- AILORA_CINEMATIC_EXPERIENCE_END -->
 
@@ -64,7 +66,7 @@ Open qualification gates remain explicit (HA, independent scientific/legal revie
 **Future Development Roadmap**
 
 Live NASA data integration was the original target data source for AILORA.
-Due to the compressed university delivery timeline, a different live data path was selected and fully implemented so that the system could be proven, tested, and demonstrated on schedule.
+A public NORAD / CelesTrak path is implemented so the candidate baseline can be demonstrated on schedule. NASA live catalogs remain a later development item.
 
 The complete live NASA data integration remains a high-priority item on the future development roadmap.
 When activated, it will further increase the richness, authority, and completeness of the orbital intelligence outputs.
@@ -695,7 +697,7 @@ Bob improves the system that builds AILORA; Bob does not become an unbounded age
 
 <p align="center"><img src="docs/assets/ailora-technology-rocket.svg" alt="Animated technology rocket traveling from the terrestrial baseline toward an outer digital world" width="100%" /></p>
 
-This animated technology trajectory represents modular growth from the verified terrestrial production-candidate baseline toward future capability. It is a visual roadmap only: no on-orbit runtime, autonomous maneuver or spacecraft command capability is claimed. NASA live data remains NOT ACTIVATED. In-repo Oya remains a local library-agent package. External Oya at getoya.ai is live for this Production Grade Candidate freeze.
+This animated technology trajectory represents modular growth from the verified terrestrial production-candidate baseline toward future capability. It is a visual roadmap only: no on-orbit runtime, autonomous maneuver or spacecraft command capability is claimed. NASA live data remains NOT ACTIVATED. In-repo Oya remains a local library-agent package. External Oya at getoya.ai is live for this Production Grade Candidate baseline.
 
 ---
 
@@ -703,7 +705,7 @@ This animated technology trajectory represents modular growth from the verified 
 <!-- AILORA_FIVE_ACTS_HORIZON_BEGIN -->
 <div align="center">
   <h2>Beyond the Horizon — Five Acts</h2>
-  <p><em>Production Grade Candidate · planned path after this freeze</em></p>
+  <p><em>Production Grade Candidate · planned path after this baseline</em></p>
   <p>
     <img src="docs/assets/ailora-five-acts.svg" alt="Five planned acts: The Gate, The Catalog, The Tenancy, The Bridge, Service Lifecycle" width="100%" />
   </p>
@@ -733,21 +735,21 @@ Act II uses a custom NASA-CLASS mark inside the artwork. It is not an official N
 | IV | The Bridge | External Oya `LIVE` · further hardening `PLANNED` |
 | V | Service Lifecycle | `PLANNED` |
 
-This freeze is a **Production Grade Candidate**. The five acts remain the post-freeze path.
+This freeze is a **Production Grade Candidate**. The five acts remain the later development path.
 <!-- AILORA_FIVE_ACTS_COMPASS_END -->
 
 
 ## Roadmap
 
 <!-- AILORA_GATE_METER_BEGIN -->
-### Closed and open gates in this Production Grade Candidate freeze
+### Closed and open gates in this Production Grade Candidate baseline
 
-| Closed in this freeze | Still open |
+| Closed in this baseline | Still open |
 |---|---|
 | Real-tenant login, session, memberships | HA / multi-instance operations |
 | SSA scenario create and tenant scenario list | Independent scientific / legal review |
 | External Oya list_endpoints + authenticated session/memberships | NASA live catalogs |
-| Advisory-only boundary and no spacecraft command | Release qualification pack / CI freeze on a tagged SHA |
+| Advisory-only boundary and no spacecraft command | Release qualification pack / later tagged qualification SHA |
 <!-- AILORA_GATE_METER_END -->
 
 
@@ -763,7 +765,7 @@ The public Render endpoint demonstrates deployment health and API availability; 
 
 - **NASA live data:** **NOT ACTIVATED**. Provider qualification, licensing, provenance and scientific approval remain mandatory gates.
 - **In-repo Oya library-agent:** local typed catalog + plan validation; not the live getoya.ai runtime.
-- **External Oya runtime:** live against Render in this Production Grade Candidate freeze (`AILORA Assistant`, `AILORA API Agent Live`).
+- **External Oya runtime:** live against Render in this Production Grade Candidate baseline (`AILORA Assistant`, `AILORA API Agent Live`).
 - **Human authority:** **REQUIRED** for review and release decisions.
 - **Scientific authority:** independent competent review remains external.
 - **Operational authority:** no spacecraft command, uplink or autonomous maneuver path exists.
@@ -783,7 +785,7 @@ The public Render endpoint demonstrates deployment health and API availability; 
 ## Documentation Index
 
 <!-- AILORA_HANDOFF_BEGIN -->
-### Handoff after this freeze
+### Handoff after this baseline
 
 | Do not touch first | Start here | Secrets stay out of git |
 |---|---|---|
@@ -823,7 +825,7 @@ A later owner inherits a Production Grade Candidate, not a Production Qualified 
 | Repository (local) | local clone of this repository | Active |
 | Remote Repository | [GitHub — azimilab2025-ai/ailora](https://github.com/azimilab2025-ai/ailora) | Active |
 | CI/CD Pipeline | [GitHub Actions](https://github.com/azimilab2025-ai/ailora/actions) | Active quality gates |
-| Deployed API | [https://ailora-web.onrender.com](https://ailora-web.onrender.com) | Live deployment |
+| Deployed API | https://ailora-web.onrender.com/docs | Live OpenAPI / Swagger |
 | API Documentation (`/docs`) | [Live Swagger UI](https://ailora-web.onrender.com/docs) | Live deployment |
 | API Documentation (`/redoc`) | [Live ReDoc](https://ailora-web.onrender.com/redoc) | Live deployment |
 | Container Image (local) | `ailora:dev` (built via `docker build . -t ailora:dev`) | Local only |
@@ -862,7 +864,7 @@ A later owner inherits a Production Grade Candidate, not a Production Qualified 
 <!-- AILORA_OYA_TWO_SURFACES_BEGIN -->
 ### Two Oya surfaces
 
-| Surface | What it is | Status in this freeze |
+| Surface | What it is | Status in this baseline |
 |---|---|---|
 | External runtime | getoya.ai agents calling the live AILORA HTTP API | Live: `AILORA Assistant`, `AILORA API Agent Live` |
 | In-repo package | `src/ailora/services/oya` typed catalog + plan DAG | Local library-agent; not the getoya.ai runtime |
@@ -882,7 +884,7 @@ Do not publish passwords, tokens, or tenant UUIDs in this README.
 <!-- AILORA_REPRO_PATH_END -->
 
 
-External Oya is live against the Render service in this Production Grade Candidate freeze.
+External Oya is live against the Render service in this Production Grade Candidate baseline.
 
 - Live API: https://ailora-web.onrender.com
 - Swagger: https://ailora-web.onrender.com/docs
@@ -908,7 +910,7 @@ Boundary: Oya may call documented HTTP endpoints. It does not add spacecraft com
 
 ## Future Integration Roadmap: Oya Library-Agent
 
-> **IN-REPO LIBRARY-AGENT SEPARATE FROM LIVE EXTERNAL OYA.** Oya now provides a typed tool catalog and plan validation surface. Hosted service model, API keys, network clients and voice session have been removed. The in-repo package remains a local library-agent surface. The external getoya.ai runtime is live in this Production Grade Candidate freeze.
+> **IN-REPO LIBRARY-AGENT SEPARATE FROM LIVE EXTERNAL OYA.** Oya now provides a typed tool catalog and plan validation surface. Hosted service model, API keys, network clients and voice session have been removed. The in-repo package remains a local library-agent surface. The external getoya.ai runtime is live in this Production Grade Candidate baseline.
 
 <p align="center">
   <a href="https://github.com/OyaAIProd/oya"><img src="https://github.com/OyaAIProd.png" alt="Official Oya GitHub organization logo — planned integration, currently disabled" width="128" /></a>
@@ -917,7 +919,7 @@ Boundary: Oya may call documented HTTP endpoints. It does not add spacecraft com
 <h3 align="center">OYA • LIBRARY-AGENT (TYPED CATALOG + PLAN DAG)</h3>
 <p align="center"><strong>Governed library-agent surface • typed tools map only to existing AILORA routes • still disabled</strong></p>
 
-Oya inside AILORA is now a pure library-agent surface. It exposes a governed typed tool catalog and a plan/DAG validator. All tools map exclusively to existing AILORA HTTP routes. No external network clients, no API keys, no voice session and no hosted configuration are present. The in-repo package remains a local library-agent surface. External Oya at getoya.ai is live in this Production Grade Candidate freeze.
+Oya inside AILORA is now a pure library-agent surface. It exposes a governed typed tool catalog and a plan/DAG validator. All tools map exclusively to existing AILORA HTTP routes. No external network clients, no API keys, no voice session and no hosted configuration are present. The in-repo package remains a local library-agent surface. External Oya at getoya.ai is live in this Production Grade Candidate baseline.
 
 <p align="center"><img src="docs/assets/ailora-capability-hive.svg" alt="AILORA interconnected capability honeycomb" width="100%" /></p>
 
@@ -947,7 +949,7 @@ The upstream project reports benchmark observations including fewer tokens, lowe
 
 **Research evidence → dependency and license review → isolated production-grade → threat model → deterministic replay → performance benchmark → tenant and authorization tests → independent review → explicit activation decision.**
 
-The in-repo Oya package stays a local library-agent surface. External Oya at getoya.ai is connected to the live AILORA HTTP API in this Production Grade Candidate freeze.
+The in-repo Oya package stays a local library-agent surface. External Oya at getoya.ai is connected to the live AILORA HTTP API in this Production Grade Candidate baseline.
 
 Official sources: [Oya repository](https://github.com/OyaAIProd/oya) • [documentation directory](https://github.com/OyaAIProd/oya/tree/main/docs) • [benchmark methodology](https://github.com/OyaAIProd/oya/tree/main/benchmarks) • [MIT license](https://github.com/OyaAIProd/oya/blob/main/LICENSE)
 
@@ -1158,7 +1160,7 @@ The following results were captured on the local engineering workstation after t
 ### Honesty bounds
 
 - No operational go/no-go claim is made from unit/contract tests alone
-- Live external gates recorded in this freeze: real tenant login/session/memberships/SSA create-list, plus external Oya list_endpoints and authenticated session/memberships.
+- Live external gates recorded in this baseline: real tenant login/session/memberships/SSA create-list, plus external Oya list_endpoints and authenticated session/memberships.
 - Evidence is reproducible by re-running the same focused pytest targets under the project virtualenv
 
 

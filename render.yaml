@@ -1,7 +1,7 @@
 ##############################################################################
 # AILORA — Render deployment configuration
 # Authoritative source: Prompts 01–15 (CSIP-EO-FMSP)
-# Advisory-only production-grade: no spacecraft command/telecommand/maneuver path.
+# Advisory-only candidate deploy: no spacecraft command/telecommand/maneuver path.
 ##############################################################################
 # COMMAND_16_EXTERNAL_EDGE_GATE_OPEN: WAF, egress broker, and secret-manager
 # enforcement still require selected-platform evidence before release closure.
@@ -11,10 +11,9 @@ services:
     name: ailora
     runtime: python
     region: oregon
-    plan: free
+    plan: starter
     buildCommand: uv sync --no-dev --frozen
-    # Render pre-deploy commands require a paid web plan. On the single-instance
-    # free production-grade, run idempotent Alembic migrations before starting ASGI.
+    # Live dashboard is a paid single instance. Run idempotent Alembic migrations before ASGI.
     startCommand: uv run alembic upgrade head && exec uv run uvicorn ailora.api.app:app --host 0.0.0.0 --port $PORT
     healthCheckPath: /health/live
     autoDeployTrigger: "off"

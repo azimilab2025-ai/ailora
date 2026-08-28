@@ -70,13 +70,13 @@ governance:
 
 future_direction:
   oya:
-    status:                   "IMPLEMENTED_LIBRARY_AGENT_SURFACE — DISABLED_BY_DESIGN"
-    description:              "Oya exists as a governed library-agent surface and remains disabled by design."
+    status:                   "IN_REPO_LIBRARY_AGENT — EXTERNAL_GETOYA_LIVE_CANDIDATE"
+    description:              "In-repo Oya is a local library-agent. External getoya.ai is live against Render in this candidate baseline."
     implementation:           "PRESENT_DISABLED"
     note:                     "Typed catalog and plan validation are present; no hosted activation or independent external authority is claimed. Activation remains a separate explicit gate."
 
 language_policy:
-  user_facing_explanations:   "Persian"
+  user_facing_explanations:   "English for this candidate baseline"
   technical_identifiers:      "English"
   source_code_identifiers:    "English"
   filenames_and_paths:        "English"
@@ -88,7 +88,7 @@ implementation_gate:
   repository_created:         true
   git_initialized:            true
   any_code_written:           true
-  explicit_statement:         "Repository and implementation are active. This manifest does not authorize Production-Ready claims, candidate freeze, tag movement, deployment, or external-gate closure."
+  explicit_statement:         "Repository and implementation are active. This manifest does not authorize Production-Ready claims, a locked candidate tag, or external-gate closure."
 
 protected_identifiers_must_not_reuse:
   - "IBM-Bob-Challenge-2026"

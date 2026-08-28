@@ -1,6 +1,6 @@
 # AILORA — Changelog
 
-## [Unreleased] — Production Candidate quality freeze
+## [Unreleased] — Production Candidate baseline notes
 
 ### Fixed
 - Ruff/mypy quality gates (HttpMethod StrEnum, assert False removal, VerificationErrorCode enum)
@@ -9,7 +9,7 @@
 
 ### Notes
 - Status remains PRODUCTION_CANDIDATE_ACTIVE_QUALIFICATION
-- No operational qualification claim; external gates (Oya live install, real tenant email) stay open by design
+- No operational qualification claim. External Oya getoya.ai is live against Render in this candidate baseline. NASA live catalogs, HA, and production IdP/MFA remain open.
 
 
 ## [Unreleased]

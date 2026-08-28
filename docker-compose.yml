@@ -2,7 +2,7 @@
 # Isolated local development environment.
 # Secrets are loaded from .env and must never be committed.
 
-name: bob-space-project-intake-2026
+name: ailora
 
 services:
   ailora:
