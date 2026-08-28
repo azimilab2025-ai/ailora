@@ -6,6 +6,23 @@
 
 
 <p align="center"><strong>Official Demo</strong> — live Render API and authenticated tenant path.</p>
+
+<!-- AILORA_TRUTH_BLOCK_BEGIN -->
+**Status:** Production Candidate — Active Qualification. Not Production-Ready. Not Production-Qualified.
+
+Live surface: Render API. No product homepage. Root URL is not a website.
+
+Outputs are advisory only. Spacecraft command, telecommand, and uplink are prohibited.
+
+NASA live: not activated. Current live catalog path: public NORAD / CelesTrak. Pc is not computed.
+
+Open gates: HA/DR, measured SLO, operational IdP/MFA, independent scientific/legal review, Prompt 06.
+
+In-repo Oya: local library-agent package. External Oya at getoya.ai: live against Render in this candidate baseline.
+
+Live checks: https://ailora-web.onrender.com/health/live and https://ailora-web.onrender.com/docs
+<!-- AILORA_TRUTH_BLOCK_END -->
+
 <!-- AILORA_STATUS_RIBBON_BEGIN -->
 <div align="center">
   <h2>Live Status Ribbon</h2>
@@ -58,10 +75,7 @@ This capability is **not active** in the current Production Candidate baseline.
 ### Continuous Integration Status (Candidate)
 
 Under the current **Production Candidate – Active Qualification** posture, the CI pipelines run with deliberately strict quality gates (coverage target and related checks).
-As a result, most recent workflow runs are expected to report as failed.
-
-This is intentional and consistent with the Candidate maturity level.
-Any decision to relax or close these gates is deferred to a later stage (post-Freeze / future development).
+GitHub Actions on main runs lint, type, test, SBOM and build gates. Open operational gates (HA, independent scientific review, production IdP/MFA) are not closed by CI. Red or green status must be read from the Actions page, not assumed.
 
 
 ## Official Demo
@@ -128,6 +142,8 @@ Physics-First and AI-Advisory-Only principles.
 ---
 
 ## Mission Control Snapshot
+
+This is a repository telemetry snapshot, not an operations center.
 
 <!-- AILORA_MISSION_CONTROL_STRIP -->
 
@@ -442,7 +458,7 @@ git clone <repository-url> ailora
 cd ailora
 
 # 2. Install dependencies (uv resolves and creates .venv automatically)
-export PATH="$HOME/Library/Python/3.9/bin:$PATH"   # adjust if uv is on PATH already
+Need Python 3.11+. Prefer: uv sync --all-extras
 uv sync
 
 # 3. Copy environment template
@@ -492,7 +508,7 @@ make run
 ### Running the Test Suite
 
 ```bash
-export PATH="$HOME/Library/Python/3.9/bin:$PATH"
+Need Python 3.11+.
 
 # Full suite with coverage
 uv run pytest tests/ -v
@@ -521,7 +537,7 @@ uv run mypy src/
 make lint && make test
 ```
 
-### Current Results (Gate 8 baseline)
+### Historical checkpoint — Gate 8 (2026-08-05) — NOT CURRENT
 
 ```
 ruff format --check   ✅  11 files, all formatted
@@ -609,7 +625,7 @@ Operational status.
 
 ### Oya — Library-Agent Direction
 
-> **Status: REALIGNED / LIBRARY-AGENT / DISABLED BY DESIGN**
+> **Status: IN-REPO LIBRARY-AGENT SEPARATE FROM LIVE EXTERNAL OYA**
 
 Oya has been realigned from the previous hosted-service concept to a pure
 library-agent surface. The package now provides a governed typed tool catalog
@@ -804,7 +820,7 @@ A later owner inherits a Production Grade Candidate, not a Production Qualified 
 
 | Resource | URL / Location | Status |
 |---|---|---|
-| Repository (local) | `/Users/amin/Documents/bob-space-project-intake-2026` | Active |
+| Repository (local) | local clone of this repository | Active |
 | Remote Repository | [GitHub — azimilab2025-ai/ailora](https://github.com/azimilab2025-ai/ailora) | Active |
 | CI/CD Pipeline | [GitHub Actions](https://github.com/azimilab2025-ai/ailora/actions) | Active quality gates |
 | Deployed API | [https://ailora-web.onrender.com](https://ailora-web.onrender.com) | Live deployment |
@@ -812,8 +828,8 @@ A later owner inherits a Production Grade Candidate, not a Production Qualified 
 | API Documentation (`/redoc`) | [Live ReDoc](https://ailora-web.onrender.com/redoc) | Live deployment |
 | Container Image (local) | `ailora:dev` (built via `docker build . -t ailora:dev`) | Local only |
 | Container Registry | To be provided by Amin Azimi | **[placeholder]** |
-| Project Website | [AILORA live service](https://ailora-web.onrender.com) | Live deployment |
-| Demo Environment | [Render deployment](https://ailora-web.onrender.com) | Live deployment |
+| API liveness | https://ailora-web.onrender.com/health/live | Live API surface only — no product homepage |
+| Interactive API | https://ailora-web.onrender.com/docs | Live Swagger |
 
 ---
 
@@ -892,7 +908,7 @@ Boundary: Oya may call documented HTTP endpoints. It does not add spacecraft com
 
 ## Future Integration Roadmap: Oya Library-Agent
 
-> **REALIGNED / LIBRARY-AGENT / DISABLED BY DESIGN.** Oya now provides a typed tool catalog and plan validation surface. Hosted service model, API keys, network clients and voice session have been removed. The in-repo package remains a local library-agent surface. The external getoya.ai runtime is live in this Production Grade Candidate freeze.
+> **IN-REPO LIBRARY-AGENT SEPARATE FROM LIVE EXTERNAL OYA.** Oya now provides a typed tool catalog and plan validation surface. Hosted service model, API keys, network clients and voice session have been removed. The in-repo package remains a local library-agent surface. The external getoya.ai runtime is live in this Production Grade Candidate freeze.
 
 <p align="center">
   <a href="https://github.com/OyaAIProd/oya"><img src="https://github.com/OyaAIProd.png" alt="Official Oya GitHub organization logo — planned integration, currently disabled" width="128" /></a>
@@ -1093,7 +1109,7 @@ A controlled **test** tenant bootstrap path was executed successfully in the loc
 
 This proves the **code path** for tenant creation works end-to-end in test mode.
 
-**Not closed yet (external gate):** production-grade tenant onboarding with a real email address, real verification link, and external identity proof. That step remains a human/external gate and is intentionally deferred.
+**Closed in this candidate baseline:** real-tenant login, session, memberships, and SSA create/list on Render. **Still deferred:** NASA live catalogs, provider legal qualification, pentest, and production IdP/MFA.
 
 ### 2) Live orbital element data path (CelesTrak / public NORAD catalog)
 
@@ -1181,7 +1197,7 @@ No business logic was reached. The API correctly implements fail-closed authenti
 
 ### Notes
 - This verification was performed on the live Render deployment.
-- Positive-path testing (with a real access token) is intentionally deferred until a production-grade tenant and real credentials are available.
+- Positive-path identity and SSA create/list were verified on Render with a real tenant. Provider E2E, NASA, and pentest remain deferred.
 - The Authorize dialog in Swagger UI is ready for use once a valid access token is obtained via `/v1/identity/login`.
 
 Status: **PASS – Fail-closed security surface confirmed.**
