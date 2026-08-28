@@ -526,6 +526,15 @@ pytest                ✅  51 tests collected, 51 passed
 
 ## Safety & Scientific Integrity
 
+<!-- AILORA_COMMAND_SEAL_BEGIN -->
+<p align="center">
+  <img alt="advisory only" src="https://img.shields.io/badge/Outputs-Advisory%20Only-e05d44?style=for-the-badge">
+  <img alt="no telecommand" src="https://img.shields.io/badge/Telecommand-PROHIBITED-111111?style=for-the-badge">
+  <img alt="no uplink" src="https://img.shields.io/badge/Spacecraft%20uplink-NONE-111111?style=for-the-badge">
+</p>
+<!-- AILORA_COMMAND_SEAL_END -->
+
+
 ### Advisory-Only Boundary (Permanent)
 
 All AI and analytical outputs produced by AILORA are **strictly advisory**. The platform
@@ -663,7 +672,34 @@ This animated technology trajectory represents modular growth from the verified 
 Act II uses a custom NASA-CLASS mark inside the artwork. It is not an official NASA emblem and does not imply NASA endorsement.
 <!-- AILORA_FIVE_ACTS_HORIZON_END -->
 
+<!-- AILORA_FIVE_ACTS_COMPASS_BEGIN -->
+<p align="center"><b>Five-Act Compass</b></p>
+
+| Act | Name | Compass |
+|---|---|---|
+| I | The Gate | `PLANNED` |
+| II | The Catalog | `PLANNED` · NASA live `NOT ACTIVATED` |
+| III | The Tenancy | `PLANNED` beyond the verified login/session/memberships/SSA create-list path |
+| IV | The Bridge | External Oya `LIVE` · further hardening `PLANNED` |
+| V | Service Lifecycle | `PLANNED` |
+
+This freeze is a **Production Grade Candidate**. The five acts remain the post-freeze path.
+<!-- AILORA_FIVE_ACTS_COMPASS_END -->
+
+
 ## Roadmap
+
+<!-- AILORA_GATE_METER_BEGIN -->
+### Closed and open gates in this Production Grade Candidate freeze
+
+| Closed in this freeze | Still open |
+|---|---|
+| Real-tenant login, session, memberships | HA / multi-instance operations |
+| SSA scenario create and tenant scenario list | Independent scientific / legal review |
+| External Oya list_endpoints + authenticated session/memberships | NASA live catalogs |
+| Advisory-only boundary and no spacecraft command | Release qualification pack / CI freeze on a tagged SHA |
+<!-- AILORA_GATE_METER_END -->
+
 
 <p align="center"><img src="docs/assets/roadmap-trajectory.svg" alt="AILORA evidence-gated animated roadmap trajectory" width="100%" /></p>
 
@@ -736,6 +772,38 @@ The public Render endpoint demonstrates deployment health and API availability; 
 
 
 ## External Oya Integration
+
+<!-- AILORA_OYA_LIVE_CHIPS_BEGIN -->
+<p align="center">
+  <img alt="27 live endpoints" src="https://img.shields.io/badge/Oya-27%20live%20endpoints-ff6a3d?style=for-the-badge">
+  <img alt="session authenticated" src="https://img.shields.io/badge/Session-authenticated%20true-3ee0a0?style=for-the-badge">
+  <img alt="role owner" src="https://img.shields.io/badge/Membership-role%20owner-e85cff?style=for-the-badge">
+</p>
+<p align="center"><em>Verified 2026-08-27 / 2026-08-28 against Render via Swagger and getoya.ai Playground.</em></p>
+<!-- AILORA_OYA_LIVE_CHIPS_END -->
+
+<!-- AILORA_OYA_TWO_SURFACES_BEGIN -->
+### Two Oya surfaces
+
+| Surface | What it is | Status in this freeze |
+|---|---|---|
+| External runtime | getoya.ai agents calling the live AILORA HTTP API | Live: `AILORA Assistant`, `AILORA API Agent Live` |
+| In-repo package | `src/ailora/services/oya` typed catalog + plan DAG | Local library-agent; not the getoya.ai runtime |
+
+These surfaces must not be collapsed into one sentence.
+<!-- AILORA_OYA_TWO_SURFACES_END -->
+
+<!-- AILORA_REPRO_PATH_BEGIN -->
+### Reproduce the live proof
+
+1. Open https://ailora-web.onrender.com/docs
+2. `POST /v1/identity/login` with a provisioned tenant email
+3. Authorize with the returned access token, then `GET /v1/auth/session`
+4. Call one tenant-scoped route such as memberships or SSA scenario list
+
+Do not publish passwords, tokens, or tenant UUIDs in this README.
+<!-- AILORA_REPRO_PATH_END -->
+
 
 External Oya is live against the Render service in this Production Grade Candidate freeze.
 
