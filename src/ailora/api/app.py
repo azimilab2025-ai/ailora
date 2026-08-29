@@ -47,11 +47,19 @@ async def lifespan(application: FastAPI) -> AsyncIterator[None]:
 
 app = FastAPI(
     title=settings.app_name,
-    description="An Azimi Innovation Lab Orbital Intelligence System",
+    description=(
+        "AILORA Production Candidate — Active Qualification. "
+        "Advisory-only orbital decision-support API. "
+        "Not Production-Ready. NASA live data is not activated."
+    ),
     version=settings.app_version,
     docs_url="/docs",
     redoc_url="/redoc",
     openapi_url="/openapi.json",
+    servers=[
+        {"url": "https://ailora-web.onrender.com", "description": "Live candidate API"},
+        {"url": "/", "description": "Current host"},
+    ],
     lifespan=lifespan,
 )
 

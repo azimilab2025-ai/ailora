@@ -210,7 +210,7 @@ class Settings(BaseSettings):
             raise ValueError("debug mode is forbidden in staging and production")
 
         if not self.runtime_read_only:
-            raise ValueError("production runtime must remain read-only")
+            raise ValueError("production runtime_read_only must stay enabled as candidate hardening, not as a blanket POST deny")
 
         if not self.security_headers_enabled:
             raise ValueError("production security headers must remain enabled")
