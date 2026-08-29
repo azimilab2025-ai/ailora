@@ -749,12 +749,17 @@ This baseline is a **Production Grade Candidate**. The five acts remain the late
 <!-- AILORA_GATE_METER_BEGIN -->
 ### Closed and open gates in this Production Grade Candidate baseline
 
-| Closed in this baseline | Still open |
-|---|---|
-| Real-tenant login, session, memberships | HA / multi-instance operations |
-| SSA scenario create and tenant scenario list | Independent scientific / legal review |
-| External Oya list_endpoints + authenticated session/memberships | NASA live catalogs |
-| Advisory-only boundary and no spacecraft command | Release qualification pack / later tagged qualification SHA |
+Closed in this baseline
+- Real-tenant login, session, memberships
+- SSA scenario create and tenant scenario list
+- External Oya list_endpoints + authenticated session/memberships
+- Advisory-only boundary and no spacecraft command
+
+Still open
+- HA / multi-instance operations
+- Independent scientific / legal review
+- NASA live catalogs
+- Release qualification pack / later tagged qualification SHA
 <!-- AILORA_GATE_METER_END -->
 
 
