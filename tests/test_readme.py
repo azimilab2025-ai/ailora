@@ -151,7 +151,10 @@ def test_oya_live_external_and_library_agent(readme_text: str) -> None:
     assert "AILORA API Agent Live" in readme_text
     assert "getoya.ai" in readme_text
     assert "library-agent" in readme_text.lower()
-    assert "Production Grade Candidate" in readme_text or "production grade candidate" in readme_text.lower()
+    assert (
+        "Production Grade Candidate" in readme_text
+        or "production grade candidate" in readme_text.lower()
+    )
 
 
 def test_no_invented_live_url() -> None:
