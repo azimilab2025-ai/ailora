@@ -85,6 +85,8 @@ GitHub Actions on main runs lint, type, test, SBOM and build gates. Open operati
 
 ## Official Demo
 
+YouTube walkthrough: https://youtu.be/_zB-dZruUbE
+
 ### 30-Second Swagger Walkthrough
 
 ![30-Second Swagger Demo](docs/assets/05-swagger-demo-30s.gif)
