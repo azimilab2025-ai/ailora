@@ -735,7 +735,7 @@ Act II uses a custom NASA-CLASS mark inside the artwork. It is not an official N
 | IV | The Bridge | External Oya `LIVE` · further hardening `PLANNED` |
 | V | Service Lifecycle | `PLANNED` |
 
-This freeze is a **Production Grade Candidate**. The five acts remain the later development path.
+This baseline is a **Production Grade Candidate**. The five acts remain the later development path.
 <!-- AILORA_FIVE_ACTS_COMPASS_END -->
 
 

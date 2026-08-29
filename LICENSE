@@ -1,7 +1,11 @@
-AILORA Proprietary Notice
+AILORA Proprietary Rights Notice
 
 Copyright (c) 2026 Amin Azimi / Azimi Innovation Lab. All rights reserved.
 
-No license, permission, patent right, trademark right, distribution right, or production-use authorization is granted by publication of this repository. Any use beyond applicable mandatory law requires prior written authorization from the rights holder.
+Publication of this repository does not grant any license, assignment, patent right, trademark right, or production-use right to any third party.
 
-This notice is an engineering placeholder pending independent legal review and is not legal advice.
+The rights holder retains exclusive authority to continue development, assign or sell the work, license it to a company, or use it in a funding application. Any such grant must be in a separate written instrument signed by the rights holder.
+
+Third-party components remain under their own licenses as recorded in uv.lock, NOTICE, and SBOM evidence.
+
+This notice is an engineering reservation of rights. It is not legal advice and does not replace independent counsel before a sale, assignment, or funded deployment.
