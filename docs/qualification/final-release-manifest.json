@@ -219,11 +219,15 @@
   "open_gates_policy": "See docs/governance/partial-residual-matrix.md and README Known Open Gates; status remains PARTIAL where applicable.",
   "metrics_note": "Qualified baseline: 1058 passing tests, 87.91% statement coverage, GitHub CI run 33025990734; not Production Ready.",
   "candidate_status": "PRODUCTION_CANDIDATE_ACTIVE_QUALIFICATION",
-  "updated_at": "2026-08-27T00:12:25Z",
+  "updated_at": "2026-08-29T07:08:06Z",
   "notes": [
     "Release-truth synchronization bound to qualified engineering baseline 9571b168080605b72a464d39d1fed5239242330d.",
     "GitHub CI run 33025990734 succeeded for that baseline.",
     "Package/release version identity reconciled to 0.1.0 without moving or recreating any Git tag.",
-    "No candidate freeze, release freeze, or Production-Ready claim is created by this synchronization."
-  ]
+    "No candidate freeze, release freeze, or Production-Ready claim is created by this synchronization.",
+    "Documentation HEAD after sanitized evidence/status contract: 89564aa. Software qualification metrics and CI run 33025990734 remain bound to 9571b168080605b72a464d39d1fed5239242330d. Live Render OpenAPI wording observed on 0c9f153. No Production-Ready claim. No candidate freeze."
+  ],
+  "documentation_head": "89564aa",
+  "documentation_head_note": "Living docs/README HEAD. Not the software qualification evidence SHA.",
+  "live_render_commit": "0c9f153"
 }
