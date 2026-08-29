@@ -788,6 +788,7 @@ The public Render endpoint demonstrates deployment health and API availability; 
 | Event | Date |
 |---|---|
 | **Official Project Start** | 2026-08-05 |
+| **Challenge submission** | 2026-08-29 |
 | **Official Project End** | NOT_YET_COMPLETED |
 
 ---
