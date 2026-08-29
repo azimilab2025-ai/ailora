@@ -22,6 +22,9 @@ In-repo Oya: local library-agent package. External Oya at getoya.ai: live agains
 
 Live checks: https://ailora-web.onrender.com/health/live and https://ailora-web.onrender.com/docs
 
+Authoritative candidate runtime auth is HS256 login/session. RS256/JWKS and OIDC/MFA remain foundation-only. In-repo Oya is a library-agent. External getoya.ai is TESTED against Render and is not a production authorization. Sanitized live-test evidence: `docs/qualification/real-system-qualification-record.md` and `docs/qualification/status-contract.md`.
+
+
 Render may use environment name `production`. That name is not a Production-Ready claim. The live web service is a paid single instance, not an HA topology.
 <!-- AILORA_TRUTH_BLOCK_END -->
 
