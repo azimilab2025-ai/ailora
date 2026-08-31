@@ -1,3 +1,5 @@
+IBM Bob August 2026: live SSA API under human authority.
+
 <div align="center">
 
 # AILORA
