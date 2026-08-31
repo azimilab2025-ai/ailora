@@ -1227,3 +1227,10 @@ Status: **Production Candidate — Active Qualification** (not Production Ready)
 ---
 **Status:** Production Candidate – Active Qualification  
 No Production-Ready claim. See `docs/qualification/candidate-evidence-pack.json` for exact baseline.
+
+## Judge pack
+- Demo: https://ailora-web.onrender.com/docs
+- Health: https://ailora-web.onrender.com/health/live
+- Release: https://github.com/azimilab2025-ai/ailora/releases/tag/candidate-2026-08-29
+- 90s: https://gist.github.com/azimilab2025-ai/36eb426684dec92477d038b28ac9d074
+- Boundary: https://gist.github.com/azimilab2025-ai/100c7309e5f88204d4c858abd667b941
