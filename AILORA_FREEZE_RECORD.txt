@@ -1,0 +1,10 @@
+AILORA challenge surface freeze
+local=2026-08-31T14:00:00+02:00
+zone=Europe/Berlin
+status=Production Candidate / Active Qualification
+production_ready=false
+demo=https://ailora-web.onrender.com/docs
+health=https://ailora-web.onrender.com/health/live
+release=https://github.com/azimilab2025-ai/ailora/releases/tag/candidate-2026-08-29
+video=https://youtu.be/_zB-dZruUbE
+head_at_freeze_write=pending_git
